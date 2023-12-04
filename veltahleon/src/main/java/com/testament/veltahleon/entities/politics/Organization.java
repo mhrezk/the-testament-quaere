@@ -21,6 +21,10 @@ public class Organization {
 
     @Getter
     @Setter
+    private Pundit founder;
+
+    @Getter
+    @Setter
     private String foundationYear;
 
     @Getter
@@ -29,9 +33,10 @@ public class Organization {
 
     public Organization() {}
 
-    public Organization(Long id, String organizationalName, String foundationYear, String disbandmentYear) {
+    public Organization(Long id, String organizationalName, Pundit founder, String foundationYear, String disbandmentYear) {
         this.id = id;
         this.organizationalName = organizationalName;
+        this.founder = founder;
         this.foundationYear = foundationYear;
         this.disbandmentYear = disbandmentYear;
     }
@@ -41,12 +46,12 @@ public class Organization {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Organization that = (Organization) o;
-        return Objects.equals(id, that.id) && Objects.equals(organizationalName, that.organizationalName) && Objects.equals(foundationYear, that.foundationYear) && Objects.equals(disbandmentYear, that.disbandmentYear);
+        return Objects.equals(id, that.id) && Objects.equals(organizationalName, that.organizationalName) && Objects.equals(founder, that.founder) && Objects.equals(foundationYear, that.foundationYear) && Objects.equals(disbandmentYear, that.disbandmentYear);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, organizationalName, foundationYear, disbandmentYear);
+        return Objects.hash(id, organizationalName, founder, foundationYear, disbandmentYear);
     }
 
     @Override
@@ -54,6 +59,7 @@ public class Organization {
         return "Organization: {\n" +
                 "\t\tid: " + id +
                 ",\n\t\torganizationalName: " + organizationalName +
+                ",\n\t\tfounder: " + founder +
                 ",\n\t\tfoundationYear: " + foundationYear +
                 ",\n\t\tdisbandmentYear: " + disbandmentYear + '\n' +
                 '}';
