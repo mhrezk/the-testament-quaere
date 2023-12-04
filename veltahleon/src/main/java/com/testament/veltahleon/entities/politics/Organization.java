@@ -1,4 +1,4 @@
-package com.testament.veltahleon.entities;
+package com.testament.veltahleon.entities.politics;
 
 import jakarta.persistence.*;
 import lombok.Getter;

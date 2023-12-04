@@ -1,4 +1,4 @@
-package com.testament.veltahleon.entities;
+package com.testament.veltahleon.entities.history;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,8 +8,8 @@ import java.util.Objects;
 
 @Getter
 @Entity
-@Table(name = "races")
-public class Race {
+@Table(name = "excerpts")
+public class Excerpt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,33 +17,34 @@ public class Race {
 
     @Getter
     @Setter
-    private String racialName;
+    private StringBuilder description;
 
-    public Race() {}
+    public Excerpt() {
+    }
 
-    public Race(Long id, String racialName) {
+    public Excerpt(Long id, StringBuilder description) {
         this.id = id;
-        this.racialName = racialName;
+        this.description = description;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Race race = (Race) o;
-        return Objects.equals(id, race.id) && Objects.equals(racialName, race.racialName);
+        Excerpt excerpt = (Excerpt) o;
+        return Objects.equals(id, excerpt.id) && Objects.equals(description, excerpt.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, racialName);
+        return Objects.hash(id, description);
     }
 
     @Override
     public String toString() {
-        return "Race: {\n" +
+        return "Excerpt: {\n" +
                 "\t\tid: " + id +
-                ",\n\t\tracialName: " + racialName + '\n' +
+                ",\n\t\tdescription: " + description + '\n' +
                 '}';
     }
 }

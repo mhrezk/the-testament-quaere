@@ -1,5 +1,6 @@
-package com.testament.veltahleon.entities;
+package com.testament.veltahleon.entities.politics;
 
+import com.testament.veltahleon.entities.history.Race;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
