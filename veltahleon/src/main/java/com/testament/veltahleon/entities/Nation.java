@@ -17,25 +17,25 @@ public class Nation {
 
     @Getter
     @Setter
-    private String nationName;
+    private String nationalName;
 
     @Getter
     @Setter
-    private String nationCapital;
+    private String nationalCapital;
 
     @Getter
     @Setter
-    private String nationContinent;
+    private String nationalContinent;
 
     public Nation() {
 
     }
 
-    public Nation(Long id, String nationName, String nationCapital, String nationContinent) {
+    public Nation(Long id, String nationalName, String nationalCapital, String nationalContinent) {
         this.id = id;
-        this.nationName = nationName;
-        this.nationCapital = nationCapital;
-        this.nationContinent = nationContinent;
+        this.nationalName = nationalName;
+        this.nationalCapital = nationalCapital;
+        this.nationalContinent = nationalContinent;
     }
 
     @Override
@@ -43,21 +43,21 @@ public class Nation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Nation nation = (Nation) o;
-        return Objects.equals(id, nation.id) && Objects.equals(nationName, nation.nationName) && Objects.equals(nationCapital, nation.nationCapital) && Objects.equals(nationContinent, nation.nationContinent);
+        return Objects.equals(id, nation.id) && Objects.equals(nationalName, nation.nationalName) && Objects.equals(nationalCapital, nation.nationalCapital) && Objects.equals(nationalContinent, nation.nationalContinent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nationName, nationCapital, nationContinent);
+        return Objects.hash(id, nationalName, nationalCapital, nationalContinent);
     }
 
     @Override
     public String toString() {
         return "Nation: {\n" +
                 "\t\tid: " + id +
-                ",\n\t\tnationName: " + nationName +
-                ",\n\t\tnationCapital: " + nationCapital +
-                ",\n\t\tnationContinent: " + nationContinent + '\n' +
+                ",\n\t\tnationName: " + nationalName +
+                ",\n\t\tnationCapital: " + nationalCapital +
+                ",\n\t\tnationContinent: " + nationalContinent + '\n' +
                 '}';
     }
 }

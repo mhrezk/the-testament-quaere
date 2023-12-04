@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -21,7 +22,13 @@ public class MilitaryLeader {
 
     @Getter
     @Setter
-    private String nationName;
+    private Race race;
+
+    @Getter
+    @Setter
+    private Nation nation;
+
+    private List<Battle> battles;
 
     @Getter
     @Setter
@@ -39,10 +46,12 @@ public class MilitaryLeader {
 
     }
 
-    public MilitaryLeader(Long id, String leaderName, String nationName, String birthYear, String beginningYear, String endYear) {
+    public MilitaryLeader(Long id, String leaderName, Race race, Nation nation, List<Battle> battles, String birthYear, String beginningYear, String endYear) {
         this.id = id;
         this.leaderName = leaderName;
-        this.nationName = nationName;
+        this.race = race;
+        this.nation = nation;
+        this.battles = battles;
         this.birthYear = birthYear;
         this.beginningYear = beginningYear;
         this.endYear = endYear;
@@ -53,12 +62,12 @@ public class MilitaryLeader {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MilitaryLeader that = (MilitaryLeader) o;
-        return Objects.equals(id, that.id) && Objects.equals(leaderName, that.leaderName) && Objects.equals(nationName, that.nationName) && Objects.equals(birthYear, that.birthYear) && Objects.equals(beginningYear, that.beginningYear) && Objects.equals(endYear, that.endYear);
+        return Objects.equals(id, that.id) && Objects.equals(leaderName, that.leaderName) && Objects.equals(race, that.race) && Objects.equals(nation, that.nation) && Objects.equals(battles, that.battles) && Objects.equals(birthYear, that.birthYear) && Objects.equals(beginningYear, that.beginningYear) && Objects.equals(endYear, that.endYear);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, leaderName, nationName, birthYear, beginningYear, endYear);
+        return Objects.hash(id, leaderName, race, nation, battles, birthYear, beginningYear, endYear);
     }
 
     @Override
@@ -66,7 +75,9 @@ public class MilitaryLeader {
         return "MilitaryLeader: {\n" +
                 "\t\tid: " + id +
                 ",\n\t\tleaderName: " + leaderName +
-                ",\n\t\tnationName: " + nationName +
+                ",\n\t\trace: " + race +
+                ",\n\t\tnation: " + nation.getNationalName() +
+                ",\n\t\tbattles: " + battles +
                 ",\n\t\tbirthYear: " + birthYear +
                 ",\n\t\tbeginningYear: " + beginningYear +
                 ",\n\t\tendYear: " + endYear + '\n' +

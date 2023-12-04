@@ -6,11 +6,11 @@ import lombok.Setter;
 
 import java.util.Objects;
 
+@Getter
 @Entity
 @Table(name = "battles")
 public class Battle {
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
