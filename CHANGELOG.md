@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.3.0] 2023-12-04
+
+- Added frontend portion
+
 ## [0.2.0] 2023-12-04
 
 - Added more entity classes
