@@ -2,6 +2,10 @@
 
 ## [0.3.0] 2023-12-04
 
+- Added entities and instance variables for those entities
+
+## [0.3.0] 2023-12-04
+
 - Added frontend portion
 
 ## [0.2.0] 2023-12-04

@@ -1,6 +1,7 @@
 package com.testament.veltahleon.entities.politics;
 
 import com.testament.veltahleon.entities.history.Race;
+import com.testament.veltahleon.entities.landmark.Nation;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,13 +30,18 @@ public class Pundit {
     @Setter
     private Organization organization;
 
+    @Getter
+    @Setter
+    private Nation nation;
+
     public Pundit() {}
 
-    public Pundit(Long id, String name, Race race, Organization organization) {
+    public Pundit(Long id, String name, Race race, Organization organization, Nation nation) {
         this.id = id;
         this.name = name;
         this.race = race;
         this.organization = organization;
+        this.nation = nation;
     }
 
     @Override
@@ -43,12 +49,12 @@ public class Pundit {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pundit pundit = (Pundit) o;
-        return Objects.equals(id, pundit.id) && Objects.equals(name, pundit.name) && Objects.equals(race, pundit.race) && Objects.equals(organization, pundit.organization);
+        return Objects.equals(id, pundit.id) && Objects.equals(name, pundit.name) && Objects.equals(race, pundit.race) && Objects.equals(organization, pundit.organization) && Objects.equals(nation, pundit.nation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, race, organization);
+        return Objects.hash(id, name, race, organization, nation);
     }
 
     @Override
@@ -57,7 +63,8 @@ public class Pundit {
                 "\t\tid: " + id +
                 ",\n\t\tname: " + name +
                 ",\n\t\trace: " + race +
-                ",\n\t\torganization: " + organization + '\n' +
+                ",\n\t\torganization: " + organization +
+                ",\n\t\torganization: " + nation + '\n' +
                 '}';
     }
 }
