@@ -1,15 +1,13 @@
-package com.testament.veltahleon.entities.landmark;
+package com.testament.veltahleon.entities.politics;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 @Getter
 @Entity
-@Table(name = "oceans")
-public class Ocean {
+@Table(name = "army_units")
+public class ArmyUnit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +15,9 @@ public class Ocean {
 
     @Getter
     @Setter
-    private String name;
+    private String unitName;
 
     @Getter
     @Setter
-    private StringBuilder oceanicDescription;
-
-    public Ocean() {}
+    private Integer unitNumber;
 }

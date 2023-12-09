@@ -4,12 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 @Getter
 @Entity
-@Table(name = "oceans")
-public class Ocean {
+@Table(name = "continents")
+public class Continent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +15,9 @@ public class Ocean {
 
     @Getter
     @Setter
-    private String name;
+    private String continentalName;
 
     @Getter
     @Setter
-    private StringBuilder oceanicDescription;
-
-    public Ocean() {}
+    private StringBuilder continentalDescription;
 }

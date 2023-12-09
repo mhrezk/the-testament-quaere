@@ -1,18 +1,17 @@
 package com.testament.veltahleon.entities.politics;
 
-import com.testament.veltahleon.entities.history.Race;
-import com.testament.veltahleon.entities.landmark.Nation;
+import java.util.List;
+import com.testament.veltahleon.abstraction.Human;
+import com.testament.veltahleon.entities.calendar.Year;
+import com.testament.veltahleon.entities.politics.enumeration.AuthoritativeStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 @Getter
 @Entity
 @Table(name = "pundits")
-
-public class Pundit {
+public class Pundit extends Human {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,51 +19,39 @@ public class Pundit {
 
     @Getter
     @Setter
-    private String name;
+    private List<Rank> ranks;
 
     @Getter
     @Setter
-    private Race race;
+    private AuthoritativeStatus authoritativeStatus;
 
     @Getter
     @Setter
-    private Organization organization;
+    private List<Organization> organization;
 
     @Getter
     @Setter
-    private Nation nation;
+    private Year beginningYear;
+
+    @Getter
+    @Setter
+    private Year endYear;
+
+    @Getter
+    @Setter
+    private Boolean isVassal;
+
+    @Getter
+    @Setter
+    private List<Pundit> vassals;
+
+    @Getter
+    @Setter
+    private Boolean isSuzerain;
+
+    @Getter
+    @Setter
+    private List<Pundit> suzerains;
 
     public Pundit() {}
-
-    public Pundit(Long id, String name, Race race, Organization organization, Nation nation) {
-        this.id = id;
-        this.name = name;
-        this.race = race;
-        this.organization = organization;
-        this.nation = nation;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pundit pundit = (Pundit) o;
-        return Objects.equals(id, pundit.id) && Objects.equals(name, pundit.name) && Objects.equals(race, pundit.race) && Objects.equals(organization, pundit.organization) && Objects.equals(nation, pundit.nation);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, race, organization, nation);
-    }
-
-    @Override
-    public String toString() {
-        return "Pundit: {\n" +
-                "\t\tid: " + id +
-                ",\n\t\tname: " + name +
-                ",\n\t\trace: " + race +
-                ",\n\t\torganization: " + organization +
-                ",\n\t\torganization: " + nation + '\n' +
-                '}';
-    }
 }

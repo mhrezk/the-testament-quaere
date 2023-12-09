@@ -1,15 +1,13 @@
-package com.testament.veltahleon.entities.landmark;
+package com.testament.veltahleon.entities.calendar;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 @Getter
 @Entity
-@Table(name = "oceans")
-public class Ocean {
+@Table(name = "years")
+public class Year {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +15,15 @@ public class Ocean {
 
     @Getter
     @Setter
-    private String name;
+    private Day day;
 
     @Getter
     @Setter
-    private StringBuilder oceanicDescription;
+    private Month month;
 
-    public Ocean() {}
+    @Getter
+    @Setter
+    private Epoch epoch;
+
+    public Year() {}
 }

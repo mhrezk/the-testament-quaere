@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -21,43 +22,15 @@ public class Nation {
 
     @Getter
     @Setter
-    private String nationalCapital;
+    private Location nationalCapital;
 
     @Getter
     @Setter
-    private String nationalContinent;
+    private Continent nationalContinent;
 
-    public Nation() {
+    @Getter
+    @Setter
+    private List<Province> nationalprovinces;
 
-    }
-
-    public Nation(Long id, String nationalName, String nationalCapital, String nationalContinent) {
-        this.id = id;
-        this.nationalName = nationalName;
-        this.nationalCapital = nationalCapital;
-        this.nationalContinent = nationalContinent;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Nation nation = (Nation) o;
-        return Objects.equals(id, nation.id) && Objects.equals(nationalName, nation.nationalName) && Objects.equals(nationalCapital, nation.nationalCapital) && Objects.equals(nationalContinent, nation.nationalContinent);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nationalName, nationalCapital, nationalContinent);
-    }
-
-    @Override
-    public String toString() {
-        return "Nation: {\n" +
-                "\t\tid: " + id +
-                ",\n\t\tnationName: " + nationalName +
-                ",\n\t\tnationCapital: " + nationalCapital +
-                ",\n\t\tnationContinent: " + nationalContinent + '\n' +
-                '}';
-    }
+    public Nation() {}
 }

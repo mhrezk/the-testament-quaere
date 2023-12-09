@@ -1,14 +1,16 @@
-package com.testament.veltahleon.entities.calendar;
+package com.testament.veltahleon.entities.politics;
 
 import com.testament.veltahleon.entities.landmark.Nation;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Entity
-@Table(name = "epochs")
-public class Epoch {
+@Table(name = "ranks")
+public class Rank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,15 +18,7 @@ public class Epoch {
 
     @Getter
     @Setter
-    private String name;
-
-    @Getter
-    @Setter
-    private String epochTime;
-
-    @Getter
-    @Setter
-    private Integer yearNumber;
+    private String rankName;
 
     @Getter
     @Setter

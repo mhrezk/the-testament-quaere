@@ -1,6 +1,10 @@
 # Change Log
 
-## [0.3.0] 2023-12-04
+## [0.7.0] 2023-12-04
+
+- Added additional entities and edited existing entities
+
+## [0.6.0] 2023-12-04
 
 - Added entities and instance variables for those entities
 

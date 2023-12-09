@@ -1,4 +1,4 @@
-package com.testament.veltahleon.entities.landmark;
+package com.testament.veltahleon.entities.society;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,8 +8,8 @@ import java.util.Objects;
 
 @Getter
 @Entity
-@Table(name = "oceans")
-public class Ocean {
+@Table(name = "titles")
+public class Title {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +17,5 @@ public class Ocean {
 
     @Getter
     @Setter
-    private String name;
-
-    @Getter
-    @Setter
-    private StringBuilder oceanicDescription;
-
-    public Ocean() {}
+    private String titularName;
 }
