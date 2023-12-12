@@ -2,7 +2,7 @@ package com.testament.veltahleon.abstraction;
 
 import com.testament.veltahleon.entities.calendar.Year;
 import com.testament.veltahleon.entities.history.Race;
-import com.testament.veltahleon.entities.landmark.Nation;
+import com.testament.veltahleon.entities.places.Nation;
 import com.testament.veltahleon.entities.society.Family;
 import com.testament.veltahleon.entities.society.Job;
 import com.testament.veltahleon.entities.society.Title;
@@ -33,7 +33,7 @@ public abstract class Human {
 
     @Getter
     @Setter
-    private Job personalJob;
+    private List<Job> personalJobs;
 
     @Getter
     @Setter

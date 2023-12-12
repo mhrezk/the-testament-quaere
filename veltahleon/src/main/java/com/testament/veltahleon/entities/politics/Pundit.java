@@ -3,7 +3,7 @@ package com.testament.veltahleon.entities.politics;
 import java.util.List;
 import com.testament.veltahleon.abstraction.Human;
 import com.testament.veltahleon.entities.calendar.Year;
-import com.testament.veltahleon.entities.politics.enumeration.AuthoritativeStatus;
+import com.testament.veltahleon.entities.politics.enumeration.JobType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +23,7 @@ public class Pundit extends Human {
 
     @Getter
     @Setter
-    private AuthoritativeStatus authoritativeStatus;
+    private List<JobType> jobType;
 
     @Getter
     @Setter
@@ -43,15 +43,7 @@ public class Pundit extends Human {
 
     @Getter
     @Setter
-    private List<Pundit> vassals;
-
-    @Getter
-    @Setter
     private Boolean isSuzerain;
-
-    @Getter
-    @Setter
-    private List<Pundit> suzerains;
 
     public Pundit() {}
 }

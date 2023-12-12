@@ -1,5 +1,6 @@
 package com.testament.veltahleon.entities.society;
 
+import com.testament.veltahleon.entities.politics.enumeration.JobType;
 import com.testament.veltahleon.entities.society.enumeration.JobStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,6 +22,10 @@ public class Job {
     @Getter
     @Setter
     private JobStatus jobStatus;
+
+    @Getter
+    @Setter
+    private JobType jobType;
 
     @Getter
     @Setter

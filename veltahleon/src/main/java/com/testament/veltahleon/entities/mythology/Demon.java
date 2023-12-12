@@ -23,34 +23,5 @@ public class Demon {
     @Setter
     private StringBuilder description;
 
-    public Demon() {
-    }
-
-    public Demon(Long id, String name, StringBuilder description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Demon demon = (Demon) o;
-        return Objects.equals(id, demon.id) && Objects.equals(name, demon.name) && Objects.equals(description, demon.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, description);
-    }
-
-    @Override
-    public String toString() {
-        return "Demon: {\n" +
-                "\t\tid: " + id +
-                ",\n\t\tname: " + name +
-                ",\n\t\tdescription: " + description + '\n' +
-                '}';
-    }
+    public Demon() {}
 }

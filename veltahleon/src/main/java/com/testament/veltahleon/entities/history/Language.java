@@ -1,12 +1,10 @@
 package com.testament.veltahleon.entities.history;
 
-import com.testament.veltahleon.entities.landmark.Nation;
+import com.testament.veltahleon.entities.places.Nation;
 import com.testament.veltahleon.entities.politics.Organization;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Objects;
 
 @Getter
 @Entity
@@ -29,36 +27,9 @@ public class Language {
     @Setter
     private Organization organizationalAffiliation;
 
-    public Language() {
-    }
+    @Getter
+    @Setter
+    private StringBuilder description;
 
-    public Language(Long id, String name, Nation nationalAffiliation, Organization organizationalAffiliation) {
-        this.id = id;
-        this.name = name;
-        this.nationalAffiliation = nationalAffiliation;
-        this.organizationalAffiliation = organizationalAffiliation;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Language language = (Language) o;
-        return Objects.equals(id, language.id) && Objects.equals(name, language.name) && Objects.equals(nationalAffiliation, language.nationalAffiliation) && Objects.equals(organizationalAffiliation, language.organizationalAffiliation);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, nationalAffiliation, organizationalAffiliation);
-    }
-
-    @Override
-    public String toString() {
-        return "Language: {\n" +
-                "\t\tid: " + id +
-                ",\n\t\tname: " + name +
-                ",\n\t\tnationalAffiliation: " + nationalAffiliation +
-                ",\n\t\torganizationalAffiliation: " + organizationalAffiliation + '\n' +
-                '}';
-    }
+    public Language() {}
 }

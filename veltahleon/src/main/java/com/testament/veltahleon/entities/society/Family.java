@@ -18,23 +18,23 @@ public class Family {
 
     @Getter
     @Setter
-    private StringBuilder fatherName;
+    private String fatherName;
 
     @Getter
     @Setter
-    private StringBuilder motherName;
+    private String motherName;
 
     @Getter
     @Setter
-    private List<StringBuilder> siblingNames;
+    private List<String> siblingNames;
 
     @Getter
     @Setter
-    private List<StringBuilder> spousalNames;
+    private List<String> spousalNames;
 
     @Getter
     @Setter
-    private List<StringBuilder> childrenNames;
+    private List<String> childrenNames;
 
     @Getter
     @Setter

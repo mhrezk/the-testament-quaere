@@ -1,7 +1,7 @@
 package com.testament.veltahleon.entities.politics;
 
 import com.testament.veltahleon.entities.calendar.Year;
-import com.testament.veltahleon.entities.landmark.Nation;
+import com.testament.veltahleon.entities.places.Nation;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

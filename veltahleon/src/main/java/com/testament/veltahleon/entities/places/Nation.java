@@ -1,11 +1,11 @@
-package com.testament.veltahleon.entities.landmark;
+package com.testament.veltahleon.entities.places;
 
+import com.testament.veltahleon.entities.politics.Pundit;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Entity
@@ -31,6 +31,26 @@ public class Nation {
     @Getter
     @Setter
     private List<Province> nationalprovinces;
+
+    @Getter
+    @Setter
+    private NationType nationalType;
+
+    @Getter
+    @Setter
+    private List<Pundit> vassals;
+
+    @Getter
+    @Setter
+    private List<Pundit> suzerains;
+
+    @Getter
+    @Setter
+    private StringBuilder nationalDescription;
+
+    @Getter
+    @Setter
+    private Boolean doesNationStillExist;
 
     public Nation() {}
 }

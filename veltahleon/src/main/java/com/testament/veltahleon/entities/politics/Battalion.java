@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Entity
-@Table(name = "army_units")
-public class ArmyUnit {
+@Table(name = "battalions")
+public class Battalion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +17,17 @@ public class ArmyUnit {
 
     @Getter
     @Setter
-    private String unitName;
+    private MilitaryLeader leaderName;
 
     @Getter
     @Setter
-    private Integer unitNumber;
+    private List<Unit> units;
+
+    @Getter
+    @Setter
+    private Pundit armyLeader;
+
+    @Getter
+    @Setter
+    private List<Battle> battles;
 }

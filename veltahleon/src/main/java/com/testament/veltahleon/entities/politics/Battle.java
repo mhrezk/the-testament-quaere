@@ -29,7 +29,7 @@ public class Battle {
 
     @Getter
     @Setter
-    private Army proponentArmy;
+    private List<Battalion> proponentArmy;
 
     @Getter
     @Setter
@@ -41,7 +41,7 @@ public class Battle {
 
     @Getter
     @Setter
-    private Army opponentArmySize;
+    private List<Battalion> opponentArmy;
 
     @Getter
     @Setter

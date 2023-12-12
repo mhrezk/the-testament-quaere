@@ -1,11 +1,9 @@
 package com.testament.veltahleon.entities.politics;
 
-import com.testament.veltahleon.entities.landmark.Nation;
+import com.testament.veltahleon.entities.places.Nation;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Objects;
 
 @Getter
 @Entity
@@ -19,6 +17,10 @@ public class Rank {
     @Getter
     @Setter
     private String rankName;
+
+    @Getter
+    @Setter
+    private Hierarchy rankPosition;
 
     @Getter
     @Setter

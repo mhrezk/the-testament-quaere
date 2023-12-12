@@ -1,6 +1,6 @@
 package com.testament.veltahleon.entities.history;
 
-import com.testament.veltahleon.entities.landmark.Nation;
+import com.testament.veltahleon.entities.places.Nation;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +22,13 @@ public class Measurement {
 
     @Getter
     @Setter
+    private String abbreviation;
+
+    @Getter
+    @Setter
     private List<Nation> nations;
+
+    @Getter
+    @Setter
+    private StringBuilder measurementUnitDescription;
 }

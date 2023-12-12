@@ -1,4 +1,4 @@
-package com.testament.veltahleon.entities.landmark;
+package com.testament.veltahleon.entities.places;
 
 import jakarta.persistence.*;
 import lombok.Getter;

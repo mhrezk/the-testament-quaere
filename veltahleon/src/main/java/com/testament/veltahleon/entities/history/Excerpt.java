@@ -19,32 +19,5 @@ public class Excerpt {
     @Setter
     private StringBuilder description;
 
-    public Excerpt() {
-    }
-
-    public Excerpt(Long id, StringBuilder description) {
-        this.id = id;
-        this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Excerpt excerpt = (Excerpt) o;
-        return Objects.equals(id, excerpt.id) && Objects.equals(description, excerpt.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, description);
-    }
-
-    @Override
-    public String toString() {
-        return "Excerpt: {\n" +
-                "\t\tid: " + id +
-                ",\n\t\tdescription: " + description + '\n' +
-                '}';
-    }
+    public Excerpt() {}
 }

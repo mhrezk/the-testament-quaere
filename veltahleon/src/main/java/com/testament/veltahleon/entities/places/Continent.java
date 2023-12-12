@@ -1,4 +1,4 @@
-package com.testament.veltahleon.entities.landmark;
+package com.testament.veltahleon.entities.places;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -6,8 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Entity
-@Table(name = "provinces")
-public class Province {
+@Table(name = "continents")
+public class Continent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +15,9 @@ public class Province {
 
     @Getter
     @Setter
-    private String provincialName;
+    private String continentalName;
 
     @Getter
     @Setter
-    private StringBuilder provincialDescription;
+    private StringBuilder continentalDescription;
 }

@@ -1,7 +1,9 @@
 package com.testament.veltahleon.entities.politics.enumeration;
 
-public enum AuthoritativeStatus {
+public enum JobType {
     MILITARISTIC,
     GOVERNMENTAL,
-    MUNICIPAL
+    MUNICIPAL,
+    CIVIL,
+    SERVILE
 }

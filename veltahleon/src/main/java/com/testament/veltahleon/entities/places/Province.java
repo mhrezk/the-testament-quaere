@@ -1,15 +1,13 @@
-package com.testament.veltahleon.entities.landmark;
+package com.testament.veltahleon.entities.places;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 @Getter
 @Entity
-@Table(name = "oceans")
-public class Ocean {
+@Table(name = "provinces")
+public class Province {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +15,9 @@ public class Ocean {
 
     @Getter
     @Setter
-    private String name;
+    private String provincialName;
 
     @Getter
     @Setter
-    private StringBuilder oceanicDescription;
-
-    public Ocean() {}
+    private StringBuilder provincialDescription;
 }

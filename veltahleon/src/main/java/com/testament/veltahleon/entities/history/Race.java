@@ -19,31 +19,9 @@ public class Race {
     @Setter
     private String racialName;
 
+    @Getter
+    @Setter
+    private StringBuilder racialDescription;
+
     public Race() {}
-
-    public Race(Long id, String racialName) {
-        this.id = id;
-        this.racialName = racialName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Race race = (Race) o;
-        return Objects.equals(id, race.id) && Objects.equals(racialName, race.racialName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, racialName);
-    }
-
-    @Override
-    public String toString() {
-        return "Race: {\n" +
-                "\t\tid: " + id +
-                ",\n\t\tracialName: " + racialName + '\n' +
-                '}';
-    }
 }
