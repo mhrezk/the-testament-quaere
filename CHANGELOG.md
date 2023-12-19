@@ -1,6 +1,6 @@
 # Change Log
 
-## [0.9.0] 2023-12-04
+## [0.9.0] 2023-12-19
 
 - Added additional entities and edited existing entities
 
