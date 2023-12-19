@@ -1,5 +1,6 @@
 package com.testament.veltahleon.entities.places;
 
+import com.testament.veltahleon.entities.politics.NationLeader;
 import com.testament.veltahleon.entities.politics.Pundit;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,7 +8,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
 @Entity
 @Table(name = "nations")
 public class Nation {
@@ -30,7 +30,7 @@ public class Nation {
 
     @Getter
     @Setter
-    private List<Province> nationalprovinces;
+    private List<Province> nationalProvinces;
 
     @Getter
     @Setter
@@ -38,11 +38,11 @@ public class Nation {
 
     @Getter
     @Setter
-    private List<Pundit> vassals;
+    private List<NationLeader> vassals;
 
     @Getter
     @Setter
-    private List<Pundit> suzerains;
+    private List<NationLeader> suzerains;
 
     @Getter
     @Setter

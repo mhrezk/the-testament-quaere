@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Entity
 @Table(name = "units")
 public class Unit {
@@ -16,9 +15,4 @@ public class Unit {
     @Getter
     @Setter
     private String unitType;
-
-    @Transient
-    @Getter
-    @Setter
-    private Integer unitNumber;
 }

@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.util.Objects;
 
-@Getter
 @Entity
 @Table(name = "excerpts")
 public class Excerpt {

@@ -6,10 +6,9 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
 @Entity
-@Table(name = "battalions")
-public class Battalion {
+@Table(name = "squads")
+public class Squad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +20,15 @@ public class Battalion {
 
     @Getter
     @Setter
-    private List<Unit> units;
+    private String squadName;
 
     @Getter
     @Setter
-    private Pundit armyLeader;
+    private Unit unit;
+
+    @Getter
+    @Setter
+    private Integer unitNumber;
 
     @Getter
     @Setter

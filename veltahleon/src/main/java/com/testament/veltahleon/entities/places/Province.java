@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Entity
 @Table(name = "provinces")
 public class Province {
@@ -16,6 +15,10 @@ public class Province {
     @Getter
     @Setter
     private String provincialName;
+
+    @Getter
+    @Setter
+    private Nation provincialNation;
 
     @Getter
     @Setter

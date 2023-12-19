@@ -21,7 +21,7 @@ public class Battle {
 
     @Getter
     @Setter
-    private List<Pundit> proponentNationalLeaders;
+    private List<NationLeader> proponentNationalLeaders;
 
     @Getter
     @Setter
@@ -29,11 +29,11 @@ public class Battle {
 
     @Getter
     @Setter
-    private List<Battalion> proponentArmy;
+    private List<Army> proponentArmy;
 
     @Getter
     @Setter
-    private List<Pundit> opponentNationalLeaders;
+    private List<NationLeader> opponentNationalLeaders;
 
     @Getter
     @Setter
@@ -41,7 +41,7 @@ public class Battle {
 
     @Getter
     @Setter
-    private List<Battalion> opponentArmy;
+    private List<Army> opponentArmy;
 
     @Getter
     @Setter

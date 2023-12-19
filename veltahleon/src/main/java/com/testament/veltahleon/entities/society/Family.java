@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
 @Entity
 @Table(name = "families")
 public class Family {
@@ -18,23 +17,23 @@ public class Family {
 
     @Getter
     @Setter
-    private String fatherName;
+    private Person fatherName;
 
     @Getter
     @Setter
-    private String motherName;
+    private Person motherName;
 
     @Getter
     @Setter
-    private List<String> siblingNames;
+    private List<Person> siblingNames;
 
     @Getter
     @Setter
-    private List<String> spousalNames;
+    private List<Person> spousalNames;
 
     @Getter
     @Setter
-    private List<String> childrenNames;
+    private List<Person> childrenNames;
 
     @Getter
     @Setter

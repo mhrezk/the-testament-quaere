@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Entity
 @Table(name = "nation_types")
 public class NationType {
@@ -16,14 +15,4 @@ public class NationType {
     @Getter
     @Setter
     private String typeName;
-
-    @Transient
-    @Getter
-    @Setter
-    private Boolean isVassal;
-
-    @Transient
-    @Getter
-    @Setter
-    private Boolean isSuzerain;
 }

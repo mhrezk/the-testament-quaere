@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
 @Entity
 @Table(name = "militaristic_leaders")
 public class MilitaryLeader extends Pundit {
@@ -17,7 +16,15 @@ public class MilitaryLeader extends Pundit {
 
     @Getter
     @Setter
+    private List<Rank> ranks;
+
+    @Getter
+    @Setter
     private List<Battle> battles;
+
+    @Getter
+    @Setter
+    private List<Squad> squads;
 
     public MilitaryLeader() {}
 }

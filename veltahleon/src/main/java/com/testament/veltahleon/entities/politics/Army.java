@@ -1,12 +1,14 @@
-package com.testament.veltahleon.entities.places;
+package com.testament.veltahleon.entities.politics;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
-@Table(name = "locations")
-public class Location {
+@Table(name = "armies")
+public class Army {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,17 +16,17 @@ public class Location {
 
     @Getter
     @Setter
-    private String locationName;
+    private String armyName;
 
     @Getter
     @Setter
-    private Nation nation;
+    private MilitaryLeader armyLeader;
 
     @Getter
     @Setter
-    private StringBuilder locationDescription;
+    private List<Squad> squads;
 
     @Getter
     @Setter
-    private Boolean isCapital;
+    private List<Battle> battles;
 }

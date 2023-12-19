@@ -1,4 +1,4 @@
-package com.testament.veltahleon.entities.history;
+package com.testament.veltahleon.entities.politics;
 
 import com.testament.veltahleon.entities.places.Nation;
 import jakarta.persistence.*;
@@ -8,8 +8,8 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "measurements")
-public class Measurement {
+@Table(name = "national_leaders")
+public class NationLeader extends Pundit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +17,15 @@ public class Measurement {
 
     @Getter
     @Setter
-    private String measurementUnitName;
-
-    @Getter
-    @Setter
-    private String abbreviation;
-
-    @Getter
-    @Setter
     private List<Nation> nations;
 
     @Getter
     @Setter
-    private StringBuilder measurementUnitDescription;
+    private Boolean isVassal;
+
+    @Getter
+    @Setter
+    private Boolean isSuzerain;
+
+    public NationLeader() {}
 }
