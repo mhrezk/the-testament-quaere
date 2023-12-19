@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.11.0] 2023-12-19
+
+- Updated world maps
+
 ## [0.10.0] 2023-12-19
 
 - Added `Gender.java`
