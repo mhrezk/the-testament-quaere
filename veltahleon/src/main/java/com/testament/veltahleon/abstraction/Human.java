@@ -9,6 +9,7 @@ import com.testament.veltahleon.entities.society.Religion;
 import com.testament.veltahleon.entities.society.Title;
 import com.testament.veltahleon.entities.society.enumeration.Gender;
 import com.testament.veltahleon.entities.society.enumeration.LifeStatus;
+import com.testament.veltahleon.entities.society.enumeration.Lineage;
 import com.testament.veltahleon.entities.society.enumeration.MaritalStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +41,10 @@ public abstract class Human {
     @Getter
     @Setter
     private Family personalFamily;
+
+    @Getter
+    @Setter
+    private Lineage personalLineage;
 
     @Getter
     @Setter
