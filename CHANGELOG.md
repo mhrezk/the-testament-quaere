@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.12.1] 2023-12-19
+
+- Resolved JPA mapping with database
+
 ## [0.12.0] 2023-12-19
 
 - Added `House.java` and `Lineage.java`
