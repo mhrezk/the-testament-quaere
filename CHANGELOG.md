@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.13.0] 2023-12-19
+
+- Added Data Access Objects for all entities
+
 ## [0.12.1] 2023-12-19
 
 - Resolved JPA mapping with database

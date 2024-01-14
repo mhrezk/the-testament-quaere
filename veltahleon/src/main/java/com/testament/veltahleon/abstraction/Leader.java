@@ -1,6 +1,6 @@
 package com.testament.veltahleon.abstraction;
 
-import com.testament.veltahleon.model.entities.politics.Battle;
+import com.testament.veltahleon.model.entities.politics.military.Battle;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToMany;
