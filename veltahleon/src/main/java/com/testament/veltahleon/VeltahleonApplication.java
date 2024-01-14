@@ -9,5 +9,4 @@ public class VeltahleonApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VeltahleonApplication.class, args);
 	}
-
 }

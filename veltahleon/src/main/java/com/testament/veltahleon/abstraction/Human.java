@@ -1,79 +1,44 @@
 package com.testament.veltahleon.abstraction;
 
-import com.testament.veltahleon.entities.calendar.Year;
-import com.testament.veltahleon.entities.history.Race;
-import com.testament.veltahleon.entities.places.Nation;
-import com.testament.veltahleon.entities.society.Family;
-import com.testament.veltahleon.entities.society.Job;
-import com.testament.veltahleon.entities.society.Religion;
-import com.testament.veltahleon.entities.society.Title;
-import com.testament.veltahleon.entities.society.enumeration.Gender;
-import com.testament.veltahleon.entities.society.enumeration.LifeStatus;
-import com.testament.veltahleon.entities.society.enumeration.Lineage;
-import com.testament.veltahleon.entities.society.enumeration.MaritalStatus;
-import lombok.Getter;
-import lombok.Setter;
+import com.testament.veltahleon.model.entities.calendar.Year;
+import com.testament.veltahleon.model.entities.history.Race;
+import com.testament.veltahleon.model.entities.society.enumeration.Gender;
 
-import java.util.List;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import java.util.Map;
+
+@MappedSuperclass
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Human {
 
-    @Getter
-    @Setter
-    private StringBuilder personalName;
+    @Column(name = "name")
+    private String personalName;
 
-    @Getter
-    @Setter
+    @OneToOne
+    @JoinColumn(name = "race_id")
+    //@PrimaryKeyJoinColumn(name = "race") //Used instead of @Column with @OneToOne
     private Race personalRace;
 
-    @Getter
-    @Setter
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
     private Gender personalGender;
 
-    @Getter
-    @Setter
-    private Religion personalReligion;
+    @OneToMany
+//    @ElementCollection(fetch = FetchType.LAZY)
+//    @CollectionTable(name = "years_birth_death_people", joinColumns = @JoinColumn(name = "people_id"))
+    @MapKeyColumn(name = "birth_or_death")
+    @Column(name = "year")
+    private Map<String, Year> yearBirthAndDeath;
 
-    @Getter
-    @Setter
-    private MaritalStatus maritalStatus;
-
-    @Getter
-    @Setter
-    private Family personalFamily;
-
-    @Getter
-    @Setter
-    private Lineage personalLineage;
-
-    @Getter
-    @Setter
-    private List<Job> personalJobs;
-
-    @Getter
-    @Setter
-    private List<Title> titles;
-
-    @Getter
-    @Setter
-    private LifeStatus lifestatus;
-
-    @Getter
-    @Setter
-    private Year birthYear;
-
-    @Getter
-    @Setter
-    private Year deathYear;
-
-    @Getter
-    @Setter
-    private Nation personalNation;
-
-    @Getter
-    @Setter
+    @Column(name = "biography", columnDefinition = "longtext")
     private StringBuilder personalBiography;
-
-    public Human() {}
-
 }
