@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.14.0] 2023-12-19
+
+- Added `@Repository` annotation for DAO classes
+
 ## [0.13.0] 2023-12-19
 
 - Added Data Access Objects for all entities
