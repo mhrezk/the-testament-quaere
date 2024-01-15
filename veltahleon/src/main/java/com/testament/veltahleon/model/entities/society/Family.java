@@ -56,4 +56,8 @@ public class Family {
     @Enumerated(EnumType.STRING)
     @Column(name = "is_adopted")
     private ClosedAnswer isAdopted;
+
+    @Column(name = "coat_of_arms_url")
+    private String urlCoatOfArms;
+
 }

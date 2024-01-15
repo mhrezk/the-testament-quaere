@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.16.0] 2023-12-19
+
+- Added CRUD functionalities for DAO classes
+
 ## [0.15.0] 2023-12-19
 
 - Added `Prophet.java` entity class

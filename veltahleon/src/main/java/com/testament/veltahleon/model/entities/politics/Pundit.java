@@ -35,11 +35,8 @@ public class Pundit extends Human {
     @OneToMany(mappedBy = "founder")
     private Set<Organization> organization;
 
-    @OneToOne
-    @JoinColumn(name = "title_id")
-    //@Column(name = "epithet") //cannot be used with @OneToOne
-    @PrimaryKeyJoinColumn(name = "epithet")
-    private Title title;
+    @Column(name = "coat_of_arms_url")
+    private String urlCoatOfArms;
 
 //    @Enumerated(EnumType.STRING)
 //    @Column(name = "is_vassal")

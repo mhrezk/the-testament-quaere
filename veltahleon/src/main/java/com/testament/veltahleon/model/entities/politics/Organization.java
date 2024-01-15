@@ -35,4 +35,7 @@ public class Organization {
     @MapKeyColumn(name = "foundation_or_disbandment")
     @Column(name = "year")
     private Map<String, Year> yearFoundationAndDisbandment;
+
+    @Column(name = "coat_of_arms_url")
+    private String urlCoatOfArms;
 }
