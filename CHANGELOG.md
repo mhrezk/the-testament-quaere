@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.19.0] 2023-12-19
+
+- Finalized service classes for all DAO classes
+
 ## [0.18.0] 2023-12-19
 
 - Added service classes for certain DAO classes

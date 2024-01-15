@@ -1,10 +1,9 @@
-package com.testament.veltahleon.repositories.dao.implementation.religion;
+package com.testament.veltahleon.repositories.dao.implementation.religion.mythology;
 
-import com.testament.veltahleon.model.entities.religion.Pantheon;
-import com.testament.veltahleon.repositories.dao.ifc.religion.PantheonDAO;
+import com.testament.veltahleon.model.entities.religion.mythology.Pantheon;
+import com.testament.veltahleon.repositories.dao.ifc.religion.mythology.PantheonDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

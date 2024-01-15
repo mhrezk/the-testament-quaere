@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.religion;
 
+import com.testament.veltahleon.model.entities.religion.mythology.Pantheon;
 import lombok.*;
 
 import jakarta.persistence.*;

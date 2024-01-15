@@ -1,10 +1,10 @@
-package com.testament.veltahleon.repositories.dao.ifc.religion;
+package com.testament.veltahleon.services.dao.ifc.religion.mythology;
 
-import com.testament.veltahleon.model.entities.religion.Pantheon;
+import com.testament.veltahleon.model.entities.religion.mythology.Pantheon;
 
 import java.util.Collection;
 
-public interface PantheonDAO {
+public interface PantheonService {
 
     Collection<Pantheon> getPantheons();
     Pantheon getPantheonByID(Long id);

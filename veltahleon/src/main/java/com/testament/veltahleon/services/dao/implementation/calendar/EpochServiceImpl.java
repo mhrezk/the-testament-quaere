@@ -5,6 +5,7 @@ import com.testament.veltahleon.repositories.dao.ifc.calendar.EpochDAO;
 import com.testament.veltahleon.services.dao.ifc.calendar.EpochService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class EpochServiceImpl implements EpochService {
 
     @Autowired

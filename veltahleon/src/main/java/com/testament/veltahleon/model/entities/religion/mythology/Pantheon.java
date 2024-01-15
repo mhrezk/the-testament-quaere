@@ -1,4 +1,4 @@
-package com.testament.veltahleon.model.entities.religion;
+package com.testament.veltahleon.model.entities.religion.mythology;
 
 import com.testament.veltahleon.model.entities.religion.mythology.Deity;
 import jakarta.persistence.*;
