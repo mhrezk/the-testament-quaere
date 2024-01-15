@@ -1,4 +1,4 @@
-package com.testament.veltahleon.services.dao.implementation;
+package com.testament.veltahleon.services.dao.implementation.calendar;
 
 import com.testament.veltahleon.model.entities.calendar.Day;
 import com.testament.veltahleon.repositories.dao.ifc.calendar.DayDAO;

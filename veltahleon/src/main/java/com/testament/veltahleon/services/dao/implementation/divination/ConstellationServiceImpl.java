@@ -1,0 +1,47 @@
+package com.testament.veltahleon.services.dao.implementation.divination;
+
+import com.testament.veltahleon.model.entities.divination.Constellation;
+import com.testament.veltahleon.repositories.dao.ifc.divination.ConstellationDAO;
+import com.testament.veltahleon.services.dao.ifc.divination.ConstellationService;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+
+@Service
+@RequiredArgsConstructor
+public class ConstellationServiceImpl implements ConstellationService {
+
+    @Autowired
+    private ConstellationDAO constellationDAO;
+
+    @Override
+    public Collection<Constellation> getConstellations() {
+        return constellationDAO.getConstellations();
+    }
+
+    @Override
+    public Constellation getConstellationByID(Long id) {
+        return constellationDAO.getConstellationByID(id);
+    }
+
+    @Override
+    @Transactional
+    public Boolean deleteConstellationByID(Long id) {
+        return constellationDAO.deleteConstellationByID(id);
+    }
+
+    @Override
+    @Transactional
+    public Constellation saveConstellation(Constellation constellation) {
+        return constellationDAO.saveConstellation(constellation);
+    }
+
+    @Override
+    @Transactional
+    public Constellation updateConstellation(Constellation constellation) {
+        return constellationDAO.updateConstellation(constellation);
+    }
+}
