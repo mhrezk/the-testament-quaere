@@ -21,4 +21,7 @@ public class Deity {
 
     @Column(columnDefinition = "longtext")
     private StringBuilder description;
+
+    @Column(name = "image_URL")
+    private String imageURL;
 }

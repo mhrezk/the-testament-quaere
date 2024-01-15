@@ -20,4 +20,7 @@ public class Race {
 
     @Column(name = "description", columnDefinition = "text")
     private StringBuilder racialDescription;
+
+    @Column(name = "image_URL")
+    private String imageURL;
 }

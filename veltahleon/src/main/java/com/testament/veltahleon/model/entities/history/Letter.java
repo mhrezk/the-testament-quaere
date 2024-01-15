@@ -23,4 +23,7 @@ public class Letter {
     @ManyToOne
     @JoinColumn(name = "language_id")
     private Language language;
+
+    @Column(name = "script_URL")
+    private String scriptURL;
 }

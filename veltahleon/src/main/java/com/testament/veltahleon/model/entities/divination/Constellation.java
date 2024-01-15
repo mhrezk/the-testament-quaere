@@ -19,4 +19,7 @@ public class Constellation {
 
     @Column(name = "description", columnDefinition = "text")
     private StringBuilder description;
+
+    @Column(name = "image_URL")
+    private String imageURL;
 }

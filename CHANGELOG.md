@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.15.0] 2023-12-19
+
+- Added `Prophet.java` entity class
+
 ## [0.14.0] 2023-12-19
 
 - Added `@Repository` annotation for DAO classes

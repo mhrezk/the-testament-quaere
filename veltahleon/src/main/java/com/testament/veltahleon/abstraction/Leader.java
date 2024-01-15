@@ -1,6 +1,7 @@
 package com.testament.veltahleon.abstraction;
 
 import com.testament.veltahleon.model.entities.politics.military.Battle;
+import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToMany;
@@ -23,4 +24,7 @@ public abstract class Leader extends Human {
     @OneToMany
     @JoinColumn(name = "leader_id")
     private Set<Battle> battles;
+
+    @Column(name = "image_URL")
+    private String imageURL;
 }

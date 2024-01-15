@@ -41,4 +41,7 @@ public abstract class Human {
 
     @Column(name = "biography", columnDefinition = "longtext")
     private StringBuilder personalBiography;
+
+    @Column(name = "image_URL")
+    private String imageURL;
 }

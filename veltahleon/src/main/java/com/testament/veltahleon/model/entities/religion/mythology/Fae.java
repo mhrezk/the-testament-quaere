@@ -24,4 +24,7 @@ public class Fae {
 
     @Column(columnDefinition = "text")
     private StringBuilder description;
+
+    @Column(name = "image_URL")
+    private String imageURL;
 }

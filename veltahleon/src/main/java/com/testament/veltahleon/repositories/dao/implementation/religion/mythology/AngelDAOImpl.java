@@ -2,12 +2,12 @@ package com.testament.veltahleon.repositories.dao.implementation.religion.mythol
 
 import com.testament.veltahleon.repositories.dao.ifc.religion.mythology.AngelDAO;
 import jakarta.persistence.EntityManager;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AngelDAOImpl implements AngelDAO {
 
     @Autowired
