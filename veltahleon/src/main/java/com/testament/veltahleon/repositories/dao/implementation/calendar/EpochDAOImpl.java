@@ -30,7 +30,6 @@ public class EpochDAOImpl implements EpochDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteEpochByID(Long id) {
         Epoch epoch = entityManager.find(Epoch.class, id);
         entityManager.remove(epoch);
@@ -38,14 +37,12 @@ public class EpochDAOImpl implements EpochDAO {
     }
 
     @Override
-    @Transactional
     public Epoch saveEpoch(Epoch epoch) {
         entityManager.persist(epoch);
         return epoch;
     }
 
     @Override
-    @Transactional
     public Epoch updateEpoch(Epoch epoch) {
         return entityManager.merge(epoch);
     }

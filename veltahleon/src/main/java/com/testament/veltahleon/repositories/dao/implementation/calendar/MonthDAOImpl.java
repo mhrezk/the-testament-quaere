@@ -30,7 +30,6 @@ public class MonthDAOImpl implements MonthDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteMonthByID(Long id) {
         Month month = entityManager.find(Month.class, id);
         entityManager.remove(month);
@@ -38,14 +37,12 @@ public class MonthDAOImpl implements MonthDAO {
     }
 
     @Override
-    @Transactional
     public Month saveMonth(Month month) {
         entityManager.persist(month);
         return month;
     }
 
     @Override
-    @Transactional
     public Month updateMonth(Month month) {
         return entityManager.merge(month);
     }

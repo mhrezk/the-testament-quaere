@@ -30,7 +30,6 @@ public class DayDAOImpl implements DayDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteDayByID(Long id) {
         Day day = entityManager.find(Day.class, id);
         entityManager.remove(day);
@@ -38,14 +37,12 @@ public class DayDAOImpl implements DayDAO {
     }
 
     @Override
-    @Transactional
     public Day saveDay(Day day) {
         entityManager.persist(day);
         return day;
     }
 
     @Override
-    @Transactional
     public Day updateDay(Day day) {
         return entityManager.merge(day);
     }

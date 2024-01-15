@@ -30,7 +30,6 @@ public class LanguageDAOImpl implements LanguageDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteLanguageByID(Long id) {
         Language language = entityManager.find(Language.class, id);
         entityManager.remove(language);
@@ -38,14 +37,12 @@ public class LanguageDAOImpl implements LanguageDAO {
     }
 
     @Override
-    @Transactional
     public Language saveLanguage(Language language) {
         entityManager.persist(language);
         return language;
     }
 
     @Override
-    @Transactional
     public Language updateLanguage(Language language) {
         return entityManager.merge(language);
     }

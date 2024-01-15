@@ -30,7 +30,6 @@ public class PunditDAOImpl implements PunditDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deletePunditByID(Long id) {
         Pundit pundit = entityManager.find(Pundit.class, id);
         entityManager.remove(pundit);
@@ -38,14 +37,12 @@ public class PunditDAOImpl implements PunditDAO {
     }
 
     @Override
-    @Transactional
     public Pundit savePundit(Pundit pundit) {
         entityManager.persist(pundit);
         return pundit;
     }
 
     @Override
-    @Transactional
     public Pundit updatePundit(Pundit pundit) {
         return entityManager.merge(pundit);
     }

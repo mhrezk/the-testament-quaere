@@ -30,7 +30,6 @@ public class JobDAOImpl implements JobDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteJobByID(Long id) {
         Job job = entityManager.find(Job.class, id);
         entityManager.remove(job);
@@ -38,14 +37,12 @@ public class JobDAOImpl implements JobDAO {
     }
 
     @Override
-    @Transactional
     public Job saveJob(Job job) {
         entityManager.persist(job);
         return job;
     }
 
     @Override
-    @Transactional
     public Job updateJob(Job job) {
         return entityManager.merge(job);
     }

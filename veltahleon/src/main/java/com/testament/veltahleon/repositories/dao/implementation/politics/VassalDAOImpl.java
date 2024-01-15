@@ -30,7 +30,6 @@ public class VassalDAOImpl implements VassalDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteVassalByID(Long id) {
         Vassal vassal = entityManager.find(Vassal.class, id);
         entityManager.remove(vassal);
@@ -38,14 +37,12 @@ public class VassalDAOImpl implements VassalDAO {
     }
 
     @Override
-    @Transactional
     public Vassal saveVassal(Vassal vassal) {
         entityManager.persist(vassal);
         return vassal;
     }
 
     @Override
-    @Transactional
     public Vassal updateVassal(Vassal vassal) {
         return entityManager.merge(vassal);
     }

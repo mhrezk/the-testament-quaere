@@ -30,7 +30,6 @@ public class OceanDAOImpl implements OceanDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteOceanByID(Long id) {
         Ocean ocean = entityManager.find(Ocean.class, id);
         entityManager.remove(ocean);
@@ -38,14 +37,12 @@ public class OceanDAOImpl implements OceanDAO {
     }
 
     @Override
-    @Transactional
     public Ocean saveOcean(Ocean ocean) {
         entityManager.persist(ocean);
         return ocean;
     }
 
     @Override
-    @Transactional
     public Ocean updateOcean(Ocean ocean) {
         return entityManager.merge(ocean);
     }

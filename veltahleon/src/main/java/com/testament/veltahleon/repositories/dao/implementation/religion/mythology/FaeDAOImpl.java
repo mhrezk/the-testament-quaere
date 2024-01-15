@@ -30,7 +30,6 @@ public class FaeDAOImpl implements FaeDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteFaeByID(Long id) {
         Fae fae = entityManager.find(Fae.class, id);
         entityManager.remove(fae);
@@ -38,14 +37,12 @@ public class FaeDAOImpl implements FaeDAO {
     }
 
     @Override
-    @Transactional
     public Fae saveFae(Fae fae) {
         entityManager.persist(fae);
         return fae;
     }
 
     @Override
-    @Transactional
     public Fae updateFae(Fae fae) {
         return entityManager.merge(fae);
     }

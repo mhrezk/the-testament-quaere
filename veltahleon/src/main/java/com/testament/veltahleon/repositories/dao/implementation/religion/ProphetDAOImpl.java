@@ -30,7 +30,6 @@ public class ProphetDAOImpl implements ProphetDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteProphetByID(Long id) {
         Prophet prophet = entityManager.find(Prophet.class, id);
         entityManager.remove(prophet);
@@ -38,14 +37,12 @@ public class ProphetDAOImpl implements ProphetDAO {
     }
 
     @Override
-    @Transactional
     public Prophet saveProphet(Prophet prophet) {
         entityManager.persist(prophet);
         return prophet;
     }
 
     @Override
-    @Transactional
     public Prophet updateProphet(Prophet prophet) {
         return entityManager.merge(prophet);
     }

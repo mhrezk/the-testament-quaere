@@ -30,7 +30,6 @@ public class PantheonDAOImpl implements PantheonDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deletePantheonByID(Long id) {
         Pantheon pantheon = entityManager.find(Pantheon.class, id);
         entityManager.remove(pantheon);
@@ -38,14 +37,12 @@ public class PantheonDAOImpl implements PantheonDAO {
     }
 
     @Override
-    @Transactional
     public Pantheon savePantheon(Pantheon pantheon) {
         entityManager.persist(pantheon);
         return pantheon;
     }
 
     @Override
-    @Transactional
     public Pantheon updatePantheon(Pantheon pantheon) {
         return entityManager.merge(pantheon);
     }

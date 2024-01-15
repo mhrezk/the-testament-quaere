@@ -30,7 +30,6 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteAuthorByID(Long id) {
         Author author = entityManager.find(Author.class, id);
         entityManager.remove(author);
@@ -38,14 +37,12 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    @Transactional
     public Author saveAuthor(Author author) {
         entityManager.persist(author);
         return author;
     }
 
     @Override
-    @Transactional
     public Author updateAuthor(Author author) {
         return entityManager.merge(author);
     }

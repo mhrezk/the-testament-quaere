@@ -30,7 +30,6 @@ public class CapitalDAOImpl implements CapitalDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteCapitalByID(Long id) {
         Capital capital = entityManager.find(Capital.class, id);
         entityManager.remove(capital);
@@ -38,14 +37,12 @@ public class CapitalDAOImpl implements CapitalDAO {
     }
 
     @Override
-    @Transactional
     public Capital saveCapital(Capital capital) {
         entityManager.persist(capital);
         return capital;
     }
 
     @Override
-    @Transactional
     public Capital updateCapital(Capital capital) {
         return entityManager.merge(capital);
     }

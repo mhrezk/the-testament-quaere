@@ -30,7 +30,6 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteLocationByID(Long id) {
         Location location = entityManager.find(Location.class, id);
         entityManager.remove(location);
@@ -38,14 +37,12 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    @Transactional
     public Location saveLocation(Location location) {
         entityManager.persist(location);
         return location;
     }
 
     @Override
-    @Transactional
     public Location updateLocation(Location location) {
         return entityManager.merge(location);
     }

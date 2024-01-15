@@ -30,7 +30,6 @@ public class TarotDAOImpl implements TarotDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteTarotByID(Long id) {
         Tarot tarot = entityManager.find(Tarot.class, id);
         entityManager.remove(tarot);
@@ -38,14 +37,12 @@ public class TarotDAOImpl implements TarotDAO {
     }
 
     @Override
-    @Transactional
     public Tarot saveTarot(Tarot tarot) {
         entityManager.persist(tarot);
         return tarot;
     }
 
     @Override
-    @Transactional
     public Tarot updateTarot(Tarot tarot) {
         return entityManager.merge(tarot);
     }

@@ -30,7 +30,6 @@ public class YearDAOImpl implements YearDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteYearByID(Long id) {
         Year year = entityManager.find(Year.class, id);
         entityManager.remove(year);
@@ -38,14 +37,12 @@ public class YearDAOImpl implements YearDAO {
     }
 
     @Override
-    @Transactional
     public Year saveYear(Year year) {
         entityManager.persist(year);
         return year;
     }
 
     @Override
-    @Transactional
     public Year updateYear(Year year) {
         return entityManager.merge(year);
     }

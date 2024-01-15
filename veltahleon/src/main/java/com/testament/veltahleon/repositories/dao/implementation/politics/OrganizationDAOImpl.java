@@ -30,7 +30,6 @@ public class OrganizationDAOImpl implements OrganizationDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteOrganizationByID(Long id) {
         Organization organization = entityManager.find(Organization.class, id);
         entityManager.remove(organization);
@@ -38,14 +37,12 @@ public class OrganizationDAOImpl implements OrganizationDAO {
     }
 
     @Override
-    @Transactional
     public Organization saveOrganization(Organization organization) {
         entityManager.persist(organization);
         return organization;
     }
 
     @Override
-    @Transactional
     public Organization updateOrganization(Organization organization) {
         return entityManager.merge(organization);
     }

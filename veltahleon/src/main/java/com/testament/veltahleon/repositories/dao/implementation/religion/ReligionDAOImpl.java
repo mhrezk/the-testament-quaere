@@ -30,7 +30,6 @@ public class ReligionDAOImpl implements ReligionDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteReligionByID(Long id) {
         Religion religion = entityManager.find(Religion.class, id);
         entityManager.remove(religion);
@@ -38,14 +37,12 @@ public class ReligionDAOImpl implements ReligionDAO {
     }
 
     @Override
-    @Transactional
     public Religion saveReligion(Religion religion) {
         entityManager.persist(religion);
         return religion;
     }
 
     @Override
-    @Transactional
     public Religion updateReligion(Religion religion) {
         return entityManager.merge(religion);
     }

@@ -30,7 +30,6 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteBookByID(Long id) {
         Book book = entityManager.find(Book.class, id);
         entityManager.remove(book);
@@ -38,14 +37,12 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    @Transactional
     public Book saveBook(Book book) {
         entityManager.persist(book);
         return book;
     }
 
     @Override
-    @Transactional
     public Book updateBook(Book book) {
         return entityManager.merge(book);
     }

@@ -30,7 +30,6 @@ public class FamilyDAOImpl implements FamilyDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteFamilyByID(Long id) {
         Family family = entityManager.find(Family.class, id);
         entityManager.remove(family);
@@ -38,14 +37,12 @@ public class FamilyDAOImpl implements FamilyDAO {
     }
 
     @Override
-    @Transactional
     public Family saveFamily(Family family) {
         entityManager.persist(family);
         return family;
     }
 
     @Override
-    @Transactional
     public Family updateFamily(Family family) {
         return entityManager.merge(family);
     }

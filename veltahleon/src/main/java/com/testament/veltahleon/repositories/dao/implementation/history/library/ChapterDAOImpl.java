@@ -30,7 +30,6 @@ public class ChapterDAOImpl implements ChapterDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteChapterByID(Long id) {
         Chapter chapter = entityManager.find(Chapter.class, id);
         entityManager.remove(chapter);
@@ -38,14 +37,12 @@ public class ChapterDAOImpl implements ChapterDAO {
     }
 
     @Override
-    @Transactional
     public Chapter saveChapter(Chapter chapter) {
         entityManager.persist(chapter);
         return chapter;
     }
 
     @Override
-    @Transactional
     public Chapter updateChapter(Chapter chapter) {
         return entityManager.merge(chapter);
     }

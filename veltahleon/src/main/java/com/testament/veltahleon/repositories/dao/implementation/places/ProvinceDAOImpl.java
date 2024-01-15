@@ -30,7 +30,6 @@ public class ProvinceDAOImpl implements ProvinceDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteProvinceByID(Long id) {
         Province province = entityManager.find(Province.class, id);
         entityManager.remove(province);
@@ -38,14 +37,12 @@ public class ProvinceDAOImpl implements ProvinceDAO {
     }
 
     @Override
-    @Transactional
     public Province saveProvince(Province province) {
         entityManager.persist(province);
         return province;
     }
 
     @Override
-    @Transactional
     public Province updateProvince(Province province) {
         return entityManager.merge(province);
     }

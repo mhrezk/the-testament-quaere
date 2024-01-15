@@ -30,7 +30,6 @@ public class ExcerptDAOImpl implements ExcerptDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteExcerptByID(Long id) {
         Excerpt excerpt = entityManager.find(Excerpt.class, id);
         entityManager.remove(excerpt);
@@ -38,14 +37,12 @@ public class ExcerptDAOImpl implements ExcerptDAO {
     }
 
     @Override
-    @Transactional
     public Excerpt saveExcerpt(Excerpt excerpt) {
         entityManager.persist(excerpt);
         return excerpt;
     }
 
     @Override
-    @Transactional
     public Excerpt updateExcerpt(Excerpt excerpt) {
         return entityManager.merge(excerpt);
     }

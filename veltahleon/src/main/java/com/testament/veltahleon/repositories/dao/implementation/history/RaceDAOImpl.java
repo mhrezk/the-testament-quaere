@@ -30,7 +30,6 @@ public class RaceDAOImpl implements RaceDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteRaceByID(Long id) {
         Race race = entityManager.find(Race.class, id);
         entityManager.remove(race);
@@ -38,14 +37,12 @@ public class RaceDAOImpl implements RaceDAO {
     }
 
     @Override
-    @Transactional
     public Race saveRace(Race race) {
         entityManager.persist(race);
         return race;
     }
 
     @Override
-    @Transactional
     public Race updateRace(Race race) {
         return entityManager.merge(race);
     }

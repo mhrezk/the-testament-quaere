@@ -30,7 +30,6 @@ public class LetterDAOImpl implements LetterDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteLetterByID(Long id) {
         Letter letter = entityManager.find(Letter.class, id);
         entityManager.remove(letter);
@@ -38,14 +37,12 @@ public class LetterDAOImpl implements LetterDAO {
     }
 
     @Override
-    @Transactional
-    public Letter saveLetter(Letter letter) {
+   public Letter saveLetter(Letter letter) {
         entityManager.persist(letter);
         return letter;
     }
 
     @Override
-    @Transactional
     public Letter updateLetter(Letter letter) {
         return entityManager.merge(letter);
     }

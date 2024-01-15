@@ -30,7 +30,6 @@ public class BattleDAOImpl implements BattleDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteBattleByID(Long id) {
         Battle battle = entityManager.find(Battle.class, id);
         entityManager.remove(battle);
@@ -38,14 +37,12 @@ public class BattleDAOImpl implements BattleDAO {
     }
 
     @Override
-    @Transactional
     public Battle saveBattle(Battle battle) {
         entityManager.persist(battle);
         return battle;
     }
 
     @Override
-    @Transactional
     public Battle updateBattle(Battle battle) {
         return entityManager.merge(battle);
     }

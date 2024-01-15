@@ -30,7 +30,6 @@ public class NationTypeDAOImpl implements NationTypeDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteNationTypeByID(Long id) {
         NationType nationType = entityManager.find(NationType.class, id);
         entityManager.remove(nationType);
@@ -38,14 +37,12 @@ public class NationTypeDAOImpl implements NationTypeDAO {
     }
 
     @Override
-    @Transactional
     public NationType saveNationType(NationType nationType) {
         entityManager.persist(nationType);
         return nationType;
     }
 
     @Override
-    @Transactional
     public NationType updateNationType(NationType nationType) {
         return entityManager.merge(nationType);
     }

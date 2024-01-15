@@ -30,7 +30,6 @@ public class DemonDAOImpl implements DemonDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteDemonByID(Long id) {
         Demon demon = entityManager.find(Demon.class, id);
         entityManager.remove(demon);
@@ -38,14 +37,12 @@ public class DemonDAOImpl implements DemonDAO {
     }
 
     @Override
-    @Transactional
     public Demon saveDemon(Demon demon) {
         entityManager.persist(demon);
         return demon;
     }
 
     @Override
-    @Transactional
     public Demon updateDemon(Demon demon) {
         return entityManager.merge(demon);
     }

@@ -30,7 +30,6 @@ public class ContinentDAOImpl implements ContinentDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteContinentByID(Long id) {
         Continent continent = entityManager.find(Continent.class, id);
         entityManager.remove(continent);
@@ -38,14 +37,12 @@ public class ContinentDAOImpl implements ContinentDAO {
     }
 
     @Override
-    @Transactional
     public Continent saveContinent(Continent continent) {
         entityManager.persist(continent);
         return continent;
     }
 
     @Override
-    @Transactional
     public Continent updateContinent(Continent continent) {
         return entityManager.merge(continent);
     }

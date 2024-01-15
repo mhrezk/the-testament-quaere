@@ -30,7 +30,6 @@ public class RankDAOImpl implements RankDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteRankByID(Long id) {
         Rank rank = entityManager.find(Rank.class, id);
         entityManager.remove(rank);
@@ -38,14 +37,12 @@ public class RankDAOImpl implements RankDAO {
     }
 
     @Override
-    @Transactional
     public Rank saveRank(Rank rank) {
         entityManager.persist(rank);
         return rank;
     }
 
     @Override
-    @Transactional
     public Rank updateRank(Rank rank) {
         return entityManager.merge(rank);
     }

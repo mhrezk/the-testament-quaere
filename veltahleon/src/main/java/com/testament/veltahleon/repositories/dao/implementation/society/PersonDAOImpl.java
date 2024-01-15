@@ -30,7 +30,6 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deletePersonByID(Long id) {
         Person person = entityManager.find(Person.class, id);
         entityManager.remove(person);
@@ -38,14 +37,12 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    @Transactional
     public Person savePerson(Person person) {
         entityManager.persist(person);
         return person;
     }
 
     @Override
-    @Transactional
     public Person updatePerson(Person person) {
         return entityManager.merge(person);
     }

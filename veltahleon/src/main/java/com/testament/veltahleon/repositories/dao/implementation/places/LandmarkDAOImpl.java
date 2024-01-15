@@ -30,7 +30,6 @@ public class LandmarkDAOImpl implements LandmarkDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteLandmarkByID(Long id) {
         Landmark landmark = entityManager.find(Landmark.class, id);
         entityManager.remove(landmark);
@@ -38,14 +37,12 @@ public class LandmarkDAOImpl implements LandmarkDAO {
     }
 
     @Override
-    @Transactional
     public Landmark saveLandmark(Landmark landmark) {
         entityManager.persist(landmark);
         return landmark;
     }
 
     @Override
-    @Transactional
     public Landmark updateLandmark(Landmark landmark) {
         return entityManager.merge(landmark);
     }

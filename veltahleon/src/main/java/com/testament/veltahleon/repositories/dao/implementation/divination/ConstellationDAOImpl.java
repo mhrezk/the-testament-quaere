@@ -30,7 +30,6 @@ public class ConstellationDAOImpl implements ConstellationDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteConstellationByID(Long id) {
         Constellation constellation = entityManager.find(Constellation.class, id);
         entityManager.remove(constellation);
@@ -38,14 +37,12 @@ public class ConstellationDAOImpl implements ConstellationDAO {
     }
 
     @Override
-    @Transactional
     public Constellation saveConstellation(Constellation constellation) {
         entityManager.persist(constellation);
         return constellation;
     }
 
     @Override
-    @Transactional
     public Constellation updateConstellation(Constellation constellation) {
         return entityManager.merge(constellation);
     }

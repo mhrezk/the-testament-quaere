@@ -30,7 +30,6 @@ public class DeityDAOImpl implements DeityDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteDeityByID(Long id) {
         Deity deity = entityManager.find(Deity.class, id);
         entityManager.remove(deity);
@@ -38,14 +37,12 @@ public class DeityDAOImpl implements DeityDAO {
     }
 
     @Override
-    @Transactional
     public Deity saveDeity(Deity deity) {
         entityManager.persist(deity);
         return deity;
     }
 
     @Override
-    @Transactional
     public Deity updateDeity(Deity deity) {
         return entityManager.merge(deity);
     }

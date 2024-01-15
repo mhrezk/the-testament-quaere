@@ -30,7 +30,6 @@ public class MeasurementDAOImpl implements MeasurementDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteMeasurementByID(Long id) {
         Measurement measurement = entityManager.find(Measurement.class, id);
         entityManager.remove(measurement);
@@ -38,14 +37,12 @@ public class MeasurementDAOImpl implements MeasurementDAO {
     }
 
     @Override
-    @Transactional
     public Measurement saveMeasurement(Measurement measurement) {
         entityManager.persist(measurement);
         return measurement;
     }
 
     @Override
-    @Transactional
     public Measurement updateMeasurement(Measurement measurement) {
         return entityManager.merge(measurement);
     }

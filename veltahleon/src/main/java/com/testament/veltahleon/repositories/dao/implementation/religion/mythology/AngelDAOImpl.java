@@ -30,7 +30,6 @@ public class AngelDAOImpl implements AngelDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteAngelByID(Long id) {
         Angel angel = entityManager.find(Angel.class, id);
         entityManager.remove(angel);
@@ -38,14 +37,12 @@ public class AngelDAOImpl implements AngelDAO {
     }
 
     @Override
-    @Transactional
     public Angel saveAngel(Angel angel) {
         entityManager.persist(angel);
         return angel;
     }
 
     @Override
-    @Transactional
     public Angel updateAngel(Angel angel) {
         return entityManager.merge(angel);
     }

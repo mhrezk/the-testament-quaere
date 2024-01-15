@@ -30,7 +30,6 @@ public class BattalionDAOImpl implements BattalionDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteBattalionByID(Long id) {
         Battalion battalion = entityManager.find(Battalion.class, id);
         entityManager.remove(battalion);
@@ -38,14 +37,12 @@ public class BattalionDAOImpl implements BattalionDAO {
     }
 
     @Override
-    @Transactional
     public Battalion saveBattalion(Battalion battalion) {
         entityManager.persist(battalion);
         return battalion;
     }
 
     @Override
-    @Transactional
     public Battalion updateBattalion(Battalion battalion) {
         return entityManager.merge(battalion);
     }

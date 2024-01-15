@@ -30,7 +30,6 @@ public class TitleDAOImpl implements TitleDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteTitleByID(Long id) {
         Title title = entityManager.find(Title.class, id);
         entityManager.remove(title);
@@ -38,14 +37,12 @@ public class TitleDAOImpl implements TitleDAO {
     }
 
     @Override
-    @Transactional
     public Title saveTitle(Title title) {
         entityManager.persist(title);
         return title;
     }
 
     @Override
-    @Transactional
     public Title updateTitle(Title title) {
         return entityManager.merge(title);
     }

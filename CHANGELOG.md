@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.17.0] 2023-12-19
+
+- Added service class for certain DAO classes
+
 ## [0.16.0] 2023-12-19
 
 - Added CRUD functionalities for DAO classes

@@ -30,7 +30,6 @@ public class ArmyLeaderDAOImpl implements ArmyLeaderDAO {
     }
 
     @Override
-    @Transactional
     public Boolean deleteArmyLeaderByID(Long id) {
         ArmyLeader armyLeader = entityManager.find(ArmyLeader.class, id);
         entityManager.remove(armyLeader);
@@ -38,14 +37,12 @@ public class ArmyLeaderDAOImpl implements ArmyLeaderDAO {
     }
 
     @Override
-    @Transactional
     public ArmyLeader saveArmyLeader(ArmyLeader armyLeader) {
         entityManager.persist(armyLeader);
         return armyLeader;
     }
 
     @Override
-    @Transactional
     public ArmyLeader updateArmyLeader(ArmyLeader armyLeader) {
         return entityManager.merge(armyLeader);
     }
