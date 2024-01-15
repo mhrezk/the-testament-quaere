@@ -1,6 +1,10 @@
 # Change Log
 
-## [0.19.0] 2023-12-19
+## [0.20.1] 2023-12-19
+
+- Moved classes to proper packages
+
+## [0.20.0] 2023-12-19
 
 - Added controllers for REST API endpoints
 
