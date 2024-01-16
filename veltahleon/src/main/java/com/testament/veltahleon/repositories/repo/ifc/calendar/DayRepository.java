@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface DayRepository extends JpaRepository<Day, Long> {
-}
+public interface DayRepository extends JpaRepository<Day, Long> {}

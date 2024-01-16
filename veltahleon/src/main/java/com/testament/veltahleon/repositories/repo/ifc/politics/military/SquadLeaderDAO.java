@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.politics.military;
 
+import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.politics.military.SquadLeader;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface SquadLeaderDAO {
-
-    Collection<SquadLeader> getSquadLeaders();
-    SquadLeader getSquadLeaderByID(Long id);
-    Boolean deleteSquadLeaderByID(Long id);
-    SquadLeader saveSquadLeader(SquadLeader squadLeader);
-    SquadLeader updateSquadLeader(SquadLeader squadLeader);
-}
+public interface SquadLeaderDAO extends JpaRepository<SquadLeader, Long> {}

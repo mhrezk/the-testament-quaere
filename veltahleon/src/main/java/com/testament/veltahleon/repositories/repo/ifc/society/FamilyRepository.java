@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.society;
 
+import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.society.Family;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface FamilyRepository {
-
-    Collection<Family> getFamilies();
-    Family getFamilyByID(Long id);
-    Boolean deleteFamilyByID(Long id);
-    Family saveFamily(Family family);
-    Family updateFamily(Family family);
-}
+public interface FamilyRepository extends JpaRepository<Family, Long> {}

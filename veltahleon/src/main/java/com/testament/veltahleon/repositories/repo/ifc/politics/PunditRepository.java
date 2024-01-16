@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.politics;
 
+import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.politics.Pundit;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface PunditRepository {
-
-    Collection<Pundit> getPundits();
-    Pundit getPunditByID(Long id);
-    Boolean deletePunditByID(Long id);
-    Pundit savePundit(Pundit pundit);
-    Pundit updatePundit(Pundit pundit);
-}
+public interface PunditRepository extends JpaRepository<Pundit, Long> {}

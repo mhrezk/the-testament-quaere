@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.politics.military;
 
+import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.politics.military.Army;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface ArmyRepository {
-
-    Collection<Army> getArmies();
-    Army getArmyByID(Long id);
-    Boolean deleteArmyByID(Long id);
-    Army saveArmy(Army army);
-    Army updateArmy(Army army);
-}
+public interface ArmyRepository extends JpaRepository<Army, Long> {}

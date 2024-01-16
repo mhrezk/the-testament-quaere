@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.religion.mythology;
 
+import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.religion.mythology.Pantheon;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface PantheonRepository {
-
-    Collection<Pantheon> getPantheons();
-    Pantheon getPantheonByID(Long id);
-    Boolean deletePantheonByID(Long id);
-    Pantheon savePantheon(Pantheon pantheon);
-    Pantheon updatePantheon(Pantheon pantheon);
-}
+public interface PantheonRepository extends JpaRepository<Pantheon, Long> {}

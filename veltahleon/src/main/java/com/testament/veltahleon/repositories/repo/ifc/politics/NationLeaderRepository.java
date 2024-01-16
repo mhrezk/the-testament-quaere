@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.politics;
 
+import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.politics.NationLeader;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface NationLeaderRepository {
-
-    Collection<NationLeader> getNationLeaders();
-    NationLeader getNationLeaderByID(Long id);
-    Boolean deleteNationLeaderByID(Long id);
-    NationLeader saveNationLeader(NationLeader nationLeader);
-    NationLeader updateNationLeader(NationLeader nationLeader);
-}
+public interface NationLeaderRepository extends JpaRepository<NationLeader, Long> {}

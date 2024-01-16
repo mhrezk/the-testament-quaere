@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.places;
 
+import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.places.Continent;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface ContinentRepository {
-
-    Collection<Continent> getContinents();
-    Continent getContinentByID(Long id);
-    Boolean deleteContinentByID(Long id);
-    Continent saveContinent(Continent continent);
-    Continent updateContinent(Continent continent);
-}
+public interface ContinentRepository extends JpaRepository<Continent, Long> {}

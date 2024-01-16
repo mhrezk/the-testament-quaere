@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.22.0] 2023-12-19
+
+- Finalized Spring Data JPA repositories for all entity classes
+
 ## [0.21.0] 2023-12-19
 
 - Added some repositories for certain entity classes

@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.history;
 
 import com.testament.veltahleon.model.entities.history.Language;
+import com.testament.veltahleon.model.entities.history.library.Author;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface LanguageRepository {
-
-    Collection<Language> getLanguages();
-    Language getLanguageByID(Long id);
-    Boolean deleteLanguageByID(Long id);
-    Language saveLanguage(Language language);
-    Language updateLanguage(Language language);
-}
+public interface LanguageRepository extends JpaRepository<Language, Long> {}

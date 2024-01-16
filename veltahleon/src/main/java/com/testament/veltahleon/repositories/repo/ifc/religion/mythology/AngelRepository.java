@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.religion.mythology;
 
+import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.religion.mythology.Angel;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface AngelRepository {
-
-    Collection<Angel> getAngels();
-    Angel getAngelByID(Long id);
-    Boolean deleteAngelByID(Long id);
-    Angel saveAngel(Angel angel);
-    Angel updateAngel(Angel angel);
-}
+public interface AngelRepository extends JpaRepository<Angel, Long> {}

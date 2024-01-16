@@ -1,14 +1,9 @@
 package com.testament.veltahleon.repositories.repo.ifc.politics.military;
 
+import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.politics.military.Battalion;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface BattalionRepository {
-
-    Collection<Battalion> getBattalions();
-    Battalion getBattalionByID(Long id);
-    Boolean deleteBattalionByID(Long id);
-    Battalion saveBattalion(Battalion battalion);
-    Battalion updateBattalion(Battalion battalion);
-}
+public interface BattalionRepository extends JpaRepository<Battalion, Long> {}
