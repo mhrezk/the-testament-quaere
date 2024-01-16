@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.21.0] 2023-12-19
+
+- Added some repositories for certain entity classes
+
 ## [0.20.1] 2023-12-19
 
 - Moved classes to proper packages
