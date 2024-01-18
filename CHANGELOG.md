@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.24.0] 2023-12-19
+
+- Created service class for spring boot data JPA
+
 ## [0.23.0] 2023-12-19
 
 - Created custom repositories for practicing named jdbc template
