@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.23.0] 2023-12-19
+
+- Created custom repositories for practicing named jdbc template
+
 ## [0.22.0] 2023-12-19
 
 - Finalized Spring Data JPA repositories for all entity classes
