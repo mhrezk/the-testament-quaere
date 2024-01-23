@@ -28,5 +28,5 @@ public class Squad {
     private Integer unitNumber;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 }

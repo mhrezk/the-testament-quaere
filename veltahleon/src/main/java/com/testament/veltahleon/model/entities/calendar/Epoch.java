@@ -28,5 +28,5 @@ public class Epoch {
     private Integer yearNumber;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 }

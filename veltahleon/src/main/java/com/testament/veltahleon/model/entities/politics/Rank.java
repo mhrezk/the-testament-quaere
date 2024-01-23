@@ -36,7 +36,7 @@ public class Rank {
     private Nation nation;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 
     @Column(name = "image_URL")
     private String imageURL;

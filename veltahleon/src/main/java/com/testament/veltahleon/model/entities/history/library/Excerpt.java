@@ -16,7 +16,7 @@ public class Excerpt {
     private Long id;
 
     @Column(name = "excerpt_body", columnDefinition = "text")
-    private StringBuilder body;
+    private String body;
 
     @ManyToOne
     @JoinColumn(name = "book_id")

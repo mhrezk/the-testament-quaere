@@ -25,5 +25,5 @@ public class Religion {
     private Pantheon pantheon;
 
     @Column(name = "description", columnDefinition = "longtext")
-    private StringBuilder description;
+    private String description;
 }

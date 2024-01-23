@@ -19,5 +19,5 @@ public class Continent {
     private String continentalName;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder continentalDescription;
+    private String continentalDescription;
 }

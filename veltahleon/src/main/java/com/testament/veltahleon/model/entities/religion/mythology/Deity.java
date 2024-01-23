@@ -20,7 +20,7 @@ public class Deity {
     private String name;
 
     @Column(columnDefinition = "longtext")
-    private StringBuilder description;
+    private String description;
 
     @Column(name = "image_URL")
     private String imageURL;

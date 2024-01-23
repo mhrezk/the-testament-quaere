@@ -27,5 +27,5 @@ public class Province {
     private Nation provincialNation;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder provincialDescription;
+    private String provincialDescription;
 }

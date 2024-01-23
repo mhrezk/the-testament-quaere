@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.25.0] 2023-12-19
+
+- Added API endpoints for `Day.java`
+- Added log files
+- Added convenient methods for `DayServiceImpl.java`
+
 ## [0.24.0] 2023-12-19
 
 - Created service class for spring boot data JPA

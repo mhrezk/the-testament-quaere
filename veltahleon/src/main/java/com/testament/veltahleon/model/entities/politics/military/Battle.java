@@ -67,5 +67,5 @@ public class Battle {
     private Year battleYear;
 
     @Column(name = "description", columnDefinition = "longtext")
-    private StringBuilder battleDescription;
+    private String battleDescription;
 }

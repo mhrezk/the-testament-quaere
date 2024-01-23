@@ -21,13 +21,13 @@ public class Month {
     @Column(name = "number_of_month")
     private Integer monthNumber;
 
-    @OneToOne
-    @JoinColumn(name = "language_id")
+    @ManyToOne
+    @JoinColumn(name = "language_id", referencedColumnName = "id")
     private Language language;
 
     @Column(name = "number_of_days")
     private Integer numberOfDays;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 }

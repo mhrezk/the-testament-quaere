@@ -20,7 +20,7 @@ public class Demon {
     private String name;
 
     @Column(columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 
     @Column(name = "image_URL")
     private String imageURL;

@@ -26,5 +26,5 @@ public class Prophet {
     private Nation nation;
 
     @Column(name = "description", columnDefinition = "longtext")
-    private StringBuilder description;
+    private String description;
 }

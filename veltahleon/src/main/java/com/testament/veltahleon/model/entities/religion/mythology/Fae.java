@@ -23,7 +23,7 @@ public class Fae {
     private Race race;
 
     @Column(columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 
     @Column(name = "image_URL")
     private String imageURL;

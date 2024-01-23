@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "languages")
+@Table(name = "letters")
 @Data
 @Builder
 @NoArgsConstructor
@@ -21,7 +21,7 @@ public class Letter {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "language_id")
+    @JoinColumn(name = "language_id", referencedColumnName = "id")
     private Language language;
 
     @Column(name = "script_URL")

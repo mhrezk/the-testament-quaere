@@ -20,5 +20,5 @@ public class Unit {
     private String unitType;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 }

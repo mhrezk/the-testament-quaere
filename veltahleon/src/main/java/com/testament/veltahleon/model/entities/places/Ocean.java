@@ -18,6 +18,6 @@ public class Ocean {
     private String name;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder oceanicDescription;
+    private String oceanicDescription;
 
 }

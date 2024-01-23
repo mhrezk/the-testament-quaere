@@ -40,7 +40,7 @@ public abstract class Human {
     private Map<String, Year> yearBirthAndDeath;
 
     @Column(name = "biography", columnDefinition = "longtext")
-    private StringBuilder personalBiography;
+    private String personalBiography;
 
     @Column(name = "image_URL")
     private String imageURL;

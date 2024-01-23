@@ -20,7 +20,7 @@ public class Angel {
     private String name;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 
     @Column(name = "image_URL")
     private String imageURL;

@@ -19,5 +19,5 @@ public class NationType {
     private String typeName;
 
     @Column(columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 }

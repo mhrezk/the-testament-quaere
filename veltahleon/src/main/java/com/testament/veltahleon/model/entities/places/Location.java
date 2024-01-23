@@ -27,5 +27,5 @@ public class Location {
     private Nation nation;
 
     @Column(name = "description", columnDefinition = "text")
-    private StringBuilder locationDescription;
+    private String locationDescription;
 }

@@ -33,5 +33,5 @@ public class Measurement {
     private Set<Nation> nations;
 
     @Column(name = "unit_description", columnDefinition = "text")
-    private StringBuilder measurementUnitDescription;
+    private String measurementUnitDescription;
 }

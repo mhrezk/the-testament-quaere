@@ -23,5 +23,5 @@ public class Chapter {
     private Book book;
 
     @Column(name = "chapter_text", columnDefinition = "longtext")
-    private StringBuilder chapterText;
+    private String chapterText;
 }

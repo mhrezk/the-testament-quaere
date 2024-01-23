@@ -22,5 +22,5 @@ public class Landmark {
     private Nation nation;
 
     @Column(columnDefinition = "text")
-    private StringBuilder description;
+    private String description;
 }

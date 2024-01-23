@@ -12,20 +12,22 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Language {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "language")
     private Set<Letter> letters;
 
-    @OneToOne(mappedBy = "nationalLanguage")
-    private Nation nationalAffiliation;
+    @OneToMany(mappedBy = "nationalLanguage")
+    private Set<Nation> nationalAffiliation;
 
     @Column(name = "description", columnDefinition = "longtext")
-    private StringBuilder description;
+    private String description;
 }

@@ -36,8 +36,8 @@ public class Nation {
     @JoinColumn(name = "nation_leader_id")
     private NationLeader nationalLeader;
 
-    @OneToOne
-    @JoinColumn(name = "language_id")
+    @ManyToOne
+    @JoinColumn(name = "language_id", referencedColumnName = "id")
     private Language nationalLanguage;
 
     @OneToMany(mappedBy = "provincialNation")
@@ -51,5 +51,5 @@ public class Nation {
     private Set<Pundit> pundits;
 
     @Column(name = "description", columnDefinition = "longtext")
-    private StringBuilder nationalDescription;
+    private String nationalDescription;
 }

@@ -57,5 +57,5 @@ public class Person extends Human {
     private Nation personalNation;
 
     @Column(name = "biography", columnDefinition = "longtext")
-    private StringBuilder personalBiography;
+    private String personalBiography;
 }
