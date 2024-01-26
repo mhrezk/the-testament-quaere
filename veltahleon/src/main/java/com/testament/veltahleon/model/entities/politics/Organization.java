@@ -2,11 +2,10 @@ package com.testament.veltahleon.model.entities.politics;
 
 import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.places.Nation;
-import com.testament.veltahleon.model.entities.society.Person;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Map;
+import java.util.List;
 
 @Entity
 @Data
@@ -32,9 +31,9 @@ public class Organization {
     private Nation nation;
 
     @OneToMany
-    @MapKeyColumn(name = "foundation_or_disbandment")
+//    @MapKeyColumn(name = "foundation_or_disbandment")
     @Column(name = "year")
-    private Map<String, Year> yearFoundationAndDisbandment;
+    private List<Year> yearFoundationAndDisbandment;
 
     @Column(name = "coat_of_arms_url")
     private String urlCoatOfArms;

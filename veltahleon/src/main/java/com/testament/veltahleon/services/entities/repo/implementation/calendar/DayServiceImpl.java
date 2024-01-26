@@ -3,8 +3,10 @@ package com.testament.veltahleon.services.entities.repo.implementation.calendar;
 import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.calendar.Day;
 import com.testament.veltahleon.model.entities.history.Language;
+import com.testament.veltahleon.model.entities.history.Letter;
 import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.calendar.DayRepository;
 import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.history.LanguageRepository;
+import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.history.LetterRepository;
 import com.testament.veltahleon.services.entities.repo.ifc.calendar.DayService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -16,8 +18,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +32,9 @@ public class DayServiceImpl implements DayService {
 
     @Autowired
     private final LanguageRepository languageRepository;
+
+
+    //CRUD
 
     @Override
     public Collection<Day> getDaysWithPagination(int pageNumber, int numberOfRecords) {
@@ -83,32 +86,12 @@ public class DayServiceImpl implements DayService {
     @Transactional
     public Day saveDay(Day day) {
         validateDayEntry(day);
+        String properName = capitalizeName(day.getName());
+        day.setName(properName);
+        //String languageProperName = capitalizeName(day.getLanguage().getName());
+        //day.getLanguage().setName(languageProperName);
         log.info("Day saved!");
         return dayRepository.save(day);
-    }
-
-    private void validateDayEntry(Day day) {
-        if(day.getName() == null) {
-            throw new DataInsertionException("Day name cannot be null!");
-        }
-
-        if(day.getLanguage() == null) {
-            throw new DataInsertionException("Language cannot be null!");
-        }
-
-        if(day.getLanguage().getName() == null) {
-            throw new DataInsertionException("Language name cannot be null!");
-        }
-
-        if(dayRepository.countByName(day.getName()) >= 1) {
-            throw new DataInsertionException("Day name already exists! Duplicate entries are disallowed!");
-        }
-
-        if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
-            Language language = languageRepository.findByName(day.getLanguage().getName());
-            day.getLanguage().setId(language.getId());
-            day.setLanguage(language);
-        }
     }
 
     @Override
@@ -116,6 +99,10 @@ public class DayServiceImpl implements DayService {
     public Collection<Day> saveDays(Collection<Day> days) {
         for(Day day : days) {
             validateDayEntry(day);
+            String properName = capitalizeName(day.getName());
+            String languageProperName = capitalizeName(day.getLanguage().getName());
+            day.setName(properName);
+            day.getLanguage().setName(languageProperName);
         }
         return dayRepository.saveAll(days);
     }
@@ -126,16 +113,18 @@ public class DayServiceImpl implements DayService {
         Day newDay = dayRepository.findById(id).get();
         Language language = newDay.getLanguage();
 
-        if(newDay.getName() != day.getName()) {
-            newDay.setName(day.getName());
+        if(day.getName() != null && newDay.getName() != day.getName()) {
+            String properName = capitalizeName(day.getName());
+            newDay.setName(properName);
         }
 
-        if(newDay.getDayNumber() != day.getDayNumber()) {
+        if(day.getDayNumber() != null && newDay.getDayNumber() != day.getDayNumber()) {
             newDay.setDayNumber(day.getDayNumber());
         }
 
-        if(language != day.getLanguage()) {
-            language.setName(day.getLanguage().getName());
+        if(day.getLanguage() != null && language != day.getLanguage()) {
+            String languageProperName = capitalizeName(day.getLanguage().getName());
+            language.setName(languageProperName);
             language.setLetters(day.getLanguage().getLetters());
             language.setNationalAffiliation(day.getLanguage().getNationalAffiliation());
             language.setDescription(day.getLanguage().getDescription());
@@ -148,7 +137,34 @@ public class DayServiceImpl implements DayService {
         return dayRepository.save(newDay);
     }
 
-    public Language checkLanguageInDatabase(String name) {
+    //Helper Methods
+    private String capitalizeName(String word) {
+        String firstCharacter = word.toLowerCase().substring(0, 1).toUpperCase();
+        return firstCharacter + word.substring(1);
+    }
+
+    private void validateDayEntry(Day day) {
+        if(day.getName() == null || day.getName().isEmpty() || day.getName().isBlank()) {
+            throw new DataInsertionException("Day name must be present!");
+        }
+
+//        if(day.getLanguage().getName() == null || day.getLanguage().getName().isEmpty() || day.getLanguage().getName().isBlank()) {
+//            throw new DataInsertionException("Language name must be present!");
+//        }
+
+        if(dayRepository.countByName(day.getName()) >= 1) {
+            throw new DataInsertionException("Day name already exists! Duplicate entries are disallowed!");
+        }
+
+        //To avoid adding different entries with the same language name
+        if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
+            Language language = languageRepository.findByName(day.getLanguage().getName());
+            day.getLanguage().setId(language.getId());
+            day.setLanguage(language);
+        }
+    }
+
+    public Language queryLanguageByName(String name) {
         TypedQuery<Language> query = entityManager.createQuery("FROM Language WHERE name=:languageName", Language.class);
         query.setParameter("languageName", name);
         return query.getSingleResult();

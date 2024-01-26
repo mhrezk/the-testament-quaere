@@ -6,8 +6,7 @@ import com.testament.veltahleon.model.entities.politics.Pundit;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "nations")
@@ -41,14 +40,14 @@ public class Nation {
     private Language nationalLanguage;
 
     @OneToMany(mappedBy = "provincialNation")
-    private Set<Province> nationalProvinces;
+    private List<Province> nationalProvinces;
 
     @OneToOne
     @JoinColumn(name = "nation_type_id")
     private NationType nationalType;
 
     @OneToMany(mappedBy = "nation")
-    private Set<Pundit> pundits;
+    private List<Pundit> pundits;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String nationalDescription;

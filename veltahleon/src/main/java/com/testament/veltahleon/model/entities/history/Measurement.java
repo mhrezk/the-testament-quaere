@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "measurements")
@@ -30,7 +30,7 @@ public class Measurement {
 
     @OneToMany
     @JoinColumn(name = "measurement_id")
-    private Set<Nation> nations;
+    private List<Nation> nations;
 
     @Column(name = "unit_description", columnDefinition = "text")
     private String measurementUnitDescription;

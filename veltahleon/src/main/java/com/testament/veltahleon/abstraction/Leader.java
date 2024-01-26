@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
@@ -21,7 +21,7 @@ public abstract class Leader extends Human {
 
     @OneToMany
     @JoinColumn(name = "leader_id")
-    private Set<Battle> battles;
+    private List<Battle> battles;
 
     @OneToOne
     @JoinColumn(name = "title_id")

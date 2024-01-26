@@ -1,14 +1,10 @@
 package com.testament.veltahleon.model.entities.politics;
 
 import com.testament.veltahleon.abstraction.Human;
-import com.testament.veltahleon.model.entities.calendar.Epoch;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 import com.testament.veltahleon.model.entities.places.Nation;
-import com.testament.veltahleon.model.entities.society.Title;
-import com.testament.veltahleon.model.enumeration.ClosedAnswer;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,7 +29,7 @@ public class Pundit extends Human {
 //    @CollectionTable(name = "organizations_people", joinColumns = @JoinColumn(name = "id"))
 //    @Column(name = "organizations")
     @OneToMany(mappedBy = "founder")
-    private Set<Organization> organization;
+    private List<Organization> organization;
 
     @Column(name = "coat_of_arms_url")
     private String urlCoatOfArms;

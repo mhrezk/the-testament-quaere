@@ -6,9 +6,10 @@ import java.util.Collection;
 
 public interface LanguageService {
 
+    Collection<Language> getLanguagesWithPagination(int pageNumber, int numberOfRecords);
     Collection<Language> getLanguages();
     Language getLanguageByID(Long id);
-    public Language getLanguageByName(String name);
+    Language getLanguageByName(String name);
     Boolean deleteLanguageByID(Long id);
     Language saveLanguage(Language language);
     Language updateLanguage(Language language);

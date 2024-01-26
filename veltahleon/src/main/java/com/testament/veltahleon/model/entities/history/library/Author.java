@@ -4,7 +4,7 @@ import com.testament.veltahleon.abstraction.Human;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -20,5 +20,5 @@ public class Author extends Human {
     private Long id;
 
     @OneToMany(mappedBy = "authorName")
-    private Set<Book> books;
+    private List<Book> books;
 }

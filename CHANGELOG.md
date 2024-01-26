@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.26.0] 2023-12-19
+
+- Resolved issues related to cardinality and cascades
+- Added CRUD operations for `Letter.java`, `Language.java`, `Day.java`
+- Proper CRUD operations and cascades for other classes will be added later
+
 ## [0.25.0] 2023-12-19
 
 - Added API endpoints for `Day.java`

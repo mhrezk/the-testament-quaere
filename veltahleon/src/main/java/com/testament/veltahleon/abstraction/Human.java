@@ -6,12 +6,11 @@ import com.testament.veltahleon.model.entities.society.enumeration.Gender;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Map;
+import java.util.List;
 
 @MappedSuperclass
 @Data
@@ -32,12 +31,13 @@ public abstract class Human {
     @Column(name = "gender")
     private Gender personalGender;
 
-    @OneToMany
+    //@OneToMany
 //    @ElementCollection(fetch = FetchType.LAZY)
 //    @CollectionTable(name = "years_birth_death_people", joinColumns = @JoinColumn(name = "people_id"))
-    @MapKeyColumn(name = "birth_or_death")
+    //@MapKeyColumn(name = "birth_or_death")
+    @OneToMany
     @Column(name = "year")
-    private Map<String, Year> yearBirthAndDeath;
+    private List<Year> yearBirthAndDeath;
 
     @Column(name = "biography", columnDefinition = "longtext")
     private String personalBiography;

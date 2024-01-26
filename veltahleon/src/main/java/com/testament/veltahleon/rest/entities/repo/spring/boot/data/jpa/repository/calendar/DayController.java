@@ -3,11 +3,14 @@ package com.testament.veltahleon.rest.entities.repo.spring.boot.data.jpa.reposit
 import com.testament.veltahleon.model.CustomResponse;
 import com.testament.veltahleon.model.entities.calendar.Day;
 import com.testament.veltahleon.model.entities.history.Language;
+import com.testament.veltahleon.model.entities.history.Letter;
 import com.testament.veltahleon.services.entities.repo.ifc.calendar.DayService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -22,52 +25,76 @@ public class DayController {
     private final DayService dayService;
 
     @GetMapping("/days")
-    public ResponseEntity<CustomResponse> getAllDays(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+    public ResponseEntity<CustomResponse> getPaginatedDays(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         List<Day> days = (List<Day>) dayService.getDaysWithPagination(pageNumber, pageSize);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allDays", days))
-                .message("Days retrieved!")
+                .data(Map.of("paginatedDays", days))
+                .message(days.size() + " days retrieved from page: " + (pageNumber + 1))
                 .build()
         );
     }
 
-    @GetMapping("/day/{name}")
-    public ResponseEntity<CustomResponse> getDayByName(@PathVariable String name) {
-        String firstCharacter = name.substring(0, 2).toUpperCase();
-        String properName = firstCharacter + name.substring(2);
+    @GetMapping("/days/all")
+    public ResponseEntity<CustomResponse> getAllDays() {
+        List<Day> days = (List<Day>) dayService.getDays();
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("day", dayService.getDayByName(properName)))
+                .data(Map.of("allDays", days))
+                .message("All days retrieved!")
+                .build()
+        );
+    }
+
+    @GetMapping("/day/name")
+    public ResponseEntity<CustomResponse> getDayByName(@RequestParam(value = "name") String name) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("queriedDayByName", dayService.getDayByName(name)))
                 .message("Day retrieved!")
                 .build()
         );
     }
 
-    @GetMapping("/days/{languageName}")
-    public ResponseEntity<CustomResponse> getDayByLanguage(@PathVariable String languageName) {
+    @GetMapping("/day/{id}")
+    public ResponseEntity<CustomResponse> getDayByID(@PathVariable Long id) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("days", dayService.getDaysByLanguage(languageName)))
+                .data(Map.of("queriedDayByID", dayService.getDayByID(id)))
+                .message("Day retrieved!")
+                .build()
+        );
+    }
+
+    @GetMapping("/days/language")
+    public ResponseEntity<CustomResponse> getDayByLanguage(@RequestParam(value = "languageName") String languageName) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("queriedDaysByLanguage", dayService.getDaysByLanguage(languageName)))
                 .message("Day retrieved!")
                 .build()
         );
     }
 
     @PostMapping("/save/day")
-    public ResponseEntity<CustomResponse> saveDay(@RequestBody Day day) {
+    public ResponseEntity<CustomResponse> saveDay(@RequestBody @Valid Day day, BindingResult result) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("savedDay", dayService.saveDay(day)))
                 .message("Day saved!")
+                .reason(result.getAllErrors().stream().toString())
                 .build()
         );
     }
@@ -85,7 +112,7 @@ public class DayController {
     }
 
     @DeleteMapping("/delete/day/{id}")
-    public ResponseEntity<CustomResponse> deleteDay(@PathVariable Long id) {
+    public ResponseEntity<CustomResponse> deleteDayByID(@PathVariable Long id) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -97,20 +124,20 @@ public class DayController {
     }
 
     @DeleteMapping("/delete/days")
-    public ResponseEntity<CustomResponse> deleteDays() {
+    public ResponseEntity<CustomResponse> deleteAllDays() {
         Collection<Day> days = dayService.getDays();
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("areDaysDeleted", dayService.deleteAllDays(days)))
+                .data(Map.of("areAllDaysDeleted", dayService.deleteAllDays(days)))
                 .message("Days deleted!")
                 .build()
         );
     }
 
     @DeleteMapping("/delete/days/id")
-    public ResponseEntity<CustomResponse> deleteDaysByIDs() {
+    public ResponseEntity<CustomResponse> deleteAllDaysByIDs() {
         Collection<Day> days = dayService.getDays();
         List<Long> idDays = new ArrayList<>();
         for(Day day : days) {
@@ -120,20 +147,21 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("areDaysDeleted", dayService.deleteAllDaysByIDs(idDays)))
+                .data(Map.of("areAllDaysDeleted", dayService.deleteAllDaysByIDs(idDays)))
                 .message("Days deleted!")
                 .build()
         );
     }
 
     @PatchMapping("/update/day/{id}")
-    public ResponseEntity<CustomResponse> updateDay(@PathVariable Long id, @RequestBody Day day) {
+    public ResponseEntity<CustomResponse> updateDay(@PathVariable Long id, @RequestBody @Valid Day day, BindingResult result) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("updatedDay", dayService.updateDay(id, day)))
                 .message("Day updated!")
+                .reason(result.getAllErrors().stream().toString())
                 .build()
         );
     }
