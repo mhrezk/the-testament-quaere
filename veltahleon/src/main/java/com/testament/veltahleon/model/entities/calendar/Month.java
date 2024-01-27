@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.calendar;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.model.entities.history.Language;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,8 +22,12 @@ public class Month {
     @Column(name = "number_of_month")
     private Integer monthNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "language_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Language language;
 
     @Column(name = "number_of_days")

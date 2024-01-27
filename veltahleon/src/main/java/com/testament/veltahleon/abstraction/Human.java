@@ -22,7 +22,10 @@ public abstract class Human {
     @Column(name = "name")
     private String personalName;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "race_id")
     //@PrimaryKeyJoinColumn(name = "race") //Used instead of @Column with @OneToOne
     private Race personalRace;
@@ -35,7 +38,10 @@ public abstract class Human {
 //    @ElementCollection(fetch = FetchType.LAZY)
 //    @CollectionTable(name = "years_birth_death_people", joinColumns = @JoinColumn(name = "people_id"))
     //@MapKeyColumn(name = "birth_or_death")
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @Column(name = "year")
     private List<Year> yearBirthAndDeath;
 

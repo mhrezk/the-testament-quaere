@@ -78,7 +78,10 @@ public class Battle {
             inverseJoinColumns = @JoinColumn(name = "battle_id"))
     private List<Army> armies;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "year_id")
     private Year battleYear;
 

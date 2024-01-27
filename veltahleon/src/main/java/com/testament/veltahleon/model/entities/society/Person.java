@@ -19,11 +19,17 @@ public class Person extends Human {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "religion_id")
     private Religion personalReligion;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "family_id", referencedColumnName = "id")
     private Family family;
 
@@ -48,11 +54,17 @@ public class Person extends Human {
 //    @Column(name = "spouses")
 //    private List<String> spouses;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "job_id")
     private Job personalJob;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "nation_id")
     private Nation personalNation;
 

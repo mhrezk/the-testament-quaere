@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.politics;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +17,11 @@ public class Vassal extends NationLeader {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "suzerain_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private NationLeader suzerain;
 }

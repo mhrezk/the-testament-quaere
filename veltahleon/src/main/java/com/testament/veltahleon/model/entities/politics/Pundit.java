@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.politics;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.abstraction.Human;
 
 import java.util.List;
@@ -21,8 +22,12 @@ public class Pundit extends Human {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "nation_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Nation nation;
 
 //    @ElementCollection

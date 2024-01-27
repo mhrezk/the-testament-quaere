@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.places;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,12 +19,19 @@ public class Province {
     @Column(name = "name")
     private String provincialName;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "province_id")
     private Capital provincialCapital;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "nation_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Nation provincialNation;
 
     @Column(name = "description", columnDefinition = "text")

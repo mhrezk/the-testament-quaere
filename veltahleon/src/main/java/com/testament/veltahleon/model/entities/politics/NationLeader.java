@@ -25,7 +25,10 @@ public class NationLeader extends Leader {
     @OneToOne(mappedBy = "nationalLeader")
     private Nation nation;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @Column(name = "year")
     private List<Year> yearBeginningAndEnd;
 

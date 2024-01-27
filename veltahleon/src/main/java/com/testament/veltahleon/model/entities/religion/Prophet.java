@@ -21,7 +21,10 @@ public class Prophet {
 
     private String name;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "nation_id")
     private Nation nation;
 

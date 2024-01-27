@@ -19,11 +19,17 @@ import java.util.List;
 @AllArgsConstructor
 public abstract class Leader extends Human {
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "leader_id")
     private List<Battle> battles;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "title_id")
     //@Column(name = "epithet") //cannot be used with @OneToOne
     @PrimaryKeyJoinColumn(name = "epithet")

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.26.1] 2023-12-19
+
+- Added fetch types and cascades for all entities
+
 ## [0.26.0] 2023-12-19
 
 - Resolved issues related to cardinality and cascades

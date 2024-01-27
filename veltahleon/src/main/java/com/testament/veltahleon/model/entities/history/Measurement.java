@@ -28,7 +28,10 @@ public class Measurement {
     private String abbreviation;
 
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "measurement_id")
     private List<Nation> nations;
 

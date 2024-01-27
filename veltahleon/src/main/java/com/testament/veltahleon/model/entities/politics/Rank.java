@@ -31,7 +31,10 @@ public class Rank {
     @Column(name = "rank_type")
     private RankType rankType;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "national_id")
     private Nation nation;
 

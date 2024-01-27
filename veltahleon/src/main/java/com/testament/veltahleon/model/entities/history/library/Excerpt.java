@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.history.library;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +19,11 @@ public class Excerpt {
     @Column(name = "excerpt_body", columnDefinition = "text")
     private String body;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     @JoinColumn(name = "book_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Book book;
 }
