@@ -32,6 +32,9 @@ public class Book {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Author authorName;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     private List<Chapter> chapters;
 }

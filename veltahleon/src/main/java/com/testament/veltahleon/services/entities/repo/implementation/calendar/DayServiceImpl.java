@@ -88,8 +88,8 @@ public class DayServiceImpl implements DayService {
         validateDayEntry(day);
         String properName = capitalizeName(day.getName());
         day.setName(properName);
-        //String languageProperName = capitalizeName(day.getLanguage().getName());
-        //day.getLanguage().setName(languageProperName);
+        String languageProperName = capitalizeName(day.getLanguage().getName());
+        day.getLanguage().setName(languageProperName);
         log.info("Day saved!");
         return dayRepository.save(day);
     }
@@ -125,9 +125,6 @@ public class DayServiceImpl implements DayService {
         if(day.getLanguage() != null && language != day.getLanguage()) {
             String languageProperName = capitalizeName(day.getLanguage().getName());
             language.setName(languageProperName);
-            language.setLetters(day.getLanguage().getLetters());
-            language.setNationalAffiliation(day.getLanguage().getNationalAffiliation());
-            language.setDescription(day.getLanguage().getDescription());
             newDay.setLanguage(language);
         }
 
@@ -136,6 +133,17 @@ public class DayServiceImpl implements DayService {
         }
         return dayRepository.save(newDay);
     }
+
+//    @Override
+//    @Transactional
+//    public Day update(Long id, Day day) {
+//        Day newDay = dayRepository.findById(id).get();
+//        newDay.setName(day.getName());
+//        newDay.setDayNumber(day.getDayNumber());
+//        newDay.setLanguage(day.getLanguage());
+//        newDay.setDescription(day.getDescription());
+//        return entityManager.merge(newDay);
+//    }
 
     //Helper Methods
     private String capitalizeName(String word) {

@@ -19,7 +19,10 @@ public class Family {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "family")
+    @OneToOne(mappedBy = "family", cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     private Person person;
 
     @Column(name = "father_name")

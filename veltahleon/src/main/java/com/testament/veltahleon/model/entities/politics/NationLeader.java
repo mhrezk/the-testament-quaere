@@ -22,7 +22,10 @@ public class NationLeader extends Leader {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "nationalLeader")
+    @OneToOne(mappedBy = "nationalLeader", cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     private Nation nation;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
@@ -32,6 +35,9 @@ public class NationLeader extends Leader {
     @Column(name = "year")
     private List<Year> yearBeginningAndEnd;
 
-    @OneToMany(mappedBy = "suzerain")
+    @OneToMany(mappedBy = "suzerain", cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     private List<Vassal> vassals;
 }

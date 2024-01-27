@@ -33,7 +33,10 @@ public class Pundit extends Human {
 //    @ElementCollection
 //    @CollectionTable(name = "organizations_people", joinColumns = @JoinColumn(name = "id"))
 //    @Column(name = "organizations")
-    @OneToMany(mappedBy = "founder")
+    @OneToMany(mappedBy = "founder", cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     private List<Organization> organization;
 
     @Column(name = "coat_of_arms_url")

@@ -32,7 +32,7 @@ public class Language {
     @Column(name = "name")
     private String name;
 
-//    @EqualsAndHashCode.Exclude
+//    @EqualsAndHashCode.Exclude //used to exclude field from equals() and hasCode() methods
     //@JsonIgnore
 //    @OneToMany(mappedBy = "language")
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
@@ -45,7 +45,10 @@ public class Language {
 
     //@EqualsAndHashCode.Exclude //to prevent StackOverflowError from recursion in hashCode() method because of Sets
     //@JsonIgnore
-    @OneToMany(mappedBy = "nationalLanguage")
+    @OneToMany(mappedBy = "nationalLanguage", cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
     private List<Nation> nationalAffiliation;
 
     @Column(name = "description", columnDefinition = "longtext")

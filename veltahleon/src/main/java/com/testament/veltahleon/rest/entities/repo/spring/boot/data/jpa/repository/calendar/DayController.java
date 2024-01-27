@@ -1,5 +1,6 @@
 package com.testament.veltahleon.rest.entities.repo.spring.boot.data.jpa.repository.calendar;
 
+import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.CustomResponse;
 import com.testament.veltahleon.model.entities.calendar.Day;
 import com.testament.veltahleon.model.entities.history.Language;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -94,7 +97,7 @@ public class DayController {
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("savedDay", dayService.saveDay(day)))
                 .message("Day saved!")
-                .reason(result.getAllErrors().stream().toString())
+                .reason(Objects.requireNonNull(result.getFieldError()).getDefaultMessage())
                 .build()
         );
     }
@@ -165,4 +168,39 @@ public class DayController {
                 .build()
         );
     }
+
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<CustomResponse> handleValidationExceptions(
+//            MethodArgumentNotValidException  ex) {
+//        List<String> errors = new ArrayList<>();
+//        ex.getAllErrors().forEach(err -> errors.add(err.getDefaultMessage()));
+//        Map<String, List<String>> result = new HashMap<>();
+//        result.put("errors", errors);
+////        Map<String, String> errors = new HashMap<>();
+////        ex.getBindingResult().getAllErrors().forEach((error) -> {
+////            String fieldName = ((FieldError) error).getField();
+////            String errorMessage = error.getDefaultMessage();
+////            errors.put(fieldName, errorMessage);
+////        });
+//        return ResponseEntity.ok(CustomResponse.builder()
+//                .timestamp(LocalDateTime.now())
+//                .status(HttpStatus.OK)
+//                .statusCode(HttpStatus.OK.value())
+//                .data(Map.of("errors", result))
+//                .build());
+//    }
+
+//    @PatchMapping("/update/{id}")
+//    public ResponseEntity<CustomResponse> update(@PathVariable Long id, @RequestBody @Valid Day day, BindingResult result) {
+//        return ResponseEntity.ok(CustomResponse.builder()
+//                .timestamp(LocalDateTime.now())
+//                .status(HttpStatus.OK)
+//                .statusCode(HttpStatus.OK.value())
+//                .data(Map.of("updatedDay", dayService.update(id, day)))
+//                .message("Day updated!")
+//                .reason(result.getAllErrors().stream().toString())
+//                .build()
+//        );
+//    }
 }
