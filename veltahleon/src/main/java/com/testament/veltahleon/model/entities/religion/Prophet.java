@@ -2,6 +2,9 @@ package com.testament.veltahleon.model.entities.religion;
 
 import com.testament.veltahleon.model.entities.places.Nation;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,14 +22,10 @@ public class Prophet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Name cannot be null!")
+    @NotEmpty(message = "Name cannot be empty!")
+    @NotBlank(message = "Name cannot be blank!")
     private String name;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "nation_id")
-    private Nation nation;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;

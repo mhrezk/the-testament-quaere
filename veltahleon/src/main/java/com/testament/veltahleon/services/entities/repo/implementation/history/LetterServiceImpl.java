@@ -63,23 +63,14 @@ public class LetterServiceImpl implements LetterService {
     public Letter saveLetter(Letter letter) {
         validateLetterEntry(letter);
         String properName = capitalizeName(letter.getName());
-        for(Language l : letter.getLanguages()) {
-            String languageProperName = capitalizeName(l.getName());
-            l.addLetter(letter);
-            l.setName(languageProperName);
-        }
         letter.setName(properName);
-//        String languageProperName = capitalizeName(letter.getLanguage().getName());
-//        letter.setName(properName);
-//        letter.getLanguage().setName(languageProperName);
-//        letter.getLanguage().addLetter(letter);
         return letterRepository.save(letter);
     }
 
     @Override
     @Transactional
-    public Letter updateLetter(Letter letter) {
-        return null;
+    public Letter updateLetter(Long id, Letter letter) {
+        return letterRepository.save(letter);
     }
 
     //Helper Methods

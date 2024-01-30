@@ -88,8 +88,10 @@ public class DayServiceImpl implements DayService {
         validateDayEntry(day);
         String properName = capitalizeName(day.getName());
         day.setName(properName);
-        String languageProperName = capitalizeName(day.getLanguage().getName());
-        day.getLanguage().setName(languageProperName);
+        if(day.getLanguage() != null) {
+            String languageProperName = capitalizeName(day.getLanguage().getName());
+            day.getLanguage().setName(languageProperName);
+        }
         log.info("Day saved!");
         return dayRepository.save(day);
     }
@@ -100,9 +102,11 @@ public class DayServiceImpl implements DayService {
         for(Day day : days) {
             validateDayEntry(day);
             String properName = capitalizeName(day.getName());
-            String languageProperName = capitalizeName(day.getLanguage().getName());
+            if(day.getLanguage() != null) {
+                String languageProperName = capitalizeName(day.getLanguage().getName());
+                day.getLanguage().setName(languageProperName);
+            }
             day.setName(properName);
-            day.getLanguage().setName(languageProperName);
         }
         return dayRepository.saveAll(days);
     }
@@ -111,7 +115,6 @@ public class DayServiceImpl implements DayService {
     @Transactional
     public Day updateDay(Long id, Day day) {
         Day newDay = dayRepository.findById(id).get();
-        Language language = newDay.getLanguage();
 
         if(day.getName() != null && newDay.getName() != day.getName()) {
             String properName = capitalizeName(day.getName());
@@ -122,10 +125,15 @@ public class DayServiceImpl implements DayService {
             newDay.setDayNumber(day.getDayNumber());
         }
 
-        if(day.getLanguage() != null && language != day.getLanguage()) {
+        if((day.getLanguage() != null && newDay.getLanguage() != day.getLanguage())) {
             String languageProperName = capitalizeName(day.getLanguage().getName());
-            language.setName(languageProperName);
-            newDay.setLanguage(language);
+            if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
+                Language language = languageRepository.findByName(languageProperName);
+                newDay.setLanguage(language);
+            } else {
+                day.getLanguage().setName(languageProperName);
+                newDay.setLanguage(day.getLanguage());
+            }
         }
 
         if(day.getDescription() != null && newDay.getDescription() != day.getDescription()) {
@@ -133,17 +141,6 @@ public class DayServiceImpl implements DayService {
         }
         return dayRepository.save(newDay);
     }
-
-//    @Override
-//    @Transactional
-//    public Day update(Long id, Day day) {
-//        Day newDay = dayRepository.findById(id).get();
-//        newDay.setName(day.getName());
-//        newDay.setDayNumber(day.getDayNumber());
-//        newDay.setLanguage(day.getLanguage());
-//        newDay.setDescription(day.getDescription());
-//        return entityManager.merge(newDay);
-//    }
 
     //Helper Methods
     private String capitalizeName(String word) {
@@ -165,10 +162,12 @@ public class DayServiceImpl implements DayService {
         }
 
         //To avoid adding different entries with the same language name
-        if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
-            Language language = languageRepository.findByName(day.getLanguage().getName());
-            day.getLanguage().setId(language.getId());
-            day.setLanguage(language);
+        if(day.getLanguage() != null) {
+            if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
+                Language language = languageRepository.findByName(day.getLanguage().getName());
+                day.getLanguage().setId(language.getId());
+                day.setLanguage(language);
+            }
         }
     }
 

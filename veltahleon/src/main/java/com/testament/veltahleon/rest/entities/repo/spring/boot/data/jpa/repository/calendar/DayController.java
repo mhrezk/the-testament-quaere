@@ -3,8 +3,6 @@ package com.testament.veltahleon.rest.entities.repo.spring.boot.data.jpa.reposit
 import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.CustomResponse;
 import com.testament.veltahleon.model.entities.calendar.Day;
-import com.testament.veltahleon.model.entities.history.Language;
-import com.testament.veltahleon.model.entities.history.Letter;
 import com.testament.veltahleon.services.entities.repo.ifc.calendar.DayService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -97,13 +95,12 @@ public class DayController {
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("savedDay", dayService.saveDay(day)))
                 .message("Day saved!")
-                .reason(Objects.requireNonNull(result.getFieldError()).getDefaultMessage())
                 .build()
         );
     }
 
     @PostMapping("/save/days")
-    public ResponseEntity<CustomResponse> saveDays(@RequestBody Collection<Day> days) {
+    public ResponseEntity<CustomResponse> saveDays(@RequestBody Collection<Day> days, BindingResult result) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -164,7 +161,6 @@ public class DayController {
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("updatedDay", dayService.updateDay(id, day)))
                 .message("Day updated!")
-                .reason(result.getAllErrors().stream().toString())
                 .build()
         );
     }

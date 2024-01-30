@@ -93,7 +93,6 @@ public class LetterController {
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("savedLetter", letterService.saveLetter(letter)))
                 .message("Letter saved!")
-                .reason(result.getAllErrors().stream().toString())
                 .build()
         );
     }
@@ -151,4 +150,16 @@ public class LetterController {
 //                .build()
 //        );
 //    }
+
+    @PatchMapping("/update/letter/{id}")
+    public ResponseEntity<CustomResponse> updateLetter(@PathVariable("id") Long id, Letter letter, BindingResult result) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("updatedLetter", letterService.updateLetter(id, letter)))
+                .message("Letter updated")
+                .build()
+        );
+    }
 }

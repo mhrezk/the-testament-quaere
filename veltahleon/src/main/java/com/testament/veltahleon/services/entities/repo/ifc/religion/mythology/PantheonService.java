@@ -6,6 +6,7 @@ import java.util.Collection;
 
 public interface PantheonService {
 
+    Collection<Pantheon> getPantheonsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Pantheon> getPantheons();
     Pantheon getPantheonByID(Long id);
     Boolean deletePantheonByID(Long id);

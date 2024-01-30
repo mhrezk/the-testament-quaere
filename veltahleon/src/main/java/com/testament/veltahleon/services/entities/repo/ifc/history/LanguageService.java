@@ -11,6 +11,8 @@ public interface LanguageService {
     Language getLanguageByID(Long id);
     Language getLanguageByName(String name);
     Boolean deleteLanguageByID(Long id);
+    Boolean deleteAllLanguages(Collection<Language> languages);
     Language saveLanguage(Language language);
-    Language updateLanguage(Language language);
+    Collection<Language> saveLanguages(Collection<Language> languages);
+    //Language updateLanguage(Long id, Language language);
 }

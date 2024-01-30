@@ -6,9 +6,15 @@ import java.util.Collection;
 
 public interface ProphetService {
 
+    Collection<Prophet> getProphetsWithPagination(int pageNumber, int numberOfRecords);
+    Collection<Prophet> getProphetsSortedWithPagination(int pageNumber, int numberOfRecords);
     Collection<Prophet> getProphets();
     Prophet getProphetByID(Long id);
+    Prophet getProphetByName(String name);
     Boolean deleteProphetByID(Long id);
+    Boolean deleteProphetByName(String name);
+    Boolean deleteProphets();
     Prophet saveProphet(Prophet prophet);
-    Prophet updateProphet(Prophet prophet);
+    Collection<Prophet> saveProphets(Collection<Prophet> prophets);
+    Prophet updateProphet(Long id, Prophet prophet);
 }

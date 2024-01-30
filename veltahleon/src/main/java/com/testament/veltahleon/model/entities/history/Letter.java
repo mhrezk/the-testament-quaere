@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,26 +46,19 @@ public class Letter {
         CascadeType.PERSIST})
     @JoinTable(name = "letters_languages", joinColumns = @JoinColumn(name = "letter_id"),
         inverseJoinColumns = @JoinColumn(name = "language_id"))
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     private List<Language> languages;
 
     @Column(name = "script_URL")
     private String scriptURL;
 
-//    @Override
-//    public String toString() {
-//        return "Letter{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", language=" + language +
-//                ", scriptURL='" + scriptURL + '\'' +
-//                '}';
-//    }
-
     //Convenience Methods
-    public void addLanguage(Language language) {
-        if(languages == null) {
-            languages = new ArrayList<>();
-        }
-        languages.add(language);
-    }
+//    public void addLanguage(Language language) {
+//        if(languages == null) {
+//            languages = new ArrayList<>();
+//        }
+//        languages.add(language);
+//        language.setLetters(List.of(this));
+//    }
 }

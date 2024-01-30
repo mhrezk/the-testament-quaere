@@ -26,9 +26,9 @@ public class Day {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Day name cannot be null!")
-    @NotBlank(message = "Day name cannot be blank!")
-    @NotEmpty(message = "Day name cannot be empty!")
+//    @NotNull(message = "Day name cannot be null!")
+//    @NotBlank(message = "Day name cannot be blank!")
+//    @NotEmpty(message = "Day name cannot be empty!")
     @Column(name = "name")
     private String name;
 
@@ -45,7 +45,7 @@ public class Day {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "language_id", referencedColumnName = "id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) //to avoid issues with lazy loading related to ManyToOne relationships, as it would require eager loading instead
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true) //to avoid issues with lazy loading related to ManyToOne relationships, as it would require eager loading instead
     private Language language;
 
     @Column(name = "description", columnDefinition = "text")

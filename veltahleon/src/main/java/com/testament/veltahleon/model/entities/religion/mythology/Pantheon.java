@@ -1,11 +1,9 @@
 package com.testament.veltahleon.model.entities.religion.mythology;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,6 +12,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Pantheon {
 
     @Id
@@ -26,4 +26,12 @@ public class Pantheon {
             CascadeType.PERSIST})
     @JoinColumn(name = "pantheon_id")
     private List<Deity> deities;
+
+    //Convenience Method
+    public void addDeity(Deity deity) {
+        if(deities == null) {
+            deities = new ArrayList<>();
+        }
+        deities.add(deity);
+    }
 }

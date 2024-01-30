@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +64,7 @@ public class LanguageController {
     }
 
     @GetMapping("/language/name")
-    public ResponseEntity<CustomResponse> getLanguagesByLanguage(@RequestParam(value = "languageName") String languageName) {
+    public ResponseEntity<CustomResponse> getLanguagesByLanguageName(@RequestParam(value = "languageName") String languageName) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -82,22 +83,21 @@ public class LanguageController {
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("savedLanguage", languageService.saveLanguage(language)))
                 .message("Language saved!")
-                .reason(result.getAllErrors().stream().toString())
                 .build()
         );
     }
 
-//    @PostMapping("/save/Languages")
-//    public ResponseEntity<CustomResponse> saveLanguages(@RequestBody Collection<Language> Languages) {
-//        return ResponseEntity.ok(CustomResponse.builder()
-//                .timestamp(LocalDateTime.now())
-//                .status(HttpStatus.OK)
-//                .statusCode(HttpStatus.OK.value())
-//                .data(Map.of("savedLanguages", languageService.saveLanguages(Languages)))
-//                .message("Languages saved!")
-//                .build()
-//        );
-//    }
+    @PostMapping("/save/languages")
+    public ResponseEntity<CustomResponse> saveLanguages(@RequestBody Collection<Language> languages) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("savedLanguages", languageService.saveLanguages(languages)))
+                .message("Languages saved!")
+                .build()
+        );
+    }
 
     @DeleteMapping("/delete/language/{id}")
     public ResponseEntity<CustomResponse> deleteLanguageByID(@PathVariable Long id) {
@@ -111,22 +111,22 @@ public class LanguageController {
         );
     }
 
-//    @DeleteMapping("/delete/Languages")
-//    public ResponseEntity<CustomResponse> deleteAllLanguages() {
-//        Collection<Language> Languages = languageService.getLanguages();
-//        return ResponseEntity.ok(CustomResponse.builder()
-//                .timestamp(LocalDateTime.now())
-//                .status(HttpStatus.OK)
-//                .statusCode(HttpStatus.OK.value())
-//                .data(Map.of("areAllLanguagesDeleted", languageService.deleteAllLanguages(Languages)))
-//                .message("Languages deleted!")
-//                .build()
-//        );
-//    }
+    @DeleteMapping("/delete/languages")
+    public ResponseEntity<CustomResponse> deleteAllLanguages() {
+        Collection<Language> languages = languageService.getLanguages();
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("areAllLanguagesDeleted", languageService.deleteAllLanguages(languages)))
+                .message("Languages deleted!")
+                .build()
+        );
+    }
 
-//    @DeleteMapping("/delete/Languages/id")
+//    @DeleteMapping("/delete/languages/id")
 //    public ResponseEntity<CustomResponse> deleteAllLanguagesByIDs() {
-//        Collection<Language> Languages = languageService.getLanguages();
+//        Collection<Language> languages = languageService.getLanguages();
 //        List<Long> idLanguages = new ArrayList<>();
 //        for(Language Language : Languages) {
 //            idLanguages.add(Language.getId());
@@ -137,6 +137,18 @@ public class LanguageController {
 //                .statusCode(HttpStatus.OK.value())
 //                .data(Map.of("areAllLanguagesDeleted", languageService.deleteAllLanguagesByIDs(idLanguages)))
 //                .message("Languages deleted!")
+//                .build()
+//        );
+//    }
+
+//    @PatchMapping("/update/language/{id}")
+//    public ResponseEntity<CustomResponse> updateLanguage(@PathVariable Long id, @RequestBody @Valid Language language, BindingResult result) {
+//        return ResponseEntity.ok(CustomResponse.builder()
+//                .timestamp(LocalDateTime.now())
+//                .status(HttpStatus.OK)
+//                .statusCode(HttpStatus.OK.value())
+//                .data(Map.of("updatedLanguage", languageService.updateLanguage(id, language)))
+//                .message("Language updated!")
 //                .build()
 //        );
 //    }

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.27.0] 2023-12-19
+
+- Added RESTful web services for `Prophet.java` and `Religion.java`
+
 ## [0.26.2] 2023-12-19
 
 - Corrected missing cascades for certain relationships

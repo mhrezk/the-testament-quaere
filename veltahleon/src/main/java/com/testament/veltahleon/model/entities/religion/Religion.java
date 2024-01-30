@@ -1,6 +1,9 @@
 package com.testament.veltahleon.model.entities.religion;
 
 import com.testament.veltahleon.model.entities.religion.mythology.Pantheon;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -11,12 +14,17 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "religions")
+@EqualsAndHashCode
+@ToString
 public class Religion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Name cannot be null!")
+    @NotEmpty(message = "Name cannot be empty!")
+    @NotBlank(message = "Name cannot be blank!")
     @Column(name = "name")
     private String name;
 

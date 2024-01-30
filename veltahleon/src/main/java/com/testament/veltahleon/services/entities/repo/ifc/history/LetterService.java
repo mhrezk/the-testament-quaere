@@ -13,5 +13,5 @@ public interface LetterService {
     Letter getLetterByID(Long id);
     Boolean deleteLetterByID(Long id);
     Letter saveLetter(Letter letter);
-    Letter updateLetter(Letter letter);
+    Letter updateLetter(Long id, Letter letter);
 }

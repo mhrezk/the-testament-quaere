@@ -1,6 +1,7 @@
 package com.testament.veltahleon.model.entities.history;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.model.entities.places.Nation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -35,48 +36,43 @@ public class Language {
 //    @EqualsAndHashCode.Exclude //used to exclude field from equals() and hasCode() methods
     //@JsonIgnore
 //    @OneToMany(mappedBy = "language")
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-        CascadeType.DETACH,
-        CascadeType.MERGE,
-        CascadeType.PERSIST})
-    @JoinTable(name = "letters_languages", joinColumns = @JoinColumn(name = "letter_id"),
-        inverseJoinColumns = @JoinColumn(name = "language_id"))
-    private List<Letter> letters;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//        CascadeType.DETACH,
+//        CascadeType.MERGE,
+//        CascadeType.PERSIST})
+//    @JoinTable(name = "letters_languages", joinColumns = @JoinColumn(name = "language_id"),
+//        inverseJoinColumns = @JoinColumn(name = "letter_id"))
+//    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private List<Letter> letters;
 
     //@EqualsAndHashCode.Exclude //to prevent StackOverflowError from recursion in hashCode() method because of Sets
     //@JsonIgnore
-    @OneToMany(mappedBy = "nationalLanguage", cascade = {CascadeType.REFRESH,
+    @OneToMany(mappedBy = "nationalLanguage", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    private List<Nation> nationalAffiliation;
+    private List<Nation> nations;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;
 
+    @Column(name = "script_URL")
+    private String scriptURL;
+
     //Convenience Methods (for bidirectional relationship)
-    public void addLetter(Letter letter) {
-        if(letters == null) {
-            letters = new ArrayList<>();
-        }
-        letters.add(letter);
-        //letter.setLanguage(this); for Many-to-One, not Many-to-Many
-    }
+//    public void addLetter(Letter letter) {
+//        if(letters == null) {
+//            letters = new ArrayList<>();
+//        }
+//        letters.add(letter);
+//        //letter.setLanguage(this); for Many-to-One, not Many-to-Many
+//    }
 
     public void addNation(Nation nation) {
-        if(nationalAffiliation == null) {
-            nationalAffiliation = new ArrayList<>();
+        if(nations == null) {
+            nations = new ArrayList<>();
         }
-        nationalAffiliation.add(nation);
-        //nation.setNationalLanguage(this);
+        nations.add(nation);
+        nation.setNationalLanguage(this);
     }
-
-//    @Override
-//    public String toString() {
-//        return "Language{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", description='" + description + '\'' +
-//                '}';
-//    }
 }

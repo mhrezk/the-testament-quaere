@@ -6,8 +6,10 @@ import java.util.Collection;
 
 public interface DeityService {
 
+    Collection<Deity> getDeitiesWithPagination(int pageNumber, int numberOfRecords);
     Collection<Deity> getDeities();
     Deity getDeityByID(Long id);
+    Deity getDeityByName(String name);
     Boolean deleteDeityByID(Long id);
     Deity saveDeity(Deity deity);
     Deity updateDeity(Deity deity);
