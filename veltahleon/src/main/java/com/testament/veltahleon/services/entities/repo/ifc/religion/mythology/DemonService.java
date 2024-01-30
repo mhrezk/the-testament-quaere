@@ -12,5 +12,5 @@ public interface DemonService {
     Demon getDemonByName(String name);
     Boolean deleteDemonByID(Long id);
     Demon saveDemon(Demon demon);
-    Demon updateDemon(Demon demon);
+    Demon updateDemon(Long id, Demon demon);
 }

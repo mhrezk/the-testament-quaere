@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.28.0] 2023-12-19
+
+- Added RESTful web services for classes in religion package
+
 ## [0.27.0] 2023-12-19
 
 - Added RESTful web services for `Prophet.java` and `Religion.java`

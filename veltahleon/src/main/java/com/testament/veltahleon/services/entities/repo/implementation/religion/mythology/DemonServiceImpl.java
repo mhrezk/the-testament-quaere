@@ -52,7 +52,21 @@ public class DemonServiceImpl implements DemonService {
     }
 
     @Override
-    public Demon updateDemon(Demon demon) {
-        return demonRepository.save(demon);
+    public Demon updateDemon(Long id, Demon demon) {
+        Demon newDemon = demonRepository.findById(id).orElseThrow();
+
+        if(demon.getName() != null && newDemon.getName() != demon.getName()) {
+            newDemon.setName(demon.getName());
+        }
+
+        if(demon.getDescription() != null && newDemon.getDescription() != demon.getDescription()) {
+            newDemon.setDescription(demon.getDescription());
+        }
+
+        if(demon.getImageURL() != null && newDemon.getImageURL() != demon.getImageURL()) {
+            newDemon.setImageURL(demon.getImageURL());
+        }
+
+        return demonRepository.save(newDemon);
     }
 }

@@ -8,9 +8,10 @@ public interface FaeService {
 
     Collection<Fae> getFaesWithPagination(int pageNumber, int numberOfRecords);
     Collection<Fae> getFaes();
+    Collection<Fae> getFaesByRacialName(String name);
     Fae getFaeByID(Long id);
     Fae getFaeByName(String name);
     Boolean deleteFaeByID(Long id);
     Fae saveFae(Fae fae);
-    Fae updateFae(Fae fae);
+    Fae updateFae(Long id, Fae fae);
 }

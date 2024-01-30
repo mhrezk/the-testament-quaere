@@ -12,5 +12,5 @@ public interface AngelService {
     Angel getAngelByName(String name);
     Boolean deleteAngelByID(Long id);
     Angel saveAngel(Angel angel);
-    Angel updateAngel(Angel angel);
+    Angel updateAngel(Long id, Angel angel);
 }

@@ -12,5 +12,5 @@ public interface DeityService {
     Deity getDeityByName(String name);
     Boolean deleteDeityByID(Long id);
     Deity saveDeity(Deity deity);
-    Deity updateDeity(Deity deity);
+    Deity updateDeity(Long id, Deity deity);
 }

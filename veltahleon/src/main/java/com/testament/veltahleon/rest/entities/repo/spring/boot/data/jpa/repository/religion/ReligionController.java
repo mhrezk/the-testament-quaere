@@ -43,7 +43,7 @@ public class ReligionController {
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("allReligions", religions))
-                .message("All religion retrieved!")
+                .message("All religions retrieved!")
                 .build()
         );
     }

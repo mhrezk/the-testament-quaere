@@ -1,5 +1,6 @@
 package com.testament.veltahleon.services.entities.repo.implementation.religion.mythology;
 
+import com.testament.veltahleon.exceptions.DataNotFoundException;
 import com.testament.veltahleon.model.entities.religion.mythology.Pantheon;
 import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.religion.mythology.PantheonRepository;
 import com.testament.veltahleon.services.entities.repo.ifc.religion.mythology.PantheonService;
@@ -31,7 +32,7 @@ public class PantheonServiceImpl implements PantheonService {
 
     @Override
     public Pantheon getPantheonByID(Long id) {
-        return pantheonRepository.findById(id).orElseThrow();
+        return pantheonRepository.findById(id).orElseThrow(() -> new DataNotFoundException(String.format("Entry with id %d does not exist", id)));
     }
 
     @Override
@@ -46,7 +47,13 @@ public class PantheonServiceImpl implements PantheonService {
     }
 
     @Override
-    public Pantheon updatePantheon(Pantheon pantheon) {
-        return pantheonRepository.save(pantheon);
+    public Pantheon updatePantheon(Long id, Pantheon pantheon) {
+        Pantheon newPantheon = pantheonRepository.findById(id).orElseThrow();
+
+        if(pantheon.getDeities() != null && newPantheon.getDeities() != pantheon.getDeities()) {
+            newPantheon.setDeities(pantheon.getDeities());
+        }
+
+        return pantheonRepository.save(newPantheon);
     }
 }

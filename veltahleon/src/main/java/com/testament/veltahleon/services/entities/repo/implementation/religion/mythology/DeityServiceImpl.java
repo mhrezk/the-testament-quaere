@@ -1,5 +1,6 @@
 package com.testament.veltahleon.services.entities.repo.implementation.religion.mythology;
 
+import com.testament.veltahleon.exceptions.DataNotFoundException;
 import com.testament.veltahleon.model.entities.religion.mythology.Deity;
 import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.religion.mythology.DeityRepository;
 import com.testament.veltahleon.services.entities.repo.ifc.religion.mythology.DeityService;
@@ -30,7 +31,7 @@ public class DeityServiceImpl implements DeityService {
 
     @Override
     public Deity getDeityByID(Long id) {
-        return deityRepository.findById(id).orElseThrow();
+        return deityRepository.findById(id).orElseThrow(() -> new DataNotFoundException(String.format("Entry with id %d does not exist", id)));
     }
 
     @Override
@@ -50,7 +51,21 @@ public class DeityServiceImpl implements DeityService {
     }
 
     @Override
-    public Deity updateDeity(Deity deity) {
-        return deityRepository.save(deity);
+    public Deity updateDeity(Long id, Deity deity) {
+        Deity newDeity = deityRepository.findById(id).orElseThrow();
+
+        if(deity.getName() != null && newDeity.getName() != deity.getName()) {
+            newDeity.setName(deity.getName());
+        }
+
+        if(deity.getDescription() != null && newDeity.getDescription() != deity.getDescription()) {
+            newDeity.setDescription(deity.getDescription());
+        }
+
+        if(deity.getImageURL() != null && newDeity.getImageURL() != deity.getImageURL()) {
+            newDeity.setImageURL(deity.getImageURL());
+        }
+
+        return deityRepository.save(newDeity);
     }
 }

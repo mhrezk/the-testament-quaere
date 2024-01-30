@@ -11,5 +11,5 @@ public interface PantheonService {
     Pantheon getPantheonByID(Long id);
     Boolean deletePantheonByID(Long id);
     Pantheon savePantheon(Pantheon pantheon);
-    Pantheon updatePantheon(Pantheon pantheon);
+    Pantheon updatePantheon(Long id, Pantheon pantheon);
 }
