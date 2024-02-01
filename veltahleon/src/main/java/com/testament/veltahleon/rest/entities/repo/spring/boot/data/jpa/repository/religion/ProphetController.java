@@ -1,6 +1,6 @@
 package com.testament.veltahleon.rest.entities.repo.spring.boot.data.jpa.repository.religion;
 
-import com.testament.veltahleon.model.CustomResponse;
+import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.model.entities.religion.Prophet;
 import com.testament.veltahleon.services.entities.repo.ifc.religion.ProphetService;
 import jakarta.validation.Valid;
@@ -8,12 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

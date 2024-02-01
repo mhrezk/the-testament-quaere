@@ -47,17 +47,17 @@ public class Language {
 
     //@EqualsAndHashCode.Exclude //to prevent StackOverflowError from recursion in hashCode() method because of Sets
     //@JsonIgnore
-    @OneToMany(mappedBy = "nationalLanguage", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    private List<Nation> nations;
+//    @OneToMany(mappedBy = "nationalLanguage", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    private List<Nation> nations;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;
 
-    @Column(name = "script_URL")
-    private String scriptURL;
+    @Column(name = "alphabet_URL")
+    private String alphabetURL;
 
     //Convenience Methods (for bidirectional relationship)
 //    public void addLetter(Letter letter) {
@@ -68,11 +68,11 @@ public class Language {
 //        //letter.setLanguage(this); for Many-to-One, not Many-to-Many
 //    }
 
-    public void addNation(Nation nation) {
-        if(nations == null) {
-            nations = new ArrayList<>();
-        }
-        nations.add(nation);
-        nation.setNationalLanguage(this);
-    }
+//    public void addNation(Nation nation) {
+//        if(nations == null) {
+//            nations = new ArrayList<>();
+//        }
+//        nations.add(nation);
+//        nation.setNationalLanguage(this);
+//    }
 }

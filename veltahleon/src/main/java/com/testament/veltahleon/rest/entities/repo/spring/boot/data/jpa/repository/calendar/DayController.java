@@ -1,7 +1,6 @@
 package com.testament.veltahleon.rest.entities.repo.spring.boot.data.jpa.repository.calendar;
 
-import com.testament.veltahleon.exceptions.DataInsertionException;
-import com.testament.veltahleon.model.CustomResponse;
+import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.model.entities.calendar.Day;
 import com.testament.veltahleon.services.entities.repo.ifc.calendar.DayService;
 import jakarta.validation.Valid;
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;

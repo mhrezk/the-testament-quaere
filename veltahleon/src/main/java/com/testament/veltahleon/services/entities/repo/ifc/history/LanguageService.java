@@ -14,5 +14,5 @@ public interface LanguageService {
     Boolean deleteAllLanguages(Collection<Language> languages);
     Language saveLanguage(Language language);
     Collection<Language> saveLanguages(Collection<Language> languages);
-    //Language updateLanguage(Long id, Language language);
+    Language updateLanguage(Long id, Language language);
 }

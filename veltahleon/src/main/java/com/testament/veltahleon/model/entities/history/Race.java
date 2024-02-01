@@ -9,6 +9,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Race {
 
     @Id
@@ -19,7 +21,7 @@ public class Race {
     private String name;
 
     @Column(name = "description", columnDefinition = "text")
-    private String racialDescription;
+    private String description;
 
     @Column(name = "image_URL")
     private String imageURL;

@@ -2,10 +2,7 @@ package com.testament.veltahleon.model.entities.history.library;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "chapters")
@@ -13,6 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Chapter {
 
     @Id
@@ -28,5 +27,5 @@ public class Chapter {
     private Book book;
 
     @Column(name = "chapter_text", columnDefinition = "longtext")
-    private String chapterText;
+    private String text;
 }

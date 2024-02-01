@@ -6,9 +6,11 @@ import java.util.Collection;
 
 public interface ExcerptService {
 
+    Collection<Excerpt> getExcerptsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Excerpt> getExcerpts();
+    Collection<Excerpt> getExcerptsByBookName(String name);
     Excerpt getExcerptByID(Long id);
     Boolean deleteExcerptByID(Long id);
     Excerpt saveExcerpt(Excerpt excerpt);
-    Excerpt updateExcerpt(Excerpt excerpt);
+    Excerpt updateExcerpt(Long id, Excerpt excerpt);
 }

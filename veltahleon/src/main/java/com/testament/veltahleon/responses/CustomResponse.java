@@ -1,4 +1,4 @@
-package com.testament.veltahleon.model;
+package com.testament.veltahleon.responses;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

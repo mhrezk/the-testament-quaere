@@ -20,16 +20,11 @@ import java.util.Collection;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class LetterServiceImpl implements LetterService {
 
     @Autowired
-    private final EntityManager entityManager;
-
-    @Autowired
     private final LetterRepository letterRepository;
-
-//    @Autowired
-//    private final LanguageRepository languageRepository;
 
     @Override
     public Collection<Letter> getLettersWithPagination(int pageNumber, int numberOfRecords) {
@@ -41,36 +36,39 @@ public class LetterServiceImpl implements LetterService {
         return letterRepository.findAll();
     }
 
-//    @Override
-//    public Collection<Letter> getLettersByLanguageName(String languageName) {
-//        return letterRepository.findByLanguageName(languageName);
-//    }
-
     @Override
     public Letter getLetterByID(Long id) {
-        return letterRepository.findById(id).get();
+        return letterRepository.findById(id).orElseThrow();
     }
 
     @Override
-    @Transactional
     public Boolean deleteLetterByID(Long id) {
         letterRepository.deleteById(id);
         return Boolean.TRUE;
     }
 
     @Override
-    @Transactional
     public Letter saveLetter(Letter letter) {
-        validateLetterEntry(letter);
-        String properName = capitalizeName(letter.getName());
-        letter.setName(properName);
         return letterRepository.save(letter);
     }
 
     @Override
-    @Transactional
     public Letter updateLetter(Long id, Letter letter) {
-        return letterRepository.save(letter);
+        Letter newLetter = letterRepository.findById(id).orElseThrow();
+
+        if(letter.getName() != null && newLetter.getName() != letter.getName()) {
+            newLetter.setName(letter.getName());
+        }
+
+        if(letter.getScriptURL() != null && newLetter.getScriptURL() != letter.getScriptURL()) {
+            newLetter.setScriptURL(letter.getScriptURL());
+        }
+
+        if(letter.getLanguages() != null && newLetter.getLanguages() != letter.getLanguages()) {
+            newLetter.setLanguages(letter.getLanguages());
+        }
+
+        return letterRepository.save(newLetter);
     }
 
     //Helper Methods

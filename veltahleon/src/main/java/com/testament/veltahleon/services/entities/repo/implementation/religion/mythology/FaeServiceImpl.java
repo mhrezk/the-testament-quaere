@@ -3,6 +3,7 @@ package com.testament.veltahleon.services.entities.repo.implementation.religion.
 import com.testament.veltahleon.model.entities.religion.mythology.Fae;
 import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.religion.mythology.FaeRepository;
 import com.testament.veltahleon.services.entities.repo.ifc.religion.mythology.FaeService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.util.Collection;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class FaeServiceImpl implements FaeService {
 
     @Autowired

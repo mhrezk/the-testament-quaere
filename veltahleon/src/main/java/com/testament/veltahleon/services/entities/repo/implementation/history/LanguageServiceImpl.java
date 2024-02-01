@@ -18,14 +18,11 @@ import java.util.Collection;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class LanguageServiceImpl implements LanguageService {
 
     @Autowired
     private final LanguageRepository languageRepository;
-
-    @Autowired
-    private final LetterRepository letterRepository;
-
 
     @Override
     public Collection<Language> getLanguagesWithPagination(int pageNumber, int numberOfRecords) {
@@ -48,7 +45,6 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    @Transactional
     public Boolean deleteLanguageByID(Long id) {
         languageRepository.deleteById(id);
         return Boolean.TRUE;
@@ -61,59 +57,33 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    @Transactional
     public Language saveLanguage(Language language) {
-        validateLanguageEntry(language);
-        String properName = capitalizeName(language.getName());
-        language.setName(properName);
         return languageRepository.save(language);
     }
 
     @Override
     public Collection<Language> saveLanguages(Collection<Language> languages) {
-        for(Language language : languages) {
-            validateLanguageEntry(language);
-            String properName = capitalizeName(language.getName());
-            language.setName(properName);
-        }
         return languageRepository.saveAll(languages);
     }
 
-//    @Override
-//    @Transactional
-//    public Language updateLanguage(Long id, Language language) {
-//        Language newLanguage = languageRepository.findById(id).get();
-//
-//        if(language.getName() != null && newLanguage.getName() != language.getName()) {
-//            String properName = capitalizeName(language.getName());
-//            newLanguage.setName(properName);
-//        }
-//
-//        if(language.getLetters() != null && newLanguage.getLetters() != language.getLetters()) {
-//            for(Letter l : language.getLetters()) {
-//                String properLetterName = capitalizeName(l.getName());
-//                if(letterRepository.countByName(l.getName()) >= 1) {
-//                    Letter letter = letterRepository.findByName(l.getName());
-//                    newLanguage.addLetter(letter);
-//                } else {
-//                    properLetterName = capitalizeName(l.getName());
-//                    l.setName(properLetterName);
-//                    l.addLanguage(newLanguage);
-//                }
-//            }
-//            newLanguage.setLetters(language.getLetters());
-//        }
-//
-//        if(language.getNations() != null && newLanguage.getNations() != language.getNations()) {
-//            newLanguage.setNations(language.getNations());
-//        }
-//
-//        if(language.getDescription() != null && newLanguage.getDescription() != language.getDescription()) {
-//            newLanguage.setDescription(language.getDescription());
-//        }
-//
-//        return languageRepository.save(newLanguage);
-//    }
+    @Override
+    public Language updateLanguage(Long id, Language language) {
+        Language newLanguage = languageRepository.findById(id).orElseThrow();
+
+        if(language.getName() != null && newLanguage.getName() != language.getName()) {
+            newLanguage.setName(language.getName());
+        }
+
+        if(language.getDescription() != null && newLanguage.getDescription() != language.getDescription()) {
+            newLanguage.setDescription(language.getDescription());
+        }
+
+        if(language.getAlphabetURL() != null && newLanguage.getAlphabetURL() != language.getAlphabetURL()) {
+            newLanguage.setAlphabetURL(language.getAlphabetURL());
+        }
+
+        return languageRepository.save(newLanguage);
+    }
 
     //Helper Methods
     private String capitalizeName(String word) {

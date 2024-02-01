@@ -20,7 +20,7 @@ import java.util.List;
 public abstract class Human {
 
     @Column(name = "name")
-    private String personalName;
+    private String name;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
@@ -28,11 +28,11 @@ public abstract class Human {
             CascadeType.PERSIST})
     @JoinColumn(name = "race_id")
     //@PrimaryKeyJoinColumn(name = "race") //Used instead of @Column with @OneToOne
-    private Race personalRace;
+    private Race race;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    private Gender personalGender;
+    private Gender gender;
 
     //@OneToMany
 //    @ElementCollection(fetch = FetchType.LAZY)
@@ -46,7 +46,7 @@ public abstract class Human {
     private List<Year> yearBirthAndDeath;
 
     @Column(name = "biography", columnDefinition = "longtext")
-    private String personalBiography;
+    private String biography;
 
     @Column(name = "image_URL")
     private String imageURL;

@@ -6,9 +6,12 @@ import java.util.Collection;
 
 public interface BookService {
 
+    Collection<Book> getBooksWithPagination(int pageNumber, int numberOfRecords);
     Collection<Book> getBooks();
     Book getBookByID(Long id);
+    Book getBookByBookName(String name);
+    Book getBookByAuthorName(String name);
     Boolean deleteBookByID(Long id);
     Book saveBook(Book book);
-    Book updateBook(Book book);
+    Book updateBook(Long id, Book book);
 }

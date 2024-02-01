@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.29.0] 2023-12-19
+
+- Added RESTful web services for classes in history package
+
 ## [0.28.0] 2023-12-19
 
 - Added RESTful web services for classes in religion package

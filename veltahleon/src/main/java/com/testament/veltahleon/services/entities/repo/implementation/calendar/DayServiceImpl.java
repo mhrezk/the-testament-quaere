@@ -22,6 +22,7 @@ import java.util.Collection;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class DayServiceImpl implements DayService {
 
     @Autowired
@@ -62,28 +63,24 @@ public class DayServiceImpl implements DayService {
     }
 
     @Override
-    @Transactional
     public Boolean deleteDayByID(Long id) {
         dayRepository.deleteById(id);
         return Boolean.TRUE;
     }
 
     @Override
-    @Transactional
     public Boolean deleteAllDaysByIDs(Collection<Long> dayIDs) {
         dayRepository.deleteAllById(dayIDs);
         return Boolean.TRUE;
     }
 
     @Override
-    @Transactional
     public Boolean deleteAllDays(Collection<Day> days) {
         dayRepository.deleteAll(days);
         return Boolean.TRUE;
     }
 
     @Override
-    @Transactional
     public Day saveDay(Day day) {
         validateDayEntry(day);
         String properName = capitalizeName(day.getName());
@@ -97,7 +94,6 @@ public class DayServiceImpl implements DayService {
     }
 
     @Override
-    @Transactional
     public Collection<Day> saveDays(Collection<Day> days) {
         for(Day day : days) {
             validateDayEntry(day);
@@ -112,7 +108,6 @@ public class DayServiceImpl implements DayService {
     }
 
     @Override
-    @Transactional
     public Day updateDay(Long id, Day day) {
         Day newDay = dayRepository.findById(id).get();
 

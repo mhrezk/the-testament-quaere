@@ -4,6 +4,7 @@ import com.testament.veltahleon.exceptions.DataNotFoundException;
 import com.testament.veltahleon.model.entities.religion.Religion;
 import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.religion.ReligionRepository;
 import com.testament.veltahleon.services.entities.repo.ifc.religion.ReligionService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.util.Collection;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class ReligionServiceImpl implements ReligionService {
 
     @Autowired

@@ -2,10 +2,7 @@ package com.testament.veltahleon.model.entities.history.library;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,6 +12,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Book {
 
     @Id
@@ -22,7 +21,7 @@ public class Book {
     private Long id;
 
     @Column(name = "book_title")
-    private String bookName;
+    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
@@ -30,7 +29,7 @@ public class Book {
             CascadeType.PERSIST})
     @JoinColumn(name = "author_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Author authorName;
+    private Author author;
 
     @OneToMany(mappedBy = "book", cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

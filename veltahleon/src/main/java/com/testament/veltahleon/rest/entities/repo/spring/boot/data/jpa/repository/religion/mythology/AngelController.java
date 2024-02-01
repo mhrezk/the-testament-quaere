@@ -1,15 +1,19 @@
 package com.testament.veltahleon.rest.entities.repo.spring.boot.data.jpa.repository.religion.mythology;
 
-import com.testament.veltahleon.model.CustomResponse;
+import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.model.entities.religion.mythology.Angel;
 import com.testament.veltahleon.services.entities.repo.ifc.religion.mythology.AngelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +74,11 @@ public class AngelController {
                 .message("Angel retrieved!")
                 .build()
         );
+    }
+
+    @GetMapping(value = "/angel/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
+    public byte[] getAngelImage(@PathVariable("fileName") String fileName) throws IOException {
+        return Files.readAllBytes(Paths.get("src/main/java/assets/images/" + fileName));
     }
 
     @DeleteMapping("/delete/angel/{id}")

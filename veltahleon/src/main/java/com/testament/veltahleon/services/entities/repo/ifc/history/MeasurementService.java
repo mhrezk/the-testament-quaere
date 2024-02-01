@@ -6,9 +6,11 @@ import java.util.Collection;
 
 public interface MeasurementService {
 
+    Collection<Measurement> getMeasurementsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Measurement> getMeasurements();
     Measurement getMeasurementByID(Long id);
+    Measurement getMeasurementByName(String name);
     Boolean deleteMeasurementByID(Long id);
     Measurement saveMeasurement(Measurement measurement);
-    Measurement updateMeasurement(Measurement measurement);
+    Measurement updateMeasurement(Long id, Measurement measurement);
 }

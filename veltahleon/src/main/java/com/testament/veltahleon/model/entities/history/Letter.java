@@ -33,7 +33,6 @@ public class Letter {
     @NotEmpty(message = "Letter name cannot be empty!")
     private String name;
 
-
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,
 //            CascadeType.MERGE,
@@ -46,8 +45,8 @@ public class Letter {
         CascadeType.PERSIST})
     @JoinTable(name = "letters_languages", joinColumns = @JoinColumn(name = "letter_id"),
         inverseJoinColumns = @JoinColumn(name = "language_id"))
-    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    //@JsonIgnore
     private List<Language> languages;
 
     @Column(name = "script_URL")

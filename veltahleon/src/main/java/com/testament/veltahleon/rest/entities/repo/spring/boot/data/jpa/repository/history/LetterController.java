@@ -1,6 +1,6 @@
 package com.testament.veltahleon.rest.entities.repo.spring.boot.data.jpa.repository.history;
 
-import com.testament.veltahleon.model.CustomResponse;
+import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.model.entities.history.Letter;
 import com.testament.veltahleon.services.entities.repo.ifc.history.LetterService;
 import jakarta.validation.Valid;
@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -49,18 +48,6 @@ public class LetterController {
         );
     }
 
-//    @GetMapping("/letter/name")
-//    public ResponseEntity<CustomResponse> getLetterByName(@RequestParam(value = "name") String name) {
-//        return ResponseEntity.ok(CustomResponse.builder()
-//                .timestamp(LocalDateTime.now())
-//                .status(HttpStatus.OK)
-//                .statusCode(HttpStatus.OK.value())
-//                .data(Map.of("queriedLetterByName", letterService.getLetterByName(name)))
-//                .message("Letter retrieved!")
-//                .build()
-//        );
-//    }
-
     @GetMapping("/letter/{id}")
     public ResponseEntity<CustomResponse> getLetterByID(@PathVariable Long id) {
         return ResponseEntity.ok(CustomResponse.builder()
@@ -73,20 +60,8 @@ public class LetterController {
         );
     }
 
-//    @GetMapping("/letters/language")
-//    public ResponseEntity<CustomResponse> getLettersByLanguage(@RequestParam(value = "languageName") String languageName) {
-//        return ResponseEntity.ok(CustomResponse.builder()
-//                .timestamp(LocalDateTime.now())
-//                .status(HttpStatus.OK)
-//                .statusCode(HttpStatus.OK.value())
-//                .data(Map.of("queriedLettersByLanguage", letterService.getLettersByLanguageName(languageName)))
-//                .message("Letters retrieved!")
-//                .build()
-//        );
-//    }
-
     @PostMapping("/save/letter")
-    public ResponseEntity<CustomResponse> saveLetter(@RequestBody @Valid Letter letter, BindingResult result) {
+    public ResponseEntity<CustomResponse> saveLetter(@RequestBody @Valid Letter letter) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -96,18 +71,6 @@ public class LetterController {
                 .build()
         );
     }
-
-//    @PostMapping("/save/letters")
-//    public ResponseEntity<CustomResponse> saveLetters(@RequestBody Collection<Letter> Letters) {
-//        return ResponseEntity.ok(CustomResponse.builder()
-//                .timestamp(LocalDateTime.now())
-//                .status(HttpStatus.OK)
-//                .statusCode(HttpStatus.OK.value())
-//                .data(Map.of("savedLetters", letterService.saveLetters(Letters)))
-//                .message("Letters saved!")
-//                .build()
-//        );
-//    }
 
     @DeleteMapping("/delete/letter/{id}")
     public ResponseEntity<CustomResponse> deleteLetterByID(@PathVariable Long id) {
@@ -121,38 +84,8 @@ public class LetterController {
         );
     }
 
-//    @DeleteMapping("/delete/letters")
-//    public ResponseEntity<CustomResponse> deleteAllLetters() {
-//        Collection<Letter> Letters = letterService.getLetters();
-//        return ResponseEntity.ok(CustomResponse.builder()
-//                .timestamp(LocalDateTime.now())
-//                .status(HttpStatus.OK)
-//                .statusCode(HttpStatus.OK.value())
-//                .data(Map.of("areAllLettersDeleted", letterService.deleteAllLetters(Letters)))
-//                .message("Letters deleted!")
-//                .build()
-//        );
-//    }
-
-//    @DeleteMapping("/delete/letters/id")
-//    public ResponseEntity<CustomResponse> deleteAllLettersByIDs() {
-//        Collection<Letter> Letters = letterService.getLetters();
-//        List<Long> idLetters = new ArrayList<>();
-//        for(Letter Letter : Letters) {
-//            idLetters.add(Letter.getId());
-//        }
-//        return ResponseEntity.ok(CustomResponse.builder()
-//                .timestamp(LocalDateTime.now())
-//                .status(HttpStatus.OK)
-//                .statusCode(HttpStatus.OK.value())
-//                .data(Map.of("areAllLettersDeleted", letterService.deleteAllLettersByIDs(idLetters)))
-//                .message("Letters deleted!")
-//                .build()
-//        );
-//    }
-
     @PatchMapping("/update/letter/{id}")
-    public ResponseEntity<CustomResponse> updateLetter(@PathVariable("id") Long id, Letter letter, BindingResult result) {
+    public ResponseEntity<CustomResponse> updateLetter(@PathVariable("id") Long id, Letter letter) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

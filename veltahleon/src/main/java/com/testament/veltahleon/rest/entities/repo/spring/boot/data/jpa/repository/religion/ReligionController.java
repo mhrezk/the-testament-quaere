@@ -1,6 +1,6 @@
 package com.testament.veltahleon.rest.entities.repo.spring.boot.data.jpa.repository.religion;
 
-import com.testament.veltahleon.model.CustomResponse;
+import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.model.entities.religion.Religion;
 import com.testament.veltahleon.services.entities.repo.ifc.religion.ReligionService;
 import jakarta.validation.Valid;
