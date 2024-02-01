@@ -24,28 +24,28 @@ public class Nation {
     private Long id;
 
     @Column(name = "name")
-    private String nationalName;
+    private String name;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "capital_id")
-    private Capital nationalCapital;
+    private Capital capital;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "continent_id")
-    private Continent nationalContinent;
+    private Continent continent;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "nation_leader_id")
-    private NationLeader nationalLeader;
+    private NationLeader leader;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
@@ -53,20 +53,20 @@ public class Nation {
             CascadeType.PERSIST})
     @JoinColumn(name = "language_id", referencedColumnName = "id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Language nationalLanguage;
+    private Language language;
 
-    @OneToMany(mappedBy = "provincialNation", cascade = {CascadeType.REFRESH,
+    @OneToMany(mappedBy = "nation", cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    private List<Province> nationalProvinces;
+    private List<Province> provinces;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "nation_type_id")
-    private NationType nationalType;
+    private NationType type;
 
     @OneToMany(mappedBy = "nation", cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
@@ -75,5 +75,5 @@ public class Nation {
     private List<Pundit> pundits;
 
     @Column(name = "description", columnDefinition = "longtext")
-    private String nationalDescription;
+    private String description;
 }

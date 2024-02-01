@@ -26,9 +26,9 @@ public class Day {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotNull(message = "Day name cannot be null!")
-//    @NotBlank(message = "Day name cannot be blank!")
-//    @NotEmpty(message = "Day name cannot be empty!")
+    @NotNull(message = "Day name cannot be null!")
+    @NotBlank(message = "Day name cannot be blank!")
+    @NotEmpty(message = "Day name cannot be empty!")
     @Column(name = "name")
     private String name;
 

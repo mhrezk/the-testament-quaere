@@ -10,5 +10,5 @@ public interface EpochService {
     Epoch getEpochByID(Long id);
     Boolean deleteEpochByID(Long id);
     Epoch saveEpoch(Epoch epoch);
-    Epoch updateEpoch(Epoch epoch);
+    Epoch updateEpoch(Long id, Epoch epoch);
 }

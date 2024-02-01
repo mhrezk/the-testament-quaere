@@ -10,6 +10,6 @@ import java.util.Collection;
 @Repository
 public interface DayRepository extends JpaRepository<Day, Long> {
     Day findByName(String name);
-    Collection<Day> findByLanguageName(String languageName);
+    Collection<Day> findByLanguage_Name(String languageName);
     long countByName(String name);
 }

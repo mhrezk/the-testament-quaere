@@ -2,6 +2,10 @@
 
 ## [0.29.0] 2023-12-19
 
+- Added RESTful web services for classes except politics and society packages
+
+## [0.29.0] 2023-12-19
+
 - Added RESTful web services for classes in history package
 
 ## [0.28.0] 2023-12-19

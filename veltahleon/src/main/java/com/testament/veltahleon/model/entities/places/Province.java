@@ -17,14 +17,14 @@ public class Province {
     private Long id;
 
     @Column(name = "name")
-    private String provincialName;
+    private String name;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "province_id")
-    private Capital provincialCapital;
+    private Capital capital;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
@@ -32,8 +32,8 @@ public class Province {
             CascadeType.PERSIST})
     @JoinColumn(name = "nation_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Nation provincialNation;
+    private Nation nation;
 
     @Column(name = "description", columnDefinition = "text")
-    private String provincialDescription;
+    private String description;
 }

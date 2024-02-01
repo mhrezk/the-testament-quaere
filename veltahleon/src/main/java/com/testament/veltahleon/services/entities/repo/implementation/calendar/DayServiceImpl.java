@@ -26,14 +26,7 @@ import java.util.Collection;
 public class DayServiceImpl implements DayService {
 
     @Autowired
-    private final EntityManager entityManager;
-
-    @Autowired
     private final DayRepository dayRepository;
-
-    @Autowired
-    private final LanguageRepository languageRepository;
-
 
     //CRUD
 
@@ -49,7 +42,7 @@ public class DayServiceImpl implements DayService {
 
     @Override
     public Collection<Day> getDaysByLanguage(String languageName) {
-        return dayRepository.findByLanguageName(languageName);
+        return dayRepository.findByLanguage_Name(languageName);
     }
 
     @Override
@@ -82,28 +75,12 @@ public class DayServiceImpl implements DayService {
 
     @Override
     public Day saveDay(Day day) {
-        validateDayEntry(day);
-        String properName = capitalizeName(day.getName());
-        day.setName(properName);
-        if(day.getLanguage() != null) {
-            String languageProperName = capitalizeName(day.getLanguage().getName());
-            day.getLanguage().setName(languageProperName);
-        }
         log.info("Day saved!");
         return dayRepository.save(day);
     }
 
     @Override
     public Collection<Day> saveDays(Collection<Day> days) {
-        for(Day day : days) {
-            validateDayEntry(day);
-            String properName = capitalizeName(day.getName());
-            if(day.getLanguage() != null) {
-                String languageProperName = capitalizeName(day.getLanguage().getName());
-                day.getLanguage().setName(languageProperName);
-            }
-            day.setName(properName);
-        }
         return dayRepository.saveAll(days);
     }
 
@@ -121,14 +98,7 @@ public class DayServiceImpl implements DayService {
         }
 
         if((day.getLanguage() != null && newDay.getLanguage() != day.getLanguage())) {
-            String languageProperName = capitalizeName(day.getLanguage().getName());
-            if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
-                Language language = languageRepository.findByName(languageProperName);
-                newDay.setLanguage(language);
-            } else {
-                day.getLanguage().setName(languageProperName);
-                newDay.setLanguage(day.getLanguage());
-            }
+            newDay.setLanguage(day.getLanguage());
         }
 
         if(day.getDescription() != null && newDay.getDescription() != day.getDescription()) {
@@ -141,34 +111,5 @@ public class DayServiceImpl implements DayService {
     private String capitalizeName(String word) {
         String firstCharacter = word.toLowerCase().substring(0, 1).toUpperCase();
         return firstCharacter + word.substring(1);
-    }
-
-    private void validateDayEntry(Day day) {
-        if(day.getName() == null || day.getName().isEmpty() || day.getName().isBlank()) {
-            throw new DataInsertionException("Day name must be present!");
-        }
-
-//        if(day.getLanguage().getName() == null || day.getLanguage().getName().isEmpty() || day.getLanguage().getName().isBlank()) {
-//            throw new DataInsertionException("Language name must be present!");
-//        }
-
-        if(dayRepository.countByName(day.getName()) >= 1) {
-            throw new DataInsertionException("Day name already exists! Duplicate entries are disallowed!");
-        }
-
-        //To avoid adding different entries with the same language name
-        if(day.getLanguage() != null) {
-            if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
-                Language language = languageRepository.findByName(day.getLanguage().getName());
-                day.getLanguage().setId(language.getId());
-                day.setLanguage(language);
-            }
-        }
-    }
-
-    public Language queryLanguageByName(String name) {
-        TypedQuery<Language> query = entityManager.createQuery("FROM Language WHERE name=:languageName", Language.class);
-        query.setParameter("languageName", name);
-        return query.getSingleResult();
     }
 }

@@ -9,6 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "nation_types")
+@EqualsAndHashCode
+@ToString
 public class NationType {
 
     @Id
@@ -16,7 +18,7 @@ public class NationType {
     private Long id;
 
     @Column(name = "type")
-    private String typeName;
+    private String name;
 
     @Column(columnDefinition = "text")
     private String description;

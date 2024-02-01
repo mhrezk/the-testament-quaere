@@ -9,6 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "continents")
+@EqualsAndHashCode
+@ToString
 public class Continent {
 
     @Id
@@ -16,8 +18,8 @@ public class Continent {
     private Long id;
 
     @Column(name = "name")
-    private String continentalName;
+    private String name;
 
     @Column(name = "description", columnDefinition = "text")
-    private String continentalDescription;
+    private String description;
 }

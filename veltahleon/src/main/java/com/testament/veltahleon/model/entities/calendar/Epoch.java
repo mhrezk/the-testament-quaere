@@ -9,22 +9,21 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Epoch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "epoch_name") //e.g: Age of Stillness
-    private String name;
+    @Column(name = "year_name") //e.g: Year of Six Emperors
+    private String yearName;
 
-    @Column(name = "epoch_year_name") //e.g: Year of Six Emperors
-    private String epochTime;
+    @Column(name = "year_abbreviation") //e.g: ADE
+    private String abbreviation;
 
-    @Column(name = "epoch_year_abbreviation") //e.g: ADE
-    private String epochAbbreviation;
-
-    @Column(name = "epoch_year_number") //e.g: 3000
+    @Column(name = "year_number") //e.g: 3000
     private Integer yearNumber;
 
     @Column(name = "description", columnDefinition = "text")

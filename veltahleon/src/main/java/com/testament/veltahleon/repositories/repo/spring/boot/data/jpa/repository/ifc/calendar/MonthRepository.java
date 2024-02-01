@@ -7,4 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Collection;
 
 public interface MonthRepository extends JpaRepository<Month, Long> {
+
+    Month findByName(String name);
+    Collection<Month> findByNumberOfDays(Integer numberOfDays);
+    Collection<Month> findByLanguage_Name(String name);
 }

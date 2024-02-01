@@ -11,6 +11,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "locations")
+@EqualsAndHashCode
+@ToString
 public class Location {
 
     @Id
@@ -18,10 +20,10 @@ public class Location {
     private Long id;
 
     @Column(name = "current_name")
-    private String locationCurrentName;
+    private String name;
 
-    @Column(name = "previous_name")
-    private String locationPreviousName;
+//    @Column(name = "previous_name")
+//    private String previousName;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
@@ -32,5 +34,5 @@ public class Location {
     private Nation nation;
 
     @Column(name = "description", columnDefinition = "text")
-    private String locationDescription;
+    private String description;
 }

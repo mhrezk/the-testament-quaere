@@ -1,9 +1,14 @@
 package com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.places;
 
-import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.places.Nation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
-public interface NationRepository extends JpaRepository<Nation, Long> {}
+@Repository
+public interface NationRepository extends JpaRepository<Nation, Long> {
+
+    Nation findByName(String name);
+    Collection<Nation> findByType_Name(String name);
+}

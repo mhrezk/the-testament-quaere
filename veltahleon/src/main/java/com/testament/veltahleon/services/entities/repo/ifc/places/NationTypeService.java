@@ -8,7 +8,8 @@ public interface NationTypeService {
 
     Collection<NationType> getNationTypes();
     NationType getNationTypeByID(Long id);
+    NationType getNationTypeByType(String type);
     Boolean deleteNationTypeByID(Long id);
     NationType saveNationType(NationType nationType);
-    NationType updateNationType(NationType nationType);
+    NationType updateNationType(Long id, NationType nationType);
 }

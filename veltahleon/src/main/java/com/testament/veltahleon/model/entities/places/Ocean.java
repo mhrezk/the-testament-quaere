@@ -9,6 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "oceans")
+@EqualsAndHashCode
+@ToString
 public class Ocean {
 
     @Id
@@ -18,6 +20,6 @@ public class Ocean {
     private String name;
 
     @Column(name = "description", columnDefinition = "text")
-    private String oceanicDescription;
+    private String description;
 
 }

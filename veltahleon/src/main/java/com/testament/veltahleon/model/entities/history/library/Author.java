@@ -20,7 +20,7 @@ public class Author extends Human {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "authorName", cascade = {CascadeType.REFRESH,
+    @OneToMany(mappedBy = "author", cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})

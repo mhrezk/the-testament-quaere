@@ -6,9 +6,12 @@ import java.util.Collection;
 
 public interface CapitalService {
 
+    Collection<Capital> getCapitalsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Capital> getCapitals();
     Capital getCapitalByID(Long id);
+    Capital getCapitalByName(String name);
+    Capital getCapitalByNationName(String name);
     Boolean deleteCapitalByID(Long id);
     Capital saveCapital(Capital capital);
-    Capital updateCapital(Capital capital);
+    Capital updateCapital(Long id, Capital capital);
 }

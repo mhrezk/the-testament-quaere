@@ -22,7 +22,7 @@ public class NationLeader extends Leader {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "nationalLeader", cascade = {CascadeType.REFRESH,
+    @OneToOne(mappedBy = "leader", cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
