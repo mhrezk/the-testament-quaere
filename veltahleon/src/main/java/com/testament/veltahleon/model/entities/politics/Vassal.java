@@ -6,11 +6,13 @@ import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
+@Getter
+@Setter
 //@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "national_leaders")
+@Table(name = "vassals")
+@ToString
 public class Vassal extends NationLeader {
 
     @Id

@@ -6,11 +6,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "ranks")
+@ToString
+@EqualsAndHashCode
 public class Rank {
 
     @Id
@@ -19,7 +22,7 @@ public class Rank {
     private Long id;
 
     @Column(name = "rank_name")
-    private String rankName;
+    private String name;
 
     @Column(name = "rank_above")
     private String rankAbove;

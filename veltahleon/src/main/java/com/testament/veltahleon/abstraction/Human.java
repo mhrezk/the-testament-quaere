@@ -45,6 +45,13 @@ public abstract class Human {
     @Column(name = "year")
     private List<Year> yearBirthAndDeath;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "nation_id")
+    private Nation nation;
+
     @Column(name = "biography", columnDefinition = "longtext")
     private String biography;
 

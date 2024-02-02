@@ -9,11 +9,14 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "organizations")
+@EqualsAndHashCode
+@ToString
 public class Organization {
 
     @Id
@@ -21,7 +24,7 @@ public class Organization {
     private Long id;
 
     @Column(name = "name")
-    private String organizationalName;
+    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

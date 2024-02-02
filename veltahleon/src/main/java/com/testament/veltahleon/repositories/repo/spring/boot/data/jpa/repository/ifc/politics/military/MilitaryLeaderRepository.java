@@ -3,7 +3,13 @@ package com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.reposito
 import com.testament.veltahleon.model.entities.history.library.Author;
 import com.testament.veltahleon.model.entities.politics.military.MilitaryLeader;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
-public interface MilitaryLeaderRepository extends JpaRepository<MilitaryLeader, Long> {}
+@Repository
+public interface MilitaryLeaderRepository extends JpaRepository<MilitaryLeader, Long> {
+
+    MilitaryLeader findByName(String name);
+    Collection<MilitaryLeader> findByNation_Name(String name);
+}

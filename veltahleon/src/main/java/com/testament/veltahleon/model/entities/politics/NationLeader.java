@@ -11,11 +11,13 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "national_leaders")
+@ToString
 public class NationLeader extends Leader {
 
     @Id

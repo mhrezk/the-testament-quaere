@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +26,7 @@ public class Squad {
             CascadeType.PERSIST})
     @JoinColumn(name = "squad_leader_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private SquadLeader squadLeader;
+    private SquadLeader leader;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

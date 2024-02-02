@@ -9,7 +9,9 @@ import lombok.*;
 @Entity
 @Table(name = "militaristic_leaders")
 @Builder
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class MilitaryLeader extends Leader {

@@ -1,6 +1,10 @@
 # Change Log
 
-## [0.30.0] 2023-12-19
+## [0.32.0] 2023-12-19
+
+- Added `@Repository` annotation to politics package
+
+## [0.31.0] 2023-12-19
 
 - Added RESTful web services for classes society package
 

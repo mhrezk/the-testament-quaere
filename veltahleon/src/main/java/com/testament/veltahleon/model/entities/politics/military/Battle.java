@@ -11,7 +11,9 @@ import lombok.*;
 @Entity
 @Table(name = "battles")
 @Builder
-@Data
+@Setter
+@EqualsAndHashCode
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Battle {
@@ -21,7 +23,7 @@ public class Battle {
     private Long id;
 
     @Column(name = "battle_name")
-    private String battleName;
+    private String name;
 
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,

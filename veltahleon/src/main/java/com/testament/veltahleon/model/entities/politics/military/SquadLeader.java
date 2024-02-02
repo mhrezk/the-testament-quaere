@@ -11,9 +11,11 @@ import java.util.List;
 @Entity
 @Table(name = "squad_leaders")
 @SuperBuilder
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class SquadLeader extends Leader {
 
     @Id

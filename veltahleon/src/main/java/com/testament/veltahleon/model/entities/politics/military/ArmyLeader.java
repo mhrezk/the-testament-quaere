@@ -9,7 +9,9 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "army_leaders")
 @SuperBuilder
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArmyLeader extends Leader {

@@ -61,11 +61,4 @@ public class Person extends Human {
             CascadeType.PERSIST})
     @JoinColumn(name = "job_id")
     private Job job;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "nation_id")
-    private Nation nation;
 }

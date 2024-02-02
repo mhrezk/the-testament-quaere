@@ -8,7 +8,10 @@ import java.util.List;
 @Entity
 @Table(name = "battalions")
 @Builder
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Battalion {
@@ -18,14 +21,14 @@ public class Battalion {
     private Long id;
 
     @Column(name = "name")
-    private String armyName;
+    private String name;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "military_leader_id")
-    private MilitaryLeader battalionLeader;
+    private MilitaryLeader leader;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
