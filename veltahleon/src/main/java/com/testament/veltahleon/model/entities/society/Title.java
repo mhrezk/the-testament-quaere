@@ -11,6 +11,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "titles")
+@EqualsAndHashCode
+@ToString
 public class Title {
 
     @Id
@@ -18,5 +20,5 @@ public class Title {
     private Long id;
 
     @Column(name = "epithet")
-    private String titularName;
+    private String name;
 }

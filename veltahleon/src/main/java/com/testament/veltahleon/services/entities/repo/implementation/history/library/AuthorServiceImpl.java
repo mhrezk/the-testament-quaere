@@ -60,34 +60,31 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author updateAuthor(Long id, Author author) {
         Author newAuthor = authorRepository.findById(id).orElseThrow();
-        compareOldAuthorWithNewAuthor(author, newAuthor);
+
+        if(author.getName() != null && newAuthor.getName() != author.getName()) {
+            newAuthor.setName(author.getName());
+        }
+
+        if(author.getGender() != null && newAuthor.getGender() != author.getGender()) {
+            newAuthor.setGender(author.getGender());
+        }
+
+        if(author.getRace() != null && newAuthor.getRace() != author.getRace()) {
+            newAuthor.setRace(author.getRace());
+        }
+
+        if(author.getBiography() != null && newAuthor.getBiography() != author.getBiography()) {
+            newAuthor.setBiography(author.getBiography());
+        }
+
+        if(author.getBooks() != null && newAuthor.getBooks() != author.getBooks()) {
+            newAuthor.setBooks(author.getBooks());
+        }
+
+        if(author.getYearBirthAndDeath() != null && newAuthor.getYearBirthAndDeath() != author.getYearBirthAndDeath()) {
+            newAuthor.setYearBirthAndDeath(author.getYearBirthAndDeath());
+        }
+
         return authorRepository.save(newAuthor);
-    }
-
-    //Helper Methods
-    private void compareOldAuthorWithNewAuthor(Author oldAuthor, Author newAuthor) {
-        if(oldAuthor.getName() != null && newAuthor.getName() != oldAuthor.getName()) {
-            newAuthor.setName(oldAuthor.getName());
-        }
-
-        if(oldAuthor.getGender() != null && newAuthor.getGender() != oldAuthor.getGender()) {
-            newAuthor.setGender(oldAuthor.getGender());
-        }
-
-        if(oldAuthor.getRace() != null && newAuthor.getRace() != oldAuthor.getRace()) {
-            newAuthor.setRace(oldAuthor.getRace());
-        }
-
-        if(oldAuthor.getBiography() != null && newAuthor.getBiography() != oldAuthor.getBiography()) {
-            newAuthor.setBiography(oldAuthor.getBiography());
-        }
-
-        if(oldAuthor.getBooks() != null && newAuthor.getBooks() != oldAuthor.getBooks()) {
-            newAuthor.setBooks(oldAuthor.getBooks());
-        }
-
-        if(oldAuthor.getYearBirthAndDeath() != null && newAuthor.getYearBirthAndDeath() != oldAuthor.getYearBirthAndDeath()) {
-            newAuthor.setYearBirthAndDeath(oldAuthor.getYearBirthAndDeath());
-        }
     }
 }

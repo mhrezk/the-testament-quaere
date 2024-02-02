@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum Lineage {
     HOUSE("House"),
     CLAN("Clan"),
-    FAMILY("Family");
+    FAMILY("Family"),
+    NONE("None");
 
     private final String lineage;
 

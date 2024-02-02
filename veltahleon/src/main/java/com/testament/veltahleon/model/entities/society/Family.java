@@ -13,6 +13,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Family {
 
     @Id
@@ -57,8 +59,8 @@ public class Family {
 //    private Boolean isAdopted;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "is_adopted")
-    private ClosedAnswer isAdopted;
+    @Column(name = "is_bastard")
+    private ClosedAnswer isBastard;
 
     @Column(name = "coat_of_arms_url")
     private String urlCoatOfArms;

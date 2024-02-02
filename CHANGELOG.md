@@ -1,6 +1,10 @@
 # Change Log
 
-## [0.29.0] 2023-12-19
+## [0.30.0] 2023-12-19
+
+- Added RESTful web services for classes society package
+
+## [0.30.0] 2023-12-19
 
 - Added RESTful web services for classes except politics and society packages
 

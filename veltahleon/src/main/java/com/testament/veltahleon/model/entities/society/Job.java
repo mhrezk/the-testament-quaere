@@ -10,6 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "jobs")
+@EqualsAndHashCode
+@ToString
 public class Job {
 
     @Id
@@ -17,7 +19,7 @@ public class Job {
     private Long id;
 
     @Column(name = "job_name")
-    private String jobName;
+    private String name;
 
     @Enumerated(EnumType.STRING)
     private JobType jobType;

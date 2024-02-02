@@ -5,9 +5,7 @@ import com.testament.veltahleon.model.entities.history.Race;
 import com.testament.veltahleon.model.entities.society.enumeration.Gender;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -17,6 +15,8 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public abstract class Human {
 
     @Column(name = "name")

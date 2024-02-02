@@ -1,15 +1,8 @@
 package com.testament.veltahleon.services.entities.repo.implementation.calendar;
 
-import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.calendar.Day;
-import com.testament.veltahleon.model.entities.history.Language;
-import com.testament.veltahleon.model.entities.history.Letter;
 import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.calendar.DayRepository;
-import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.history.LanguageRepository;
-import com.testament.veltahleon.repositories.repo.spring.boot.data.jpa.repository.ifc.history.LetterRepository;
 import com.testament.veltahleon.services.entities.repo.ifc.calendar.DayService;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

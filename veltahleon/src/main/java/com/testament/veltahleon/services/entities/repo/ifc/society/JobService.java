@@ -6,9 +6,10 @@ import java.util.Collection;
 
 public interface JobService {
 
+    Collection<Job> getJobsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Job> getJobs();
     Job getJobByID(Long id);
     Boolean deleteJobByID(Long id);
-    Job saveJob(Job fob);
-    Job updateJob(Job fob);
+    Job saveJob(Job job);
+    Job updateJob(Long id, Job job);
 }

@@ -13,6 +13,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Person extends Human {
 
     @Id
@@ -24,7 +25,7 @@ public class Person extends Human {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "religion_id")
-    private Religion personalReligion;
+    private Religion religion;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
@@ -59,15 +60,12 @@ public class Person extends Human {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "job_id")
-    private Job personalJob;
+    private Job job;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "nation_id")
-    private Nation personalNation;
-
-    @Column(name = "biography", columnDefinition = "longtext")
-    private String personalBiography;
+    private Nation nation;
 }

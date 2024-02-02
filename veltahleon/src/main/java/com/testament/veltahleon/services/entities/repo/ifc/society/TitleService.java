@@ -10,5 +10,5 @@ public interface TitleService {
     Title getTitleByID(Long id);
     Boolean deleteTitleByID(Long id);
     Title saveTitle(Title title);
-    Title updateTitle(Title title);
+    Title updateTitle(Long id, Title title);
 }

@@ -6,9 +6,12 @@ import java.util.Collection;
 
 public interface FamilyService {
 
+    Collection<Family> getFamiliesWithPagination(int pageNumber, int numberOfRecords);
     Collection<Family> getFamilies();
+    Collection<Family> getFamiliesByLineage(String lineage);
     Family getFamilyByID(Long id);
+    Family getFamilyByPersonName(String personName);
     Boolean deleteFamilyByID(Long id);
     Family saveFamily(Family family);
-    Family updateFamily(Family family);
+    Family updateFamily(Long id, Family family);
 }
