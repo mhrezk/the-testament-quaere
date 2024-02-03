@@ -6,9 +6,10 @@ import java.util.Collection;
 
 public interface BattleService {
 
+    Collection<Battle> getBattlesWithPagination(int pageNumber, int numberOfRecords);
     Collection<Battle> getBattles();
     Battle getBattleByID(Long id);
     Boolean deleteBattleByID(Long id);
     Battle saveBattle(Battle battle);
-    Battle updateBattle(Battle battle);
+    Battle updateBattle(Long id, Battle battle);
 }

@@ -6,9 +6,11 @@ import java.util.Collection;
 
 public interface NationLeaderService {
 
+    Collection<NationLeader> getNationLeadersWithPagination(int pageNumber, int numberOfRecords);
     Collection<NationLeader> getNationLeaders();
     NationLeader getNationLeaderByID(Long id);
+    NationLeader getNationLeaderByName(String name);
     Boolean deleteNationLeaderByID(Long id);
     NationLeader saveNationLeader(NationLeader nationLeader);
-    NationLeader updateNationLeader(NationLeader nationLeader);
+    NationLeader updateNationLeader(Long id, NationLeader nationLeader);
 }

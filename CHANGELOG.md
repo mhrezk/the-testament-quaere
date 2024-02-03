@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.33.0] 2023-12-19
+
+- Added abstract methods for services in politics package
+
 ## [0.32.0] 2023-12-19
 
 - Added `@Repository` annotation to politics package

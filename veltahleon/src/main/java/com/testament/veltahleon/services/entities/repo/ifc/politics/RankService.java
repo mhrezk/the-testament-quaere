@@ -8,7 +8,8 @@ public interface RankService {
 
     Collection<Rank> getRanks();
     Rank getRankByID(Long id);
+    Rank getRankByRankName(String name);
     Boolean deleteRankByID(Long id);
     Rank saveRank(Rank rank);
-    Rank updateRank(Rank rank);
+    Rank updateRank(Long id, Rank rank);
 }

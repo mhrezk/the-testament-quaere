@@ -10,5 +10,5 @@ public interface VassalService {
     Vassal getVassalByID(Long id);
     Boolean deleteVassalByID(Long id);
     Vassal saveVassal(Vassal vassal);
-    Vassal updateVassal(Vassal vassal);
+    Vassal updateVassal(Long id, Vassal vassal);
 }
