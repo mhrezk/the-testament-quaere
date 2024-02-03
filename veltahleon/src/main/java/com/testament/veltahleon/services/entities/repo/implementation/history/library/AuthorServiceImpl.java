@@ -43,7 +43,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author getAuthorByBookName(String name) {
-        return authorRepository.findByBook_Name(name);
+        return authorRepository.findByBooks_Name(name);
     }
 
     @Override

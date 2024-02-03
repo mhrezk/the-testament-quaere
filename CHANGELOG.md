@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.35.0] 2023-12-19
+
+- Finalized controllers in politics package
+
 ## [0.34.0] 2023-12-19
 
 - Finalized services in politics package

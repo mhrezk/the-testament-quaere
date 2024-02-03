@@ -8,5 +8,5 @@ import java.util.Collection;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     Author findByName(String name);
-    Author findByBook_Name(String name);
+    Author findByBooks_Name(String name);
 }

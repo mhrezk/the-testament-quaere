@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EpochRepository extends JpaRepository<Epoch, Long> {
 
-    Epoch findByName(String name);
+    Epoch findByYearName(String name);
 }

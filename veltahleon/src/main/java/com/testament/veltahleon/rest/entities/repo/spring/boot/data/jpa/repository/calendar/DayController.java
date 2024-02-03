@@ -85,7 +85,7 @@ public class DayController {
     }
 
     @PostMapping("/save/day")
-    public ResponseEntity<CustomResponse> saveDay(@RequestBody @Valid Day day, BindingResult result) {
+    public ResponseEntity<CustomResponse> saveDay(@RequestBody @Valid Day day) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -97,7 +97,7 @@ public class DayController {
     }
 
     @PostMapping("/save/days")
-    public ResponseEntity<CustomResponse> saveDays(@RequestBody Collection<Day> days, BindingResult result) {
+    public ResponseEntity<CustomResponse> saveDays(@RequestBody Collection<Day> days) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

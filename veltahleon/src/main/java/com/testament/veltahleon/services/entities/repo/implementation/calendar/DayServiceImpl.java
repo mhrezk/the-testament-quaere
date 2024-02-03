@@ -40,7 +40,7 @@ public class DayServiceImpl implements DayService {
 
     @Override
     public Day getDayByID(Long id) {
-        return dayRepository.findById(id).get();
+        return dayRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -82,8 +82,7 @@ public class DayServiceImpl implements DayService {
         Day newDay = dayRepository.findById(id).get();
 
         if(day.getName() != null && newDay.getName() != day.getName()) {
-            String properName = capitalizeName(day.getName());
-            newDay.setName(properName);
+            newDay.setName(day.getName());
         }
 
         if(day.getDayNumber() != null && newDay.getDayNumber() != day.getDayNumber()) {

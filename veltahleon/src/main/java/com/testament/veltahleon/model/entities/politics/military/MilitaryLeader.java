@@ -27,7 +27,7 @@ public class MilitaryLeader extends Leader {
     @JoinColumn(name = "rank_id")
     private Rank rank;
 
-    @OneToOne(mappedBy = "battalionLeader", cascade = {CascadeType.REFRESH,
+    @OneToOne(mappedBy = "leader", cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
