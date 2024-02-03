@@ -97,6 +97,10 @@ public class PersonServiceImpl implements PersonService {
             newPerson.setBiography(person.getBiography());
         }
 
+        if(person.getTitle() != null && newPerson.getTitle() != person.getTitle()) {
+            newPerson.setTitle(person.getTitle());
+        }
+
         return personRepository.save(newPerson);
     }
 }

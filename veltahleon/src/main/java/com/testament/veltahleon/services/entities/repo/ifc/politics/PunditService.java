@@ -10,6 +10,7 @@ public interface PunditService {
     Collection<Pundit> getPundits();
     Pundit getPunditByID(Long id);
     Pundit getPunditByName(String name);
+    Pundit getPunditByOrganizationName(String name);
     Boolean deletePunditByID(Long id);
     Pundit savePundit(Pundit pundit);
     Pundit updatePundit(Long id, Pundit pundit);

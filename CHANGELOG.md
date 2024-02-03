@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.34.0] 2023-12-19
+
+- Finalized services in politics package
+
 ## [0.33.0] 2023-12-19
 
 - Added abstract methods for services in politics package

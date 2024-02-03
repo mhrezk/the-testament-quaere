@@ -20,20 +20,6 @@ public class Person extends Human {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "religion_id")
-    private Religion religion;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "family_id", referencedColumnName = "id")
-    private Family family;
-
 //    @OneToMany
 ////    @ElementCollection(fetch = FetchType.LAZY)
 ////    @CollectionTable(name = "siblings_people", joinColumns = @JoinColumn(name = "people_id"))

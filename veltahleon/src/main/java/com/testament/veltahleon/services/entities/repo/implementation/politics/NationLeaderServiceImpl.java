@@ -65,7 +65,49 @@ public class NationLeaderServiceImpl implements NationLeaderService {
             newNationLeader.setNation(nationLeader.getNation());
         }
 
+        if(nationLeader.getRace() != null && newNationLeader.getRace() != nationLeader.getRace()) {
+            newNationLeader.setRace(nationLeader.getRace());
+        }
 
+        if(nationLeader.getImageURL() != null && newNationLeader.getImageURL() != nationLeader.getImageURL()) {
+            newNationLeader.setImageURL(nationLeader.getImageURL());
+        }
+
+        if(nationLeader.getBiography() != null && newNationLeader.getBiography() != nationLeader.getBiography()) {
+            newNationLeader.setBiography(nationLeader.getBiography());
+        }
+
+        if(nationLeader.getFamily() != null && newNationLeader.getFamily() != nationLeader.getFamily()) {
+            newNationLeader.setFamily(nationLeader.getFamily());
+        }
+
+        if(nationLeader.getReligion() != null && newNationLeader.getReligion() != nationLeader.getReligion()) {
+            newNationLeader.setReligion(nationLeader.getReligion());
+        }
+
+        if(nationLeader.getBattles() != null && newNationLeader.getBattles() != nationLeader.getBattles()) {
+            newNationLeader.setBattles(nationLeader.getBattles());
+        }
+
+        if(nationLeader.getFamily() != null && newNationLeader.getFamily() != nationLeader.getFamily()) {
+            newNationLeader.setFamily(nationLeader.getFamily());
+        }
+
+        if(nationLeader.getYearBeginningAndEnd() != null && newNationLeader.getYearBeginningAndEnd() != nationLeader.getYearBeginningAndEnd()) {
+            newNationLeader.setYearBeginningAndEnd(nationLeader.getYearBeginningAndEnd());
+        }
+
+        if(nationLeader.getYearBirthAndDeath() != null && newNationLeader.getYearBirthAndDeath() != nationLeader.getYearBirthAndDeath()) {
+            newNationLeader.setYearBirthAndDeath(nationLeader.getYearBirthAndDeath());
+        }
+
+        if(nationLeader.getTitle() != null && newNationLeader.getTitle() != nationLeader.getTitle()) {
+            newNationLeader.setTitle(nationLeader.getTitle());
+        }
+
+        if(nationLeader.getGender() != null && newNationLeader.getGender() != nationLeader.getGender()) {
+            newNationLeader.setGender(nationLeader.getGender());
+        }
 
         return nationLeaderRepository.save(newNationLeader);
     }
