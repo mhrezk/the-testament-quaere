@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.36.0] 2023-12-19
+
+- Corrected controllers for `Day.java`
+- Refactored packages for project
+- Corrected file path for images related to `Angel.java`
+
 ## [0.35.0] 2023-12-19
 
 - Finalized controllers in politics package

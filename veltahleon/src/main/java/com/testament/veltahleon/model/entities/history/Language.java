@@ -30,7 +30,6 @@ public class Language {
     @NotNull(message = "Language name cannot be null!")
     @NotBlank(message = "Language name cannot be blank!")
     @NotEmpty(message = "Language name cannot be empty!")
-    @Column(name = "name")
     private String name;
 
 //    @EqualsAndHashCode.Exclude //used to exclude field from equals() and hasCode() methods

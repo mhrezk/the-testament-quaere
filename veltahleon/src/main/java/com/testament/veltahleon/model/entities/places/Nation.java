@@ -55,6 +55,8 @@ public class Nation {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Language language;
 
+    //private String language;
+
     @OneToMany(mappedBy = "nation", cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
@@ -68,11 +70,11 @@ public class Nation {
     @JoinColumn(name = "nation_type_id")
     private NationType type;
 
-    @OneToMany(mappedBy = "nation", cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    private List<Pundit> pundits;
+//    @OneToMany(mappedBy = "nation", cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    private List<Pundit> pundits;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;

@@ -32,6 +32,8 @@ public class Month {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Language language;
 
+    //private String languageName;
+
     @Column(name = "number_of_days")
     private Integer numberOfDays;
 

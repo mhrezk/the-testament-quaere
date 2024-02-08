@@ -8,10 +8,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "letters")
@@ -39,15 +36,26 @@ public class Letter {
 //            CascadeType.PERSIST})
 //    @JoinColumn(name = "language_id", referencedColumnName = "id")
 //    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-        CascadeType.DETACH,
-        CascadeType.MERGE,
-        CascadeType.PERSIST})
-    @JoinTable(name = "letters_languages", joinColumns = @JoinColumn(name = "letter_id"),
-        inverseJoinColumns = @JoinColumn(name = "language_id"))
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    //@JsonIgnore
-    private List<Language> languages;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//        CascadeType.DETACH,
+//        CascadeType.MERGE,
+//        CascadeType.PERSIST})
+//    @JoinTable(name = "letters_languages", joinColumns = @JoinColumn(name = "letter_id"),
+//        inverseJoinColumns = @JoinColumn(name = "language_id"))
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    //@JsonIgnore
+//    private List<Language> languages;
+
+//    @ElementCollection(targetClass = String.class, fetch = FetchType.LAZY)
+//    @CollectionTable(name = "languages", joinColumns = @JoinColumn(name = "letter_id"))
+//    private Set<String> languages;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "language_id", referencedColumnName = "id")
+    private Language language;
 
     @Column(name = "script_URL")
     private String scriptURL;

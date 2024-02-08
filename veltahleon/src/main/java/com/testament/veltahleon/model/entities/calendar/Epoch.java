@@ -17,7 +17,7 @@ public class Epoch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "year_name") //e.g: Year of Six Emperors
+    @Column(name = "year_name", unique = true) //e.g: Year of Six Emperors
     private String yearName;
 
     @Column(name = "year_abbreviation") //e.g: ADE
