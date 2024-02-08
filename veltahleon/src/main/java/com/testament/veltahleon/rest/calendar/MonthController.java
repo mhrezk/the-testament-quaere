@@ -97,7 +97,7 @@ public class MonthController {
     }
 
     @PatchMapping("/update/month/{id}")
-    public ResponseEntity<CustomResponse> updateMonth(@PathVariable Long id, @RequestBody @Valid Month month) {
+    public ResponseEntity<CustomResponse> updateMonth(@PathVariable Long id, @RequestBody Month month) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

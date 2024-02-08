@@ -27,7 +27,6 @@ public class DayServiceImpl implements DayService {
     private final LanguageRepository languageRepository;
 
     //CRUD
-
     @Override
     public Collection<Day> getDaysWithPagination(int pageNumber, int numberOfRecords) {
         return dayRepository.findAll(PageRequest.of(pageNumber, numberOfRecords)).toList();
@@ -93,18 +92,6 @@ public class DayServiceImpl implements DayService {
 
     @Override
     public Collection<Day> saveDays(Collection<Day> days) {
-//        Collection<Day> daysList = dayRepository.saveAll(days);
-//        for(Day day : daysList) {
-//            if(dayRepository.countByName(day.getName().toLowerCase()) >= 1) {
-//                throw new DataInsertionException("Day name");
-//            }
-//
-//            if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
-//                Language language = languageRepository.findFirstByName(day.getLanguage().getName());
-//                day.getLanguage().setId(language.getId());
-//                day.setLanguage(language);
-//            }
-//        }
         log.info("Days saved!");
         return dayRepository.saveAll(days);
     }
@@ -132,11 +119,6 @@ public class DayServiceImpl implements DayService {
     }
 
     //Helper Methods
-    private String capitalizeName(String word) {
-        String firstCharacter = word.toLowerCase().substring(0, 1).toUpperCase();
-        return firstCharacter + word.substring(1);
-    }
-
     private Language checkLanguageForUpdate(Language language, Language newLanguage) {
         if(language.getName() != null && newLanguage.getName() != language.getName()) {
             newLanguage.setName(language.getName());
@@ -149,7 +131,6 @@ public class DayServiceImpl implements DayService {
         if(language.getAlphabetURL() != null && newLanguage.getAlphabetURL() != language.getAlphabetURL()) {
             newLanguage.setAlphabetURL(language.getAlphabetURL());
         }
-
         return newLanguage;
     }
 }

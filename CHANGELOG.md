@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.36.1] 2023-12-19
+
+- Refactored code for `Month` entity
+
 ## [0.36.0] 2023-12-19
 
 - Corrected controllers for `Day.java`

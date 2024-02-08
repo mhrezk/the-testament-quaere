@@ -11,4 +11,5 @@ public interface MonthRepository extends JpaRepository<Month, Long> {
     Month findByName(String name);
     Collection<Month> findByNumberOfDays(Integer numberOfDays);
     Collection<Month> findByLanguage_Name(String name);
+    long countByName(String name);
 }
