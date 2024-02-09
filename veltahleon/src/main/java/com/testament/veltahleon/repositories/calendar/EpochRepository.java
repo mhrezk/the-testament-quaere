@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface EpochRepository extends JpaRepository<Epoch, Long> {
 
     Epoch findByYearName(String name);
+    long countByYearName(String name);
 }

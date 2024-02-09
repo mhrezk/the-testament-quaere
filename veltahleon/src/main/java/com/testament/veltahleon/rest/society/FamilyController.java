@@ -97,7 +97,7 @@ public class FamilyController {
     }
 
     @PatchMapping("/update/family/{id}")
-    public ResponseEntity<CustomResponse> updateFamily(@PathVariable Long id, @RequestBody @Valid Family family) {
+    public ResponseEntity<CustomResponse> updateFamily(@PathVariable Long id, @RequestBody Family family) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

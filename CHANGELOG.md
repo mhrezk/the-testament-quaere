@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.36.4] 2023-12-19
+
+- Refactored code for society package
+
 ## [0.36.3] 2023-12-19
 
 - Refactored code for `Constellation` and `Tarot` entity

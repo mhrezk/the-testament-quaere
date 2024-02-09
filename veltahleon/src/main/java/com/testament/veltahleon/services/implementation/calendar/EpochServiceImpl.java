@@ -1,5 +1,6 @@
 package com.testament.veltahleon.services.implementation.calendar;
 
+import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.calendar.Epoch;
 import com.testament.veltahleon.repositories.calendar.EpochRepository;
 import com.testament.veltahleon.services.ifc.calendar.EpochService;
@@ -39,6 +40,9 @@ public class EpochServiceImpl implements EpochService {
 
     @Override
     public Epoch saveEpoch(Epoch epoch) {
+        if(epochRepository.countByYearName(epoch.getYearName().toLowerCase()) >= 1) {
+            throw new DataInsertionException("Year name");
+        }
         return epochRepository.save(epoch);
     }
 

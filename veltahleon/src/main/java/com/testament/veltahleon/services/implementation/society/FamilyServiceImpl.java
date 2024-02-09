@@ -1,11 +1,14 @@
 package com.testament.veltahleon.services.implementation.society;
 
+import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.society.Family;
 import com.testament.veltahleon.repositories.society.FamilyRepository;
+import com.testament.veltahleon.repositories.society.PersonRepository;
 import com.testament.veltahleon.services.ifc.society.FamilyService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,10 @@ import java.util.Collection;
 @Transactional
 public class FamilyServiceImpl implements FamilyService {
 
+    @Autowired
     private FamilyRepository familyRepository;
+    @Autowired
+    private PersonRepository personRepository;
 
     @Override
     public Collection<Family> getFamiliesWithPagination(int pageNumber, int numberOfRecords) {
@@ -52,6 +58,9 @@ public class FamilyServiceImpl implements FamilyService {
 
     @Override
     public Family saveFamily(Family family) {
+        if(personRepository.countByName(family.getPerson().getName().toLowerCase()) >= 1) {
+            throw new DataInsertionException("Person name");
+        }
         return familyRepository.save(family);
     }
 

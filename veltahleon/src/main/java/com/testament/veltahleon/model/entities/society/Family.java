@@ -3,6 +3,9 @@ package com.testament.veltahleon.model.entities.society;
 import com.testament.veltahleon.model.entities.society.enumeration.Lineage;
 import com.testament.veltahleon.model.enumeration.ClosedAnswer;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -27,9 +30,15 @@ public class Family {
             CascadeType.PERSIST})
     private Person person;
 
+    @NotNull(message = "Father name cannot be null!")
+    @NotBlank(message = "Father name cannot be blank!")
+    @NotEmpty(message = "Father name cannot be empty!")
     @Column(name = "father_name")
     private String fatherName;
 
+    @NotNull(message = "Mother name cannot be null!")
+    @NotBlank(message = "Mother name cannot be blank!")
+    @NotEmpty(message = "Mother name cannot be empty!")
     @Column(name = "mother_name")
     private String motherName;
 
@@ -47,6 +56,9 @@ public class Family {
     @CollectionTable(name = "children", joinColumns = @JoinColumn(name = "family_id"))
     private List<String> children;
 
+    @NotNull(message = "Mother name cannot be null!")
+    @NotBlank(message = "Mother name cannot be blank!")
+    @NotEmpty(message = "Mother name cannot be empty!")
     @Column(name = "familial_name")
     private String familyName;
 
