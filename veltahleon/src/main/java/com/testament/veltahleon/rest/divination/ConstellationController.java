@@ -85,7 +85,7 @@ public class ConstellationController {
     }
 
     @PatchMapping("/update/constellation/{id}")
-    public ResponseEntity<CustomResponse> updateConstellation(@PathVariable("id") Long id, @RequestBody @Valid Constellation constellation) {
+    public ResponseEntity<CustomResponse> updateConstellation(@PathVariable("id") Long id, @RequestBody Constellation constellation) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

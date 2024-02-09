@@ -85,7 +85,7 @@ public class TarotController {
     }
 
     @PatchMapping("/update/tarot/{id}")
-    public ResponseEntity<CustomResponse> updateTarot(@PathVariable("id") Long id, @RequestBody @Valid Tarot Tarot) {
+    public ResponseEntity<CustomResponse> updateTarot(@PathVariable("id") Long id, @RequestBody Tarot Tarot) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
