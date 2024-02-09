@@ -3,6 +3,10 @@ package com.testament.veltahleon.model.entities.calendar;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.model.entities.history.Language;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -19,8 +23,12 @@ public class Month {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Month name cannot be null!")
+    @NotBlank(message = "Month name cannot be blank!")
+    @NotEmpty(message = "Month name cannot be empty!")
     private String name;
 
+    @Min(value = 1, message = "Number cannot be below 1!")
     @Column(name = "number_of_month")
     private Integer monthNumber;
 

@@ -72,6 +72,18 @@ public class YearController {
         );
     }
 
+    @GetMapping("/year/date")
+    public ResponseEntity<CustomResponse> getYearByDate(@RequestParam(value = "dayNumber") Integer day, @RequestParam(value = "monthNumber") Integer month, @RequestParam(value = "yearNumber") Integer year) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("queriedYearByDate", yearService.getYearByDate(day, month, year)))
+                .message("Year retrieved!")
+                .build()
+        );
+    }
+
     @PostMapping("/save/year")
     public ResponseEntity<CustomResponse> saveYear(@RequestBody @Valid Year year) {
         return ResponseEntity.ok(CustomResponse.builder()
@@ -97,7 +109,7 @@ public class YearController {
     }
 
     @PatchMapping("/update/year/{id}")
-    public ResponseEntity<CustomResponse> updateYear(@PathVariable Long id, @RequestBody @Valid Year year) {
+    public ResponseEntity<CustomResponse> updateYear(@PathVariable Long id, @RequestBody Year year) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

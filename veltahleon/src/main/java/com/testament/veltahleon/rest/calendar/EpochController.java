@@ -72,7 +72,7 @@ public class EpochController {
     }
 
     @PatchMapping("/update/epoch/{id}")
-    public ResponseEntity<CustomResponse> updateEpoch(@PathVariable Long id, @RequestBody @Valid Epoch epoch) {
+    public ResponseEntity<CustomResponse> updateEpoch(@PathVariable Long id, @RequestBody Epoch epoch) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

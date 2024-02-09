@@ -8,8 +8,9 @@ public interface YearService {
 
     Collection<Year> getYearsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Year> getYears();
-    Year getYearByID(Long id);
     Collection<Year> getYearByName(String name);
+    Year getYearByID(Long id);
+    Year getYearByDate(Integer day, Integer month, Integer year);
     Boolean deleteYearByID(Long id);
     Year saveYear(Year year);
     Year updateYear(Long id, Year year);

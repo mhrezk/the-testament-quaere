@@ -19,7 +19,7 @@ public class Year {
     @Column(name = "year_id")
     private Long id;
 
-    @EqualsAndHashCode.Exclude
+    //@EqualsAndHashCode.Exclude
     @Column(name = "epoch_name") //e.g: Age of Stillness
     private String name;
 

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.36.2] 2023-12-19
+
+- Refactored code for `Year` and `Epoch` entity
+
 ## [0.36.1] 2023-12-19
 
 - Refactored code for `Month` entity
