@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.36.5] 2023-12-19
+
+- Added validation for `Location` entity
+
 ## [0.36.4] 2023-12-19
 
 - Refactored code for society package
