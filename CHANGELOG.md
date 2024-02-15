@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.38.0] 2023-12-19
+
+- Added image folders for different packages
+- Added GET request for all images
+
 ## [0.37.0] 2023-12-19
 
 - Added validation for entities in places packages

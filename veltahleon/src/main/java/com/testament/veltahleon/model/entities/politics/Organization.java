@@ -49,6 +49,6 @@ public class Organization {
     @Column(name = "year")
     private List<Year> yearFoundationAndDisbandment;
 
-    @Column(name = "coat_of_arms_url")
-    private String urlCoatOfArms;
+    @Column(name = "symbol_url")
+    private String urlSymbol;
 }

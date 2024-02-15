@@ -78,8 +78,8 @@ public class OrganizationServiceImpl implements OrganizationService {
             newOrganization.setYearFoundationAndDisbandment(organization.getYearFoundationAndDisbandment());
         }
 
-        if(organization.getUrlCoatOfArms() != null && newOrganization.getUrlCoatOfArms() != organization.getUrlCoatOfArms()) {
-            newOrganization.setUrlCoatOfArms(organization.getUrlCoatOfArms());
+        if(organization.getUrlSymbol() != null && newOrganization.getUrlSymbol() != organization.getUrlSymbol()) {
+            newOrganization.setUrlSymbol(organization.getUrlSymbol());
         }
 
         return organizationRepository.save(newOrganization);

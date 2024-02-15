@@ -35,9 +35,12 @@ public class Squad {
     @JoinColumn(name = "unit_id")
     private Unit unit;
 
-    @Column(name = "unit_number")
+    @Column(name = "number_of_units")
     private Integer unitNumber;
 
     @Column(name = "description", columnDefinition = "text")
     private String description;
+
+    @Column(name = "symbol_url")
+    private String urlSymbol;
 }

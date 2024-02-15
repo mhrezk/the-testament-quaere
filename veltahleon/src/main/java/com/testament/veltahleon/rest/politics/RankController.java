@@ -7,9 +7,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +61,11 @@ public class RankController {
                 .message("Rank retrieved!")
                 .build()
         );
+    }
+
+    @GetMapping(value = "/rank/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE})
+    public byte[] getRankSymbol(@PathVariable("fileName") String fileName) throws IOException {
+        return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/symbols/" + fileName));
     }
 
     @PostMapping("/save/rank")

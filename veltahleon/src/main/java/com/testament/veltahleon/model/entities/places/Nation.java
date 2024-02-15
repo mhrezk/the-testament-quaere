@@ -84,4 +84,7 @@ public class Nation {
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;
+
+    @Column(name = "flag_url", nullable = true)
+    private String urlFlag;
 }

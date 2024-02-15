@@ -78,7 +78,7 @@ public class AngelController {
 
     @GetMapping(value = "/angel/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
     public byte[] getAngelImage(@PathVariable("fileName") String fileName) throws IOException {
-        return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/" + fileName));
+        return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/angels/" + fileName));
     }
 
     @DeleteMapping("/delete/angel/{id}")

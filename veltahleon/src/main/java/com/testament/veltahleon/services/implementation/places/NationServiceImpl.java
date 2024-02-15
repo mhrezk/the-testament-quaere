@@ -88,6 +88,10 @@ public class NationServiceImpl implements NationService {
             newNation.setType(nation.getType());
         }
 
+        if(nation.getUrlFlag() != null && newNation.getUrlFlag() != nation.getUrlFlag()) {
+            newNation.setUrlFlag(nation.getUrlFlag());
+        }
+
         return nationRepository.save(newNation);
     }
 }
