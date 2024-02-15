@@ -1,7 +1,9 @@
 package com.testament.veltahleon.services.implementation.history;
 
 import com.testament.veltahleon.exceptions.DataInsertionException;
+import com.testament.veltahleon.model.entities.history.Language;
 import com.testament.veltahleon.model.entities.history.Letter;
+import com.testament.veltahleon.repositories.history.LanguageRepository;
 import com.testament.veltahleon.repositories.history.LetterRepository;
 import com.testament.veltahleon.services.ifc.history.LetterService;
 import jakarta.transaction.Transactional;
@@ -21,6 +23,8 @@ public class LetterServiceImpl implements LetterService {
 
     @Autowired
     private final LetterRepository letterRepository;
+    @Autowired
+    private final LanguageRepository languageRepository;
 
     @Override
     public Collection<Letter> getLettersWithPagination(int pageNumber, int numberOfRecords) {
@@ -30,6 +34,11 @@ public class LetterServiceImpl implements LetterService {
     @Override
     public Collection<Letter> getLetters() {
         return letterRepository.findAll();
+    }
+
+    @Override
+    public Collection<Letter> getLettersByLanguageName(String languageName) {
+        return letterRepository.findByLanguage_Name(languageName);
     }
 
     @Override
@@ -52,8 +61,8 @@ public class LetterServiceImpl implements LetterService {
     public Letter updateLetter(Long id, Letter letter) {
         Letter newLetter = letterRepository.findById(id).orElseThrow();
 
-        if(letter.getName() != null && newLetter.getName() != letter.getName()) {
-            newLetter.setName(letter.getName());
+        if((letter.getLanguage() != null && newLetter.getLanguage() != letter.getLanguage())) {
+            newLetter.setLanguage(checkLanguageForUpdate(letter.getLanguage(), newLetter.getLanguage()));
         }
 
         if(letter.getScriptURL() != null && newLetter.getScriptURL() != letter.getScriptURL()) {
@@ -64,28 +73,18 @@ public class LetterServiceImpl implements LetterService {
     }
 
     //Helper Methods
-    private String capitalizeName(String word) {
-        String firstCharacter = word.toLowerCase().substring(0, 1).toUpperCase();
-        return firstCharacter + word.substring(1);
-    }
-
-    private void validateLetterEntry(Letter letter) {
-        if(letter.getName() == null || letter.getName().isEmpty() || letter.getName().isBlank()) {
-            throw new DataInsertionException("Letter name must be present!");
+    private Language checkLanguageForUpdate(Language language, Language newLanguage) {
+        if(language.getName() != null && newLanguage.getName() != language.getName()) {
+            newLanguage.setName(language.getName());
         }
 
-//        if(letter.getLanguage().getName() == null || letter.getLanguage().getName().isEmpty() || letter.getLanguage().getName().isBlank()) {
-//            throw new DataInsertionException("Language name must be present!");
-//        }
-//
-//        if(letterRepository.countByName(letter.getName()) >= 1) {
-//            throw new DataInsertionException("Letter name already exists! Duplicate entries are disallowed!");
-//        }
-//
-//        if(languageRepository.countByName(letter.getLanguage().getName()) >= 1) {
-//            Language language = languageRepository.findByName(letter.getLanguage().getName());
-//            letter.getLanguage().setId(language.getId());
-//            letter.setLanguage(language);
-//        }
+        if(language.getDescription() != null && newLanguage.getDescription() != language.getDescription()) {
+            newLanguage.setDescription(language.getDescription());
+        }
+
+        if(language.getAlphabetURL() != null && newLanguage.getAlphabetURL() != language.getAlphabetURL()) {
+            newLanguage.setAlphabetURL(language.getAlphabetURL());
+        }
+        return newLanguage;
     }
 }

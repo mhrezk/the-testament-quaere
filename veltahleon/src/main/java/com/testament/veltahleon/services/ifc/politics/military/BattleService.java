@@ -8,6 +8,8 @@ public interface BattleService {
 
     Collection<Battle> getBattlesWithPagination(int pageNumber, int numberOfRecords);
     Collection<Battle> getBattles();
+    Collection<Battle> getBattleByNationLeaderName(String name);
+    Collection<Battle> getBattleByArmyLeaderName(String name);
     Battle getBattleByID(Long id);
     Battle getBattleByName(String name);
     Boolean deleteBattleByID(Long id);

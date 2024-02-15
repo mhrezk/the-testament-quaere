@@ -68,6 +68,10 @@ public class ArmyLeaderServiceImpl implements ArmyLeaderService {
             newArmyLeader.setRace(armyLeader.getRace());
         }
 
+        if(armyLeader.getRank() != null && newArmyLeader.getRank() != armyLeader.getRank()) {
+            newArmyLeader.setRank(armyLeader.getRank());
+        }
+
         if(armyLeader.getImageURL() != null && newArmyLeader.getImageURL() != armyLeader.getImageURL()) {
             newArmyLeader.setImageURL(armyLeader.getImageURL());
         }

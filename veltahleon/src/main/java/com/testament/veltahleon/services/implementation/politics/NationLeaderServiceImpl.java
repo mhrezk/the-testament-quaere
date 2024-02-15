@@ -43,6 +43,11 @@ public class NationLeaderServiceImpl implements NationLeaderService {
     }
 
     @Override
+    public Collection<NationLeader> getNationLeadersByBattleName(String name) {
+        return nationLeaderRepository.findByBattle_Name(name);
+    }
+
+    @Override
     public Boolean deleteNationLeaderByID(Long id) {
         nationLeaderRepository.deleteById(id);
         return Boolean.TRUE;

@@ -10,6 +10,7 @@ public interface NationLeaderService {
     Collection<NationLeader> getNationLeaders();
     NationLeader getNationLeaderByID(Long id);
     NationLeader getNationLeaderByName(String name);
+    Collection<NationLeader> getNationLeadersByBattleName(String name);
     Boolean deleteNationLeaderByID(Long id);
     NationLeader saveNationLeader(NationLeader nationLeader);
     NationLeader updateNationLeader(Long id, NationLeader nationLeader);

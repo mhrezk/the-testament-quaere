@@ -7,9 +7,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +52,18 @@ public class LetterController {
         );
     }
 
+    @GetMapping("/letters/{languageName}")
+    public ResponseEntity<CustomResponse> getLetterByLanguageName(@PathVariable("languageName") String languageName) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("queriedLetterByID", letterService.getLettersByLanguageName(languageName)))
+                .message("Letter retrieved!")
+                .build()
+        );
+    }
+
     @GetMapping("/letter/{id}")
     public ResponseEntity<CustomResponse> getLetterByID(@PathVariable Long id) {
         return ResponseEntity.ok(CustomResponse.builder()
@@ -58,6 +74,11 @@ public class LetterController {
                 .message("Letter retrieved!")
                 .build()
         );
+    }
+
+    @GetMapping(value = "/letter/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE})
+    public byte[] getLetterScript(@PathVariable("fileName") String fileName) throws IOException {
+        return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/languages/letters/" + fileName));
     }
 
     @PostMapping("/save/letter")

@@ -87,18 +87,4 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     //Helper Methods
-    private String capitalizeName(String word) {
-        String firstCharacter = word.toLowerCase().substring(0, 1).toUpperCase();
-        return firstCharacter + word.substring(1);
-    }
-
-    private void validateLanguageEntry(Language language) {
-        if(language.getName() == null || language.getName().isEmpty() || language.getName().isBlank()) {
-            throw new DataInsertionException("Language name must be present!");
-        }
-
-        if(languageRepository.countByName(language.getName()) >= 1) {
-            throw new DataInsertionException("Language name already exists! Duplicate entries are disallowed!");
-        }
-    }
 }

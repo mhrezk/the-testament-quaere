@@ -1,5 +1,7 @@
 package com.testament.veltahleon.model.entities.religion;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.testament.veltahleon.model.entities.religion.mythology.Deity;
 import com.testament.veltahleon.model.entities.religion.mythology.Pantheon;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,6 +9,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -28,12 +32,20 @@ public class Religion {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "pantheon_id")
+//    private Pantheon pantheon;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @JoinColumn(name = "pantheon_id")
-    private Pantheon pantheon;
+    @JoinColumn(name = "deity_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<Deity> deities;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;

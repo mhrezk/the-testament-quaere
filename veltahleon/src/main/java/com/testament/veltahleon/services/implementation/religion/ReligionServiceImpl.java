@@ -65,8 +65,8 @@ public class ReligionServiceImpl implements ReligionService {
             newReligion.setDescription(religion.getDescription());
         }
 
-        if(religion.getPantheon() != null && newReligion.getPantheon() != religion.getPantheon()) {
-            newReligion.setPantheon(religion.getPantheon());
+        if(religion.getDeities() != null && newReligion.getDeities() != religion.getDeities()) {
+            newReligion.setDeities(religion.getDeities());
         }
 
         return religionRepository.save(newReligion);

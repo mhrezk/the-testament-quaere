@@ -32,6 +32,16 @@ public class BattleServiceImpl implements BattleService {
     }
 
     @Override
+    public Collection<Battle> getBattleByNationLeaderName(String name) {
+        return battleRepository.findByNationalLeaders_Name(name);
+    }
+
+    @Override
+    public Collection<Battle> getBattleByArmyLeaderName(String name) {
+        return battleRepository.findByArmies_Leader_Name(name);
+    }
+
+    @Override
     public Battle getBattleByID(Long id) {
         return battleRepository.findById(id).orElseThrow();
     }

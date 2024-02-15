@@ -88,6 +88,10 @@ public class SquadLeaderServiceImpl implements SquadLeaderService {
             newSquadLeader.setBattles(squadLeader.getBattles());
         }
 
+        if(squadLeader.getRank() != null && newSquadLeader.getRank() != squadLeader.getRank()) {
+            newSquadLeader.setRank(squadLeader.getRank());
+        }
+
         if(squadLeader.getFamily() != null && newSquadLeader.getFamily() != squadLeader.getFamily()) {
             newSquadLeader.setFamily(squadLeader.getFamily());
         }

@@ -1,6 +1,8 @@
 package com.testament.veltahleon.services.implementation.society;
 
 
+import com.testament.veltahleon.model.entities.history.Race;
+import com.testament.veltahleon.model.entities.society.Family;
 import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.repositories.society.PersonRepository;
 import com.testament.veltahleon.services.ifc.society.PersonService;
@@ -70,7 +72,7 @@ public class PersonServiceImpl implements PersonService {
         }
 
         if(person.getRace() != null && newPerson.getRace() != person.getRace()) {
-            newPerson.setRace(person.getRace());
+            newPerson.setRace(checkRaceForUpdate(person.getRace(), newPerson.getRace()));
         }
 
         if(person.getGender() != null && newPerson.getGender() != person.getGender()) {
@@ -102,5 +104,22 @@ public class PersonServiceImpl implements PersonService {
         }
 
         return personRepository.save(newPerson);
+    }
+
+    //Helper Methods
+    private Race checkRaceForUpdate(Race race, Race newRace) {
+        if(race.getName() != null && newRace.getName() != race.getName()) {
+            newRace.setName(race.getName());
+        }
+
+        if(race.getDescription() != null && newRace.getDescription() != race.getDescription()) {
+            newRace.setDescription(race.getDescription());
+        }
+
+        if(race.getImageURL() != null && newRace.getImageURL() != race.getImageURL()) {
+            newRace.setImageURL(race.getImageURL());
+        }
+
+        return newRace;
     }
 }

@@ -2,6 +2,11 @@
 
 ## [0.38.0] 2023-12-19
 
+- Added Spring Data JPA queries for politics package
+- Corrected GET request for all images
+
+## [0.38.0] 2023-12-19
+
 - Added image folders for different packages
 - Added GET request for all images
 

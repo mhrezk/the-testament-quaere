@@ -8,7 +8,6 @@ import java.util.Collection;
 
 @Repository
 public interface LetterRepository extends JpaRepository<Letter, Long> {
-    Letter findByName(String name);
-    //Collection<Letter> findByLanguageName(String languageName);
-    long countByName(String name);
+    Collection<Letter> findByLanguage_Name(String languageName);
+    long countByLanguage_Name(String name);
 }

@@ -2,6 +2,7 @@ package com.testament.veltahleon.services.implementation.society;
 
 import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.society.Family;
+import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.repositories.society.FamilyRepository;
 import com.testament.veltahleon.repositories.society.PersonRepository;
 import com.testament.veltahleon.services.ifc.society.FamilyService;
@@ -89,7 +90,7 @@ public class FamilyServiceImpl implements FamilyService {
         }
 
         if(family.getPerson() != null && newFamily.getPerson() != family.getPerson()) {
-            newFamily.setPerson(family.getPerson());
+            newFamily.setPerson(checkPersonForUpdate(family.getPerson(), newFamily.getPerson()));
         }
 
         if(family.getSpouses() != null && newFamily.getSpouses() != family.getSpouses()) {
@@ -109,5 +110,54 @@ public class FamilyServiceImpl implements FamilyService {
         }
 
         return familyRepository.save(newFamily);
+    }
+
+    //Helper Methods
+    private Person checkPersonForUpdate(Person person, Person newPerson) {
+        if(person.getName() != null && newPerson.getName() != person.getName()) {
+            newPerson.setName(person.getName());
+        }
+
+        if(person.getNation() != null && newPerson.getNation() != person.getNation()) {
+            newPerson.setNation(person.getNation());
+        }
+
+        if(person.getReligion() != null && newPerson.getReligion() != person.getReligion()) {
+            newPerson.setReligion(person.getReligion());
+        }
+
+        if(person.getRace() != null && newPerson.getRace() != person.getRace()) {
+            newPerson.setRace(person.getRace());
+        }
+
+        if(person.getGender() != null && newPerson.getGender() != person.getGender()) {
+            newPerson.setGender(person.getGender());
+        }
+
+        if(person.getFamily() != null && newPerson.getFamily() != person.getFamily()) {
+            newPerson.setFamily(person.getFamily());
+        }
+
+        if(person.getJob() != null && newPerson.getJob() != person.getJob()) {
+            newPerson.setJob(person.getJob());
+        }
+
+        if(person.getYearBirthAndDeath() != null && newPerson.getYearBirthAndDeath() != person.getYearBirthAndDeath()) {
+            newPerson.setYearBirthAndDeath(person.getYearBirthAndDeath());
+        }
+
+        if(person.getImageURL() != null && newPerson.getImageURL() != person.getImageURL()) {
+            newPerson.setImageURL(person.getImageURL());
+        }
+
+        if(person.getBiography() != null && newPerson.getBiography() != person.getBiography()) {
+            newPerson.setBiography(person.getBiography());
+        }
+
+        if(person.getTitle() != null && newPerson.getTitle() != person.getTitle()) {
+            newPerson.setTitle(person.getTitle());
+        }
+
+        return newPerson;
     }
 }

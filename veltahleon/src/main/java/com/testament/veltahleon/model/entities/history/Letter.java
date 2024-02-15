@@ -25,10 +25,10 @@ public class Letter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Letter name cannot be null!")
-    @NotBlank(message = "Letter name cannot be blank!")
-    @NotEmpty(message = "Letter name cannot be empty!")
-    private String name;
+//    @NotNull(message = "Letter name cannot be null!")
+//    @NotBlank(message = "Letter name cannot be blank!")
+//    @NotEmpty(message = "Letter name cannot be empty!")
+//    private String name;
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,

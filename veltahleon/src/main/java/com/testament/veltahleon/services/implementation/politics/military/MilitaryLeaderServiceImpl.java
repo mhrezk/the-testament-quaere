@@ -32,8 +32,13 @@ public class MilitaryLeaderServiceImpl implements MilitaryLeaderService {
     }
 
     @Override
-    public Collection<MilitaryLeader> getMilitaryLeaderByNationName(String name) {
+    public Collection<MilitaryLeader> getMilitaryLeadersByNationName(String name) {
         return militaryLeaderRepository.findByNation_Name(name);
+    }
+
+    @Override
+    public Collection<MilitaryLeader> getMilitaryLeadersByBattleName(String name) {
+        return militaryLeaderRepository.findByBattle_Name(name);
     }
 
     @Override
