@@ -1,6 +1,6 @@
 # Change Log
 
-## [0.38.0] 2023-12-19
+## [0.39.0] 2023-12-19
 
 - Added Spring Data JPA queries for politics package
 - Corrected GET request for all images
