@@ -84,7 +84,7 @@ public class OceanController {
     }
 
     @PatchMapping("/update/ocean/{id}")
-    public ResponseEntity<CustomResponse> updateOcean(@PathVariable Long id, @RequestBody @Valid Ocean ocean) {
+    public ResponseEntity<CustomResponse> updateOcean(@PathVariable Long id, @RequestBody Ocean ocean) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

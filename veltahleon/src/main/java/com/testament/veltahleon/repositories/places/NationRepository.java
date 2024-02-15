@@ -11,4 +11,5 @@ public interface NationRepository extends JpaRepository<Nation, Long> {
 
     Nation findByName(String name);
     Collection<Nation> findByType_Name(String name);
+    long countByName(String name);
 }

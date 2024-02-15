@@ -97,7 +97,7 @@ public class LocationController {
     }
 
     @PatchMapping("/update/location/{id}")
-    public ResponseEntity<CustomResponse> updateLocation(@PathVariable Long id, @RequestBody @Valid Location location) {
+    public ResponseEntity<CustomResponse> updateLocation(@PathVariable Long id, @RequestBody Location location) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

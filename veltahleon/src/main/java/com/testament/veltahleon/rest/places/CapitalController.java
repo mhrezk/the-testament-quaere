@@ -97,7 +97,7 @@ public class CapitalController {
     }
 
     @PatchMapping("/update/capital/{id}")
-    public ResponseEntity<CustomResponse> updateCapital(@PathVariable Long id, @RequestBody @Valid Capital capital) {
+    public ResponseEntity<CustomResponse> updateCapital(@PathVariable Long id, @RequestBody Capital capital) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

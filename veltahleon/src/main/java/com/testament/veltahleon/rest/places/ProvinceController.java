@@ -97,7 +97,7 @@ public class ProvinceController {
     }
 
     @PatchMapping("/update/Province/{id}")
-    public ResponseEntity<CustomResponse> updateProvince(@PathVariable Long id, @RequestBody @Valid Province province) {
+    public ResponseEntity<CustomResponse> updateProvince(@PathVariable Long id, @RequestBody Province province) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

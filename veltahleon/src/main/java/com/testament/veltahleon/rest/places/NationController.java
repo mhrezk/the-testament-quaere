@@ -97,7 +97,7 @@ public class NationController {
     }
 
     @PatchMapping("/update/nation/{id}")
-    public ResponseEntity<CustomResponse> updateNation(@PathVariable Long id, @RequestBody @Valid Nation nation) {
+    public ResponseEntity<CustomResponse> updateNation(@PathVariable Long id, @RequestBody Nation nation) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

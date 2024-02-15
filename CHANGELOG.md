@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.37.0] 2023-12-19
+
+- Added validation for entities in places packages
+- Updated PATCH method for controllers in places packages
+
 ## [0.36.5] 2023-12-19
 
 - Added validation for `Location` entity

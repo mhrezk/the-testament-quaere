@@ -5,6 +5,9 @@ import com.testament.veltahleon.model.entities.history.Language;
 import com.testament.veltahleon.model.entities.politics.NationLeader;
 import com.testament.veltahleon.model.entities.politics.Pundit;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -23,6 +26,9 @@ public class Nation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Name cannot be null!")
+    @NotBlank(message = "Name cannot be blank!")
+    @NotEmpty(message = "Name cannot be empty!")
     @Column(name = "name")
     private String name;
 
@@ -33,12 +39,12 @@ public class Nation {
     @JoinColumn(name = "capital_id")
     private Capital capital;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "continent_id")
-    private Continent continent;
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "continent_id")
+//    private Continent continent;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

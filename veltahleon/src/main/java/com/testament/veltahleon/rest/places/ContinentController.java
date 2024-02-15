@@ -97,7 +97,7 @@ public class ContinentController {
     }
 
     @PatchMapping("/update/continent/{id}")
-    public ResponseEntity<CustomResponse> updateContinent(@PathVariable Long id, @RequestBody @Valid Continent continent) {
+    public ResponseEntity<CustomResponse> updateContinent(@PathVariable Long id, @RequestBody Continent continent) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

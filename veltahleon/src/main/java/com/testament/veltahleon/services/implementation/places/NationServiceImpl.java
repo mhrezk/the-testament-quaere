@@ -68,9 +68,9 @@ public class NationServiceImpl implements NationService {
             newNation.setCapital(nation.getCapital());
         }
 
-        if(nation.getContinent() != null && newNation.getContinent() != nation.getContinent()) {
-            newNation.setContinent(nation.getContinent());
-        }
+//        if(nation.getContinent() != null && newNation.getContinent() != nation.getContinent()) {
+//            newNation.setContinent(nation.getContinent());
+//        }
 
         if(nation.getLeader() != null && newNation.getLeader() != nation.getLeader()) {
             newNation.setLeader(nation.getLeader());

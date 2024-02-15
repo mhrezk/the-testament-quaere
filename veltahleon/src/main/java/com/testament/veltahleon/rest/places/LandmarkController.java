@@ -97,7 +97,7 @@ public class LandmarkController {
     }
 
     @PatchMapping("/update/landmark/{id}")
-    public ResponseEntity<CustomResponse> updateLandmark(@PathVariable Long id, @RequestBody @Valid Landmark landmark) {
+    public ResponseEntity<CustomResponse> updateLandmark(@PathVariable Long id, @RequestBody Landmark landmark) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
