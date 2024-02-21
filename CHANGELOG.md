@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.40.0] 2023-12-19
+
+- Added Angular frontend project
+- Added dependency for text editor
+
 ## [0.39.0] 2023-12-19
 
 - Added Spring Data JPA queries for politics package
