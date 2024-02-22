@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.40.2] 2023-12-19
+
+- Upgraded Angular to version 17
+- Added dependency for text editor Ngx Editor
+- Added dependency for text editor Quill Editor
+
 ## [0.40.0] 2023-12-19
 
 - Added Angular frontend project
