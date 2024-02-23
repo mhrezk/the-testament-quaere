@@ -1,6 +1,12 @@
 # Change Log
 
-## [0.40.2] 2023-12-19
+## [0.41.0] 2023-12-19
+
+- Created sidenav
+- Created routes
+- Created home page
+
+## [0.40.1] 2023-12-19
 
 - Upgraded Angular to version 17
 - Added dependency for text editor Ngx Editor
