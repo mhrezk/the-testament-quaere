@@ -9,7 +9,7 @@ public interface DayService {
 
     Collection<Day> getDaysWithPagination(int pageNumber, int numberOfRecords);
     Collection<Day> getDays();
-    Collection<Day> getDaysByLanguage(String languageName);
+    //Collection<Day> getDaysByLanguage(String languageName);
     Day getDayByID(Long id);
     Day getDayByName(String name);
     Boolean deleteDayByID(Long id);

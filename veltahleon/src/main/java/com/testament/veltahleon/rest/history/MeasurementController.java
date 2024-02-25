@@ -29,7 +29,7 @@ public class MeasurementController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedMeasurements", measurements))
+                .data(Map.of("dataRetrieved", measurements))
                 .message(measurements.size() + " measurements retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class MeasurementController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allMeasurements", measurements))
+                .data(Map.of("dataRetrieved", measurements))
                 .message("All measurements retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class MeasurementController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedMeasurementByID", measurementService.getMeasurementByID(id)))
+                .data(Map.of("dataRetrieved", measurementService.getMeasurementByID(id)))
                 .message("Measurement retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class MeasurementController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isMeasurementDeleted", measurementService.deleteMeasurementByID(id)))
+                .data(Map.of("dataRetrieved", measurementService.deleteMeasurementByID(id)))
                 .message("Measurement deleted!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class MeasurementController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedMeasurement", measurementService.saveMeasurement(measurement)))
+                .data(Map.of("dataSaved", measurementService.saveMeasurement(measurement)))
                 .message("Measurement saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class MeasurementController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedMeasurement", measurementService.updateMeasurement(id, measurement)))
+                .data(Map.of("dataUpdated", measurementService.updateMeasurement(id, measurement)))
                 .message("Measurement updated!")
                 .build()
         );

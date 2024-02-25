@@ -29,7 +29,7 @@ public class ProvinceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedProvinces", provinces))
+                .data(Map.of("dataRetrieved", provinces))
                 .message(provinces.size() + " Provinces retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class ProvinceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allProvinces", provinces))
+                .data(Map.of("dataRetrieved", provinces))
                 .message("All Provinces retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class ProvinceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedProvinceByID", provinceService.getProvinceByID(id)))
+                .data(Map.of("dataRetrieved", provinceService.getProvinceByID(id)))
                 .message("Province retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class ProvinceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedProvinceByName", provinceService.getProvinceByName(provinceName)))
+                .data(Map.of("dataRetrieved", provinceService.getProvinceByName(provinceName)))
                 .message("Province retrieved!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class ProvinceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedProvince", provinceService.saveProvince(province)))
+                .data(Map.of("dataSaved", provinceService.saveProvince(province)))
                 .message("Province saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class ProvinceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isProvinceDeleted", provinceService.deleteProvinceByID(id)))
+                .data(Map.of("dataDeleted", provinceService.deleteProvinceByID(id)))
                 .message("Province deleted!")
                 .build()
         );
@@ -102,7 +102,7 @@ public class ProvinceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedProvince", provinceService.updateProvince(id, province)))
+                .data(Map.of("dataUpdated", provinceService.updateProvince(id, province)))
                 .message("Province updated!")
                 .build()
         );

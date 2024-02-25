@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
 
@@ -64,5 +65,13 @@ public class ConstellationServiceImpl implements ConstellationService {
         }
 
         return constellationRepository.save(newConstellation);
+    }
+
+    @Override
+    public String addImageURL(String fileName) {
+        return ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/divination/constellation/image/" + fileName)
+                .toUriString();
     }
 }

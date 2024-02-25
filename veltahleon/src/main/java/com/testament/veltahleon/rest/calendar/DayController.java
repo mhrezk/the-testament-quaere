@@ -29,7 +29,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedDays", days))
+                .data(Map.of("dataRetrieved", days))
                 .message(days.size() + " days retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allDays", days))
+                .data(Map.of("dataRetrieved", days))
                 .message("All days retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedDayByName", dayService.getDayByName(name)))
+                .data(Map.of("dataRetrieved", dayService.getDayByName(name)))
                 .message("Day retrieved!")
                 .build()
         );
@@ -66,23 +66,23 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedDayByID", dayService.getDayByID(id)))
+                .data(Map.of("dataRetrieved", dayService.getDayByID(id)))
                 .message("Day retrieved!")
                 .build()
         );
     }
 
-    @GetMapping("/days/language")
-    public ResponseEntity<CustomResponse> getDayByLanguage(@RequestParam(value = "languageName") String languageName) {
-        return ResponseEntity.ok(CustomResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.OK)
-                .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedDaysByLanguage", dayService.getDaysByLanguage(languageName)))
-                .message("Day retrieved!")
-                .build()
-        );
-    }
+//    @GetMapping("/days/language")
+//    public ResponseEntity<CustomResponse> getDayByLanguage(@RequestParam(value = "languageName") String languageName) {
+//        return ResponseEntity.ok(CustomResponse.builder()
+//                .timestamp(LocalDateTime.now())
+//                .status(HttpStatus.OK)
+//                .statusCode(HttpStatus.OK.value())
+//                .data(Map.of("dataRetrieved", dayService.getDaysByLanguage(languageName)))
+//                .message("Day retrieved!")
+//                .build()
+//        );
+//    }
 
     @PostMapping("/save/day")
     public ResponseEntity<CustomResponse> saveDay(@RequestBody @Valid Day day) {
@@ -90,7 +90,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedDay", dayService.saveDay(day)))
+                .data(Map.of("dataSaved", dayService.saveDay(day)))
                 .message("Day saved!")
                 .build()
         );
@@ -102,7 +102,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedDays", dayService.saveDays(days)))
+                .data(Map.of("dataSaved", dayService.saveDays(days)))
                 .message("Days saved!")
                 .build()
         );
@@ -114,7 +114,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isDayDeleted", dayService.deleteDayByID(id)))
+                .data(Map.of("dataDeleted", dayService.deleteDayByID(id)))
                 .message("Day deleted!")
                 .build()
         );
@@ -127,7 +127,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("areAllDaysDeleted", dayService.deleteAllDays(days)))
+                .data(Map.of("dataDeleted", dayService.deleteAllDays(days)))
                 .message("Days deleted!")
                 .build()
         );
@@ -144,7 +144,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("areAllDaysDeleted", dayService.deleteAllDaysByIDs(idDays)))
+                .data(Map.of("dataDeleted", dayService.deleteAllDaysByIDs(idDays)))
                 .message("Days deleted!")
                 .build()
         );
@@ -156,7 +156,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedDay", dayService.updateDay(id, day)))
+                .data(Map.of("dataUpdated", dayService.updateDay(id, day)))
                 .message("Day updated!")
                 .build()
         );

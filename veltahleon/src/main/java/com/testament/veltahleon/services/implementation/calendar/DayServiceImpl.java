@@ -2,9 +2,7 @@ package com.testament.veltahleon.services.implementation.calendar;
 
 import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.calendar.Day;
-import com.testament.veltahleon.model.entities.history.Language;
 import com.testament.veltahleon.repositories.calendar.DayRepository;
-import com.testament.veltahleon.repositories.history.LanguageRepository;
 import com.testament.veltahleon.services.ifc.calendar.DayService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +21,6 @@ public class DayServiceImpl implements DayService {
 
     @Autowired
     private final DayRepository dayRepository;
-    @Autowired
-    private final LanguageRepository languageRepository;
 
     //CRUD
     @Override
@@ -42,10 +38,10 @@ public class DayServiceImpl implements DayService {
 //        return dayRepository.findByLanguage_Name(languageName);
 //    }
 
-    @Override
-    public Collection<Day> getDaysByLanguage(String languageName) {
-        return dayRepository.findByLanguage_Name(languageName);
-    }
+//    @Override
+//    public Collection<Day> getDaysByLanguage(String languageName) {
+//        return dayRepository.findByLanguage_Name(languageName);
+//    }
 
     @Override
     public Day getDayByID(Long id) {
@@ -81,11 +77,11 @@ public class DayServiceImpl implements DayService {
             throw new DataInsertionException("Day name");
         }
 
-        if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
-            Language language = languageRepository.findByName(day.getLanguage().getName());
-            day.getLanguage().setId(language.getId());
-            day.setLanguage(language);
-        }
+//        if(languageRepository.countByName(day.getLanguage().getName()) >= 1) {
+//            Language language = languageRepository.findByName(day.getLanguage().getName());
+//            day.getLanguage().setId(language.getId());
+//            day.setLanguage(language);
+//        }
         log.info("Day saved!");
         return dayRepository.save(day);
     }
@@ -108,9 +104,9 @@ public class DayServiceImpl implements DayService {
             newDay.setDayNumber(day.getDayNumber());
         }
 
-        if((day.getLanguage() != null && newDay.getLanguage() != day.getLanguage())) {
-            newDay.setLanguage(checkLanguageForUpdate(day.getLanguage(), newDay.getLanguage()));
-        }
+//        if((day.getLanguage() != null && newDay.getLanguage() != day.getLanguage())) {
+//            newDay.setLanguage(checkLanguageForUpdate(day.getLanguage(), newDay.getLanguage()));
+//        }
 
         if(day.getDescription() != null && newDay.getDescription() != day.getDescription()) {
             newDay.setDescription(day.getDescription());
@@ -119,18 +115,18 @@ public class DayServiceImpl implements DayService {
     }
 
     //Helper Methods
-    private Language checkLanguageForUpdate(Language language, Language newLanguage) {
-        if(language.getName() != null && newLanguage.getName() != language.getName()) {
-            newLanguage.setName(language.getName());
-        }
-
-        if(language.getDescription() != null && newLanguage.getDescription() != language.getDescription()) {
-            newLanguage.setDescription(language.getDescription());
-        }
-
-        if(language.getAlphabetURL() != null && newLanguage.getAlphabetURL() != language.getAlphabetURL()) {
-            newLanguage.setAlphabetURL(language.getAlphabetURL());
-        }
-        return newLanguage;
-    }
+//    private Language checkLanguageForUpdate(Language language, Language newLanguage) {
+//        if(language.getName() != null && newLanguage.getName() != language.getName()) {
+//            newLanguage.setName(language.getName());
+//        }
+//
+//        if(language.getDescription() != null && newLanguage.getDescription() != language.getDescription()) {
+//            newLanguage.setDescription(language.getDescription());
+//        }
+//
+//        if(language.getAlphabetURL() != null && newLanguage.getAlphabetURL() != language.getAlphabetURL()) {
+//            newLanguage.setAlphabetURL(language.getAlphabetURL());
+//        }
+//        return newLanguage;
+//    }
 }

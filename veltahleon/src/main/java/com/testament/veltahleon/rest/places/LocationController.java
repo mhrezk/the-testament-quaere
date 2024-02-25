@@ -29,7 +29,7 @@ public class LocationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedLocations", locations))
+                .data(Map.of("dataRetrieved", locations))
                 .message(locations.size() + " locations retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class LocationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allLocations", locations))
+                .data(Map.of("dataRetrieved", locations))
                 .message("All locations retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class LocationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedLocationByID", locationService.getLocationByID(id)))
+                .data(Map.of("dataRetrieved", locationService.getLocationByID(id)))
                 .message("Location retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class LocationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedLocationByName", locationService.getLocationByName(locationName)))
+                .data(Map.of("dataRetrieved", locationService.getLocationByName(locationName)))
                 .message("Location retrieved!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class LocationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedLocation", locationService.saveLocation(location)))
+                .data(Map.of("dataSaved", locationService.saveLocation(location)))
                 .message("Location saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class LocationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isLocationDeleted", locationService.deleteLocationByID(id)))
+                .data(Map.of("dataDeleted", locationService.deleteLocationByID(id)))
                 .message("Location deleted!")
                 .build()
         );
@@ -102,7 +102,7 @@ public class LocationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedLocation", locationService.updateLocation(id, location)))
+                .data(Map.of("dataUpdated", locationService.updateLocation(id, location)))
                 .message("Location updated!")
                 .build()
         );

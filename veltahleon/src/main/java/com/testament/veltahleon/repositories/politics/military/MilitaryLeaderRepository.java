@@ -12,5 +12,5 @@ public interface MilitaryLeaderRepository extends JpaRepository<MilitaryLeader, 
 
     MilitaryLeader findByName(String name);
     Collection<MilitaryLeader> findByNation_Name(String name);
-    Collection<MilitaryLeader> findByBattle_Name(String name);
+    Collection<MilitaryLeader> findByBattles_Name(String name);
 }

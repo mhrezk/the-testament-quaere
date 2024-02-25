@@ -29,7 +29,7 @@ public class BookController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedBooks", books))
+                .data(Map.of("dataRetrieved", books))
                 .message(books.size() + " books retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class BookController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allBooks", books))
+                .data(Map.of("dataRetrieved", books))
                 .message("All books retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class BookController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedBookByID", bookService.getBookByID(id)))
+                .data(Map.of("dataRetrieved", bookService.getBookByID(id)))
                 .message("Book retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class BookController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isBookDeleted", bookService.deleteBookByID(id)))
+                .data(Map.of("dataDeleted", bookService.deleteBookByID(id)))
                 .message("Book deleted!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class BookController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedBook", bookService.saveBook(book)))
+                .data(Map.of("dataSaved", bookService.saveBook(book)))
                 .message("Book saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class BookController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedBook", bookService.updateBook(id, book)))
+                .data(Map.of("dataUpdated", bookService.updateBook(id, book)))
                 .message("Book updated!")
                 .build()
         );

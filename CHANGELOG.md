@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.42.0] 2023-12-19
+
+- Created observables for Day entity on frontend
+- Adjusted custom response messages on frontend and backend
+
 ## [0.41.0] 2023-12-19
 
 - Created sidenav

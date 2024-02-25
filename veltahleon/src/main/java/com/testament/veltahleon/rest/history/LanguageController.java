@@ -34,7 +34,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedLanguages", languages))
+                .data(Map.of("dataRetrieved", languages))
                 .message(languages.size() + " languages retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allLanguages", languages))
+                .data(Map.of("dataRetrieved", languages))
                 .message("All languages retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedLanguageByID", languageService.getLanguageByID(id)))
+                .data(Map.of("dataRetrieved", languageService.getLanguageByID(id)))
                 .message("Language retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedLanguageByName", languageService.getLanguageByName(languageName)))
+                .data(Map.of("dataRetrieved", languageService.getLanguageByName(languageName)))
                 .message("Language retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedLanguage", languageService.saveLanguage(language)))
+                .data(Map.of("dataSaved", languageService.saveLanguage(language)))
                 .message("Language saved!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedLanguages", languageService.saveLanguages(languages)))
+                .data(Map.of("dataSaved", languageService.saveLanguages(languages)))
                 .message("Languages saved!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isLanguageDeleted", languageService.deleteLanguageByID(id)))
+                .data(Map.of("dataDeleted", languageService.deleteLanguageByID(id)))
                 .message("Language deleted!")
                 .build()
         );
@@ -125,7 +125,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("areAllLanguagesDeleted", languageService.deleteAllLanguages(languages)))
+                .data(Map.of("dataDeleted", languageService.deleteAllLanguages(languages)))
                 .message("Languages deleted!")
                 .build()
         );
@@ -137,7 +137,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedLanguage", languageService.updateLanguage(id, language)))
+                .data(Map.of("dataUpdated", languageService.updateLanguage(id, language)))
                 .message("Language updated!")
                 .build()
         );

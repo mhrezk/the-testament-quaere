@@ -33,7 +33,7 @@ public class RaceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedRaces", races))
+                .data(Map.of("dataRetrieved", races))
                 .message(races.size() + " races retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -46,7 +46,7 @@ public class RaceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allRaces", races))
+                .data(Map.of("dataRetrieved", races))
                 .message("All races retrieved!")
                 .build()
         );
@@ -58,7 +58,7 @@ public class RaceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedRaceByID", raceService.getRaceByID(id)))
+                .data(Map.of("dataRetrieved", raceService.getRaceByID(id)))
                 .message("Race retrieved!")
                 .build()
         );
@@ -75,7 +75,7 @@ public class RaceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isRaceDeleted", raceService.deleteRaceByID(id)))
+                .data(Map.of("dataDeleted", raceService.deleteRaceByID(id)))
                 .message("Race deleted!")
                 .build()
         );
@@ -87,7 +87,7 @@ public class RaceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedRace", raceService.saveRace(Race)))
+                .data(Map.of("dataSaved", raceService.saveRace(Race)))
                 .message("Race saved!")
                 .build()
         );
@@ -99,7 +99,7 @@ public class RaceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedRace", raceService.updateRace(id, Race)))
+                .data(Map.of("dataUpdated", raceService.updateRace(id, Race)))
                 .message("Race updated!")
                 .build()
         );

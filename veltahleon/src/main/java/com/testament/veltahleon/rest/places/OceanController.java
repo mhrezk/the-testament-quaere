@@ -29,7 +29,7 @@ public class OceanController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allOceans", oceans))
+                .data(Map.of("dataRetrieved", oceans))
                 .message("All oceans retrieved!")
                 .build()
         );
@@ -41,7 +41,7 @@ public class OceanController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedOceanByID", oceanService.getOceanByID(id)))
+                .data(Map.of("dataRetrieved", oceanService.getOceanByID(id)))
                 .message("Ocean retrieved!")
                 .build()
         );
@@ -53,7 +53,7 @@ public class OceanController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedOceanByName", oceanService.getOceanByName(oceanName)))
+                .data(Map.of("dataRetrieved", oceanService.getOceanByName(oceanName)))
                 .message("Ocean retrieved!")
                 .build()
         );
@@ -65,7 +65,7 @@ public class OceanController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedOcean", oceanService.saveOcean(ocean)))
+                .data(Map.of("dataSaved", oceanService.saveOcean(ocean)))
                 .message("Ocean saved!")
                 .build()
         );
@@ -77,7 +77,7 @@ public class OceanController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isOceanDeleted", oceanService.deleteOceanByID(id)))
+                .data(Map.of("dataDeleted", oceanService.deleteOceanByID(id)))
                 .message("Ocean deleted!")
                 .build()
         );
@@ -89,7 +89,7 @@ public class OceanController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedOcean", oceanService.updateOcean(id, ocean)))
+                .data(Map.of("dataUpdated", oceanService.updateOcean(id, ocean)))
                 .message("Ocean updated!")
                 .build()
         );

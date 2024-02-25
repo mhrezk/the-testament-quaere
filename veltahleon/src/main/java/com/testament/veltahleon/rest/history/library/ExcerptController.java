@@ -29,7 +29,7 @@ public class ExcerptController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedExcerpts", excerpts))
+                .data(Map.of("dataRetrieved", excerpts))
                 .message(excerpts.size() + " excerpts retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class ExcerptController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allExcerpts", excerpts))
+                .data(Map.of("dataRetrieved", excerpts))
                 .message("All excerpts retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class ExcerptController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedExcerptByID", excerptService.getExcerptByID(id)))
+                .data(Map.of("dataRetrieved", excerptService.getExcerptByID(id)))
                 .message("Excerpt retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class ExcerptController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isExcerptDeleted", excerptService.deleteExcerptByID(id)))
+                .data(Map.of("dataDeleted", excerptService.deleteExcerptByID(id)))
                 .message("Excerpt deleted!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class ExcerptController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedExcerpt", excerptService.saveExcerpt(excerpt)))
+                .data(Map.of("dataSaved", excerptService.saveExcerpt(excerpt)))
                 .message("Excerpt saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class ExcerptController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedExcerpt", excerptService.updateExcerpt(id, excerpt)))
+                .data(Map.of("dataUpdated", excerptService.updateExcerpt(id, excerpt)))
                 .message("Excerpt updated!")
                 .build()
         );

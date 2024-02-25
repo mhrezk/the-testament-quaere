@@ -44,7 +44,7 @@ public class NationLeaderServiceImpl implements NationLeaderService {
 
     @Override
     public Collection<NationLeader> getNationLeadersByBattleName(String name) {
-        return nationLeaderRepository.findByBattle_Name(name);
+        return nationLeaderRepository.findByBattles_Name(name);
     }
 
     @Override

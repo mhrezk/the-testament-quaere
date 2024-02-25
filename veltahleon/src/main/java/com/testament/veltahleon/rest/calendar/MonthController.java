@@ -29,7 +29,7 @@ public class MonthController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedMonths", months))
+                .data(Map.of("dataRetrieved", months))
                 .message(months.size() + " Months retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class MonthController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allMonths", months))
+                .data(Map.of("dataRetrieved", months))
                 .message("All Months retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class MonthController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedMonthByID", monthService.getMonthByID(id)))
+                .data(Map.of("dataRetrieved", monthService.getMonthByID(id)))
                 .message("Month retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class MonthController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedMonthByName", monthService.getMonthByName(monthName)))
+                .data(Map.of("dataRetrieved", monthService.getMonthByName(monthName)))
                 .message("Month retrieved!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class MonthController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedMonth", monthService.saveMonth(month)))
+                .data(Map.of("dataSaved", monthService.saveMonth(month)))
                 .message("Month saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class MonthController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isMonthDeleted", monthService.deleteMonthByID(id)))
+                .data(Map.of("dataDeleted", monthService.deleteMonthByID(id)))
                 .message("Month deleted!")
                 .build()
         );
@@ -102,7 +102,7 @@ public class MonthController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedMonth", monthService.updateMonth(id, month)))
+                .data(Map.of("dataUpdated", monthService.updateMonth(id, month)))
                 .message("Month updated!")
                 .build()
         );

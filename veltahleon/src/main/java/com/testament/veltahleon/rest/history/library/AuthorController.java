@@ -29,7 +29,7 @@ public class AuthorController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedAuthors", authors))
+                .data(Map.of("dataRetrieved", authors))
                 .message(authors.size() + " authors retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class AuthorController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allAuthors", authors))
+                .data(Map.of("dataRetrieved", authors))
                 .message("All authors retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class AuthorController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedAuthorByID", authorService.getAuthorByID(id)))
+                .data(Map.of("dataRetrieved", authorService.getAuthorByID(id)))
                 .message("Author retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class AuthorController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isAuthorDeleted", authorService.deleteAuthorByID(id)))
+                .data(Map.of("dataDeleted", authorService.deleteAuthorByID(id)))
                 .message("Author deleted!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class AuthorController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedAuthor", authorService.saveAuthor(author)))
+                .data(Map.of("dataSaved", authorService.saveAuthor(author)))
                 .message("Author saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class AuthorController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedAuthor", authorService.updateAuthor(id, author)))
+                .data(Map.of("dataUpdated", authorService.updateAuthor(id, author)))
                 .message("Author updated!")
                 .build()
         );

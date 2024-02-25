@@ -29,7 +29,7 @@ public class CapitalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedCapitals", capitals))
+                .data(Map.of("dataRetrieved", capitals))
                 .message(capitals.size() + " capitals retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class CapitalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allCapitals", capitals))
+                .data(Map.of("dataRetrieved", capitals))
                 .message("All capitals retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class CapitalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedCapitalByID", capitalService.getCapitalByID(id)))
+                .data(Map.of("dataRetrieved", capitalService.getCapitalByID(id)))
                 .message("Capital retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class CapitalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedCapitalByName", capitalService.getCapitalByName(capitalName)))
+                .data(Map.of("dataRetrieved", capitalService.getCapitalByName(capitalName)))
                 .message("Capital retrieved!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class CapitalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedCapital", capitalService.saveCapital(capital)))
+                .data(Map.of("dataSaved", capitalService.saveCapital(capital)))
                 .message("Capital saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class CapitalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isCapitalDeleted", capitalService.deleteCapitalByID(id)))
+                .data(Map.of("dataDeleted", capitalService.deleteCapitalByID(id)))
                 .message("Capital deleted!")
                 .build()
         );
@@ -102,7 +102,7 @@ public class CapitalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedCapital", capitalService.updateCapital(id, capital)))
+                .data(Map.of("dataUpdated", capitalService.updateCapital(id, capital)))
                 .message("Capital updated!")
                 .build()
         );

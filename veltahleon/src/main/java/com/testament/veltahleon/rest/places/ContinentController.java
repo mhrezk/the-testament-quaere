@@ -29,7 +29,7 @@ public class ContinentController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedContinents", continents))
+                .data(Map.of("dataRetrieved", continents))
                 .message(continents.size() + " continents retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class ContinentController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allContinents", continents))
+                .data(Map.of("dataRetrieved", continents))
                 .message("All continents retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class ContinentController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedContinentByID", continentService.getContinentByID(id)))
+                .data(Map.of("dataRetrieved", continentService.getContinentByID(id)))
                 .message("Continent retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class ContinentController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedContinentByName", continentService.getContinentByName(continentName)))
+                .data(Map.of("dataRetrieved", continentService.getContinentByName(continentName)))
                 .message("Continent retrieved!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class ContinentController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedContinent", continentService.saveContinent(continent)))
+                .data(Map.of("dataSaved", continentService.saveContinent(continent)))
                 .message("Continent saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class ContinentController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isContinentDeleted", continentService.deleteContinentByID(id)))
+                .data(Map.of("dataDeleted", continentService.deleteContinentByID(id)))
                 .message("Continent deleted!")
                 .build()
         );
@@ -102,7 +102,7 @@ public class ContinentController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedContinent", continentService.updateContinent(id, continent)))
+                .data(Map.of("dataUpdated", continentService.updateContinent(id, continent)))
                 .message("Continent updated!")
                 .build()
         );

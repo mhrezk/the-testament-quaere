@@ -33,7 +33,7 @@ public class TarotController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedTarots", tarots))
+                .data(Map.of("dataRetrieved", tarots))
                 .message(tarots.size() + " tarots retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -46,7 +46,7 @@ public class TarotController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allTarots", tarots))
+                .data(Map.of("dataRetrieved", tarots))
                 .message("All tarots retrieved!")
                 .build()
         );
@@ -58,7 +58,7 @@ public class TarotController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedTarotByID", tarotService.getTarotByID(id)))
+                .data(Map.of("dataRetrieved", tarotService.getTarotByID(id)))
                 .message("Tarot retrieved!")
                 .build()
         );
@@ -75,7 +75,7 @@ public class TarotController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isTarotDeleted", tarotService.deleteTarotByID(id)))
+                .data(Map.of("dataDeleted", tarotService.deleteTarotByID(id)))
                 .message("Tarot deleted!")
                 .build()
         );
@@ -87,7 +87,7 @@ public class TarotController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedTarot", tarotService.saveTarot(Tarot)))
+                .data(Map.of("dataSaved", tarotService.saveTarot(Tarot)))
                 .message("Tarot saved!")
                 .build()
         );
@@ -99,7 +99,7 @@ public class TarotController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedTarot", tarotService.updateTarot(id, Tarot)))
+                .data(Map.of("dataUpdated", tarotService.updateTarot(id, Tarot)))
                 .message("Tarot updated!")
                 .build()
         );

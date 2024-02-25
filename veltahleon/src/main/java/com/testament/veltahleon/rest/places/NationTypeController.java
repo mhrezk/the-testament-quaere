@@ -29,7 +29,7 @@ public class NationTypeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allNationTypes", nationTypes))
+                .data(Map.of("dataRetrieved", nationTypes))
                 .message("All nationTypes retrieved!")
                 .build()
         );
@@ -41,7 +41,7 @@ public class NationTypeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedNationTypeByID", nationTypeService.getNationTypeByID(id)))
+                .data(Map.of("dataRetrieved", nationTypeService.getNationTypeByID(id)))
                 .message("NationType retrieved!")
                 .build()
         );
@@ -53,7 +53,7 @@ public class NationTypeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedNationTypeByName", nationTypeService.getNationTypeByType(nationTypeName)))
+                .data(Map.of("dataRetrieved", nationTypeService.getNationTypeByType(nationTypeName)))
                 .message("NationType retrieved!")
                 .build()
         );
@@ -65,7 +65,7 @@ public class NationTypeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedNationType", nationTypeService.saveNationType(nationType)))
+                .data(Map.of("dataSaved", nationTypeService.saveNationType(nationType)))
                 .message("NationType saved!")
                 .build()
         );
@@ -77,7 +77,7 @@ public class NationTypeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isNationTypeDeleted", nationTypeService.deleteNationTypeByID(id)))
+                .data(Map.of("dataDeleted", nationTypeService.deleteNationTypeByID(id)))
                 .message("NationType deleted!")
                 .build()
         );
@@ -89,7 +89,7 @@ public class NationTypeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedNationType", nationTypeService.updateNationType(id, nationType)))
+                .data(Map.of("dataUpdated", nationTypeService.updateNationType(id, nationType)))
                 .message("NationType updated!")
                 .build()
         );

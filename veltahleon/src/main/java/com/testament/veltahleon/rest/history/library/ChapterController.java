@@ -29,7 +29,7 @@ public class ChapterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedChapters", chapters))
+                .data(Map.of("dataRetrieved", chapters))
                 .message(chapters.size() + " chapters retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class ChapterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allChapters", chapters))
+                .data(Map.of("dataRetrieved", chapters))
                 .message("All chapters retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class ChapterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedChapterByID", chapterService.getChapterByID(id)))
+                .data(Map.of("dataRetrieved", chapterService.getChapterByID(id)))
                 .message("Chapter retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class ChapterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isChapterDeleted", chapterService.deleteChapterByID(id)))
+                .data(Map.of("dataDeleted", chapterService.deleteChapterByID(id)))
                 .message("Chapter deleted!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class ChapterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedChapter", chapterService.saveChapter(chapter)))
+                .data(Map.of("dataSaved", chapterService.saveChapter(chapter)))
                 .message("Chapter saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class ChapterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedChapter", chapterService.updateChapter(id, chapter)))
+                .data(Map.of("dataUpdated", chapterService.updateChapter(id, chapter)))
                 .message("Chapter updated!")
                 .build()
         );

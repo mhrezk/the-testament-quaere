@@ -33,7 +33,7 @@ public class NationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedNations", nations))
+                .data(Map.of("dataRetrieved", nations))
                 .message(nations.size() + " nations retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -46,7 +46,7 @@ public class NationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allNations", nations))
+                .data(Map.of("dataRetrieved", nations))
                 .message("All nations retrieved!")
                 .build()
         );
@@ -58,7 +58,7 @@ public class NationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedNationByID", nationService.getNationByID(id)))
+                .data(Map.of("dataRetrieved", nationService.getNationByID(id)))
                 .message("Nation retrieved!")
                 .build()
         );
@@ -70,7 +70,7 @@ public class NationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedNationByName", nationService.getNationByName(nationName)))
+                .data(Map.of("dataRetrieved", nationService.getNationByName(nationName)))
                 .message("Nation retrieved!")
                 .build()
         );
@@ -87,7 +87,7 @@ public class NationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedNation", nationService.saveNation(nation)))
+                .data(Map.of("dataSaved", nationService.saveNation(nation)))
                 .message("Nation saved!")
                 .build()
         );
@@ -99,7 +99,7 @@ public class NationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isNationDeleted", nationService.deleteNationByID(id)))
+                .data(Map.of("dataDeleted", nationService.deleteNationByID(id)))
                 .message("Nation deleted!")
                 .build()
         );
@@ -111,7 +111,7 @@ public class NationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedNation", nationService.updateNation(id, nation)))
+                .data(Map.of("dataUpdated", nationService.updateNation(id, nation)))
                 .message("Nation updated!")
                 .build()
         );

@@ -29,7 +29,7 @@ public class EpochController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allEpochs", epochs))
+                .data(Map.of("dataRetrieved", epochs))
                 .message("All epochs retrieved!")
                 .build()
         );
@@ -41,7 +41,7 @@ public class EpochController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedEpochByID", epochService.getEpochByID(id)))
+                .data(Map.of("dataRetrieved", epochService.getEpochByID(id)))
                 .message("Epoch retrieved!")
                 .build()
         );
@@ -53,7 +53,7 @@ public class EpochController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedEpoch", epochService.saveEpoch(epoch)))
+                .data(Map.of("dataSaved", epochService.saveEpoch(epoch)))
                 .message("Epoch saved!")
                 .build()
         );
@@ -65,7 +65,7 @@ public class EpochController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isEpochDeleted", epochService.deleteEpochByID(id)))
+                .data(Map.of("dataDeleted", epochService.deleteEpochByID(id)))
                 .message("Epoch deleted!")
                 .build()
         );
@@ -77,7 +77,7 @@ public class EpochController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedEpoch", epochService.updateEpoch(id, epoch)))
+                .data(Map.of("dataUpdated", epochService.updateEpoch(id, epoch)))
                 .message("Epoch updated!")
                 .build()
         );

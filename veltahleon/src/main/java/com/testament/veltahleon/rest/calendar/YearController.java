@@ -29,7 +29,7 @@ public class YearController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedYears", years))
+                .data(Map.of("dataRetrieved", years))
                 .message(years.size() + " years retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class YearController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allYears", years))
+                .data(Map.of("dataRetrieved", years))
                 .message("All years retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class YearController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedYearByID", yearService.getYearByID(id)))
+                .data(Map.of("dataRetrieved", yearService.getYearByID(id)))
                 .message("Year retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class YearController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedYearByName", yearService.getYearByName(yearName)))
+                .data(Map.of("dataRetrieved", yearService.getYearByName(yearName)))
                 .message("Year retrieved!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class YearController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedYearByDate", yearService.getYearByDate(day, month, year)))
+                .data(Map.of("dataRetrieved", yearService.getYearByDate(day, month, year)))
                 .message("Year retrieved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class YearController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedYear", yearService.saveYear(year)))
+                .data(Map.of("dataSaved", yearService.saveYear(year)))
                 .message("Year saved!")
                 .build()
         );
@@ -102,7 +102,7 @@ public class YearController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isYearDeleted", yearService.deleteYearByID(id)))
+                .data(Map.of("dataDeleted", yearService.deleteYearByID(id)))
                 .message("Year deleted!")
                 .build()
         );
@@ -114,7 +114,7 @@ public class YearController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedYear", yearService.updateYear(id, year)))
+                .data(Map.of("dataUpdated", yearService.updateYear(id, year)))
                 .message("Year updated!")
                 .build()
         );

@@ -42,13 +42,13 @@ public class Day {
 //            CascadeType.DETACH,
 //            CascadeType.MERGE,
 //            CascadeType.PERSIST})
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "language_id", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true) //to avoid issues with lazy loading related to ManyToOne relationships, as it would require eager loading instead
-    private Language language;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "language_id", referencedColumnName = "id")
+//    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true) //to avoid issues with lazy loading related to ManyToOne relationships, as it would require eager loading instead
+//    private Language language;
 
 //    @Column(name = "language_name")
 //    private String languageName;

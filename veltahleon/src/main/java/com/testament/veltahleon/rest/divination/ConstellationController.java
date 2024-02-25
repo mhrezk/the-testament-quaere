@@ -33,7 +33,7 @@ public class ConstellationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedConstellations", constellations))
+                .data(Map.of("dataRetrieved", constellations))
                 .message(constellations.size() + " constellations retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -46,7 +46,7 @@ public class ConstellationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allConstellations", constellations))
+                .data(Map.of("dataRetrieved", constellations))
                 .message("All constellations retrieved!")
                 .build()
         );
@@ -58,7 +58,7 @@ public class ConstellationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedConstellationByID", constellationService.getConstellationByID(id)))
+                .data(Map.of("dataRetrieved", constellationService.getConstellationByID(id)))
                 .message("Constellation retrieved!")
                 .build()
         );
@@ -75,7 +75,7 @@ public class ConstellationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isConstellationDeleted", constellationService.deleteConstellationByID(id)))
+                .data(Map.of("dataDeleted", constellationService.deleteConstellationByID(id)))
                 .message("Constellation deleted!")
                 .build()
         );
@@ -87,7 +87,7 @@ public class ConstellationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedConstellation", constellationService.saveConstellation(constellation)))
+                .data(Map.of("dataSaved", constellationService.saveConstellation(constellation)))
                 .message("Constellation saved!")
                 .build()
         );
@@ -99,7 +99,7 @@ public class ConstellationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedConstellation", constellationService.updateConstellation(id, constellation)))
+                .data(Map.of("dataUpdated", constellationService.updateConstellation(id, constellation)))
                 .message("Constellation updated!")
                 .build()
         );

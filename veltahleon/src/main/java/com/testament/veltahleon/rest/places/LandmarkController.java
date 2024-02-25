@@ -29,7 +29,7 @@ public class LandmarkController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedLandmarks", landmarks))
+                .data(Map.of("dataRetrieved", landmarks))
                 .message(landmarks.size() + " landmarks retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -42,7 +42,7 @@ public class LandmarkController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allLandmarks", landmarks))
+                .data(Map.of("dataRetrieved", landmarks))
                 .message("All landmarks retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class LandmarkController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedLandmarkByID", landmarkService.getLandmarkByID(id)))
+                .data(Map.of("dataRetrieved", landmarkService.getLandmarkByID(id)))
                 .message("Landmark retrieved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class LandmarkController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedLandmarkByName", landmarkService.getLandmarkByName(landmarkName)))
+                .data(Map.of("dataRetrieved", landmarkService.getLandmarkByName(landmarkName)))
                 .message("Landmark retrieved!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class LandmarkController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedLandmark", landmarkService.saveLandmark(landmark)))
+                .data(Map.of("dataSaved", landmarkService.saveLandmark(landmark)))
                 .message("Landmark saved!")
                 .build()
         );
@@ -90,7 +90,7 @@ public class LandmarkController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isLandmarkDeleted", landmarkService.deleteLandmarkByID(id)))
+                .data(Map.of("dataDeleted", landmarkService.deleteLandmarkByID(id)))
                 .message("Landmark deleted!")
                 .build()
         );
@@ -102,7 +102,7 @@ public class LandmarkController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedLandmark", landmarkService.updateLandmark(id, landmark)))
+                .data(Map.of("dataUpdated", landmarkService.updateLandmark(id, landmark)))
                 .message("Landmark updated!")
                 .build()
         );

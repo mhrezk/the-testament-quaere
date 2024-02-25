@@ -33,7 +33,7 @@ public class LetterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedLetters", letters))
+                .data(Map.of("dataRetrieved", letters))
                 .message(letters.size() + " letters retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -46,7 +46,7 @@ public class LetterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allLetters", letters))
+                .data(Map.of("dataRetrieved", letters))
                 .message("All letters retrieved!")
                 .build()
         );
@@ -58,7 +58,7 @@ public class LetterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedLetterByID", letterService.getLettersByLanguageName(languageName)))
+                .data(Map.of("dataRetrieved", letterService.getLettersByLanguageName(languageName)))
                 .message("Letter retrieved!")
                 .build()
         );
@@ -70,7 +70,7 @@ public class LetterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedLetterByID", letterService.getLetterByID(id)))
+                .data(Map.of("dataRetrieved", letterService.getLetterByID(id)))
                 .message("Letter retrieved!")
                 .build()
         );
@@ -87,7 +87,7 @@ public class LetterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedLetter", letterService.saveLetter(letter)))
+                .data(Map.of("dataSaved", letterService.saveLetter(letter)))
                 .message("Letter saved!")
                 .build()
         );
@@ -99,7 +99,7 @@ public class LetterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isLetterDeleted", letterService.deleteLetterByID(id)))
+                .data(Map.of("dataDeleted", letterService.deleteLetterByID(id)))
                 .message("Letter deleted!")
                 .build()
         );
@@ -111,7 +111,7 @@ public class LetterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedLetter", letterService.updateLetter(id, letter)))
+                .data(Map.of("dataUpdated", letterService.updateLetter(id, letter)))
                 .message("Letter updated")
                 .build()
         );

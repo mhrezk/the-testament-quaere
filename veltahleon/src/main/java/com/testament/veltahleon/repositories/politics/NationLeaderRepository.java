@@ -10,5 +10,5 @@ import java.util.Collection;
 public interface NationLeaderRepository extends JpaRepository<NationLeader, Long> {
 
     NationLeader findByName(String name);
-    Collection<NationLeader> findByBattle_Name(String name);
+    Collection<NationLeader> findByBattles_Name(String name);
 }
