@@ -13,8 +13,8 @@ import {Day} from "../../../../interfaces/models/calendar/day/day";
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent implements OnInit {
-  appState$: Observable<AppState<CustomResponse<Day>>>;
-  readonly DATA_STATE: DataState;
+  appState$: Observable<AppState<CustomResponse>>;
+  protected readonly DATA_STATE = DataState;
   headers = [
     {
       key: "name",
@@ -53,6 +53,4 @@ export class CalendarComponent implements OnInit {
         })
       );
   }
-
-  protected readonly DataState = DataState;
 }

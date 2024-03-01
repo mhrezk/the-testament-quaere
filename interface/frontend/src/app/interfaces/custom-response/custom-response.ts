@@ -1,12 +1,12 @@
-export interface CustomResponse<T> {
+export interface CustomResponse {
   timestamp: Date;
   statusCode: number;
   status: string;
   data: {
-    dataRetrieved?: T[],
-    dataSaved?: T,
+    dataRetrieved?: any[],
+    dataSaved?: any,
     dataDeleted?: boolean,
-    dataUpdated?: T
+    dataUpdated?: any
   };
   // reason?: {};
   message: string;

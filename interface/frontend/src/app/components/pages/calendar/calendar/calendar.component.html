@@ -1,10 +1,10 @@
 <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
-  <ng-container *ngSwitchCase="DataState.LOADING">
+  <ng-container *ngSwitchCase="DATA_STATE.LOADING">
     <div class="col-md-12 single-note-item text-center">
       <div class="spinner-border text-info" role="status"></div>
     </div>
   </ng-container>
-  <ng-container *ngSwitchCase="DataState.LOADED">
+  <ng-container *ngSwitchCase="DATA_STATE.LOADED">
     <table class="table table-striped table-hover" id="days">
       <thead>
 <!--        <tr *ngFor="let header of headers; let i = index;">-->
@@ -24,7 +24,7 @@
       </tbody>
     </table>
   </ng-container>
-  <ng-container *ngSwitchCase="DataState.ERROR">
+  <ng-container *ngSwitchCase="DATA_STATE.ERROR">
     <div style="background-color: indianred">Data does not exist!</div>
   </ng-container>
 </ng-container>

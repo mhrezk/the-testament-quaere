@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.43.0] 2023-12-19
+
+- Enabling Cross Origin Requests for RESTful Web Services
+
 ## [0.42.0] 2023-12-19
 
 - Created observables for Day entity on frontend
