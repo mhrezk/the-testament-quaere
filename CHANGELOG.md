@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.43.1] 2023-12-19
+
+- Added HTTP request methods for `TitleController.java`
+
 ## [0.43.0] 2023-12-19
 
 - Enabling Cross Origin Requests for RESTful Web Services
