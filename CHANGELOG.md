@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.44.0] 2023-12-19
+
+- Edited entities in backend
+- Added post method in frontend
+
 ## [0.43.1] 2023-12-19
 
 - Added HTTP request methods for `TitleController.java`

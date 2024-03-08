@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "nations")
@@ -67,7 +68,7 @@ public class Nation {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    private List<Province> provinces;
+    private Set<Province> provinces;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

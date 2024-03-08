@@ -12,5 +12,4 @@ public interface ConstellationService {
     Boolean deleteConstellationByID(Long id);
     Constellation saveConstellation(Constellation constellation);
     Constellation updateConstellation(Long id, Constellation constellation);
-    String addImageURL(String fileName);
 }

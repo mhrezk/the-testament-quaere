@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
@@ -18,6 +19,8 @@ import java.util.Collection;
 @Slf4j
 @Transactional
 public class ConstellationServiceImpl implements ConstellationService {
+
+    private final String BASE_IMAGE_PATH = "src/main/java/com/testament/veltahleon/assets/images/constellations/";
 
     @Autowired
     private ConstellationRepository constellationRepository;
@@ -65,13 +68,5 @@ public class ConstellationServiceImpl implements ConstellationService {
         }
 
         return constellationRepository.save(newConstellation);
-    }
-
-    @Override
-    public String addImageURL(String fileName) {
-        return ServletUriComponentsBuilder
-                .fromCurrentContextPath()
-                .path("/divination/constellation/image/" + fileName)
-                .toUriString();
     }
 }

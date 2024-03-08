@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface CapitalRepository extends JpaRepository<Capital, Long> {
 
     Capital findByName(String name);
-    Capital findByNation_Name(String name);
+    //Capital findByNation_Name(String name);
     long countByName(String name);
 }

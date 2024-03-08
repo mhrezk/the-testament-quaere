@@ -46,10 +46,10 @@ public class CapitalServiceImpl implements CapitalService {
         return capitalRepository.findByName(name);
     }
 
-    @Override
-    public Capital getCapitalByNationName(String name) {
-        return capitalRepository.findByNation_Name(name);
-    }
+//    @Override
+//    public Capital getCapitalByNationName(String name) {
+//        return capitalRepository.findByNation_Name(name);
+//    }
 
     @Override
     public Boolean deleteCapitalByID(Long id) {
@@ -63,11 +63,11 @@ public class CapitalServiceImpl implements CapitalService {
             throw new DataInsertionException("Capital name");
         }
 
-        if(nationRepository.countByName(capital.getNation().getName()) >= 1) {
-            Nation nation = nationRepository.findByName(capital.getNation().getName());
-            capital.getNation().setId(nation.getId());
-            capital.setNation(nation);
-        }
+//        if(nationRepository.countByName(capital.getNation().getName()) >= 1) {
+//            Nation nation = nationRepository.findByName(capital.getNation().getName());
+//            capital.getNation().setId(nation.getId());
+//            capital.setNation(nation);
+//        }
         return capitalRepository.save(capital);
     }
 
@@ -83,9 +83,9 @@ public class CapitalServiceImpl implements CapitalService {
             newCapital.setDescription(capital.getDescription());
         }
 
-        if(capital.getNation() != null && newCapital.getNation() != capital.getNation()) {
-            newCapital.setNation(checkNationForUpdate(capital.getNation(), newCapital.getNation()));
-        }
+//        if(capital.getNation() != null && newCapital.getNation() != capital.getNation()) {
+//            newCapital.setNation(checkNationForUpdate(capital.getNation(), newCapital.getNation()));
+//        }
 
         return capitalRepository.save(newCapital);
     }
