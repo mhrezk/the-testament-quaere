@@ -30,6 +30,11 @@ public class Letter {
 //    @NotEmpty(message = "Letter name cannot be empty!")
 //    private String name;
 
+    private String name;
+
+    @Column(name = "international_phonetic_alphabet")
+    private String ipa;
+
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,
 //            CascadeType.MERGE,

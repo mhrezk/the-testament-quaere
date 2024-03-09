@@ -34,7 +34,7 @@ public class DeityController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedDeities", deities))
+                .data(Map.of("dataRetrieved", deities))
                 .message(deities.size() + " deities retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class DeityController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allDeities", deities))
+                .data(Map.of("dataRetrieved", deities))
                 .message("All deities retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class DeityController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedDeityByName", deityService.getDeityByName(name)))
+                .data(Map.of("datumRetrieved", deityService.getDeityByName(name)))
                 .message("Deity retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class DeityController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedDeityByID", deityService.getDeityByID(id)))
+                .data(Map.of("datumRetrieved", deityService.getDeityByID(id)))
                 .message("Deity retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class DeityController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isDeityDeleted", deityService.deleteDeityByID(id)))
+                .data(Map.of("dataDeleted", deityService.deleteDeityByID(id)))
                 .message("Deity deleted!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class DeityController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedDeity", deityService.saveDeity(deity)))
+                .data(Map.of("dataSaved", deityService.saveDeity(deity)))
                 .message("Deity saved!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class DeityController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedDeity", deityService.updateDeity(id, deity)))
+                .data(Map.of("dataUpdated", deityService.updateDeity(id, deity)))
                 .message("Deity updated!")
                 .build()
         );

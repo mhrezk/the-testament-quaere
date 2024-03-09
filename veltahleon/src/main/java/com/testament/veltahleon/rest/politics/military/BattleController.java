@@ -30,7 +30,7 @@ public class BattleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedBattles", battles))
+                .data(Map.of("dataRetrieved", battles))
                 .message(battles.size() + " battles retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -43,7 +43,7 @@ public class BattleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allBattles", battles))
+                .data(Map.of("dataRetrieved", battles))
                 .message("All battles retrieved!")
                 .build()
         );
@@ -55,7 +55,7 @@ public class BattleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedBattleByID", battleService.getBattleByID(id)))
+                .data(Map.of("datumRetrieved", battleService.getBattleByID(id)))
                 .message("Battle retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class BattleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedBattleByName", battleService.getBattleByName(name)))
+                .data(Map.of("datumRetrieved", battleService.getBattleByName(name)))
                 .message("Battle retrieved!")
                 .build()
         );
@@ -79,7 +79,7 @@ public class BattleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedBattle", battleService.saveBattle(battle)))
+                .data(Map.of("dataSaved", battleService.saveBattle(battle)))
                 .message("Battle saved!")
                 .build()
         );
@@ -91,7 +91,7 @@ public class BattleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isBattleDeleted", battleService.deleteBattleByID(id)))
+                .data(Map.of("dataDeleted", battleService.deleteBattleByID(id)))
                 .message("Battle deleted!")
                 .build()
         );
@@ -103,7 +103,7 @@ public class BattleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedBattle", battleService.updateBattle(id, battle)))
+                .data(Map.of("dataUpdated", battleService.updateBattle(id, battle)))
                 .message("Battle updated!")
                 .build()
         );

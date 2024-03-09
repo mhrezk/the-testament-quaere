@@ -59,7 +59,7 @@ public class LetterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", letterService.getLettersByLanguageName(languageName)))
+                .data(Map.of("datumRetrieved", letterService.getLettersByLanguageName(languageName)))
                 .message("Letter retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class LetterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", letterService.getLetterByID(id)))
+                .data(Map.of("datumRetrieved", letterService.getLetterByID(id)))
                 .message("Letter retrieved!")
                 .build()
         );

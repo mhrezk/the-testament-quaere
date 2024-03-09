@@ -55,7 +55,7 @@ public class ExcerptController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", excerptService.getExcerptByID(id)))
+                .data(Map.of("datumRetrieved", excerptService.getExcerptByID(id)))
                 .message("Excerpt retrieved!")
                 .build()
         );

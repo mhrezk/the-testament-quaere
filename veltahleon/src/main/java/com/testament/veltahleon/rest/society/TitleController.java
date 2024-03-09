@@ -34,7 +34,7 @@ public class TitleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allTitles", titles))
+                .data(Map.of("dataRetrieved", titles))
                 .message("All Titles retrieved!")
                 .build()
         );
@@ -46,7 +46,7 @@ public class TitleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedTitleByID", titleService.getTitleByID(id)))
+                .data(Map.of("datumRetrieved", titleService.getTitleByID(id)))
                 .message("Title retrieved!")
                 .build()
         );
@@ -58,7 +58,7 @@ public class TitleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedTitle", titleService.saveTitle(title)))
+                .data(Map.of("dataSaved", titleService.saveTitle(title)))
                 .message("Title saved!")
                 .build()
         );
@@ -70,7 +70,7 @@ public class TitleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isTitleDeleted", titleService.deleteTitleByID(id)))
+                .data(Map.of("dataDeleted", titleService.deleteTitleByID(id)))
                 .message("Title deleted!")
                 .build()
         );
@@ -82,7 +82,7 @@ public class TitleController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedTitle", titleService.updateTitle(id, title)))
+                .data(Map.of("dataUpdated", titleService.updateTitle(id, title)))
                 .message("Title updated!")
                 .build()
         );

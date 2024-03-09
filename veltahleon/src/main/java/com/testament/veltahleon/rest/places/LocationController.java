@@ -55,7 +55,7 @@ public class LocationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", locationService.getLocationByID(id)))
+                .data(Map.of("datumRetrieved", locationService.getLocationByID(id)))
                 .message("Location retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class LocationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", locationService.getLocationByName(locationName)))
+                .data(Map.of("datumRetrieved", locationService.getLocationByName(locationName)))
                 .message("Location retrieved!")
                 .build()
         );

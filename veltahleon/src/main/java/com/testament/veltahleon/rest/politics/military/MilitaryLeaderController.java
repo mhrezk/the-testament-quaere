@@ -34,7 +34,7 @@ public class MilitaryLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedMilitaryLeaders", militaryLeaders))
+                .data(Map.of("dataRetrieved", militaryLeaders))
                 .message(militaryLeaders.size() + " military leaders retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class MilitaryLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allMilitaryLeaders", militaryLeaders))
+                .data(Map.of("dataRetrieved", militaryLeaders))
                 .message("All military leaders retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class MilitaryLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedMilitaryLeaderByID", militaryLeaderService.getMilitaryLeaderByID(id)))
+                .data(Map.of("datumRetrieved", militaryLeaderService.getMilitaryLeaderByID(id)))
                 .message("Military leader retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class MilitaryLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedMilitaryLeaderByName", militaryLeaderService.getMilitaryLeaderByName(name)))
+                .data(Map.of("datumRetrieved", militaryLeaderService.getMilitaryLeaderByName(name)))
                 .message("Military leader retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class MilitaryLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedMilitaryLeader", militaryLeaderService.saveMilitaryLeader(militaryLeader)))
+                .data(Map.of("dataSaved", militaryLeaderService.saveMilitaryLeader(militaryLeader)))
                 .message("Military leader saved!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class MilitaryLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isMilitaryLeaderDeleted", militaryLeaderService.deleteMilitaryLeaderByID(id)))
+                .data(Map.of("dataDeleted", militaryLeaderService.deleteMilitaryLeaderByID(id)))
                 .message("Military leader deleted!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class MilitaryLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedMilitaryLeader", militaryLeaderService.updateMilitaryLeader(id, militaryLeader)))
+                .data(Map.of("dataUpdated", militaryLeaderService.updateMilitaryLeader(id, militaryLeader)))
                 .message("Military leader updated!")
                 .build()
         );

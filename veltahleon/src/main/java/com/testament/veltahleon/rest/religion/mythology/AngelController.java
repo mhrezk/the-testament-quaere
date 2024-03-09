@@ -34,7 +34,7 @@ public class AngelController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedAngels", angels))
+                .data(Map.of("dataRetrieved", angels))
                 .message(angels.size() + " angels retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class AngelController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allAngels", angels))
+                .data(Map.of("dataRetrieved", angels))
                 .message("All angels retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class AngelController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedAngelByName", angelService.getAngelByName(name)))
+                .data(Map.of("datumRetrieved", angelService.getAngelByName(name)))
                 .message("Angel retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class AngelController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedAngelByID", angelService.getAngelByID(id)))
+                .data(Map.of("datumRetrieved", angelService.getAngelByID(id)))
                 .message("Angel retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class AngelController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isAngelDeleted", angelService.deleteAngelByID(id)))
+                .data(Map.of("dataDeleted", angelService.deleteAngelByID(id)))
                 .message("Angel deleted!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class AngelController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedAngel", angelService.saveAngel(angel)))
+                .data(Map.of("dataSaved", angelService.saveAngel(angel)))
                 .message("Angel saved!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class AngelController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedAngel", angelService.updateAngel(id, angel)))
+                .data(Map.of("dataUpdated", angelService.updateAngel(id, angel)))
                 .message("Angel updated!")
                 .build()
         );

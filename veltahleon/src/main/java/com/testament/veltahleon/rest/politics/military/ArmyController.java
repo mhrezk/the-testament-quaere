@@ -30,7 +30,7 @@ public class ArmyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedArmies", armies))
+                .data(Map.of("dataRetrieved", armies))
                 .message(armies.size() + " armies retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -43,7 +43,7 @@ public class ArmyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allArmies", armies))
+                .data(Map.of("dataRetrieved", armies))
                 .message("All armies retrieved!")
                 .build()
         );
@@ -55,7 +55,7 @@ public class ArmyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedArmyByID", armyService.getArmyByID(id)))
+                .data(Map.of("datumRetrieved", armyService.getArmyByID(id)))
                 .message("Army retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class ArmyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedArmyByName", armyService.getArmyByLeaderName(name)))
+                .data(Map.of("datumRetrieved", armyService.getArmyByLeaderName(name)))
                 .message("Army retrieved!")
                 .build()
         );
@@ -79,7 +79,7 @@ public class ArmyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedArmy", armyService.saveArmy(army)))
+                .data(Map.of("dataSaved", armyService.saveArmy(army)))
                 .message("Army saved!")
                 .build()
         );
@@ -91,7 +91,7 @@ public class ArmyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isArmyDeleted", armyService.deleteArmyByID(id)))
+                .data(Map.of("dataDeleted", armyService.deleteArmyByID(id)))
                 .message("Army deleted!")
                 .build()
         );
@@ -103,7 +103,7 @@ public class ArmyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedArmy", armyService.updateArmy(id, army)))
+                .data(Map.of("dataUpdated", armyService.updateArmy(id, army)))
                 .message("Army updated!")
                 .build()
         );

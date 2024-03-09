@@ -60,7 +60,7 @@ public class ConstellationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", constellationService.getConstellationByID(id)))
+                .data(Map.of("datumRetrieved", constellationService.getConstellationByID(id)))
                 .message("Constellation retrieved!")
                 .build()
         );

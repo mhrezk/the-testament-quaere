@@ -34,7 +34,7 @@ public class PersonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedPersons", persons))
+                .data(Map.of("dataRetrieved", persons))
                 .message(persons.size() + " persons retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class PersonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allPersons", persons))
+                .data(Map.of("dataRetrieved", persons))
                 .message("All persons retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class PersonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedPersonByID", personService.getPersonByID(id)))
+                .data(Map.of("datumRetrieved", personService.getPersonByID(id)))
                 .message("Person retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class PersonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedPersonByName", personService.getPersonByName(personName)))
+                .data(Map.of("datumRetrieved", personService.getPersonByName(personName)))
                 .message("Person retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class PersonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedPerson", personService.savePerson(person)))
+                .data(Map.of("dataSaved", personService.savePerson(person)))
                 .message("Person saved!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class PersonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isPersonDeleted", personService.deletePersonByID(id)))
+                .data(Map.of("dataDeleted", personService.deletePersonByID(id)))
                 .message("Person deleted!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class PersonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedPerson", personService.updatePerson(id, person)))
+                .data(Map.of("dataUpdated", personService.updatePerson(id, person)))
                 .message("Person updated!")
                 .build()
         );

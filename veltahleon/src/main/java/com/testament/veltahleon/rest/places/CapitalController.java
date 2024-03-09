@@ -55,7 +55,7 @@ public class CapitalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", capitalService.getCapitalByID(id)))
+                .data(Map.of("datumRetrieved", capitalService.getCapitalByID(id)))
                 .message("Capital retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class CapitalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", capitalService.getCapitalByName(capitalName)))
+                .data(Map.of("datumRetrieved", capitalService.getCapitalByName(capitalName)))
                 .message("Capital retrieved!")
                 .build()
         );

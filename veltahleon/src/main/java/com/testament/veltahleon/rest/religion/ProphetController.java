@@ -31,7 +31,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedProphets", prophets))
+                .data(Map.of("dataRetrieved", prophets))
                 .message(prophets.size() + " prophets retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -44,7 +44,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedSortedProphets", prophets))
+                .data(Map.of("dataRetrieved", prophets))
                 .message(prophets.size() + " prophets retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -57,7 +57,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allProphets", prophets))
+                .data(Map.of("dataRetrieved", prophets))
                 .message("All prophets retrieved!")
                 .build()
         );
@@ -69,7 +69,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedProphetByName", prophetService.getProphetByName(name)))
+                .data(Map.of("datumRetrieved", prophetService.getProphetByName(name)))
                 .message("Prophet retrieved!")
                 .build()
         );
@@ -81,7 +81,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedProphetByID", prophetService.getProphetByID(id)))
+                .data(Map.of("datumRetrieved", prophetService.getProphetByID(id)))
                 .message("Prophet retrieved!")
                 .build()
         );
@@ -93,7 +93,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isProphetDeleted", prophetService.deleteProphetByID(id)))
+                .data(Map.of("dataDeleted", prophetService.deleteProphetByID(id)))
                 .message("Prophet deleted!")
                 .build()
         );
@@ -105,7 +105,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isProphetDeleted", prophetService.deleteProphetByName(name)))
+                .data(Map.of("dataDeleted", prophetService.deleteProphetByName(name)))
                 .message("Prophet deleted!")
                 .build()
         );
@@ -117,7 +117,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("areProphetsDeleted", prophetService.deleteProphets()))
+                .data(Map.of("dataDeleted", prophetService.deleteProphets()))
                 .message("Prophets deleted!")
                 .build()
         );
@@ -129,7 +129,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedProphet", prophetService.saveProphet(prophet)))
+                .data(Map.of("dataSaved", prophetService.saveProphet(prophet)))
                 .message("Prophet saved!")
                 .build()
         );
@@ -141,7 +141,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedProphets", prophetService.saveProphets(prophets)))
+                .data(Map.of("dataSaved", prophetService.saveProphets(prophets)))
                 .message("Prophets saved!")
                 .build()
         );
@@ -153,7 +153,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedProphet", prophetService.updateProphet(id, prophet)))
+                .data(Map.of("dataUpdated", prophetService.updateProphet(id, prophet)))
                 .message("Prophet updated!")
                 .build()
         );

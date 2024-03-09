@@ -55,7 +55,7 @@ public class ProvinceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", provinceService.getProvinceByID(id)))
+                .data(Map.of("datumRetrieved", provinceService.getProvinceByID(id)))
                 .message("Province retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class ProvinceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", provinceService.getProvinceByName(provinceName)))
+                .data(Map.of("datumRetrieved", provinceService.getProvinceByName(provinceName)))
                 .message("Province retrieved!")
                 .build()
         );

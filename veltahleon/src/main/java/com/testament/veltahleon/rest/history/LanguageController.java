@@ -60,7 +60,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", languageService.getLanguageByID(id)))
+                .data(Map.of("datumRetrieved", languageService.getLanguageByID(id)))
                 .message("Language retrieved!")
                 .build()
         );
@@ -72,7 +72,7 @@ public class LanguageController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", languageService.getLanguageByName(languageName)))
+                .data(Map.of("datumRetrieved", languageService.getLanguageByName(languageName)))
                 .message("Language retrieved!")
                 .build()
         );

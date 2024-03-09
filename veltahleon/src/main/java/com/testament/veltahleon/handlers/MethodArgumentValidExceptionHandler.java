@@ -34,8 +34,8 @@ public class MethodArgumentValidExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .status(HttpStatus.BAD_REQUEST)
-                .data(errorMap)
-                .message("Validation error!")
+                .errorData(errorMap)
+                .issue("Validation error!")
                 .build());
     }
 }

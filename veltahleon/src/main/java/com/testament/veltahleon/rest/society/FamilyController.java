@@ -34,7 +34,7 @@ public class FamilyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedFamilies", families))
+                .data(Map.of("dataRetrieved", families))
                 .message(families.size() + " families retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class FamilyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allFamilies", families))
+                .data(Map.of("dataRetrieved", families))
                 .message("All families retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class FamilyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedFamilyByID", familyService.getFamilyByID(id)))
+                .data(Map.of("datumRetrieved", familyService.getFamilyByID(id)))
                 .message("Family retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class FamilyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedFamilyByName", familyService.getFamilyByPersonName(personName)))
+                .data(Map.of("datumRetrieved", familyService.getFamilyByPersonName(personName)))
                 .message("Family retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class FamilyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedFamily", familyService.saveFamily(family)))
+                .data(Map.of("dataSaved", familyService.saveFamily(family)))
                 .message("Family saved!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class FamilyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isFamilyDeleted", familyService.deleteFamilyByID(id)))
+                .data(Map.of("dataDeleted", familyService.deleteFamilyByID(id)))
                 .message("Family deleted!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class FamilyController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedFamily", familyService.updateFamily(id, family)))
+                .data(Map.of("dataUpdated", familyService.updateFamily(id, family)))
                 .message("Family updated!")
                 .build()
         );

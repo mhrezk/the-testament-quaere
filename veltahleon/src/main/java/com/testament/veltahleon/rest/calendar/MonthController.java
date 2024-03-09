@@ -55,7 +55,7 @@ public class MonthController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", monthService.getMonthByID(id)))
+                .data(Map.of("datumRetrieved", monthService.getMonthByID(id)))
                 .message("Month retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class MonthController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", monthService.getMonthByName(monthName)))
+                .data(Map.of("datumRetrieved", monthService.getMonthByName(monthName)))
                 .message("Month retrieved!")
                 .build()
         );

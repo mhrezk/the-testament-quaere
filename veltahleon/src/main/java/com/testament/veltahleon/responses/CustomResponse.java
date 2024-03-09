@@ -21,6 +21,7 @@ public class CustomResponse {
     private int statusCode;
     private HttpStatus status;
     private Map<?, ?> data;
-//    private Map<?, ?> reason;
+    private Map<?, ?> errorData;
+    private String issue;
     private String message;
 }

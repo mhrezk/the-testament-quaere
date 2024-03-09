@@ -34,7 +34,7 @@ public class PunditController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedPundits", pundits))
+                .data(Map.of("dataRetrieved", pundits))
                 .message(pundits.size() + " pundits retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class PunditController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allPundits", pundits))
+                .data(Map.of("dataRetrieved", pundits))
                 .message("All pundits retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class PunditController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedPunditByID", punditService.getPunditByID(id)))
+                .data(Map.of("datumRetrieved", punditService.getPunditByID(id)))
                 .message("Pundit retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class PunditController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedPunditByName", punditService.getPunditByName(punditName)))
+                .data(Map.of("datumRetrieved", punditService.getPunditByName(punditName)))
                 .message("Pundit retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class PunditController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedPundit", punditService.savePundit(pundit)))
+                .data(Map.of("dataSaved", punditService.savePundit(pundit)))
                 .message("Pundit saved!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class PunditController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isPunditDeleted", punditService.deletePunditByID(id)))
+                .data(Map.of("dataDeleted", punditService.deletePunditByID(id)))
                 .message("Pundit deleted!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class PunditController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedPundit", punditService.updatePundit(id, pundit)))
+                .data(Map.of("dataUpdated", punditService.updatePundit(id, pundit)))
                 .message("Pundit updated!")
                 .build()
         );

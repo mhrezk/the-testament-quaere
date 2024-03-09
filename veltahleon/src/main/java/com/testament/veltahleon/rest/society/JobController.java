@@ -30,7 +30,7 @@ public class JobController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allJobs", jobs))
+                .data(Map.of("dataRetrieved", jobs))
                 .message("All jobs retrieved!")
                 .build()
         );
@@ -42,7 +42,7 @@ public class JobController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedJobByID", jobService.getJobByID(id)))
+                .data(Map.of("datumRetrieved", jobService.getJobByID(id)))
                 .message("Job retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class JobController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedJob", jobService.saveJob(job)))
+                .data(Map.of("dataSaved", jobService.saveJob(job)))
                 .message("Job saved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class JobController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isJobDeleted", jobService.deleteJobByID(id)))
+                .data(Map.of("dataDeleted", jobService.deleteJobByID(id)))
                 .message("Job deleted!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class JobController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedJob", jobService.updateJob(id, job)))
+                .data(Map.of("dataUpdated", jobService.updateJob(id, job)))
                 .message("Job updated!")
                 .build()
         );

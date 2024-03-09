@@ -55,7 +55,7 @@ public class MeasurementController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", measurementService.getMeasurementByID(id)))
+                .data(Map.of("datumRetrieved", measurementService.getMeasurementByID(id)))
                 .message("Measurement retrieved!")
                 .build()
         );

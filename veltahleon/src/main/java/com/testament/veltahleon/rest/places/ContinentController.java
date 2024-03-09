@@ -55,7 +55,7 @@ public class ContinentController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", continentService.getContinentByID(id)))
+                .data(Map.of("datumRetrieved", continentService.getContinentByID(id)))
                 .message("Continent retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class ContinentController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", continentService.getContinentByName(continentName)))
+                .data(Map.of("datumRetrieved", continentService.getContinentByName(continentName)))
                 .message("Continent retrieved!")
                 .build()
         );

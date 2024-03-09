@@ -42,7 +42,7 @@ public class EpochController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", epochService.getEpochByID(id)))
+                .data(Map.of("datumRetrieved", epochService.getEpochByID(id)))
                 .message("Epoch retrieved!")
                 .build()
         );

@@ -34,7 +34,7 @@ public class OrganizationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedOrganizations", organizations))
+                .data(Map.of("dataRetrieved", organizations))
                 .message(organizations.size() + " organizations retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class OrganizationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allOrganizations", organizations))
+                .data(Map.of("dataRetrieved", organizations))
                 .message("All organizations retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class OrganizationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedOrganizationByID", organizationService.getOrganizationByID(id)))
+                .data(Map.of("datumRetrieved", organizationService.getOrganizationByID(id)))
                 .message("Organization retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class OrganizationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedOrganizationByName", organizationService.getOrganizationByName(organizationName)))
+                .data(Map.of("datumRetrieved", organizationService.getOrganizationByName(organizationName)))
                 .message("Organization retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class OrganizationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedOrganization", organizationService.saveOrganization(organization)))
+                .data(Map.of("dataSaved", organizationService.saveOrganization(organization)))
                 .message("Organization saved!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class OrganizationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isOrganizationDeleted", organizationService.deleteOrganizationByID(id)))
+                .data(Map.of("dataDeleted", organizationService.deleteOrganizationByID(id)))
                 .message("Organization deleted!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class OrganizationController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedOrganization", organizationService.updateOrganization(id, organization)))
+                .data(Map.of("dataUpdated", organizationService.updateOrganization(id, organization)))
                 .message("Organization updated!")
                 .build()
         );

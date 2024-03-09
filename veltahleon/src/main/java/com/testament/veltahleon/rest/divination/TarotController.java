@@ -59,7 +59,7 @@ public class TarotController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", tarotService.getTarotByID(id)))
+                .data(Map.of("datumRetrieved", tarotService.getTarotByID(id)))
                 .message("Tarot retrieved!")
                 .build()
         );

@@ -61,6 +61,14 @@ public class LetterServiceImpl implements LetterService {
     public Letter updateLetter(Long id, Letter letter) {
         Letter newLetter = letterRepository.findById(id).orElseThrow();
 
+        if(letter.getName() != null && newLetter.getName() != letter.getName()) {
+            newLetter.setName(letter.getName());
+        }
+
+        if(letter.getIpa() != null && newLetter.getIpa() != letter.getIpa()) {
+            newLetter.setIpa(letter.getIpa());
+        }
+
         if((letter.getLanguage() != null && newLetter.getLanguage() != letter.getLanguage())) {
             newLetter.setLanguage(checkLanguageForUpdate(letter.getLanguage(), newLetter.getLanguage()));
         }

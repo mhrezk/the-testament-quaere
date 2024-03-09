@@ -55,7 +55,7 @@ public class BookController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", bookService.getBookByID(id)))
+                .data(Map.of("datumRetrieved", bookService.getBookByID(id)))
                 .message("Book retrieved!")
                 .build()
         );

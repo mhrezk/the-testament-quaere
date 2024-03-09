@@ -30,7 +30,7 @@ public class ReligionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedReligions", religions))
+                .data(Map.of("dataRetrieved", religions))
                 .message(religions.size() + " religions retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -43,7 +43,7 @@ public class ReligionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allReligions", religions))
+                .data(Map.of("dataRetrieved", religions))
                 .message("All religions retrieved!")
                 .build()
         );
@@ -55,7 +55,7 @@ public class ReligionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedReligionByName", religionService.getReligionByName(name)))
+                .data(Map.of("datumRetrieved", religionService.getReligionByName(name)))
                 .message("Religion retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class ReligionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedReligionByID", religionService.getReligionByID(id)))
+                .data(Map.of("datumRetrieved", religionService.getReligionByID(id)))
                 .message("Religion retrieved!")
                 .build()
         );
@@ -79,7 +79,7 @@ public class ReligionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isReligionDeleted", religionService.deleteReligionByID(id)))
+                .data(Map.of("dataDeleted", religionService.deleteReligionByID(id)))
                 .message("Religion deleted!")
                 .build()
         );
@@ -91,7 +91,7 @@ public class ReligionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedReligion", religionService.saveReligion(religion)))
+                .data(Map.of("dataSaved", religionService.saveReligion(religion)))
                 .message("Religion saved!")
                 .build()
         );
@@ -103,7 +103,7 @@ public class ReligionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedReligion", religionService.updateReligion(id, religion)))
+                .data(Map.of("dataUpdated", religionService.updateReligion(id, religion)))
                 .message("Religion updated!")
                 .build()
         );

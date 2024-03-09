@@ -30,7 +30,7 @@ public class VassalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allVassals", vassals))
+                .data(Map.of("dataRetrieved", vassals))
                 .message("All vassals retrieved!")
                 .build()
         );
@@ -42,7 +42,7 @@ public class VassalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedVassalByID", vassalService.getVassalByID(id)))
+                .data(Map.of("datumRetrieved", vassalService.getVassalByID(id)))
                 .message("Vassal retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class VassalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedVassal", vassalService.saveVassal(vassal)))
+                .data(Map.of("dataSaved", vassalService.saveVassal(vassal)))
                 .message("Vassal saved!")
                 .build()
         );
@@ -66,7 +66,7 @@ public class VassalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isVassalDeleted", vassalService.deleteVassalByID(id)))
+                .data(Map.of("dataDeleted", vassalService.deleteVassalByID(id)))
                 .message("Vassal deleted!")
                 .build()
         );
@@ -78,7 +78,7 @@ public class VassalController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedVassal", vassalService.updateVassal(id, vassal)))
+                .data(Map.of("dataUpdated", vassalService.updateVassal(id, vassal)))
                 .message("Vassal updated!")
                 .build()
         );

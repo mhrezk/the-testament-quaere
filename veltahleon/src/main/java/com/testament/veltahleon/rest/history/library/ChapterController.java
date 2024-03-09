@@ -55,7 +55,7 @@ public class ChapterController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", chapterService.getChapterByID(id)))
+                .data(Map.of("datumRetrieved", chapterService.getChapterByID(id)))
                 .message("Chapter retrieved!")
                 .build()
         );

@@ -42,7 +42,7 @@ public class OceanController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", oceanService.getOceanByID(id)))
+                .data(Map.of("datumRetrieved", oceanService.getOceanByID(id)))
                 .message("Ocean retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class OceanController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", oceanService.getOceanByName(oceanName)))
+                .data(Map.of("datumRetrieved", oceanService.getOceanByName(oceanName)))
                 .message("Ocean retrieved!")
                 .build()
         );

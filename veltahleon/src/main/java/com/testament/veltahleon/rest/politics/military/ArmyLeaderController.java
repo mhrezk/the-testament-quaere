@@ -34,7 +34,7 @@ public class ArmyLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedArmyLeaders", armyLeaders))
+                .data(Map.of("dataRetrieved", armyLeaders))
                 .message(armyLeaders.size() + " army leaders retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class ArmyLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allArmyLeaders", armyLeaders))
+                .data(Map.of("dataRetrieved", armyLeaders))
                 .message("All army leaders retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class ArmyLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedArmyLeaderByID", armyLeaderService.getArmyLeaderByID(id)))
+                .data(Map.of("datumRetrieved", armyLeaderService.getArmyLeaderByID(id)))
                 .message("Army leader retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class ArmyLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedArmyLeaderByName", armyLeaderService.getArmyLeaderByName(name)))
+                .data(Map.of("datumRetrieved", armyLeaderService.getArmyLeaderByName(name)))
                 .message("Army leader retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class ArmyLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedArmyLeader", armyLeaderService.saveArmyLeader(armyLeader)))
+                .data(Map.of("dataSaved", armyLeaderService.saveArmyLeader(armyLeader)))
                 .message("Army leader saved!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class ArmyLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isArmyLeaderDeleted", armyLeaderService.deleteArmyLeaderByID(id)))
+                .data(Map.of("dataDeleted", armyLeaderService.deleteArmyLeaderByID(id)))
                 .message("Army leader deleted!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class ArmyLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedArmyLeader", armyLeaderService.updateArmyLeader(id, armyLeader)))
+                .data(Map.of("dataUpdated", armyLeaderService.updateArmyLeader(id, armyLeader)))
                 .message("Army leader updated!")
                 .build()
         );

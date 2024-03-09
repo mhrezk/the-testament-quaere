@@ -12,6 +12,6 @@ public class WelcomeController {
 
     @GetMapping
     public String welcomePage() {
-        return "<h1>Welcome to the API of the world of The testament</h1>";
+        return "<h1>Welcome to the API of the world of The Testament</h1>";
     }
 }

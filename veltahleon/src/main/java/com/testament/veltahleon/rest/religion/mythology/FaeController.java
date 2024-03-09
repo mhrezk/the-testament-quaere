@@ -34,7 +34,7 @@ public class FaeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedFaes", faes))
+                .data(Map.of("dataRetrieved", faes))
                 .message(faes.size() + " faes retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class FaeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allFaes", faes))
+                .data(Map.of("dataRetrieved", faes))
                 .message("All Faes retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class FaeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedFaeByName", faeService.getFaeByName(name)))
+                .data(Map.of("datumRetrieved", faeService.getFaeByName(name)))
                 .message("Fae retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class FaeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedFaeByID", faeService.getFaeByID(id)))
+                .data(Map.of("datumRetrieved", faeService.getFaeByID(id)))
                 .message("Fae retrieved!")
                 .build()
         );
@@ -83,7 +83,7 @@ public class FaeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedFaesByRacialName", faeService.getFaesByRacialName(name)))
+                .data(Map.of("datumRetrieved", faeService.getFaesByRacialName(name)))
                 .message("Faes retrieved!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class FaeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isFaeDeleted", faeService.deleteFaeByID(id)))
+                .data(Map.of("dataDeleted", faeService.deleteFaeByID(id)))
                 .message("Fae deleted!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class FaeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedFae", faeService.saveFae(fae)))
+                .data(Map.of("dataSaved", faeService.saveFae(fae)))
                 .message("Fae saved!")
                 .build()
         );
@@ -124,7 +124,7 @@ public class FaeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedFae", faeService.updateFae(id, fae)))
+                .data(Map.of("dataUpdated", faeService.updateFae(id, fae)))
                 .message("Fae updated!")
                 .build()
         );

@@ -30,7 +30,7 @@ public class BattalionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedBattalions", battalions))
+                .data(Map.of("dataRetrieved", battalions))
                 .message(battalions.size() + " battalions retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -43,7 +43,7 @@ public class BattalionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allBattalions", battalions))
+                .data(Map.of("dataRetrieved", battalions))
                 .message("All battalions retrieved!")
                 .build()
         );
@@ -55,7 +55,7 @@ public class BattalionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedBattalionByID", battalionService.getBattalionByID(id)))
+                .data(Map.of("datumRetrieved", battalionService.getBattalionByID(id)))
                 .message("Battalion retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class BattalionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedBattalionByName", battalionService.getBattalionByName(name)))
+                .data(Map.of("datumRetrieved", battalionService.getBattalionByName(name)))
                 .message("Battalion retrieved!")
                 .build()
         );
@@ -79,7 +79,7 @@ public class BattalionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedBattalion", battalionService.saveBattalion(battalion)))
+                .data(Map.of("dataSaved", battalionService.saveBattalion(battalion)))
                 .message("Battalion saved!")
                 .build()
         );
@@ -91,7 +91,7 @@ public class BattalionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isBattalionDeleted", battalionService.deleteBattalionByID(id)))
+                .data(Map.of("dataDeleted", battalionService.deleteBattalionByID(id)))
                 .message("Battalion deleted!")
                 .build()
         );
@@ -103,7 +103,7 @@ public class BattalionController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedBattalion", battalionService.updateBattalion(id, battalion)))
+                .data(Map.of("dataUpdated", battalionService.updateBattalion(id, battalion)))
                 .message("Battalion updated!")
                 .build()
         );

@@ -34,7 +34,7 @@ public class DemonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedDemons", demons))
+                .data(Map.of("dataRetrieved", demons))
                 .message(demons.size() + " demons retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class DemonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allDemons", demons))
+                .data(Map.of("dataRetrieved", demons))
                 .message("All demons retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class DemonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedDemonByName", demonService.getDemonByName(name)))
+                .data(Map.of("datumRetrieved", demonService.getDemonByName(name)))
                 .message("Demon retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class DemonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedDemonByID", demonService.getDemonByID(id)))
+                .data(Map.of("datumRetrieved", demonService.getDemonByID(id)))
                 .message("Demon retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class DemonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isDemonDeleted", demonService.deleteDemonByID(id)))
+                .data(Map.of("dataDeleted", demonService.deleteDemonByID(id)))
                 .message("Demon deleted!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class DemonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedDemon", demonService.saveDemon(demon)))
+                .data(Map.of("dataSaved", demonService.saveDemon(demon)))
                 .message("Demon saved!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class DemonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedDemon", demonService.updateDemon(id, demon)))
+                .data(Map.of("dataUpdated", demonService.updateDemon(id, demon)))
                 .message("Demon updated!")
                 .build()
         );

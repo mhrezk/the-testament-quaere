@@ -30,7 +30,7 @@ public class UnitController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedUnits", units))
+                .data(Map.of("dataRetrieved", units))
                 .message(units.size() + " units retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -43,7 +43,7 @@ public class UnitController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allUnits", units))
+                .data(Map.of("dataRetrieved", units))
                 .message("All units retrieved!")
                 .build()
         );
@@ -55,7 +55,7 @@ public class UnitController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedUnitByID", unitService.getUnitByID(id)))
+                .data(Map.of("datumRetrieved", unitService.getUnitByID(id)))
                 .message("Unit retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class UnitController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedUnitByName", unitService.getUnitByUnitType(type)))
+                .data(Map.of("datumRetrieved", unitService.getUnitByUnitType(type)))
                 .message("Unit retrieved!")
                 .build()
         );
@@ -79,7 +79,7 @@ public class UnitController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedUnit", unitService.saveUnit(unit)))
+                .data(Map.of("dataSaved", unitService.saveUnit(unit)))
                 .message("Unit saved!")
                 .build()
         );
@@ -91,7 +91,7 @@ public class UnitController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isUnitDeleted", unitService.deleteUnitByID(id)))
+                .data(Map.of("dataDeleted", unitService.deleteUnitByID(id)))
                 .message("Unit deleted!")
                 .build()
         );
@@ -103,7 +103,7 @@ public class UnitController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedUnit", unitService.updateUnit(id, unit)))
+                .data(Map.of("dataUpdated", unitService.updateUnit(id, unit)))
                 .message("Unit updated!")
                 .build()
         );

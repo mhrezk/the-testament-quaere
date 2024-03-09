@@ -34,7 +34,7 @@ public class RankController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allRanks", ranks))
+                .data(Map.of("dataRetrieved", ranks))
                 .message("All ranks retrieved!")
                 .build()
         );
@@ -46,7 +46,7 @@ public class RankController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedRankByID", rankService.getRankByID(id)))
+                .data(Map.of("datumRetrieved", rankService.getRankByID(id)))
                 .message("Rank retrieved!")
                 .build()
         );
@@ -58,7 +58,7 @@ public class RankController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedRankByName", rankService.getRankByRankName(rankName)))
+                .data(Map.of("datumRetrieved", rankService.getRankByRankName(rankName)))
                 .message("Rank retrieved!")
                 .build()
         );
@@ -75,7 +75,7 @@ public class RankController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedRank", rankService.saveRank(rank)))
+                .data(Map.of("dataSaved", rankService.saveRank(rank)))
                 .message("Rank saved!")
                 .build()
         );
@@ -87,7 +87,7 @@ public class RankController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isRankDeleted", rankService.deleteRankByID(id)))
+                .data(Map.of("dataDeleted", rankService.deleteRankByID(id)))
                 .message("Rank deleted!")
                 .build()
         );
@@ -99,7 +99,7 @@ public class RankController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedRank", rankService.updateRank(id, rank)))
+                .data(Map.of("dataUpdated", rankService.updateRank(id, rank)))
                 .message("Rank updated!")
                 .build()
         );

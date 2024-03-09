@@ -24,8 +24,8 @@ public class DataInsertionExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .data(errorMap)
-                .message("Validation error!")
+                .errorData(errorMap)
+                .issue("Validation error!")
                 .build());
     }
 }

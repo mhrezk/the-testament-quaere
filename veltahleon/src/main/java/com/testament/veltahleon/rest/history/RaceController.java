@@ -59,7 +59,7 @@ public class RaceController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", raceService.getRaceByID(id)))
+                .data(Map.of("datumRetrieved", raceService.getRaceByID(id)))
                 .message("Race retrieved!")
                 .build()
         );

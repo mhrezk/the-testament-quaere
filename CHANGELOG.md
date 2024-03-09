@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.45.0] 2023-12-19
+
+- Adjusted mapping for data between frontend and backend
+
 ## [0.44.0] 2023-12-19
 
 - Edited entities in backend

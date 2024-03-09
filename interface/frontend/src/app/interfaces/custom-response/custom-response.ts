@@ -2,12 +2,16 @@ export interface CustomResponse {
   timestamp: Date;
   statusCode: number;
   status: string;
-  data: {
+  data?: {
     dataRetrieved?: any[],
+    datumRetrieved?: any,
     dataSaved?: any,
     dataDeleted?: boolean,
     dataUpdated?: any
   };
-  // reason?: {};
-  message: string;
+  errorData?: {
+    error?: string
+  };
+  issue?: string;
+  message?: string;
 }

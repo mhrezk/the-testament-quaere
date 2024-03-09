@@ -34,7 +34,7 @@ public class NationLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allNationLeaders", nationLeaders))
+                .data(Map.of("dataRetrieved", nationLeaders))
                 .message("All nation leaders retrieved!")
                 .build()
         );
@@ -46,7 +46,7 @@ public class NationLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedNationLeaderByID", nationLeaderService.getNationLeaderByID(id)))
+                .data(Map.of("datumRetrieved", nationLeaderService.getNationLeaderByID(id)))
                 .message("Nation leader retrieved!")
                 .build()
         );
@@ -63,7 +63,7 @@ public class NationLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedNationLeader", nationLeaderService.saveNationLeader(nationLeader)))
+                .data(Map.of("dataSaved", nationLeaderService.saveNationLeader(nationLeader)))
                 .message("Nation leader saved!")
                 .build()
         );
@@ -75,7 +75,7 @@ public class NationLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isNationLeaderDeleted", nationLeaderService.deleteNationLeaderByID(id)))
+                .data(Map.of("dataDeleted", nationLeaderService.deleteNationLeaderByID(id)))
                 .message("Nation leader deleted!")
                 .build()
         );
@@ -87,7 +87,7 @@ public class NationLeaderController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedNationLeader", nationLeaderService.updateNationLeader(id, nationLeader)))
+                .data(Map.of("dataUpdated", nationLeaderService.updateNationLeader(id, nationLeader)))
                 .message("Nation leader updated!")
                 .build()
         );

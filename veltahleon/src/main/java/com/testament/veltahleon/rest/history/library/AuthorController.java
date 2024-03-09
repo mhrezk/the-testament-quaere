@@ -55,7 +55,7 @@ public class AuthorController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", authorService.getAuthorByID(id)))
+                .data(Map.of("datumRetrieved", authorService.getAuthorByID(id)))
                 .message("Author retrieved!")
                 .build()
         );

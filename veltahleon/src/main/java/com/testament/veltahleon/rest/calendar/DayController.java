@@ -55,7 +55,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", dayService.getDayByName(name)))
+                .data(Map.of("datumRetrieved", dayService.getDayByName(name)))
                 .message("Day retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class DayController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", dayService.getDayByID(id)))
+                .data(Map.of("datumRetrieved", dayService.getDayByID(id)))
                 .message("Day retrieved!")
                 .build()
         );

@@ -34,7 +34,7 @@ public class SquadController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedSquads", squads))
+                .data(Map.of("dataRetrieved", squads))
                 .message(squads.size() + " squads retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -47,7 +47,7 @@ public class SquadController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allSquads", squads))
+                .data(Map.of("dataRetrieved", squads))
                 .message("All squads retrieved!")
                 .build()
         );
@@ -59,7 +59,7 @@ public class SquadController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedSquadByID", squadService.getSquadByID(id)))
+                .data(Map.of("datumRetrieved", squadService.getSquadByID(id)))
                 .message("Squad retrieved!")
                 .build()
         );
@@ -71,7 +71,7 @@ public class SquadController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedSquadByName", squadService.getSquadBySquadLeader(name)))
+                .data(Map.of("datumRetrieved", squadService.getSquadBySquadLeader(name)))
                 .message("Squad retrieved!")
                 .build()
         );
@@ -88,7 +88,7 @@ public class SquadController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedSquad", squadService.saveSquad(squad)))
+                .data(Map.of("dataSaved", squadService.saveSquad(squad)))
                 .message("Squad saved!")
                 .build()
         );
@@ -100,7 +100,7 @@ public class SquadController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isSquadDeleted", squadService.deleteSquadByID(id)))
+                .data(Map.of("dataDeleted", squadService.deleteSquadByID(id)))
                 .message("Squad deleted!")
                 .build()
         );
@@ -112,7 +112,7 @@ public class SquadController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedSquad", squadService.updateSquad(id, squad)))
+                .data(Map.of("dataUpdated", squadService.updateSquad(id, squad)))
                 .message("Squad updated!")
                 .build()
         );

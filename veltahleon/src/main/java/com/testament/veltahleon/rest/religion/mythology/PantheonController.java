@@ -30,7 +30,7 @@ public class PantheonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("paginatedPantheons", pantheons))
+                .data(Map.of("dataRetrieved", pantheons))
                 .message(pantheons.size() + " pantheons retrieved from page: " + (pageNumber + 1))
                 .build()
         );
@@ -43,7 +43,7 @@ public class PantheonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("allPantheons", pantheons))
+                .data(Map.of("dataRetrieved", pantheons))
                 .message("All pantheons retrieved!")
                 .build()
         );
@@ -55,7 +55,7 @@ public class PantheonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("queriedPantheonByID", pantheonService.getPantheonByID(id)))
+                .data(Map.of("datumRetrieved", pantheonService.getPantheonByID(id)))
                 .message("Pantheon retrieved!")
                 .build()
         );
@@ -67,7 +67,7 @@ public class PantheonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("isPantheonDeleted", pantheonService.deletePantheonByID(id)))
+                .data(Map.of("dataDeleted", pantheonService.deletePantheonByID(id)))
                 .message("Pantheon deleted!")
                 .build()
         );
@@ -79,7 +79,7 @@ public class PantheonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("savedPantheon", pantheonService.savePantheon(pantheon)))
+                .data(Map.of("dataSaved", pantheonService.savePantheon(pantheon)))
                 .message("Pantheon saved!")
                 .build()
         );
@@ -91,7 +91,7 @@ public class PantheonController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("updatedPantheon", pantheonService.updatePantheon(id, pantheon)))
+                .data(Map.of("dataUpdated", pantheonService.updatePantheon(id, pantheon)))
                 .message("Pantheon updated!")
                 .build()
         );

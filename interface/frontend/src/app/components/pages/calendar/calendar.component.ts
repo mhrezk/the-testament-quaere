@@ -8,7 +8,6 @@ import { catchError } from 'rxjs/operators';
 import {
   faTrash,
   faEdit,
-  faArrowPointer,
 } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
 
@@ -21,6 +20,8 @@ export class CalendarComponent implements OnInit {
   appState$: Observable<AppState<CustomResponse>>;
   protected readonly DATA_STATE = DataState;
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
+  private isLoading = new BehaviorSubject<boolean>(false);
+  isLoading$ = this.isLoading.asObservable();
   faTrash = faTrash;
   faEdit = faEdit;
   headers = [
@@ -28,10 +29,10 @@ export class CalendarComponent implements OnInit {
       key: 'name',
       value: 'Day Name',
     },
-    {
-      key: 'number',
-      value: 'Day Number',
-    },
+    // {
+    //   key: 'number',
+    //   value: 'Day Number',
+    // },
     {
       key: 'description',
       value: 'Day Description',
@@ -63,6 +64,7 @@ export class CalendarComponent implements OnInit {
   }
 
   saveDay(dayForm: NgForm) {
+    this.isLoading.next(true);
     this.appState$ = this.dayService
       .saveDay$(dayForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
@@ -76,7 +78,9 @@ export class CalendarComponent implements OnInit {
               ],
             },
           });
-          //close modal
+          document.getElementById("closeModal").click() //close modal
+          this.isLoading.next(false);
+          dayForm.resetForm(); //resets form
           return {
             dataState: DataState.LOADED,
             data: this.dataSubject.value,
@@ -87,6 +91,7 @@ export class CalendarComponent implements OnInit {
           data: this.dataSubject.value, //begin with pre-loaded data
         }),
         catchError((caughtError: string) => {
+          this.isLoading.next(false);
           return of({
             dataState: DataState.ERROR,
             error: caughtError,

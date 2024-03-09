@@ -42,7 +42,7 @@ public class NationTypeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", nationTypeService.getNationTypeByID(id)))
+                .data(Map.of("datumRetrieved", nationTypeService.getNationTypeByID(id)))
                 .message("NationType retrieved!")
                 .build()
         );
@@ -54,7 +54,7 @@ public class NationTypeController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", nationTypeService.getNationTypeByType(nationTypeName)))
+                .data(Map.of("datumRetrieved", nationTypeService.getNationTypeByType(nationTypeName)))
                 .message("NationType retrieved!")
                 .build()
         );
