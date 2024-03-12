@@ -18,10 +18,13 @@ import { NgForm } from '@angular/forms';
 })
 export class CalendarComponent implements OnInit {
   appState$: Observable<AppState<CustomResponse>>;
+  // protected window: any = window;
   protected readonly DATA_STATE = DataState;
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
+  private isClicked = new BehaviorSubject<boolean>(false);
+  isClicked$ = this.isClicked.asObservable();
   faTrash = faTrash;
   faEdit = faEdit;
   headers = [
@@ -99,4 +102,15 @@ export class CalendarComponent implements OnInit {
         })
       );
   }
+
+  activateModal() {
+    const modal = document.getElementById("addDayModal");
+    if(modal != null) {
+      modal.style.display = "block";
+    }
+  }
+
+  // openDayModal() {
+  //   window.location.href = 'addDayModal';
+  // }
 }

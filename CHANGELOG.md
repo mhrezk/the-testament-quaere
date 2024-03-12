@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.45.1] 2023-12-19
+
+- Added code for generic modal template
+
 ## [0.45.0] 2023-12-19
 
 - Adjusted mapping for data between frontend and backend
