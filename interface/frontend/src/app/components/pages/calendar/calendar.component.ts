@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { DayService } from '../../../services/calendar/day/day.service';
-import { BehaviorSubject, map, Observable, of, startWith } from 'rxjs';
-import { AppState } from '../../../interfaces/application-state/app-state';
-import { CustomResponse } from '../../../interfaces/custom-response/custom-response';
-import { DataState } from '../../../enums/data-state/data-state';
-import { catchError } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
+import {MatDialog} from "@angular/material/dialog";
+
 import {
   faTrash,
   faEdit,
 } from '@fortawesome/free-solid-svg-icons';
-import { NgForm } from '@angular/forms';
+
+import { BehaviorSubject, map, Observable, of, startWith } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+import { DayService } from '../../../services/calendar/day/day.service';
+import { AppState } from '../../../interfaces/application-state/app-state';
+import { CustomResponse } from '../../../interfaces/custom-response/custom-response';
+import { DataState } from '../../../enums/data-state/data-state';
+import {DayDialogComponent} from "../../../dialogs/calendar/day-dialog/day-dialog.component";
 
 @Component({
   selector: 'app-calendar',
@@ -23,8 +28,8 @@ export class CalendarComponent implements OnInit {
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
-  private isClicked = new BehaviorSubject<boolean>(false);
-  isClicked$ = this.isClicked.asObservable();
+  //private isClicked = new BehaviorSubject<boolean>(false);
+  // isClicked$ = this.isClicked.asObservable();
   faTrash = faTrash;
   faEdit = faEdit;
   headers = [
@@ -42,7 +47,7 @@ export class CalendarComponent implements OnInit {
     },
   ];
 
-  constructor(private dayService: DayService) {}
+  constructor(private dayService: DayService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.appState$ = this.dayService.getDays$.pipe(
@@ -103,12 +108,18 @@ export class CalendarComponent implements OnInit {
       );
   }
 
-  activateModal() {
-    const modal = document.getElementById("addDayModal");
-    if(modal != null) {
-      modal.style.display = "block";
-    }
+  openDialog() {
+    this.dialog.open(DayDialogComponent, {
+      width: "400px"
+    });
   }
+
+  // activateModal() {
+  //   const modal = document.getElementById("addDayModal");
+  //   if(modal != null) {
+  //     modal.style.display = "block";
+  //   }
+  // }
 
   // openDayModal() {
   //   window.location.href = 'addDayModal';

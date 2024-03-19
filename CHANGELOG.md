@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.46.0] 2023-12-19
+
+- Created modal for adding days
+- Created save, delete and get methods for HTTP requests regarding the Day entity
+- Added Bootstrap library for modal and styling
+- Created a new Angular project to avoid incompatibilities between Bootstrap and Angular Material
+
 ## [0.45.1] 2023-12-19
 
 - Added code for generic modal template

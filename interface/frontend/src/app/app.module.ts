@@ -12,6 +12,9 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatDialogModule } from "@angular/material/dialog";
 
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
@@ -23,6 +26,7 @@ import { AppComponent } from './app.component';
 import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { CalendarComponent } from './components/pages/calendar/calendar.component';
+import { DayDialogComponent } from './dialogs/calendar/day-dialog/day-dialog.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -31,7 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     CustomSidenavComponent,
     HomeComponent,
-    CalendarComponent
+    CalendarComponent,
+    DayDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +50,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
     NgOptimizedImage,
     RouterModule,
     BrowserAnimationsModule,

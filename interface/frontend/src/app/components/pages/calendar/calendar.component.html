@@ -9,31 +9,38 @@
           <div class="col-sm-6">
             <!--            <button (click)="printReport()" type="button" class="btn btn-primary">Print Report</button>-->
 
-<!--            <a href="#addDayModal" class="btn btn-success" data-toggle="modal">-->
-<!--              <i class="material-icons">&#xE147;</i>-->
-<!--              <span>Add Day</span>-->
-<!--            </a>-->
+            <!--            <a href="#addDayModal" class="btn btn-success" data-toggle="modal">-->
+            <!--              <i class="material-icons">&#xE147;</i>-->
+            <!--              <span>Add Day</span>-->
+            <!--            </a>-->
 
-<!--            <button (click)="window.location.href = '#addDayModal'" class="btn btn-success" data-toggle="modal">-->
-<!--              <i class="material-icons">&#xE147;</i>-->
-<!--              <span>Add Day</span>-->
-<!--            </button>-->
+            <!--            <button (click)="window.location.href = '#addDayModal'" class="btn btn-success" data-toggle="modal">-->
+            <!--              <i class="material-icons">&#xE147;</i>-->
+            <!--              <span>Add Day</span>-->
+            <!--            </button>-->
 
-<!--            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="addDayModal">-->
-<!--              <i class="material-icons">&#xE147;</i>-->
-<!--              <span>Add Day</span>-->
-<!--            </button>-->
+            <!--            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="addDayModal">-->
+            <!--              <i class="material-icons">&#xE147;</i>-->
+            <!--              <span>Add Day</span>-->
+            <!--            </button>-->
 
             <!-- Button to Open the Modal -->
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#dayModal">
-              <i class="material-icons">&#xE147;</i>-->
+            <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#dayModal">
+              <i class="material-icons">&#xE147;</i>
               <span>Add Day</span>
-            </button>
+            </a>
 
-<!--            <button class="btn btn-success">-->
-<!--              <i class="material-icons">&#xE147;</i>-->
-<!--              <span>Add Day</span>-->
-<!--            </button>-->
+<!--            <mat-dialog-actions>-->
+<!--              <button id="addDay" mat-raised-button style="background-color: lightgreen; color: darkslategrey" (click)="openDialog()">-->
+<!--                <i class="material-icons">&#xE147;</i>-->
+<!--                <span>Add Day</span>-->
+<!--              </button>-->
+<!--            </mat-dialog-actions>-->
+
+            <!--            <button class="btn btn-success">-->
+            <!--              <i class="material-icons">&#xE147;</i>-->
+            <!--              <span>Add Day</span>-->
+            <!--            </button>-->
 
             <!--            <span>-->
             <!--                          <select (ngModelChange)="filterServers($event)" name="status" ngModel="ALL"-->
@@ -64,7 +71,7 @@
             <tbody *ngFor="let day of appState.data?.data.dataRetrieved">
             <tr>
               <td>{{ day.name }}</td>
-<!--              <td>{{ day.dayNumber }}</td>-->
+              <!--              <td>{{ day.dayNumber }}</td>-->
               <td>{{ day.description }}</td>
               <td>
                 <span>
@@ -142,26 +149,44 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->
-<!-- The Modal -->
-<div class="modal" id="dayModal">
+<!-- Modal -->
+<div class="modal fade in" id="dayModal" tabindex="-1" aria-labelledby="dayModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <form #dayForm="ngForm" (ngSubmit)="saveDay(dayForm)">
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Add Day</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
+        <div class="modal-header">
+          <h4 class="modal-title" id="dayModalLabel">Add Day</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Day Name</label>
+            <input type="text" ngModel name="name" class="form-control" required>
+          </div>
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+              <div class="form-group">
+                <label>Day Number</label>
+                <input type="text" ngModel name="dayNumber" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+              <div class="form-group">
+                <label>Day Description</label>
+                <input type="text" ngModel name="description" class="form-control" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="submit" [disabled]="dayForm.invalid || (isLoading$ | async)"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
       </form>
     </div>
   </div>

@@ -1,0 +1,13 @@
+<div id="header">
+  <div id="logo">
+    <img
+      [src]="sidebarActive
+          ? 'assets/images/icons/cross-box.svg'
+          : 'assets/images/icons/menu-icon.svg'"
+      (click)="toggleSidebar.emit()">
+    The Testament
+  </div>
+  <div id="menu">
+    <a href="#">Contact</a>
+  </div>
+</div>
