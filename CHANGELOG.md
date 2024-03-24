@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.48.0] 2024-03-24
+
+- Removed frontend portion to resolve strange errors
+
 ## [0.47.0] 2024-03-24
 
 - Created modal for editing days
