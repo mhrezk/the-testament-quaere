@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.47.0] 2024-03-24
+
+- Created modal for editing days
+- Created PUT request method for Day entity
+- Created observable to edit days on frontend
+
 ## [0.46.0] 2023-12-19
 
 - Created modal for adding days

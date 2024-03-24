@@ -21,17 +21,33 @@ export class DayService {
       catchError(this.handleError)
     );
 
+  getDayByID$ = (dayID: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/day/${dayID}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
   saveDay$ = (day: Day) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/save/day`, day)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
 
-  updateDay$ = (dayID: number, day: Day) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/update/day/${dayID}`, day)
+  updateDay$ = (dayID: number, day: Day) => <Observable<CustomResponse>>this.http.patch<CustomResponse>(`${this.baseURL}/update/day/${dayID}`, day)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
+
+  modifyDay$ = (day: Day) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/day`, day)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  // public modifyDay(day: Day): Observable<Day> {
+  //   return this.http.put<Day>(`${this.baseURL}/update/day`, day);
+  // }
 
   deleteDay$ = (dayID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/day/${dayID}`)
     .pipe(

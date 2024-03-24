@@ -26,9 +26,9 @@
 
             <!-- Button to Open the Modal -->
             <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#dayModal">
-<!--              <i class="material-icons">&#xE147;</i>-->
-<!--              <img style="background-color: white" [src]="'assets/images/icons/plus-circle.svg'">-->
-<!--              <span>Add Day</span>-->
+              <!--              <i class="material-icons">&#xE147;</i>-->
+              <!--              <img style="background-color: white" [src]="'assets/images/icons/plus-circle.svg'">-->
+              <!--              <span>Add Day</span>-->
               Add Day
             </a>
 
@@ -66,21 +66,23 @@
           <table class="table table-striped table-hover" id="days">
             <thead>
             <tr>
-              <th *ngFor="let header of headers; let i = index;">{{ header.value }}</th>
+              <th *ngFor="let header of headers">{{ header.value }}</th>
               <th>Actions</th>
             </tr>
             </thead>
-            <tbody *ngFor="let day of appState.appData?.data.dataRetrieved">
+            <tbody *ngFor="let day of appState.appData?.data.dataRetrieved; let i = index;">
             <tr>
               <td>{{ day.name }}</td>
               <!--              <td>{{ day.dayNumber }}</td>-->
               <td>{{ day.description }}</td>
               <td>
                 <span>
-                  <fa-icon [icon]="faEdit"
-                           [style.color]="'blue'"
-                           [title]="'Edit'"
-                           [style.cursor]="'pointer'"></fa-icon>
+                  <a data-bs-toggle="modal" data-bs-target="#editDayModal">
+                    <fa-icon [icon]="faEdit"
+                             [style.color]="'blue'"
+                             [title]="'Edit'"
+                             [style.cursor]="'pointer'"></fa-icon>
+                  </a>
                 </span>
                 &nbsp;
                 &nbsp;
@@ -151,7 +153,10 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->
+
 <!-- Modal -->
+
+<!-- Add Modal -->
 <div class="modal fade in" id="dayModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -174,8 +179,10 @@
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
               <div class="form-group">
+                <!--                <label>Day Description</label>-->
+                <!--                <input type="text" ngModel name="description" class="form-control" required>-->
                 <label>Day Description</label>
-                <input type="text" ngModel name="description" class="form-control" required>
+                <textarea ngModel name="description" class="form-control" required></textarea>
               </div>
             </div>
           </div>
@@ -193,5 +200,49 @@
     </div>
   </div>
 </div>
-<!--<notifier-container></notifier-container>-->
 
+<!-- Edit Modal -->
+
+<div *ngIf="(appState$ | async) as appState" class="modal fade in" id="editDayModal" tabindex="-1" aria-hidden="true">
+  <div *ngFor="let day of appState.appData?.data.dataRetrieved; let i = index;" class="modal-dialog">
+    <div class="modal-content">
+      <form #dayForm="ngForm" (ngSubmit)="modifyDay(dayForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Day</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Day Name</label>
+            <input type="text" [(ngModel)]="appState.appData?.data.dataRetrieved[i].name" name="name" class="form-control">
+          </div>
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+              <div class="form-group">
+                <label>Day Number</label>
+                <input type="text" [(ngModel)]="appState.appData?.data.dataRetrieved[i].dayNumber" name="dayNumber" class="form-control">
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+              <div class="form-group">
+                <label>Day Description</label>
+                <textarea [(ngModel)]="appState.appData?.data.dataRetrieved[i].description" name="description" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="closeEditModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="submit" [disabled]="(isLoading$ | async)"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Update</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--<notifier-container></notifier-container>-->

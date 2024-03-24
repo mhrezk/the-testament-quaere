@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 import {
   faTrash,
   faEdit,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { BehaviorSubject, map, Observable, of, startWith } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {BehaviorSubject, map, Observable, of, startWith} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
-import { DayService } from '../../../services/calendar/day/day.service';
-import { AppState } from '../../../interfaces/application-state/app-state';
-import { CustomResponse } from '../../../interfaces/custom-response/custom-response';
-import { DataState } from '../../../enums/data-state/data-state';
+import {DayService} from '../../../services/calendar/day/day.service';
+import {AppState} from '../../../interfaces/application-state/app-state';
+import {CustomResponse} from '../../../interfaces/custom-response/custom-response';
+import {DataState} from '../../../enums/data-state/data-state';
 import {Day} from "../../../interfaces/models/calendar/day/day";
+import {app} from "../../../../../server";
 
 @Component({
   selector: 'app-calendar',
@@ -46,7 +47,8 @@ export class CalendarComponent implements OnInit {
     },
   ];
 
-  constructor(private dayService: DayService) {}
+  constructor(private dayService: DayService) {
+  }
 
   ngOnInit(): void {
     this.appState$ = this.dayService.getDays$.pipe(
@@ -70,21 +72,44 @@ export class CalendarComponent implements OnInit {
     );
   }
 
+  getDayByID(day: Day) {
+    this.appState$ = this.dayService.getDayByID$(day.id).pipe(
+      map((result) => {
+        this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
+        return {
+          dataState: DataState.LOADED,
+          appData: result,
+        };
+      }),
+      startWith({
+        dataState: DataState.LOADED,
+        appData: this.dataSubject.value
+      }),
+      catchError((caughtError: string) => {
+        return of({
+          dataState: DataState.ERROR,
+          error: caughtError,
+        });
+      })
+    );
+  }
+
   saveDay(dayForm: NgForm) {
     this.isLoading.next(true);
     this.appState$ = this.dayService
       .saveDay$(dayForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
-          this.dataSubject.next({
-            ...result,
-            data: {
-              dataRetrieved: [
-                result.data.dataSaved,
-                ...this.dataSubject.value.data.dataRetrieved,
-              ],
-            },
-          });
+          this.dataSubject.next(
+            {
+              ...result,
+              data: {
+                dataRetrieved: [
+                  result.data.dataSaved,
+                  ...this.dataSubject.value.data.dataRetrieved,
+                ],
+              },
+            });
           document.getElementById("closeModal").click() //close modal
           this.isLoading.next(false);
           dayForm.resetForm(); //resets form
@@ -113,10 +138,11 @@ export class CalendarComponent implements OnInit {
       .pipe(
         map((result) => {
           this.dataSubject.next(
-            {...result,
+            {
+              ...result,
               data: {
                 dataRetrieved: this.dataSubject.value.data.dataRetrieved.filter((d) =>
-                  d.id !== day.id
+                  d.id !== day.id //delete the record that matches d.id === day.id
                 )
               }
             }
@@ -139,6 +165,43 @@ export class CalendarComponent implements OnInit {
       );
   }
 
+  modifyDay(dayForm: NgForm) {
+    this.isLoading.next(true);
+    this.appState$ = this.dayService
+      .modifyDay$(dayForm.value) //or dayForm.value as Day or <Day> dayForm.value
+      .pipe(
+        map((result) => {
+          this.dataSubject.next({
+            ...result,
+            data: {
+              dataSaved: result.data.dataSaved
+            },
+          });
+          document.getElementById("closeEditModal").click() //close modal
+          this.isLoading.next(false);
+          return {
+            dataState: DataState.LOADED,
+            appData: this.dataSubject.value,
+          };
+        }),
+        startWith({
+          dataState: DataState.LOADED,
+          appData: this.dataSubject.value, //begin with pre-loaded data
+        }),
+        catchError((caughtError: string) => {
+          this.isLoading.next(false);
+          return of({
+            dataState: DataState.ERROR,
+            error: caughtError,
+          });
+        })
+      );
+  }
+
+  // modifyDay(day: Day) {
+  //   this.dayService.modifyDay(day).subscribe();
+  // }
+
   // activateModal() {
   //   const modal = document.getElementById("addDayModal");
   //   if(modal != null) {
@@ -149,4 +212,5 @@ export class CalendarComponent implements OnInit {
   // openDayModal() {
   //   window.location.href = 'addDayModal';
   // }
+  protected readonly app = app;
 }

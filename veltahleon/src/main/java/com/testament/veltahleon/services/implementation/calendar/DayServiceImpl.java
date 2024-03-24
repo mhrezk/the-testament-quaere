@@ -114,6 +114,11 @@ public class DayServiceImpl implements DayService {
         return dayRepository.save(newDay);
     }
 
+    @Override
+    public Day updateDay(Day day) {
+        return dayRepository.save(day);
+    }
+
     //Helper Methods
 //    private Language checkLanguageForUpdate(Language language, Language newLanguage) {
 //        if(language.getName() != null && newLanguage.getName() != language.getName()) {
