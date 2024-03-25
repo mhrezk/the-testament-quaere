@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.50.1] 2024-03-25
+
+- Removed redundant modal
+
 ## [0.50.0] 2024-03-25
 
 - Updated Spring Boot backend to 3.2.4
