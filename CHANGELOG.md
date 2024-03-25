@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.49.0] 2024-03-25
+
+- Added angular to project
+- Created frontend portion again
+
 ## [0.48.0] 2024-03-24
 
 - Removed frontend portion to resolve strange errors
