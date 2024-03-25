@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.50.0] 2024-03-25
+
+- Updated Spring Boot backend to 3.2.4
+- Added Bootstrap library and modal
+
 ## [0.49.0] 2024-03-25
 
 - Added angular to project
