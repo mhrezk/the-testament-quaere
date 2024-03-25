@@ -238,10 +238,6 @@ table.table .avatar {
   position: absolute;
 }
 
-.modal .modal-backdrop {
-  z-index: 1040 !important;
-}
-
 .modal .modal-dialog {
   max-width: 400px;
 }
@@ -255,7 +251,6 @@ table.table .avatar {
 .modal .modal-content {
   border-radius: 3px;
   font-size: 14px;
-  z-index: 1100 !important;
 }
 
 .modal .modal-footer {

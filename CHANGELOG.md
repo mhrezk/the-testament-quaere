@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.51.0] 2024-03-25
+
+- Added Swagger dependency
+
 ## [0.50.1] 2024-03-25
 
 - Removed redundant modal

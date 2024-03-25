@@ -14,6 +14,7 @@ import { DayService } from '../../../services/calendar/day/day.service';
 import { AppState } from '../../../interfaces/application-state/app-state';
 import { CustomResponse } from '../../../interfaces/custom-response/custom-response';
 import { DataState } from '../../../enums/data-state/data-state';
+import {Day} from "../../../interfaces/models/calendar/day/day";
 
 @Component({
   selector: 'app-calendar',
@@ -27,8 +28,8 @@ export class CalendarComponent implements OnInit {
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
-  //private isClicked = new BehaviorSubject<boolean>(false);
-  // isClicked$ = this.isClicked.asObservable();
+  isClicked: boolean = false;
+  //isClicked$ = this.isClicked.asObservable();
   faTrash = faTrash;
   faEdit = faEdit;
   headers = [
@@ -99,6 +100,39 @@ export class CalendarComponent implements OnInit {
         }),
         catchError((caughtError: string) => {
           this.isLoading.next(false);
+          return of({
+            dataState: DataState.ERROR,
+            error: caughtError,
+          });
+        })
+      );
+  }
+
+  deleteDay(day: Day) {
+    this.appState$ = this.dayService
+      .deleteDay$(day.id) //or dayForm.value as Day or <Day> dayForm.value
+      .pipe(
+        map((result) => {
+          this.dataSubject.next(
+            {
+              ...result,
+              data: {
+                dataRetrieved: this.dataSubject.value.data.dataRetrieved.filter((d) =>
+                  d.id !== day.id //delete the record that matches d.id === day.id
+                )
+              }
+            }
+          );
+          return {
+            dataState: DataState.LOADED,
+            appData: this.dataSubject.value,
+          };
+        }),
+        startWith({
+          dataState: DataState.LOADED,
+          appData: this.dataSubject.value, //begin with pre-loaded data
+        }),
+        catchError((caughtError: string) => {
           return of({
             dataState: DataState.ERROR,
             error: caughtError,
