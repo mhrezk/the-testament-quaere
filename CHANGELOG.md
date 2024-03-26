@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.52.0] 2024-03-25
+
+- Added modal for creating and editing Day entity
+
 ## [0.51.0] 2024-03-25
 
 - Added Swagger dependency

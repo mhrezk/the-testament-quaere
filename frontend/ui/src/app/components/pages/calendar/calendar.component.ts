@@ -28,6 +28,8 @@ export class CalendarComponent implements OnInit {
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
+  showTable: boolean = false;
+  isUpdated: boolean = false;
   isClicked: boolean = false;
   //isClicked$ = this.isClicked.asObservable();
   faTrash = faTrash;
@@ -50,17 +52,18 @@ export class CalendarComponent implements OnInit {
   constructor(private dayService: DayService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.showTable = true;
     this.appState$ = this.dayService.getDays$.pipe(
       map((result) => {
         this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
         return {
           dataState: DataState.LOADED,
-          data: result,
+          appData: result,
         };
       }),
       startWith({
         dataState: DataState.LOADING,
-        // data: null
+        // appData: null
       }),
       catchError((caughtError: string) => {
         return of({
@@ -77,26 +80,29 @@ export class CalendarComponent implements OnInit {
       .saveDay$(dayForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
-          this.dataSubject.next({
-            ...result,
-            data: {
-              dataRetrieved: [
-                result.data.dataSaved,
-                ...this.dataSubject.value.data.dataRetrieved,
-              ],
-            },
-          });
-          document.getElementById("closeModal").click() //close modal
+          this.dataSubject.next(
+            {
+              ...result,
+              data: {
+                dataRetrieved: [
+                  result.data.dataSaved,
+                  ...this.dataSubject.value.data.dataRetrieved,
+                ],
+              },
+            });
+          //document.getElementById("closeModal").click() //close modal
+          this.isClicked = false;
+          this.showTable = true;
           this.isLoading.next(false);
           dayForm.resetForm(); //resets form
           return {
             dataState: DataState.LOADED,
-            data: this.dataSubject.value,
+            appData: this.dataSubject.value,
           };
         }),
         startWith({
           dataState: DataState.LOADED,
-          data: this.dataSubject.value, //begin with pre-loaded data
+          appData: this.dataSubject.value, //begin with pre-loaded data
         }),
         catchError((caughtError: string) => {
           this.isLoading.next(false);
@@ -133,6 +139,46 @@ export class CalendarComponent implements OnInit {
           appData: this.dataSubject.value, //begin with pre-loaded data
         }),
         catchError((caughtError: string) => {
+          return of({
+            dataState: DataState.ERROR,
+            error: caughtError,
+          });
+        })
+      );
+  }
+
+  modifyDay(dayForm: NgForm) {
+    this.isLoading.next(true);
+    this.appState$ = this.dayService
+      .saveDay$(dayForm.value) //or dayForm.value as Day or <Day> dayForm.value
+      .pipe(
+        map((result) => {
+          this.dataSubject.next(
+            {
+              ...result,
+              data: {
+                dataRetrieved: [
+                  result.data.dataUpdated,
+                  ...this.dataSubject.value.data.dataRetrieved,
+                ],
+              },
+            });
+          this.isUpdated = false;
+          this.showTable = true;
+          //document.getElementById("closeModal").click() //close modal
+          this.isLoading.next(false);
+          dayForm.resetForm(); //resets form
+          return {
+            dataState: DataState.LOADED,
+            appData: this.dataSubject.value,
+          };
+        }),
+        startWith({
+          dataState: DataState.LOADED,
+          appData: this.dataSubject.value, //begin with pre-loaded data
+        }),
+        catchError((caughtError: string) => {
+          this.isLoading.next(false);
           return of({
             dataState: DataState.ERROR,
             error: caughtError,

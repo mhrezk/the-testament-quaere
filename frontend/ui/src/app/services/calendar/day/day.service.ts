@@ -27,7 +27,13 @@ export class DayService {
       catchError(this.handleError)
     );
 
-  updateDay$ = (dayID: number, day: Day) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/update/day/${dayID}`, day)
+  updateDay$ = (dayID: number, day: Day) => <Observable<CustomResponse>>this.http.patch<CustomResponse>(`${this.baseURL}/update/day/${dayID}`, day)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  modifyDay$ = (day: Day) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/day`, day)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
