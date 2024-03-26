@@ -22,6 +22,8 @@ import {Day} from "../../../interfaces/models/calendar/day/day";
   styleUrl: './calendar.component.css',
 })
 export class CalendarComponent implements OnInit {
+  updatedDay: Day;
+  selectedDay: Day;
   appState$: Observable<AppState<CustomResponse>>;
   // protected window: any = window;
   protected readonly DATA_STATE = DataState;
@@ -52,7 +54,10 @@ export class CalendarComponent implements OnInit {
   constructor(private dayService: DayService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.showTable = true;
+    this.getAllDays();
+  }
+
+  getAllDays() {
     this.appState$ = this.dayService.getDays$.pipe(
       map((result) => {
         this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
@@ -74,6 +79,12 @@ export class CalendarComponent implements OnInit {
     );
   }
 
+  getDayByID(dayID: number) {
+    this.dayService.getDayByID(dayID).subscribe(result => {
+      this.selectedDay = result.data.datumRetrieved;
+    })
+  }
+
   saveDay(dayForm: NgForm) {
     this.isLoading.next(true);
     this.appState$ = this.dayService
@@ -92,7 +103,6 @@ export class CalendarComponent implements OnInit {
             });
           //document.getElementById("closeModal").click() //close modal
           this.isClicked = false;
-          this.showTable = true;
           this.isLoading.next(false);
           dayForm.resetForm(); //resets form
           return {
@@ -150,7 +160,7 @@ export class CalendarComponent implements OnInit {
   modifyDay(dayForm: NgForm) {
     this.isLoading.next(true);
     this.appState$ = this.dayService
-      .saveDay$(dayForm.value) //or dayForm.value as Day or <Day> dayForm.value
+      .modifyDay$(dayForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
           this.dataSubject.next(
@@ -164,7 +174,6 @@ export class CalendarComponent implements OnInit {
               },
             });
           this.isUpdated = false;
-          this.showTable = true;
           //document.getElementById("closeModal").click() //close modal
           this.isLoading.next(false);
           dayForm.resetForm(); //resets form
@@ -185,6 +194,17 @@ export class CalendarComponent implements OnInit {
           });
         })
       );
+  }
+
+  updateDay(dayForm: NgForm) {
+    this.dayService.modifyDay(dayForm.value).subscribe(result => {
+      for(let i = 0; i < this.dataSubject.value.data.dataRetrieved.length; i++) {
+        if(this.selectedDay.id === this.dataSubject.value.data.dataRetrieved[i].id) {
+          this.dataSubject.value.data.dataRetrieved.splice(i, 1, this.selectedDay);
+        }
+      }
+    });
+    this.isUpdated = false;
   }
 
   // openDialog() {

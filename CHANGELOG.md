@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.53.0] 2024-03-26
+
+- Added folder for maps
+- Loaded map on home screen
+- Created PUT HTTP request method for Day entity
+- Created GET by ID HTTP request method for Day entity
+
 ## [0.52.1] 2024-03-26
 
 - Added heightmaps

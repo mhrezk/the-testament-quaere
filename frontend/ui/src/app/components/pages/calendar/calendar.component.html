@@ -1,5 +1,5 @@
 <div class="container-xl">
-  <div *ngIf="showTable && (!isClicked || !isUpdated)" class="table-responsive">
+  <div class="table-responsive">
     <div class="table-wrapper">
       <div class="table-title">
         <div class="row">
@@ -78,7 +78,7 @@
                   <fa-icon [icon]="faEdit"
                            [style.color]="'blue'"
                            [title]="'Edit'"
-                           (click)="isUpdated = true"
+                           (click)="isUpdated = true; getDayByID(day.id);"
                            [style.cursor]="'pointer'"></fa-icon>
                 </span>
                 &nbsp;
@@ -93,7 +93,8 @@
           </table>
         </ng-container>
         <ng-container *ngSwitchCase="DATA_STATE.ERROR">
-          <div style="background-color: indianred">{{ appState.appData?.issue }}</div>
+<!--          <div style="background-color: indianred">{{ appState.appData?.issue }}</div>-->
+          <div style="background-color: indianred">Internal Server Error: Database is not connected!</div>
         </ng-container>
       </ng-container>
     </div>
@@ -237,29 +238,29 @@
 </div>
 
 <!-- Edit Day -->
-<div *ngIf="isUpdated && (appState$ | async) as appState" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel" aria-hidden="true">
-  <div *ngFor="let day of appState.appData?.data.dataRetrieved; let i = index" class="modal-dialog">
+<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <form #dayForm="ngForm" (ngSubmit)="modifyDay(dayForm)">
+      <form #dayForm="ngForm" (ngSubmit)="updateDay(dayForm)">
         <div class="modal-header">
           <h4 class="modal-title">Edit Day</h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label>Day Name</label>
-            <input type="text" [(ngModel)]="appState.appData?.data.dataRetrieved[i].name" name="name" class="form-control" required>
+            <input type="text" [(ngModel)]="selectedDay.name" name="name" class="form-control" required>
           </div>
           <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
               <div class="form-group">
                 <label>Day Number</label>
-                <input type="text" [(ngModel)]="appState.appData?.data.dataRetrieved[i].dayNumber" name="dayNumber" class="form-control" required>
+                <input type="text" [(ngModel)]="selectedDay.dayNumber" name="dayNumber" class="form-control" required>
               </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
               <div class="form-group">
                 <label>Day Description</label>
-                <input type="text" [(ngModel)]="appState.appData?.data.dataRetrieved[i].description" name="description" class="form-control" required>
+                <input type="text" [(ngModel)]="selectedDay.description" name="description" class="form-control" required>
               </div>
             </div>
           </div>
