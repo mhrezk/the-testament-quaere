@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
 import {MatDialog} from "@angular/material/dialog";
 
 import {
@@ -7,13 +7,13 @@ import {
   faEdit,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { BehaviorSubject, map, Observable, of, startWith } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {BehaviorSubject, map, Observable, of, startWith} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
-import { DayService } from '../../../services/calendar/day/day.service';
-import { AppState } from '../../../interfaces/application-state/app-state';
-import { CustomResponse } from '../../../interfaces/custom-response/custom-response';
-import { DataState } from '../../../enums/data-state/data-state';
+import {DayService} from '../../../services/calendar/day/day.service';
+import {AppState} from '../../../interfaces/application-state/app-state';
+import {CustomResponse} from '../../../interfaces/custom-response/custom-response';
+import {DataState} from '../../../enums/data-state/data-state';
 import {Day} from "../../../interfaces/models/calendar/day/day";
 
 @Component({
@@ -22,7 +22,6 @@ import {Day} from "../../../interfaces/models/calendar/day/day";
   styleUrl: './calendar.component.css',
 })
 export class CalendarComponent implements OnInit {
-  updatedDay: Day;
   selectedDay: Day;
   appState$: Observable<AppState<CustomResponse>>;
   // protected window: any = window;
@@ -30,7 +29,6 @@ export class CalendarComponent implements OnInit {
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
-  showTable: boolean = false;
   isUpdated: boolean = false;
   isClicked: boolean = false;
   //isClicked$ = this.isClicked.asObservable();
@@ -51,32 +49,34 @@ export class CalendarComponent implements OnInit {
     },
   ];
 
-  constructor(private dayService: DayService, private dialog: MatDialog) {}
+  constructor(private dayService: DayService, private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.getAllDays();
   }
 
   getAllDays() {
-    this.appState$ = this.dayService.getDays$.pipe(
-      map((result) => {
-        this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
-        return {
-          dataState: DataState.LOADED,
-          appData: result,
-        };
-      }),
-      startWith({
-        dataState: DataState.LOADING,
-        // appData: null
-      }),
-      catchError((caughtError: string) => {
-        return of({
-          dataState: DataState.ERROR,
-          error: caughtError,
-        });
-      })
-    );
+    this.appState$ = this.dayService.getDays$
+      .pipe(
+        map((result) => {
+          this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
+          return {
+            dataState: DataState.LOADED,
+            appData: result,
+          };
+        }),
+        startWith({
+          dataState: DataState.LOADING,
+          // appData: null
+        }),
+        catchError((caughtError: string) => {
+          return of({
+            dataState: DataState.ERROR,
+            error: caughtError,
+          });
+        })
+      );
   }
 
   getDayByID(dayID: number) {
@@ -157,49 +157,36 @@ export class CalendarComponent implements OnInit {
       );
   }
 
-  modifyDay(dayForm: NgForm) {
+  modifyDay(day: Day) {
     this.isLoading.next(true);
-    this.appState$ = this.dayService
-      .modifyDay$(dayForm.value) //or dayForm.value as Day or <Day> dayForm.value
-      .pipe(
-        map((result) => {
-          this.dataSubject.next(
-            {
-              ...result,
-              data: {
-                dataRetrieved: [
-                  result.data.dataUpdated,
-                  ...this.dataSubject.value.data.dataRetrieved,
-                ],
-              },
-            });
-          this.isUpdated = false;
-          //document.getElementById("closeModal").click() //close modal
-          this.isLoading.next(false);
-          dayForm.resetForm(); //resets form
-          return {
-            dataState: DataState.LOADED,
-            appData: this.dataSubject.value,
-          };
-        }),
-        startWith({
+    this.appState$ = this.dayService.modifyDay$(day).pipe(
+      map((result) => {
+        const index = this.dataSubject.value.data.dataRetrieved.findIndex(day => day.id === result.data.dataUpdated.id); //loops through the array and finds the record whose id matches the updated day from the backend
+        this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated; //replaces old day with updated day
+        this.isUpdated = false;
+        this.isLoading.next(false);
+        return {
           dataState: DataState.LOADED,
-          appData: this.dataSubject.value, //begin with pre-loaded data
-        }),
-        catchError((caughtError: string) => {
-          this.isLoading.next(false);
-          return of({
-            dataState: DataState.ERROR,
-            error: caughtError,
-          });
-        })
-      );
+          appData: this.dataSubject.value
+        };
+      }),
+      startWith({
+        dataState: DataState.LOADED,
+        appData: this.dataSubject.value
+      }),
+      catchError((caughtError: string) => {
+        return of({
+          dataState: DataState.ERROR,
+          error: caughtError,
+        });
+      })
+    );
   }
 
   updateDay(dayForm: NgForm) {
     this.dayService.modifyDay(dayForm.value).subscribe(result => {
-      for(let i = 0; i < this.dataSubject.value.data.dataRetrieved.length; i++) {
-        if(this.selectedDay.id === this.dataSubject.value.data.dataRetrieved[i].id) {
+      for (let i = 0; i < this.dataSubject.value.data.dataRetrieved.length; i++) {
+        if (this.selectedDay.id === this.dataSubject.value.data.dataRetrieved[i].id) {
           this.dataSubject.value.data.dataRetrieved.splice(i, 1, this.selectedDay);
         }
       }

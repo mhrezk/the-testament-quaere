@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.55.0] 2024-03-27
+
+- Created filterByGender method in person.component.ts to use the PersonService observable
+- Created modifyDay method that utilizes PUT HTTP request observable for the Day entity
+
 ## [0.54.0] 2024-03-27
 
 - Edited name of package for religion to dogma

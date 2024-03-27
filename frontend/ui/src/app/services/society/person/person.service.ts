@@ -22,14 +22,6 @@ export class PersonService {
               ...response,
               message: `People have been filtered by gender type: ${gender}`
             } :
-            // gender === Gender.MALE ? {
-            //     ...response,
-            //     message: `People have been filtered by gender type: ${gender}`
-            //   } :
-            //   {
-            //     ...response,
-            //     message: `People have been filtered by gender type: FEMALE`
-            //   }
             {
               ...response,
               message: response.data.dataRetrieved?.filter(person => person.gender === gender).length > 0 ?
