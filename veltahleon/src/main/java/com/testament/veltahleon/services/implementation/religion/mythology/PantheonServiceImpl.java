@@ -1,8 +1,8 @@
 package com.testament.veltahleon.services.implementation.religion.mythology;
 
 import com.testament.veltahleon.exceptions.DataNotFoundException;
-import com.testament.veltahleon.model.entities.religion.mythology.Pantheon;
-import com.testament.veltahleon.repositories.religion.mythology.PantheonRepository;
+import com.testament.veltahleon.model.entities.dogma.mythology.Pantheon;
+import com.testament.veltahleon.repositories.dogma.mythology.PantheonRepository;
 import com.testament.veltahleon.services.ifc.religion.mythology.PantheonService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

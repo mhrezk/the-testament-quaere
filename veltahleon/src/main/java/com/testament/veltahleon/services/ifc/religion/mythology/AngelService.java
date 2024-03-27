@@ -1,6 +1,6 @@
 package com.testament.veltahleon.services.ifc.religion.mythology;
 
-import com.testament.veltahleon.model.entities.religion.mythology.Angel;
+import com.testament.veltahleon.model.entities.dogma.mythology.Angel;
 
 import java.util.Collection;
 

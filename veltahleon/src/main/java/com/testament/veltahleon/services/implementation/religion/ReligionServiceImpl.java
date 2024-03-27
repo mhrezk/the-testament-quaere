@@ -1,8 +1,8 @@
 package com.testament.veltahleon.services.implementation.religion;
 
 import com.testament.veltahleon.exceptions.DataNotFoundException;
-import com.testament.veltahleon.model.entities.religion.Religion;
-import com.testament.veltahleon.repositories.religion.ReligionRepository;
+import com.testament.veltahleon.model.entities.dogma.Religion;
+import com.testament.veltahleon.repositories.dogma.ReligionRepository;
 import com.testament.veltahleon.services.ifc.religion.ReligionService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.testament.veltahleon.services.implementation.religion.mythology;
 
-import com.testament.veltahleon.model.entities.religion.mythology.Fae;
-import com.testament.veltahleon.repositories.religion.mythology.FaeRepository;
+import com.testament.veltahleon.model.entities.dogma.mythology.Fae;
+import com.testament.veltahleon.repositories.dogma.mythology.FaeRepository;
 import com.testament.veltahleon.services.ifc.religion.mythology.FaeService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

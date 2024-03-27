@@ -1,8 +1,8 @@
 package com.testament.veltahleon.services.implementation.religion.mythology;
 
 import com.testament.veltahleon.exceptions.DataNotFoundException;
-import com.testament.veltahleon.model.entities.religion.mythology.Demon;
-import com.testament.veltahleon.repositories.religion.mythology.DemonRepository;
+import com.testament.veltahleon.model.entities.dogma.mythology.Demon;
+import com.testament.veltahleon.repositories.dogma.mythology.DemonRepository;
 import com.testament.veltahleon.services.ifc.religion.mythology.DemonService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

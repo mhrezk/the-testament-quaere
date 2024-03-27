@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.54.0] 2024-03-27
+
+- Edited name of package for religion to dogma
+- Added all interfaces on frontend for society package
+- Added service class on frontend for person entity
+- Added filterByGender observable on frontend for person service
+
 ## [0.53.0] 2024-03-26
 
 - Added folder for maps

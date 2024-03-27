@@ -1,6 +1,6 @@
 package com.testament.veltahleon.services.ifc.religion.mythology;
 
-import com.testament.veltahleon.model.entities.religion.mythology.Deity;
+import com.testament.veltahleon.model.entities.dogma.mythology.Deity;
 
 import java.util.Collection;
 

@@ -1,8 +1,6 @@
 package com.testament.veltahleon.model.entities.society;
 
 import com.testament.veltahleon.abstraction.Human;
-import com.testament.veltahleon.model.entities.places.Nation;
-import com.testament.veltahleon.model.entities.religion.Religion;
 import jakarta.persistence.*;
 import lombok.*;
 

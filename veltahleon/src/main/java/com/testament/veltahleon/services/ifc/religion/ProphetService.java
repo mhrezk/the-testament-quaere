@@ -1,6 +1,6 @@
 package com.testament.veltahleon.services.ifc.religion;
 
-import com.testament.veltahleon.model.entities.religion.Prophet;
+import com.testament.veltahleon.model.entities.dogma.Prophet;
 
 import java.util.Collection;
 

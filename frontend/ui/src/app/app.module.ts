@@ -26,6 +26,7 @@ import { AppComponent } from './app.component';
 import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { CalendarComponent } from './components/pages/calendar/calendar.component';
+import { PersonComponent } from './components/pages/society/person/person.component';
 // import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
 // import { HomeComponent } from './components/pages/home/home.component';
 // import { CalendarComponent } from './components/pages/calendar/calendar.component';
@@ -35,7 +36,8 @@ import { CalendarComponent } from './components/pages/calendar/calendar.componen
     AppComponent,
     CustomSidenavComponent,
     HomeComponent,
-    CalendarComponent
+    CalendarComponent,
+    PersonComponent
   ],
   imports: [
     BrowserModule,
