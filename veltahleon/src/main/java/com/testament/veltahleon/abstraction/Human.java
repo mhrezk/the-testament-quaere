@@ -6,7 +6,7 @@ import com.testament.veltahleon.model.entities.places.Nation;
 import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.society.Family;
 import com.testament.veltahleon.model.entities.society.Title;
-import com.testament.veltahleon.model.entities.society.enumeration.Gender;
+import com.testament.veltahleon.model.enumeration.Gender;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

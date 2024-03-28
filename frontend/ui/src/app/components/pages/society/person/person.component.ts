@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {PersonService} from "../../../../services/society/person/person.service";
-import {Gender} from "../../../../enums/gender/gender";
+import {Gender} from "../../../../enums/gender";
 import {BehaviorSubject, map, Observable, of, startWith} from "rxjs";
-import {AppState} from "../../../../interfaces/application-state/app-state";
-import {CustomResponse} from "../../../../interfaces/custom-response/custom-response";
-import {DataState} from "../../../../enums/data-state/data-state";
+import {AppState} from "../../../../interfaces/app-state";
+import {CustomResponse} from "../../../../interfaces/custom-response";
+import {DataState} from "../../../../enums/data-state";
 import {catchError} from "rxjs/operators";
 
 @Component({

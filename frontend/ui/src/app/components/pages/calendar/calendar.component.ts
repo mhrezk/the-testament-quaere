@@ -11,10 +11,10 @@ import {BehaviorSubject, map, Observable, of, startWith} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 import {DayService} from '../../../services/calendar/day/day.service';
-import {AppState} from '../../../interfaces/application-state/app-state';
-import {CustomResponse} from '../../../interfaces/custom-response/custom-response';
-import {DataState} from '../../../enums/data-state/data-state';
-import {Day} from "../../../interfaces/models/calendar/day/day";
+import {AppState} from '../../../interfaces/app-state';
+import {CustomResponse} from '../../../interfaces/custom-response';
+import {DataState} from '../../../enums/data-state';
+import {Day} from "../../../interfaces/models/calendar/day";
 
 @Component({
   selector: 'app-calendar',

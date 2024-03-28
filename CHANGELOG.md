@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.56.0] 2024-03-28
+
+- Refactored enums in backend
+- Created interfaces for all entities in frotend
+- Created services for most entities in frontend
+- Created all necessary enums in frontend
+
 ## [0.55.0] 2024-03-27
 
 - Created filterByGender method in person.component.ts to use the PersonService observable

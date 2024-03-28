@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {tap, catchError} from "rxjs/operators";
-import {CustomResponse} from "../../../interfaces/custom-response/custom-response";
+import {CustomResponse} from "../../../interfaces/custom-response";
 import {environment} from "../../../../environments/environment";
-import {Day} from "../../../interfaces/models/calendar/day/day";
+import {Day} from "../../../interfaces/models/calendar/day";
 
 @Injectable({
   providedIn: 'root'
