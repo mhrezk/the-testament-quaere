@@ -38,11 +38,6 @@ public class DayServiceImpl implements DayService {
 //        return dayRepository.findByLanguage_Name(languageName);
 //    }
 
-//    @Override
-//    public Collection<Day> getDaysByLanguage(String languageName) {
-//        return dayRepository.findByLanguage_Name(languageName);
-//    }
-
     @Override
     public Day getDayByID(Long id) {
         return dayRepository.findById(id).orElseThrow();

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.57.0] 2024-03-29
+
+- Added properties for interfaces in frontend
+
 ## [0.56.0] 2024-03-28
 
 - Refactored enums in backend

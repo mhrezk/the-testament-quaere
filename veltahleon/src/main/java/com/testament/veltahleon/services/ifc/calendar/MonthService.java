@@ -8,7 +8,7 @@ public interface MonthService {
 
     Collection<Month> getMonthsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Month> getMonths();
-    Collection<Month> getMonthsByLanguageName(String name);
+    //Collection<Month> getMonthsByLanguageName(String name);
     Month getMonthByID(Long id);
     Month getMonthByName(String name);
     Boolean deleteMonthByID(Long id);

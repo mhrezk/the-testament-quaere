@@ -2,11 +2,12 @@ package com.testament.veltahleon.model.entities.calendar;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.commons.lang3.builder.EqualsExclude;
+import com.testament.veltahleon.model.entities.calendar.Day;
 
 @Entity
 @Table(name = "years")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

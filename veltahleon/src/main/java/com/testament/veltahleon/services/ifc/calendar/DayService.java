@@ -20,6 +20,4 @@ public interface DayService {
     Day updateDay(Long id, Day day);
 
     Day updateDay(Day day);
-
-    //Day update(Long id, Day day);
 }

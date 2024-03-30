@@ -4,7 +4,6 @@ import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.calendar.Month;
 import com.testament.veltahleon.model.entities.history.Language;
 import com.testament.veltahleon.repositories.calendar.MonthRepository;
-import com.testament.veltahleon.repositories.history.LanguageRepository;
 import com.testament.veltahleon.services.ifc.calendar.MonthService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +22,8 @@ public class MonthServiceImpl implements MonthService {
 
     @Autowired
     private MonthRepository monthRepository;
-    @Autowired
-    private final LanguageRepository languageRepository;
+//    @Autowired
+//    private final LanguageRepository languageRepository;
 
     //CRUD
     @Override
@@ -37,10 +36,10 @@ public class MonthServiceImpl implements MonthService {
         return monthRepository.findAll();
     }
 
-    @Override
-    public Collection<Month> getMonthsByLanguageName(String name) {
-        return monthRepository.findByLanguage_Name(name);
-    }
+//    @Override
+//    public Collection<Month> getMonthsByLanguageName(String name) {
+//        return monthRepository.findByLanguage_Name(name);
+//    }
 
     @Override
     public Month getMonthByID(Long id) {
@@ -64,11 +63,11 @@ public class MonthServiceImpl implements MonthService {
             throw new DataInsertionException("Month name");
         }
 
-        if(languageRepository.countByName(month.getLanguage().getName()) >= 1) {
-            Language language = languageRepository.findByName(month.getLanguage().getName());
-            month.getLanguage().setId(language.getId());
-            month.setLanguage(language);
-        }
+//        if(languageRepository.countByName(month.getLanguage().getName()) >= 1) {
+//            Language language = languageRepository.findByName(month.getLanguage().getName());
+//            month.getLanguage().setId(language.getId());
+//            month.setLanguage(language);
+//        }
         return monthRepository.save(month);
     }
 
@@ -92,26 +91,26 @@ public class MonthServiceImpl implements MonthService {
             newMonth.setNumberOfDays(month.getNumberOfDays());
         }
 
-        if(month.getLanguage() != null && newMonth.getLanguage() != month.getLanguage()) {
-            newMonth.setLanguage(checkLanguageForUpdate(month.getLanguage(), newMonth.getLanguage()));
-        }
+//        if(month.getLanguage() != null && newMonth.getLanguage() != month.getLanguage()) {
+//            newMonth.setLanguage(checkLanguageForUpdate(month.getLanguage(), newMonth.getLanguage()));
+//        }
 
         return monthRepository.save(newMonth);
     }
 
     //Helper Methods
-    private Language checkLanguageForUpdate(Language language, Language newLanguage) {
-        if(language.getName() != null && newLanguage.getName() != language.getName()) {
-            newLanguage.setName(language.getName());
-        }
-
-        if(language.getDescription() != null && newLanguage.getDescription() != language.getDescription()) {
-            newLanguage.setDescription(language.getDescription());
-        }
-
-        if(language.getAlphabetURL() != null && newLanguage.getAlphabetURL() != language.getAlphabetURL()) {
-            newLanguage.setAlphabetURL(language.getAlphabetURL());
-        }
-        return newLanguage;
-    }
+//    private Language checkLanguageForUpdate(Language language, Language newLanguage) {
+//        if(language.getName() != null && newLanguage.getName() != language.getName()) {
+//            newLanguage.setName(language.getName());
+//        }
+//
+//        if(language.getDescription() != null && newLanguage.getDescription() != language.getDescription()) {
+//            newLanguage.setDescription(language.getDescription());
+//        }
+//
+//        if(language.getAlphabetURL() != null && newLanguage.getAlphabetURL() != language.getAlphabetURL()) {
+//            newLanguage.setAlphabetURL(language.getAlphabetURL());
+//        }
+//        return newLanguage;
+//    }
 }
