@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.58.0] 2024-03-29
+
+- Finished adding all properties for all interfaces in frontend
+- Deleted extra folder
+
 ## [0.57.0] 2024-03-29
 
 - Added properties for interfaces in frontend
