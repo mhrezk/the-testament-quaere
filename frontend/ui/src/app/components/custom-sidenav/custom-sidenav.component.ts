@@ -31,6 +31,11 @@ export class CustomSidenavComponent {
       icon: "flag",
       label: "Nations",
       route: "nations"
+    },
+    {
+      icon: "people",
+      label: "People",
+      route: "people"
     }
   ]);
 

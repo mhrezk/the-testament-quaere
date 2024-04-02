@@ -13,4 +13,5 @@ public interface PersonService {
     Boolean deletePersonByID(Long id);
     Person savePerson(Person person);
     Person updatePerson(Long id, Person person);
+    Person updatePerson(Person person);
 }

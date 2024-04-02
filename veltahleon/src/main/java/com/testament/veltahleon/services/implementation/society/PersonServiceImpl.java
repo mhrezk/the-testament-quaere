@@ -106,6 +106,11 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.save(newPerson);
     }
 
+    @Override
+    public Person updatePerson(Person person) {
+        return personRepository.save(person);
+    }
+
     //Helper Methods
     private Race checkRaceForUpdate(Race race, Race newRace) {
         if(race.getName() != null && newRace.getName() != race.getName()) {

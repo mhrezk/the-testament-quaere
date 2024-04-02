@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.59.0] 2024-03-29
+
+- Created person HTML template
+- Added CRUD operations for Person entity
+
 ## [0.58.0] 2024-03-29
 
 - Finished adding all properties for all interfaces in frontend

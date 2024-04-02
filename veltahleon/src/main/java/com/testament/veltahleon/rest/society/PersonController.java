@@ -29,13 +29,20 @@ public class PersonController {
 
     @GetMapping("/persons")
     public ResponseEntity<CustomResponse> getPaginatedPersons(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        List<Person> persons = (List<Person>) personService.getPersonsWithPagination(pageNumber, pageSize);
+        List<Person> persons;
+        int page = 0;
+        if(pageNumber <= 0) {
+            persons = (List<Person>) personService.getPersonsWithPagination(page, pageSize);
+        } else {
+            page = pageNumber;
+            persons = (List<Person>) personService.getPersonsWithPagination((page - 1), pageSize);
+        }
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", persons))
-                .message(persons.size() + " persons retrieved from page: " + (pageNumber + 1))
+                .message(persons.size() + " persons retrieved!")
                 .build()
         );
     }
@@ -113,6 +120,18 @@ public class PersonController {
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataUpdated", personService.updatePerson(id, person)))
+                .message("Person updated!")
+                .build()
+        );
+    }
+
+    @PutMapping("/update/person")
+    public ResponseEntity<CustomResponse> updatePerson(@RequestBody Person person) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataUpdated", personService.updatePerson(person)))
                 .message("Person updated!")
                 .build()
         );

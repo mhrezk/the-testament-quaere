@@ -27,6 +27,7 @@ import { CustomSidenavComponent } from './components/custom-sidenav/custom-siden
 import { HomeComponent } from './components/pages/home/home.component';
 import { CalendarComponent } from './components/pages/calendar/calendar.component';
 import { PersonComponent } from './components/pages/society/person/person.component';
+import {NgxPaginationModule} from "ngx-pagination";
 // import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
 // import { HomeComponent } from './components/pages/home/home.component';
 // import { CalendarComponent } from './components/pages/calendar/calendar.component';
@@ -39,27 +40,28 @@ import { PersonComponent } from './components/pages/society/person/person.compon
     CalendarComponent,
     PersonComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    FormsModule,
-    RouterOutlet,
-    HttpClientModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDialogModule,
-    MatInputModule,
-    MatFormFieldModule,
-    NgOptimizedImage,
-    RouterModule,
-    BrowserAnimationsModule,
-    NgxSimpleTextEditorModule,
-    FontAwesomeModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        FormsModule,
+        RouterOutlet,
+        HttpClientModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatDialogModule,
+        MatInputModule,
+        MatFormFieldModule,
+        NgOptimizedImage,
+        RouterModule,
+        BrowserAnimationsModule,
+        NgxSimpleTextEditorModule,
+        FontAwesomeModule,
+        NgxPaginationModule
+    ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync()
