@@ -13,4 +13,5 @@ public interface RaceService {
     Boolean deleteRaceByID(Long id);
     Race saveRace(Race race);
     Race updateRace(Long id, Race race);
+    Race updateRace(Race race);
 }

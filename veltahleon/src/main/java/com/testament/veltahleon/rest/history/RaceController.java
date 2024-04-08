@@ -65,6 +65,18 @@ public class RaceController {
         );
     }
 
+    @GetMapping("/race")
+    public ResponseEntity<CustomResponse> getRaceByName(@RequestParam(value = "name") String name) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", raceService.getRaceByName(name)))
+                .message("Race retrieved!")
+                .build()
+        );
+    }
+
     @GetMapping(value = "/race/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE})
     public byte[] getRaceImage(@PathVariable("fileName") String fileName) throws IOException {
         return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/races/" + fileName));
@@ -101,6 +113,18 @@ public class RaceController {
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataUpdated", raceService.updateRace(id, Race)))
+                .message("Race updated!")
+                .build()
+        );
+    }
+
+    @PutMapping("/update/race")
+    public ResponseEntity<CustomResponse> updateRace(@RequestBody Race race) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataUpdated", raceService.updateRace(race)))
                 .message("Race updated!")
                 .build()
         );

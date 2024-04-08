@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.59.1] 2024-04-08
+
+- Added PUT functionality for Race entity
+
 ## [0.59.0] 2024-03-29
 
 - Created person HTML template
