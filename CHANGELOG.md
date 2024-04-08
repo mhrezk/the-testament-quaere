@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.60.0] 2024-04-08
+
+- Added service class for Race entity in frontend portion
+- Added component for Race entity in frontend portion
+- Added ClosedAnswer enum in frontend portion
+
 ## [0.59.1] 2024-04-08
 
 - Added PUT functionality for Race entity

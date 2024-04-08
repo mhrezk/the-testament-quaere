@@ -1,0 +1,138 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Races</h2>
+          </div>
+          <div class="col-sm-6">
+            <a class="btn btn-success" data-bs-toggle="modal" (click)="isClicked = true">
+              <i class="material-icons">&#xE147;</i>
+              <span>Add Race</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+        <ng-container *ngSwitchCase="DATA_STATE.LOADING">
+          <div class="col-md-12 single-note-item text-center">
+            <div class="spinner-border text-info" role="status"></div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+          <table class="table table-striped table-hover" id="days">
+            <thead>
+            <tr>
+              <th *ngFor="let header of headers">{{ header.value }}</th>
+              <th></th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let race of appState.appData?.data.dataRetrieved; let i = index;">
+            <tr>
+              <td>{{ race.name }}</td>
+              <td></td>
+              <td>
+                  <span>
+                    <fa-icon [icon]="faEdit"
+                             [style.color]="'blue'"
+                             [title]="'Edit'"
+                             (click)="isUpdated = true; getRaceByID(race.id);"
+                             [style.cursor]="'pointer'"></fa-icon>
+                  </span>
+                &nbsp;
+                &nbsp;
+                <span>
+                    <fa-icon [icon]="faTrash" [title]="'Delete'" (click)="deleteRace(race)"
+                             style="cursor: pointer; color: firebrick"></fa-icon>
+                  </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.ERROR">
+          <!--          <div style="background-color: indianred">{{ appState.appData?.issue }}</div>-->
+          <div style="background-color: indianred">Internal Server Error: Database is not connected!</div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Add Race -->
+<div *ngIf="isClicked" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #raceForm="ngForm" (ngSubmit)="saveRace(raceForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Race</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Race Name</label>
+            <input type="text" ngModel name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Race Description</label>
+            <input type="text" ngModel name="description" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" ngModel name="imageURL" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="isClicked = false">Close</button>
+          <button type="submit" [disabled]="isLoading$ | async"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Race -->
+<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="modifyRace(selectedRace)">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Person</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Race Name</label>
+            <input type="text" [(ngModel)]="selectedRace.name" name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Race Description</label>
+            <input type="text" [(ngModel)]="selectedRace.description" name="description" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" [(ngModel)]="selectedRace.imageURL" name="imageURL" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="isUpdated = false">Close</button>
+          <button type="submit" [disabled]="isLoading$ | async"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Updating...</span>
+            <span *ngIf="!(isLoading$ | async)">Update</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

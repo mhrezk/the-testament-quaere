@@ -28,6 +28,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { CalendarComponent } from './components/pages/calendar/calendar.component';
 import { PersonComponent } from './components/pages/society/person/person.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { RaceComponent } from './components/pages/history/race/race.component';
 // import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
 // import { HomeComponent } from './components/pages/home/home.component';
 // import { CalendarComponent } from './components/pages/calendar/calendar.component';
@@ -38,7 +39,8 @@ import {NgxPaginationModule} from "ngx-pagination";
     CustomSidenavComponent,
     HomeComponent,
     CalendarComponent,
-    PersonComponent
+    PersonComponent,
+    RaceComponent
   ],
     imports: [
         BrowserModule,
