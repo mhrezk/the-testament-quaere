@@ -174,4 +174,3 @@ export class RaceComponent implements OnInit {
     );
   }
 }
-

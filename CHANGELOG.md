@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.61.0] 2024-04-12
+
+- Added dto pattern and mapper for Person entity
+- Added Model Mapper dependency in pom.xml
+- Updated version of Swagger to 2.3.0
+
 ## [0.60.0] 2024-04-08
 
 - Added service class for Race entity in frontend portion

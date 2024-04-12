@@ -24,11 +24,11 @@ public class Family {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "family", cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    private Person person;
+//    @OneToOne(mappedBy = "family", cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    private Person person;
 
     @NotNull(message = "Father name cannot be null!")
     @NotBlank(message = "Father name cannot be blank!")
@@ -56,9 +56,9 @@ public class Family {
     @CollectionTable(name = "children", joinColumns = @JoinColumn(name = "family_id"))
     private List<String> children;
 
-    @NotNull(message = "Mother name cannot be null!")
-    @NotBlank(message = "Mother name cannot be blank!")
-    @NotEmpty(message = "Mother name cannot be empty!")
+    @NotNull(message = "Family name cannot be null!")
+    @NotBlank(message = "Family name cannot be blank!")
+    @NotEmpty(message = "Family name cannot be empty!")
     @Column(name = "familial_name")
     private String familyName;
 

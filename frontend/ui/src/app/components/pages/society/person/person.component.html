@@ -53,7 +53,7 @@
             }; let i = index;">
             <tr>
               <td>{{ person.name }}</td>
-<!--              <td>{{ person.race.name }}</td>-->
+              <td>{{ person.race.name }}</td>
               <td>{{ person.gender }}</td>
               <td>
                 <span>
@@ -75,7 +75,6 @@
           </table>
         </ng-container>
         <ng-container *ngSwitchCase="DATA_STATE.ERROR">
-          <!--          <div style="background-color: indianred">{{ appState.appData?.issue }}</div>-->
           <div style="background-color: indianred">Internal Server Error: Database is not connected!</div>
         </ng-container>
         <pagination-controls
@@ -116,6 +115,13 @@
             <select name="gender" ngModel="MALE" class="form-control" required>
               <option value="MALE">Male</option>
               <option value="FEMALE">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Race</label>
+            <select (change)="onSelectRaceHandler($event)" name="gender" class="form-control" required>
+              <option default>Choose race...</option>
+              <option *ngFor="let race of races" [value]="race.name">{{ race.name }}</option>
             </select>
           </div>
         </div>

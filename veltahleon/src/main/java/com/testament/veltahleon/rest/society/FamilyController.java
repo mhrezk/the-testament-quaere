@@ -65,13 +65,25 @@ public class FamilyController {
         );
     }
 
-    @GetMapping("/family/person")
-    public ResponseEntity<CustomResponse> getFamilyByPersonName(@RequestParam(value = "personName") String personName) {
+//    @GetMapping("/family/person")
+//    public ResponseEntity<CustomResponse> getFamilyByPersonName(@RequestParam(value = "personName") String personName) {
+//        return ResponseEntity.ok(CustomResponse.builder()
+//                .timestamp(LocalDateTime.now())
+//                .status(HttpStatus.OK)
+//                .statusCode(HttpStatus.OK.value())
+//                .data(Map.of("datumRetrieved", familyService.getFamilyByPersonName(personName)))
+//                .message("Family retrieved!")
+//                .build()
+//        );
+//    }
+
+    @GetMapping("/family/familyName")
+    public ResponseEntity<CustomResponse> getFamilyByFamilyName(@RequestParam(value = "familyName") String familyName) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("datumRetrieved", familyService.getFamilyByPersonName(personName)))
+                .data(Map.of("datumRetrieved", familyService.getFamilyByFamilyName(familyName)))
                 .message("Family retrieved!")
                 .build()
         );

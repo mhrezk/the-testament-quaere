@@ -10,7 +10,8 @@ public interface FamilyService {
     Collection<Family> getFamilies();
     Collection<Family> getFamiliesByLineage(String lineage);
     Family getFamilyByID(Long id);
-    Family getFamilyByPersonName(String personName);
+    //Family getFamilyByPersonName(String personName);
+    Family getFamilyByFamilyName(String personName);
     Boolean deleteFamilyByID(Long id);
     Family saveFamily(Family family);
     Family updateFamily(Long id, Family family);

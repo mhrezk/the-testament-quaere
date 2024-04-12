@@ -23,8 +23,8 @@ public class FamilyServiceImpl implements FamilyService {
 
     @Autowired
     private FamilyRepository familyRepository;
-    @Autowired
-    private PersonRepository personRepository;
+//    @Autowired
+//    private PersonRepository personRepository;
 
     @Override
     public Collection<Family> getFamiliesWithPagination(int pageNumber, int numberOfRecords) {
@@ -47,8 +47,8 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     @Override
-    public Family getFamilyByPersonName(String personName) {
-        return familyRepository.findByPerson_Name(personName);
+    public Family getFamilyByFamilyName(String personName) {
+        return familyRepository.findByFamilyName(personName);
     }
 
     @Override
@@ -59,9 +59,9 @@ public class FamilyServiceImpl implements FamilyService {
 
     @Override
     public Family saveFamily(Family family) {
-        if(personRepository.countByName(family.getPerson().getName().toLowerCase()) >= 1) {
-            throw new DataInsertionException("Person name");
-        }
+//        if(personRepository.countByName(family.getPerson().getName().toLowerCase()) >= 1) {
+//            throw new DataInsertionException("Person name");
+//        }
         return familyRepository.save(family);
     }
 
@@ -89,9 +89,9 @@ public class FamilyServiceImpl implements FamilyService {
             newFamily.setSiblings(family.getSiblings());
         }
 
-        if(family.getPerson() != null && newFamily.getPerson() != family.getPerson()) {
-            newFamily.setPerson(checkPersonForUpdate(family.getPerson(), newFamily.getPerson()));
-        }
+//        if(family.getPerson() != null && newFamily.getPerson() != family.getPerson()) {
+//            newFamily.setPerson(checkPersonForUpdate(family.getPerson(), newFamily.getPerson()));
+//        }
 
         if(family.getSpouses() != null && newFamily.getSpouses() != family.getSpouses()) {
             newFamily.setSpouses(family.getSpouses());

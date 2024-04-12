@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject, map, Observable, of, startWith} from "rxjs";
+import {BehaviorSubject, firstValueFrom, map, Observable, of, startWith} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {NgForm} from "@angular/forms";
 
@@ -14,6 +14,8 @@ import {DataState} from "../../../../enums/data-state";
 import {PersonService} from "../../../../services/society/person/person.service";
 import {Gender} from "../../../../enums/gender";
 import {Person} from "../../../../interfaces/models/society/person";
+import {Race} from "../../../../interfaces/models/history/race";
+import {RaceService} from "../../../../services/history/race/race.service";
 
 @Component({
   selector: 'app-person',
@@ -26,6 +28,8 @@ export class PersonComponent implements OnInit {
   count: number = 0;
   tableSizes: number[] = [5, 10, 20];
 
+  races: Race[];
+  selectedRace: Race;
   selectedPerson: Person;
   appState$: Observable<AppState<CustomResponse>>;
   readonly gender = Gender;
@@ -42,21 +46,29 @@ export class PersonComponent implements OnInit {
       key: 'name',
       value: 'Person Name',
     },
-    // {
-    //   key: 'race',
-    //   value: 'Race',
-    // },
+    {
+      key: 'race',
+      value: 'Race',
+    },
     {
       key: 'gender',
       value: 'Gender',
     }
   ];
 
-  constructor(private personService: PersonService) {
+  constructor(private personService: PersonService,
+              private raceService: RaceService) {
   }
 
   ngOnInit(): void {
     this.getPaginatedPeople(this.currentPage, this.tableSize);
+    this.getAllRaces();
+  }
+
+  getAllRaces() {
+    this.raceService.getRaces$.subscribe(
+      result => this.races = result.data.dataRetrieved
+    )
   }
 
   getPaginatedPeople(pageNumber: number, pageSize: number) {
@@ -89,9 +101,11 @@ export class PersonComponent implements OnInit {
   }
 
   savePerson(personForm: NgForm) {
+    this.selectedPerson = personForm.value;
+    this.selectedPerson.race = this.selectedRace;
     this.isLoading.next(true);
     this.appState$ = this.personService
-      .savePerson$(personForm.value) //or dayForm.value as Day or <Day> dayForm.value
+      .savePerson$(this.selectedPerson) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
           this.dataSubject.next(
@@ -217,5 +231,11 @@ export class PersonComponent implements OnInit {
     this.tableSize = event.target.value;
     this.currentPage = 1;
     this.getPaginatedPeople(this.currentPage, this.tableSize);
+  }
+
+  async onSelectRaceHandler(event: any) {
+    let name = event.target.value;
+    let temp = await firstValueFrom(this.raceService.getRaceByName$(name));
+    this.selectedRace = temp.data.datumRetrieved;
   }
 }

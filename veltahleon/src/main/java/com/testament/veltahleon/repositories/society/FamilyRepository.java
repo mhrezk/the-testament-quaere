@@ -9,6 +9,7 @@ import java.util.Collection;
 @Repository
 public interface FamilyRepository extends JpaRepository<Family, Long> {
 
-    Family findByPerson_Name(String name);
+    //Family findByPerson_Name(String name);
+    Family findByFamilyName(String familyName);
     Collection<Family> findByLineage(String lineage);
 }
