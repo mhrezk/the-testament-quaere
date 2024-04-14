@@ -8,13 +8,20 @@ import {Title} from "../models/society/title";
 
 export interface Human {
   name: string;
-  race?: Race;
+  //race?: Race;
   gender: Gender;
-  religion?: Religion;
-  family?: Family;
-  yearBirthAndDeath?: Year[];
-  nation?: Nation;
-  title?: Title;
+  //religion?: Religion;
+  //family?: Family;
+  //yearBirthAndDeath?: Year[];
+  //nation?: Nation;
+  //title?: Title;
+  raceName?: string;
+  religion?: string;
+  family?: string;
+  birthYear?: number;
+  deathYear?: number;
+  nation?: string;
+  title?: string;
   biography?: string;
   imageURL?: string;
 }

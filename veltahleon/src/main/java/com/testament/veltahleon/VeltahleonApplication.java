@@ -1,6 +1,8 @@
 package com.testament.veltahleon;
 
+import com.testament.veltahleon.mapper.society.PersonMapper;
 import org.apache.catalina.filters.CorsFilter;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,12 @@ public class VeltahleonApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VeltahleonApplication.class, args);
 	}
+
+
+//	@Bean
+//	public ModelMapper getModelMapper() {
+//		return new ModelMapper();
+//	}
 
 	//CORS Error Resolution
 //	@Bean

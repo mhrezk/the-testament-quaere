@@ -23,15 +23,13 @@ import { NgxSimpleTextEditorModule } from 'ngx-simple-text-editor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
+import { CustomSidenavComponent } from './components/custom/custom-sidenav/custom-sidenav.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { CalendarComponent } from './components/pages/calendar/calendar.component';
 import { PersonComponent } from './components/pages/society/person/person.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { RaceComponent } from './components/pages/history/race/race.component';
-// import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
-// import { HomeComponent } from './components/pages/home/home.component';
-// import { CalendarComponent } from './components/pages/calendar/calendar.component';
+import { CustomModalComponent } from './components/custom/custom-modal/custom-modal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +38,8 @@ import { RaceComponent } from './components/pages/history/race/race.component';
     HomeComponent,
     CalendarComponent,
     PersonComponent,
-    RaceComponent
+    RaceComponent,
+    CustomModalComponent
   ],
     imports: [
         BrowserModule,

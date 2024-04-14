@@ -88,6 +88,6 @@ export class PersonService {
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
-    return throwError(`Error: ${error.message}`);
+    return throwError(`Error: ${error.error.errorData.error}`);
   }
 }

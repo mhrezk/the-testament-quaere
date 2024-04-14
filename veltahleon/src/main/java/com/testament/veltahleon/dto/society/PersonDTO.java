@@ -1,21 +1,18 @@
 package com.testament.veltahleon.dto.society;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.List;
+import lombok.*;
 
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class PersonDTO {
+    Long id;
     String name;
     String gender;
-    String race;
-    String familyName;
+    String raceName;
+    String family;
     String religion;
     String title;
     String nation;

@@ -30,7 +30,7 @@ public class MethodArgumentValidExceptionHandler {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
 
-        return ResponseEntity.ok(CustomResponse.builder()
+        return ResponseEntity.internalServerError().body(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .status(HttpStatus.BAD_REQUEST)

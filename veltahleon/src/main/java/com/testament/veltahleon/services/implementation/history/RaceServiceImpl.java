@@ -1,5 +1,6 @@
 package com.testament.veltahleon.services.implementation.history;
 
+import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.history.Race;
 import com.testament.veltahleon.repositories.history.RaceRepository;
 import com.testament.veltahleon.services.ifc.history.RaceService;
@@ -50,6 +51,9 @@ public class RaceServiceImpl implements RaceService {
 
     @Override
     public Race saveRace(Race race) {
+        if(raceRepository.countByName(race.getName().toLowerCase()) >= 1) {
+            throw new DataInsertionException("Race name");
+        }
         return raceRepository.save(race);
     }
 

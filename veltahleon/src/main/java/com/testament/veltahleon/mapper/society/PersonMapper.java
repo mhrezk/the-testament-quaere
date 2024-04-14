@@ -2,36 +2,37 @@ package com.testament.veltahleon.mapper.society;
 
 import com.testament.veltahleon.dto.society.PersonDTO;
 import com.testament.veltahleon.model.entities.society.Person;
+import com.testament.veltahleon.model.enumeration.Gender;
+import com.testament.veltahleon.services.ifc.history.RaceService;
 import com.testament.veltahleon.services.ifc.society.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @AllArgsConstructor
 public class PersonMapper {
 
     @Autowired
-    public PersonService service;
+    public RaceService raceService;
+
+    @Autowired
+    public PersonService personService;
 
     public PersonDTO convertToDTO(Person person) {
-        int firstElement = 0;
-        int lastElement = 1;
         return PersonDTO.builder()
+                .id(person.getId())
                 .name(person.getName())
                 .gender(String.valueOf(person.getGender()))
-                .race(person.getRace().getName())
-                .religion(person.getReligion().getName())
-                .job(person.getJob().getName())
-                .nation(person.getNation().getName())
-                .title(person.getTitle().getName())
-                .familyName(person.getFamily().getFamilyName())
-                .biography(person.getBiography())
-                .imageURL(person.getImageURL())
-                .birthYear(person.getYearBirthAndDeath().get(firstElement).getEpoch().getYearNumber())
-                .deathYear(person.getYearBirthAndDeath().get(lastElement).getEpoch().getYearNumber())
+                .raceName(person.getRace().getName())
                 .build();
     }
 
-//    public Person convertToEntity(PersonDTO personDTO) {
-//        return new Person();
-//    }
+    public Person convertToEntity(PersonDTO personDTO) {
+        Person p = new Person();
+        p.setName(personDTO.getName());
+        p.setRace(raceService.getRaceByName(personDTO.getRaceName()));
+        p.setGender(Gender.valueOf(personDTO.getGender()));
+        return p;
+    }
 }

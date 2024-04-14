@@ -3,5 +3,6 @@ import {Human} from "../../abstraction/human";
 
 export interface Person extends Human {
   id: number;
-  job?: Job;
+  //job?: Job;
+  job?: string;
 }

@@ -32,12 +32,11 @@ public abstract class Human {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @JoinColumn(name = "race_id")
-    //@PrimaryKeyJoinColumn(name = "race") //Used instead of @Column with @OneToOne
+    @JoinColumn(name = "race_id", referencedColumnName = "id")
     private Race race;
 
     @Enumerated(EnumType.STRING)

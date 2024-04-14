@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {BehaviorSubject, firstValueFrom, map, Observable, of, startWith} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {NgForm} from "@angular/forms";
@@ -11,11 +11,12 @@ import {
 import {AppState} from "../../../../interfaces/app-state";
 import {CustomResponse} from "../../../../interfaces/custom-response";
 import {DataState} from "../../../../enums/data-state";
-import {PersonService} from "../../../../services/society/person/person.service";
+import {PersonService} from "../../../../services/models/society/person/person.service";
 import {Gender} from "../../../../enums/gender";
 import {Person} from "../../../../interfaces/models/society/person";
 import {Race} from "../../../../interfaces/models/history/race";
-import {RaceService} from "../../../../services/history/race/race.service";
+import {RaceService} from "../../../../services/models/history/race/race.service";
+import {ModalService} from "../../../../services/custom/custom-modal/custom-modal.service";
 
 @Component({
   selector: 'app-person',
@@ -29,8 +30,8 @@ export class PersonComponent implements OnInit {
   tableSizes: number[] = [5, 10, 20];
 
   races: Race[];
-  selectedRace: Race;
   selectedPerson: Person;
+  selectedRace: string;
   appState$: Observable<AppState<CustomResponse>>;
   readonly gender = Gender;
   protected readonly DATA_STATE = DataState;
@@ -39,6 +40,7 @@ export class PersonComponent implements OnInit {
   isLoading$ = this.isLoading.asObservable();
   isUpdated: boolean = false;
   isClicked: boolean = false;
+  isTableShown: boolean = false;
   faTrash = faTrash;
   faEdit = faEdit;
   headers = [
@@ -57,7 +59,8 @@ export class PersonComponent implements OnInit {
   ];
 
   constructor(private personService: PersonService,
-              private raceService: RaceService) {
+              private raceService: RaceService,
+              private modalService: ModalService) {
   }
 
   ngOnInit(): void {
@@ -76,6 +79,7 @@ export class PersonComponent implements OnInit {
       .pipe(
         map((result) => {
           this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
+          this.isTableShown = true;
           return {
             dataState: DataState.LOADED,
             appData: result,
@@ -101,11 +105,9 @@ export class PersonComponent implements OnInit {
   }
 
   savePerson(personForm: NgForm) {
-    this.selectedPerson = personForm.value;
-    this.selectedPerson.race = this.selectedRace;
     this.isLoading.next(true);
     this.appState$ = this.personService
-      .savePerson$(this.selectedPerson) //or dayForm.value as Day or <Day> dayForm.value
+      .savePerson$(personForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
           this.dataSubject.next(
@@ -119,8 +121,10 @@ export class PersonComponent implements OnInit {
               },
             });
           this.isClicked = false;
+          this.isTableShown = true;
           this.isLoading.next(false);
           personForm.resetForm({gender: this.gender.MALE}); //resets form with a default value
+          //window.location.reload();
           return {
             dataState: DataState.LOADED,
             appData: this.dataSubject.value,
@@ -180,6 +184,7 @@ export class PersonComponent implements OnInit {
         const index = this.dataSubject.value.data.dataRetrieved.findIndex(person => person.id === result.data.dataUpdated.id); //loops through the array and finds the record whose id matches the updated day from the backend
         this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated; //replaces old day with updated day
         this.isUpdated = false;
+        this.isTableShown = true;
         this.isLoading.next(false);
         return {
           dataState: DataState.LOADED,
@@ -233,9 +238,18 @@ export class PersonComponent implements OnInit {
     this.getPaginatedPeople(this.currentPage, this.tableSize);
   }
 
-  async onSelectRaceHandler(event: any) {
-    let name = event.target.value;
-    let temp = await firstValueFrom(this.raceService.getRaceByName$(name));
-    this.selectedRace = temp.data.datumRetrieved;
+  onSelectRaceHandler(event: any) {
+    this.selectedRace = event.target.value;
+    console.log(this.selectedRace);
+    // let temp = await firstValueFrom(this.raceService.getRaceByName$(name)); //uses async keyword for method
+    // this.selectedRace = temp.data.datumRetrieved;
+  }
+
+  openModal(modalTemplate: TemplateRef<any>, size: string , title: string) {
+    this.modalService
+      .open(modalTemplate, { size: size, title: title })
+      .subscribe((action) => {
+        console.log('modalAction', action);
+      });
   }
 }

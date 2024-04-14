@@ -59,7 +59,7 @@ export class RaceService {
     return this.http.put<CustomResponse>(`${this.baseURL}/update/race`, race);
   }
 
-  deleteRace$ = (raceID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/person/${raceID}`)
+  deleteRace$ = (raceID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/race/${raceID}`)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
@@ -67,7 +67,7 @@ export class RaceService {
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
-    return throwError(`Error: ${error.message}`);
+    return throwError(`Error: ${error.error.issue}`);
   }
 }
 

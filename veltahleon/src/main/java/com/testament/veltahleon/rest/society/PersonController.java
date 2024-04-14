@@ -1,10 +1,13 @@
 package com.testament.veltahleon.rest.society;
 
+import com.testament.veltahleon.dto.society.PersonDTO;
+import com.testament.veltahleon.mapper.society.PersonMapper;
 import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.services.ifc.society.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +31,15 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private PersonMapper personMapper;
+
+//    @Autowired
+//    private ModelMapper modelMapper;
+
     @GetMapping("/persons")
     public ResponseEntity<CustomResponse> getPaginatedPersons(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+        List<PersonDTO> personsDTO;
         List<Person> persons;
         int page = 0;
         if(pageNumber <= 0) {
@@ -37,11 +48,12 @@ public class PersonController {
             page = pageNumber;
             persons = (List<Person>) personService.getPersonsWithPagination((page - 1), pageSize);
         }
+        personsDTO = persons.stream().map(p -> personMapper.convertToDTO(p)).toList();
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", persons))
+                .data(Map.of("dataRetrieved", personsDTO))
                 .message(persons.size() + " persons retrieved!")
                 .build()
         );
@@ -90,12 +102,15 @@ public class PersonController {
     }
 
     @PostMapping("/save/person")
-    public ResponseEntity<CustomResponse> savePerson(@RequestBody @Valid Person person) {
+    public ResponseEntity<CustomResponse> savePerson(@RequestBody PersonDTO personDTO) {
+        //Person person = modelMapper.map(personDTO, Person.class);
+        Person person = personMapper.convertToEntity(personDTO);
+        PersonDTO savedPersonDTO = personMapper.convertToDTO(personService.savePerson(person));
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataSaved", personService.savePerson(person)))
+                .data(Map.of("dataSaved", savedPersonDTO))
                 .message("Person saved!")
                 .build()
         );
@@ -126,12 +141,14 @@ public class PersonController {
     }
 
     @PutMapping("/update/person")
-    public ResponseEntity<CustomResponse> updatePerson(@RequestBody Person person) {
+    public ResponseEntity<CustomResponse> updatePerson(@RequestBody PersonDTO personDTO) {
+        Person person = personMapper.convertToEntity(personDTO);
+        PersonDTO updatedPersonDTO = personMapper.convertToDTO(personService.updatePerson(person));
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataUpdated", personService.updatePerson(person)))
+                .data(Map.of("dataUpdated", updatedPersonDTO))
                 .message("Person updated!")
                 .build()
         );

@@ -20,12 +20,12 @@ public class DataInsertionExceptionHandler {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("error", exception.getMessage() + " already exists! Duplicate entry is disallowed!");
 
-        return ResponseEntity.ok(CustomResponse.builder()
+        return ResponseEntity.internalServerError().body(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .errorData(errorMap)
-                .issue("Validation error!")
+                .issue("Validation error! " + errorMap.get("error"))
                 .build());
     }
 }

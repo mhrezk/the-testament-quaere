@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.62.0] 2024-04-14
+
+- Updated PUT method for Person entity in backend
+- Corrected exception handling methods to use the correct status error
+- Added custom modal to avoid conflict between Angular Material modal and Bootstrap modal libraries
+
 ## [0.61.0] 2024-04-12
 
 - Added dto pattern and mapper for Person entity

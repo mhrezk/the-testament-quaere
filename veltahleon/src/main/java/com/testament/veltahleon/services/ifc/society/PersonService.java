@@ -1,5 +1,6 @@
 package com.testament.veltahleon.services.ifc.society;
 
+import com.testament.veltahleon.dto.society.PersonDTO;
 import com.testament.veltahleon.model.entities.society.Person;
 
 import java.util.Collection;

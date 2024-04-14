@@ -54,8 +54,7 @@
           </table>
         </ng-container>
         <ng-container *ngSwitchCase="DATA_STATE.ERROR">
-          <!--          <div style="background-color: indianred">{{ appState.appData?.issue }}</div>-->
-          <div style="background-color: indianred">Internal Server Error: Database is not connected!</div>
+          <div style="background-color: indianred">{{ appState.error }}</div>
         </ng-container>
       </ng-container>
     </div>
