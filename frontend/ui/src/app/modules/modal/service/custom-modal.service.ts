@@ -7,7 +7,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import {CustomModalComponent} from "../../../components/custom/custom-modal/custom-modal.component";
+import {CustomModalComponent} from "../component/custom-modal/custom-modal.component";
 
 @Injectable()
 export class ModalService {

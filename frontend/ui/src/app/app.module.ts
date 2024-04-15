@@ -29,7 +29,7 @@ import { CalendarComponent } from './components/pages/calendar/calendar.componen
 import { PersonComponent } from './components/pages/society/person/person.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { RaceComponent } from './components/pages/history/race/race.component';
-import { CustomModalComponent } from './components/custom/custom-modal/custom-modal.component';
+import {ModalModule} from "./modules/modal/modal.module";
 
 @NgModule({
   declarations: [
@@ -38,8 +38,7 @@ import { CustomModalComponent } from './components/custom/custom-modal/custom-mo
     HomeComponent,
     CalendarComponent,
     PersonComponent,
-    RaceComponent,
-    CustomModalComponent
+    RaceComponent
   ],
     imports: [
         BrowserModule,
@@ -61,7 +60,8 @@ import { CustomModalComponent } from './components/custom/custom-modal/custom-mo
         BrowserAnimationsModule,
         NgxSimpleTextEditorModule,
         FontAwesomeModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        ModalModule
     ],
   providers: [
     provideClientHydration(),

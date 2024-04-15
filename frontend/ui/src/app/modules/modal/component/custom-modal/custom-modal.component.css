@@ -1,4 +1,4 @@
-.modal-backdrop {
+.popup-backdrop {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
@@ -13,7 +13,7 @@
   align-items: center;
 }
 
-.modal {
+.popup {
   z-index: 3;
   position: absolute;
   left: 50%;
@@ -27,22 +27,22 @@
   padding: 20px;
 }
 
-.modal-header {
+.popup-header {
   display: flex;
   justify-content: space-between;
   font-size: 18px;
   margin-bottom: 20px;
 }
 
-.modal-content {
+.popup-content {
   margin-bottom: 20px;
 }
 
-.modal-footer {
+.popup-footer {
   display: flex;
   justify-content: flex-end;
 }
 
-.modal-close {
+.popup-close {
   cursor: pointer;
 }

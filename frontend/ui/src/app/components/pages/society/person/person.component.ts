@@ -16,7 +16,7 @@ import {Gender} from "../../../../enums/gender";
 import {Person} from "../../../../interfaces/models/society/person";
 import {Race} from "../../../../interfaces/models/history/race";
 import {RaceService} from "../../../../services/models/history/race/race.service";
-import {ModalService} from "../../../../services/custom/custom-modal/custom-modal.service";
+import {ModalService} from "../../../../modules/modal/service/custom-modal.service";
 
 @Component({
   selector: 'app-person',
@@ -75,6 +75,7 @@ export class PersonComponent implements OnInit {
   }
 
   getPaginatedPeople(pageNumber: number, pageSize: number) {
+    this.isTableShown = true;
     this.appState$ = this.personService.getPaginatedPeople$(pageNumber, pageSize)
       .pipe(
         map((result) => {

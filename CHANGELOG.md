@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.62.1] 2024-04-14
+
+- Added modal elements to a module
+- Changed css classes from modal to popup to avoid conflict with Bootstrap and Angular Material
+
 ## [0.62.0] 2024-04-14
 
 - Updated PUT method for Person entity in backend

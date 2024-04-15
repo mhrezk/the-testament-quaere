@@ -1,0 +1,14 @@
+<div class="popup {{ size }}">
+  <div class="popup-header">
+    {{ title }}
+    <span class="popup-close" (click)="close()">✕</span>
+  </div>
+  <div class="popup-content">
+    <ng-content></ng-content>
+  </div>
+  <div class="popup-footer">
+    <button (click)="submit()">Submit</button>
+  </div>
+</div>
+
+<div class="popup-backdrop" (click)="close()"></div>

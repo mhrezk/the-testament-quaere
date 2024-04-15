@@ -11,7 +11,7 @@ import {
 import {AppState} from "../../../../interfaces/app-state";
 import {CustomResponse} from "../../../../interfaces/custom-response";
 import {DataState} from "../../../../enums/data-state";
-import { RaceService } from '../../../../services/history/race/race.service';
+import { RaceService } from '../../../../services/models/history/race/race.service';
 import { Race } from '../../../../interfaces/models/history/race';
 
 @Component({

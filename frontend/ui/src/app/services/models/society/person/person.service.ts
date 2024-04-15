@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from "rxjs";
-import {CustomResponse} from "../../../interfaces/custom-response";
-import {Gender} from "../../../enums/gender";
+import {CustomResponse} from "../../../../interfaces/custom-response";
+import {Gender} from "../../../../enums/gender";
 import {catchError, tap} from "rxjs/operators";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {environment} from "../../../../environments/environment";
-import {Person} from "../../../interfaces/models/society/person";
+import {environment} from "../../../../../environments/environment";
+import {Person} from "../../../../interfaces/models/society/person";
 
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from "rxjs";
-import {CustomResponse} from "../../../interfaces/custom-response";
+import {CustomResponse} from "../../../../interfaces/custom-response";
 import {catchError, tap} from "rxjs/operators";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {environment} from "../../../../environments/environment";
-import { Race } from '../../../interfaces/models/history/race';
+import {environment} from "../../../../../environments/environment";
+import { Race } from '../../../../interfaces/models/history/race';
 
 
 @Injectable({

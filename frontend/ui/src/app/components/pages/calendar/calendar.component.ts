@@ -10,7 +10,7 @@ import {
 import {BehaviorSubject, map, Observable, of, startWith} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
-import {DayService} from '../../../services/calendar/day/day.service';
+import {DayService} from '../../../services/models/calendar/day/day.service';
 import {AppState} from '../../../interfaces/app-state';
 import {CustomResponse} from '../../../interfaces/custom-response';
 import {DataState} from '../../../enums/data-state';
