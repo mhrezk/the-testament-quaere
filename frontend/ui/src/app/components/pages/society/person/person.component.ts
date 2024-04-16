@@ -125,7 +125,6 @@ export class PersonComponent implements OnInit {
           this.isTableShown = true;
           this.isLoading.next(false);
           personForm.resetForm({gender: this.gender.MALE}); //resets form with a default value
-          //window.location.reload();
           return {
             dataState: DataState.LOADED,
             appData: this.dataSubject.value,
@@ -180,10 +179,10 @@ export class PersonComponent implements OnInit {
 
   modifyPerson(person: Person) {
     this.isLoading.next(true);
-    this.appState$ = this.personService.modifyPerson$(person).pipe(
+    this.appState$ = this.personService.modifyPerson$(person.id, person).pipe(
       map((result) => {
-        const index = this.dataSubject.value.data.dataRetrieved.findIndex(person => person.id === result.data.dataUpdated.id); //loops through the array and finds the record whose id matches the updated day from the backend
-        this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated; //replaces old day with updated day
+        const index = this.dataSubject.value.data.dataRetrieved.findIndex(person => person.id === result.data.dataUpdated.id);
+        this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated;
         this.isUpdated = false;
         this.isTableShown = true;
         this.isLoading.next(false);
@@ -246,11 +245,15 @@ export class PersonComponent implements OnInit {
     // this.selectedRace = temp.data.datumRetrieved;
   }
 
-  openModal(modalTemplate: TemplateRef<any>, size: string , title: string) {
+  openModal(modalTemplate: TemplateRef<any>, size: string, title: string) {
     this.modalService
       .open(modalTemplate, { size: size, title: title })
       .subscribe((action) => {
         console.log('modalAction', action);
       });
+  }
+
+  closeModal() {
+    document.getElementById("closeModal").click();
   }
 }

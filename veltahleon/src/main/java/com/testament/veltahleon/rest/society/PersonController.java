@@ -74,11 +74,12 @@ public class PersonController {
 
     @GetMapping("/person/{id}")
     public ResponseEntity<CustomResponse> getPersonByID(@PathVariable Long id) {
+        PersonDTO personDTO = personMapper.convertToDTO(personService.getPersonByID(id));
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("datumRetrieved", personService.getPersonByID(id)))
+                .data(Map.of("datumRetrieved", personDTO))
                 .message("Person retrieved!")
                 .build()
         );
@@ -129,7 +130,7 @@ public class PersonController {
     }
 
     @PatchMapping("/update/person/{id}")
-    public ResponseEntity<CustomResponse> updatePerson(@PathVariable Long id, @RequestBody @Valid Person person) {
+    public ResponseEntity<CustomResponse> updatePerson(@PathVariable Long id, @RequestBody Person person) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -140,10 +141,10 @@ public class PersonController {
         );
     }
 
-    @PutMapping("/update/person")
-    public ResponseEntity<CustomResponse> updatePerson(@RequestBody PersonDTO personDTO) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CustomResponse> updatePerson(@PathVariable Long id, @RequestBody PersonDTO personDTO) {
         Person person = personMapper.convertToEntity(personDTO);
-        PersonDTO updatedPersonDTO = personMapper.convertToDTO(personService.updatePerson(person));
+        PersonDTO updatedPersonDTO = personMapper.convertToDTO(personService.modifyPerson(id, person));
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

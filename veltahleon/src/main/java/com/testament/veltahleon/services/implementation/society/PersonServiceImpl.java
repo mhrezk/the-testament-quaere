@@ -107,8 +107,14 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person updatePerson(Person person) {
-        return personRepository.save(person);
+    public Person modifyPerson(Long id, Person person) {
+        Person newPerson = personRepository.findById(id).orElseThrow();
+        newPerson.setName(person.getName());
+        newPerson.setGender(person.getGender());
+        newPerson.setBiography(person.getBiography());
+        newPerson.setImageURL(person.getImageURL());
+        newPerson.setRace(person.getRace());
+        return personRepository.save(newPerson);
     }
 
     //Helper Methods

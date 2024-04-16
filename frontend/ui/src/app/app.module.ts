@@ -30,6 +30,7 @@ import { PersonComponent } from './components/pages/society/person/person.compon
 import {NgxPaginationModule} from "ngx-pagination";
 import { RaceComponent } from './components/pages/history/race/race.component';
 import {ModalModule} from "./modules/modal/modal.module";
+import { TimelineComponent } from './components/pages/timeline/timeline.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {ModalModule} from "./modules/modal/modal.module";
     HomeComponent,
     CalendarComponent,
     PersonComponent,
-    RaceComponent
+    RaceComponent,
+    TimelineComponent
   ],
     imports: [
         BrowserModule,
@@ -65,7 +67,8 @@ import {ModalModule} from "./modules/modal/modal.module";
     ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    //ModalService
   ],
   bootstrap: [AppComponent]
 })

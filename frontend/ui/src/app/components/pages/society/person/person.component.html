@@ -7,7 +7,7 @@
             <h2>People</h2>
           </div>
           <div class="col-sm-6">
-            <a class="btn btn-success" (click)="openModal(modalTemplate, 'lg', 'Add Person')">
+            <a class="btn btn-success" (click)="isTableShown = false; isClicked = true">
               <i class="material-icons">&#xE147;</i>
               <span>Add Person</span>
             </a>
@@ -30,7 +30,7 @@
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="DATA_STATE.LOADED">
-          <span>
+          <span *ngIf="isTableShown">
               Number of records:
               <select (change)="onTableSizeChange($event)">
                 <option *ngFor="let size of tableSizes">
@@ -60,7 +60,7 @@
                   <fa-icon [icon]="faEdit"
                            [style.color]="'blue'"
                            [title]="'Edit'"
-                           (click)="isUpdated = true; getPersonByID(person.id);"
+                           (click)="isUpdated = true; getPersonByID(person.id); isTableShown = false;"
                            [style.cursor]="'pointer'"></fa-icon>
                 </span>
                 &nbsp;
@@ -107,8 +107,8 @@
           </div>
           <div class="form-group">
             <label>Gender</label>
-<!--            <input type="radio" ngModel name="gender" value="MALE" required>Male-->
-<!--            <input type="radio" ngModel name="gender" value="FEMALE" required>Female-->
+            <!--            <input type="radio" ngModel name="gender" value="MALE" required>Male-->
+            <!--            <input type="radio" ngModel name="gender" value="FEMALE" required>Female-->
             <select name="gender" ngModel="MALE" class="form-control" required>
               <option value="MALE">Male</option>
               <option value="FEMALE">Female</option>
@@ -156,9 +156,15 @@
               <option value="FEMALE">Female</option>
             </select>
           </div>
+          <div class="form-group">
+            <label>Race</label>
+            <select name="raceName" [(ngModel)]="selectedPerson.raceName" (change)="onSelectRaceHandler($event)" class="form-control" required>
+              <option *ngFor="let race of races" [value]="race.name">{{ race.name }}</option>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" (click)="isUpdated = false">Close</button>
+          <button type="button" class="btn btn-danger" (click)="isUpdated = false; isTableShown = true;">Close</button>
           <button type="submit" [disabled]="isLoading$ | async"
                   class="btn btn-success">
             <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
@@ -170,6 +176,8 @@
     </div>
   </div>
 </div>
+
 <ng-template #modalTemplate>
-  <div>This is our custom modal content</div>
+  <div submitForm>
+  </div>
 </ng-template>

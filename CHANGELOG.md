@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.63.0] 2024-04-14
+
+- Edited PUT method for Person entity
+- Added Event entity for timelines
+- Added Timeline route for frontend
+
 ## [0.62.1] 2024-04-14
 
 - Added modal elements to a module

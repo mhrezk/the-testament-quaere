@@ -4,6 +4,7 @@ import {HomeComponent} from "./components/pages/home/home.component";
 import {CalendarComponent} from "./components/pages/calendar/calendar.component";
 import {PersonComponent} from "./components/pages/society/person/person.component";
 import {RaceComponent} from "./components/pages/history/race/race.component";
+import {TimelineComponent} from "./components/pages/timeline/timeline.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: "races",
     component: RaceComponent
+  },
+  {
+    path: "timeline",
+    component: TimelineComponent
   }
 ];
 
