@@ -46,7 +46,12 @@ export class CustomSidenavComponent {
       icon: "diversity_1",
       label: "Races",
       route: "races"
-    }
+    },
+    {
+      icon: "diversity_3",
+      label: "Family Trees",
+      route: "family-tree"
+    },
   ]);
 
   sidenavCollapsed = signal(false);

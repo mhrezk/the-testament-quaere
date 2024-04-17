@@ -30,17 +30,23 @@ export class PersonComponent implements OnInit {
   tableSizes: number[] = [5, 10, 20];
 
   races: Race[];
+  people: Person[];
+  checkedPeople: Person[];
   selectedPerson: Person;
   selectedRace: string;
+
   appState$: Observable<AppState<CustomResponse>>;
   readonly gender = Gender;
   protected readonly DATA_STATE = DataState;
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
+
   isUpdated: boolean = false;
   isClicked: boolean = false;
   isTableShown: boolean = false;
+  isMasterSelected: boolean = false;
+
   faTrash = faTrash;
   faEdit = faEdit;
   headers = [
@@ -79,6 +85,7 @@ export class PersonComponent implements OnInit {
     this.appState$ = this.personService.getPaginatedPeople$(pageNumber, pageSize)
       .pipe(
         map((result) => {
+          this.people = result.data.dataRetrieved;
           this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
           this.isTableShown = true;
           return {
@@ -245,15 +252,32 @@ export class PersonComponent implements OnInit {
     // this.selectedRace = temp.data.datumRetrieved;
   }
 
-  openModal(modalTemplate: TemplateRef<any>, size: string, title: string) {
-    this.modalService
-      .open(modalTemplate, { size: size, title: title })
-      .subscribe((action) => {
-        console.log('modalAction', action);
-      });
+  checkUncheckAll() {
+    for(let person of this.people) {
+      person.isSelected = this.isMasterSelected;
+    }
+    this.getCheckedPeople();
   }
 
-  closeModal() {
-    document.getElementById("closeModal").click();
+  isAllSelected() {
+    this.isMasterSelected = this.people.every(person => person.isSelected);
+    this.getCheckedPeople();
   }
+
+  getCheckedPeople() {
+    this.checkedPeople = [];
+    for(let checkedPerson of this.people) {
+      if(checkedPerson.isSelected) {
+        this.checkedPeople.push(checkedPerson);
+      }
+    }
+  }
+
+  // openModal(modalTemplate: TemplateRef<any>, size: string, title: string) {
+  //   this.modalService
+  //     .open(modalTemplate, { size: size, title: title })
+  //     .subscribe((action) => {
+  //       console.log('modalAction', action);
+  //     });
+  // }
 }

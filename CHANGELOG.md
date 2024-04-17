@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.64.0] 2024-04-17
+
+- Added family tree on frontend portion
+- Installed Balkan FamilyTreeJS library
+- Refactored code in personMapper
+
 ## [0.63.0] 2024-04-14
 
 - Edited PUT method for Person entity

@@ -5,4 +5,6 @@ export interface Person extends Human {
   id: number;
   //job?: Job;
   job?: string;
+
+  isSelected: boolean;
 }

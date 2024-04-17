@@ -4,7 +4,6 @@ import com.testament.veltahleon.dto.society.PersonDTO;
 import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.model.enumeration.Gender;
 import com.testament.veltahleon.services.ifc.history.RaceService;
-import com.testament.veltahleon.services.ifc.society.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,9 +14,6 @@ public class PersonMapper {
 
     @Autowired
     public RaceService raceService;
-
-    @Autowired
-    public PersonService personService;
 
     public PersonDTO convertToDTO(Person person) {
         return PersonDTO.builder()

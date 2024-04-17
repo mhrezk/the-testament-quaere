@@ -26,6 +26,7 @@ export class RaceComponent implements OnInit {
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
+  isTableShown: boolean = false;
   isUpdated: boolean = false;
   isClicked: boolean = false;
   faTrash = faTrash;
@@ -49,6 +50,7 @@ export class RaceComponent implements OnInit {
   }
 
   getAllRaces() {
+    this.isTableShown = true;
     this.appState$ = this.raceService.getRaces$
       .pipe(
         map((result) => {

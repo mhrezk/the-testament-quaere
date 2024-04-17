@@ -31,6 +31,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { RaceComponent } from './components/pages/history/race/race.component';
 import {ModalModule} from "./modules/modal/modal.module";
 import { TimelineComponent } from './components/pages/timeline/timeline.component';
+import { FamilyTreeComponent } from './components/pages/family-tree/family-tree.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TimelineComponent } from './components/pages/timeline/timeline.componen
     CalendarComponent,
     PersonComponent,
     RaceComponent,
-    TimelineComponent
+    TimelineComponent,
+    FamilyTreeComponent
   ],
     imports: [
         BrowserModule,
