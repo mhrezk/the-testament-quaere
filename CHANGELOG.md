@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.67.0] 2024-04-17
+
+- Added customizable familial tree
+
 ## [0.66.0] 2024-04-17
 
 - Added organizational chart for frontend portion

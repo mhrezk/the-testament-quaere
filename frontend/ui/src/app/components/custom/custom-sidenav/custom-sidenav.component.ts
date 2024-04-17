@@ -57,6 +57,11 @@ export class CustomSidenavComponent {
       label: "Hierarchy",
       route: "hierarchy"
     },
+    {
+      icon: "account_tree",
+      label: "Custom Family Tree",
+      route: "custom-family-tree"
+    }
   ]);
 
   sidenavCollapsed = signal(false);

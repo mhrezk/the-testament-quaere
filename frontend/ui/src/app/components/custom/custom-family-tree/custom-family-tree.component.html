@@ -1,0 +1,5 @@
+<app-family-tree-form [formControl]="control"></app-family-tree-form>
+
+<pre>{{ control.value | json }}</pre>
+
+<button (click)="updateFormValue()">Update form with the Simpson's info</button>

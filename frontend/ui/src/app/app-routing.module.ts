@@ -7,6 +7,7 @@ import {RaceComponent} from "./components/pages/history/race/race.component";
 import {TimelineComponent} from "./components/pages/timeline/timeline.component";
 import {FamilyTreeComponent} from "./components/pages/family-tree/family-tree.component";
 import {HierarchyComponent} from "./components/pages/hierarchy/hierarchy/hierarchy.component";
+import {CustomFamilyTreeComponent} from "./components/custom/custom-family-tree/custom-family-tree.component";
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: "hierarchy",
     component: HierarchyComponent
+  },
+  {
+    path: "custom-family-tree",
+    component: CustomFamilyTreeComponent
   }
 ];
 

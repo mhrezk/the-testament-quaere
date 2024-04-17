@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RouterModule, RouterOutlet } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import { NgOptimizedImage } from "@angular/common";
@@ -19,6 +19,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 import { NgxSimpleTextEditorModule } from 'ngx-simple-text-editor';
+import {NgxPaginationModule} from "ngx-pagination";
 //import { QuillModule } from "ngx-quill";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +28,6 @@ import { CustomSidenavComponent } from './components/custom/custom-sidenav/custo
 import { HomeComponent } from './components/pages/home/home.component';
 import { CalendarComponent } from './components/pages/calendar/calendar.component';
 import { PersonComponent } from './components/pages/society/person/person.component';
-import {NgxPaginationModule} from "ngx-pagination";
 import { RaceComponent } from './components/pages/history/race/race.component';
 import {ModalModule} from "./modules/modal/modal.module";
 import { TimelineComponent } from './components/pages/timeline/timeline.component';
@@ -35,6 +35,8 @@ import { FamilyTreeComponent } from './components/pages/family-tree/family-tree.
 import { InspectorComponent } from './components/pages/hierarchy/inspector/inspector.component';
 import {OrganizationChartComponent} from "./components/pages/hierarchy/organization-chart/organization-chart.component";
 import { HierarchyComponent } from './components/pages/hierarchy/hierarchy/hierarchy.component';
+import { CustomFamilyTreeComponent } from './components/custom/custom-family-tree/custom-family-tree.component';
+import { FamilyTreeFormComponent } from './components/custom/custom-family-tree/family-tree-form/family-tree-form.component';
 
 @NgModule({
   declarations: [
@@ -48,31 +50,34 @@ import { HierarchyComponent } from './components/pages/hierarchy/hierarchy/hiera
     FamilyTreeComponent,
     OrganizationChartComponent,
     InspectorComponent,
-    HierarchyComponent
+    HierarchyComponent,
+    CustomFamilyTreeComponent,
+    FamilyTreeFormComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        FormsModule,
-        RouterOutlet,
-        HttpClientModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatListModule,
-        MatDialogModule,
-        MatInputModule,
-        MatFormFieldModule,
-        NgOptimizedImage,
-        RouterModule,
-        BrowserAnimationsModule,
-        NgxSimpleTextEditorModule,
-        FontAwesomeModule,
-        NgxPaginationModule,
-        ModalModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterOutlet,
+    HttpClientModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    NgOptimizedImage,
+    RouterModule,
+    BrowserAnimationsModule,
+    NgxSimpleTextEditorModule,
+    FontAwesomeModule,
+    NgxPaginationModule,
+    ModalModule
+  ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
