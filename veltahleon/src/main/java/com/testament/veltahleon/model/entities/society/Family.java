@@ -30,6 +30,9 @@ public class Family {
 //            CascadeType.PERSIST})
 //    private Person person;
 
+    @Column(name = "person_name")
+    private String personName;
+
     @NotNull(message = "Father name cannot be null!")
     @NotBlank(message = "Father name cannot be blank!")
     @NotEmpty(message = "Father name cannot be empty!")

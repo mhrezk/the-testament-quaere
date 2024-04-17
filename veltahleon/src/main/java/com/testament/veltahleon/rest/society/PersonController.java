@@ -1,13 +1,11 @@
 package com.testament.veltahleon.rest.society;
 
 import com.testament.veltahleon.dto.society.PersonDTO;
-import com.testament.veltahleon.mapper.society.PersonMapper;
+import com.testament.veltahleon.mappers.society.PersonMapper;
 import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.services.ifc.society.PersonService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +16,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

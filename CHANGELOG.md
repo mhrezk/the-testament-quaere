@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.65.0] 2024-04-17
+
+- Added GoJS library
+- Added RESTful web services for Event entity
+
 ## [0.64.0] 2024-04-17
 
 - Added family tree on frontend portion

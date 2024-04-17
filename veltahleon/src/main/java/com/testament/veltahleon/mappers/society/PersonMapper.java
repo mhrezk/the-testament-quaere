@@ -1,4 +1,4 @@
-package com.testament.veltahleon.mapper.society;
+package com.testament.veltahleon.mappers.society;
 
 import com.testament.veltahleon.dto.society.PersonDTO;
 import com.testament.veltahleon.model.entities.society.Person;

@@ -1,7 +1,6 @@
 package com.testament.veltahleon.services.implementation.society;
 
 
-import com.testament.veltahleon.mapper.society.PersonMapper;
 import com.testament.veltahleon.model.entities.history.Race;
 import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.repositories.society.PersonRepository;

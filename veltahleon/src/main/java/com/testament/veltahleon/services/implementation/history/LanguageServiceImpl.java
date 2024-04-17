@@ -57,7 +57,7 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public Language saveLanguage(Language language) {
         if(languageRepository.countByName(language.getName().toLowerCase()) >= 1) {
-            throw new DataInsertionException();
+            throw new DataInsertionException("Language name");
         }
         return languageRepository.save(language);
     }
