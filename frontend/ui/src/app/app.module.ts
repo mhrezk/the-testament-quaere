@@ -32,6 +32,9 @@ import { RaceComponent } from './components/pages/history/race/race.component';
 import {ModalModule} from "./modules/modal/modal.module";
 import { TimelineComponent } from './components/pages/timeline/timeline.component';
 import { FamilyTreeComponent } from './components/pages/family-tree/family-tree.component';
+import { InspectorComponent } from './components/pages/hierarchy/inspector/inspector.component';
+import {OrganizationChartComponent} from "./components/pages/hierarchy/organization-chart/organization-chart.component";
+import { HierarchyComponent } from './components/pages/hierarchy/hierarchy/hierarchy.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { FamilyTreeComponent } from './components/pages/family-tree/family-tree.
     PersonComponent,
     RaceComponent,
     TimelineComponent,
-    FamilyTreeComponent
+    FamilyTreeComponent,
+    OrganizationChartComponent,
+    InspectorComponent,
+    HierarchyComponent
   ],
     imports: [
         BrowserModule,

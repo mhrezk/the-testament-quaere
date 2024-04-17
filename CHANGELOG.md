@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.66.0] 2024-04-17
+
+- Added organizational chart for frontend portion
+
 ## [0.65.0] 2024-04-17
 
 - Added GoJS library

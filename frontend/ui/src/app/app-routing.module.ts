@@ -6,6 +6,7 @@ import {PersonComponent} from "./components/pages/society/person/person.componen
 import {RaceComponent} from "./components/pages/history/race/race.component";
 import {TimelineComponent} from "./components/pages/timeline/timeline.component";
 import {FamilyTreeComponent} from "./components/pages/family-tree/family-tree.component";
+import {HierarchyComponent} from "./components/pages/hierarchy/hierarchy/hierarchy.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: "family-tree",
     component: FamilyTreeComponent
+  },
+  {
+    path: "hierarchy",
+    component: HierarchyComponent
   }
 ];
 
