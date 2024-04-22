@@ -1,10 +1,8 @@
 package com.testament.veltahleon.services.implementation.society;
 
-import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.society.Family;
 import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.repositories.society.FamilyRepository;
-import com.testament.veltahleon.repositories.society.PersonRepository;
 import com.testament.veltahleon.services.ifc.society.FamilyService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +21,6 @@ public class FamilyServiceImpl implements FamilyService {
 
     @Autowired
     private FamilyRepository familyRepository;
-//    @Autowired
-//    private PersonRepository personRepository;
 
     @Override
     public Collection<Family> getFamiliesWithPagination(int pageNumber, int numberOfRecords) {
@@ -134,16 +130,16 @@ public class FamilyServiceImpl implements FamilyService {
             newPerson.setGender(person.getGender());
         }
 
-        if(person.getFamily() != null && newPerson.getFamily() != person.getFamily()) {
-            newPerson.setFamily(person.getFamily());
-        }
-
         if(person.getJob() != null && newPerson.getJob() != person.getJob()) {
             newPerson.setJob(person.getJob());
         }
 
-        if(person.getYearBirthAndDeath() != null && newPerson.getYearBirthAndDeath() != person.getYearBirthAndDeath()) {
-            newPerson.setYearBirthAndDeath(person.getYearBirthAndDeath());
+        if(person.getBirthYear() != null && newPerson.getBirthYear() != person.getBirthYear()) {
+            newPerson.setBirthYear(person.getBirthYear());
+        }
+
+        if(person.getDeathYear() != null && newPerson.getDeathYear() != person.getDeathYear()) {
+            newPerson.setDeathYear(person.getDeathYear());
         }
 
         if(person.getImageURL() != null && newPerson.getImageURL() != person.getImageURL()) {

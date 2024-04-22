@@ -11,6 +11,7 @@ public interface PersonService {
     Collection<Person> getPersons();
     Person getPersonByID(Long id);
     Person getPersonByName(String name);
+    Boolean doesPersonNameExist(String name);
     Boolean deletePersonByID(Long id);
     Person savePerson(Person person);
     Person updatePerson(Long id, Person person);

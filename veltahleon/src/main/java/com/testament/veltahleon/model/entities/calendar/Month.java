@@ -30,7 +30,7 @@ public class Month {
 
     @Min(value = 1, message = "Number cannot be below 1!")
     @Column(name = "number_of_month")
-    private Integer monthNumber;
+    private int monthNumber;
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,

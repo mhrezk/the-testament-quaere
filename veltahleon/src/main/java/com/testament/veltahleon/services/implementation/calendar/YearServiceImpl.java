@@ -37,13 +37,18 @@ public class YearServiceImpl implements YearService {
     }
 
     @Override
-    public Year getYearByDate(Integer day, Integer month, Integer year) {
+    public Year getYearByDate(int day, int month, int year) {
         return yearRepository.findByDay_DayNumberAndMonth_MonthNumberAndEpoch_YearNumber(day, month, year);
     }
 
     @Override
     public Collection<Year> getYearByName(String name) {
         return yearRepository.findByName(name);
+    }
+
+    @Override
+    public Collection<Year> getYearsByYearNumber(int year) {
+        return yearRepository.findByEpoch_YearNumber(year);
     }
 
     @Override

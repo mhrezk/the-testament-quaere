@@ -35,7 +35,7 @@ public class Day {
 
     @Min(value = 1, message = "Number cannot be below 1!")
     @Column(name = "number_of_day")
-    private Integer dayNumber;
+    private int dayNumber;
 
     //@PrimaryKeyJoinColumn
 //    @Cascade({CascadeType.REFRESH,

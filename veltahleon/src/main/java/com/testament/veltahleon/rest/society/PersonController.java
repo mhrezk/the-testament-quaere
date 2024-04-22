@@ -94,6 +94,18 @@ public class PersonController {
         );
     }
 
+    @GetMapping("/person/{personName}/exist")
+    public ResponseEntity<CustomResponse> getPersonNameExistence(@PathVariable(value = "personName") String personName) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", personService.doesPersonNameExist(personName)))
+                .message("Person name exists!")
+                .build()
+        );
+    }
+
     @GetMapping(value = "/people/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE})
     public byte[] getPersonImage(@PathVariable("fileName") String fileName) throws IOException {
         return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/people/" + fileName));

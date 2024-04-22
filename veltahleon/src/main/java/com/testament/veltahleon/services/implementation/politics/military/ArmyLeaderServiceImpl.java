@@ -80,10 +80,6 @@ public class ArmyLeaderServiceImpl implements ArmyLeaderService {
             newArmyLeader.setBiography(armyLeader.getBiography());
         }
 
-        if(armyLeader.getFamily() != null && newArmyLeader.getFamily() != armyLeader.getFamily()) {
-            newArmyLeader.setFamily(armyLeader.getFamily());
-        }
-
         if(armyLeader.getReligion() != null && newArmyLeader.getReligion() != armyLeader.getReligion()) {
             newArmyLeader.setReligion(armyLeader.getReligion());
         }
@@ -96,8 +92,12 @@ public class ArmyLeaderServiceImpl implements ArmyLeaderService {
             newArmyLeader.setFamily(armyLeader.getFamily());
         }
 
-        if(armyLeader.getYearBirthAndDeath() != null && newArmyLeader.getYearBirthAndDeath() != armyLeader.getYearBirthAndDeath()) {
-            newArmyLeader.setYearBirthAndDeath(armyLeader.getYearBirthAndDeath());
+        if(armyLeader.getBirthYear() != null && newArmyLeader.getBirthYear() != armyLeader.getBirthYear()) {
+            newArmyLeader.setBirthYear(armyLeader.getBirthYear());
+        }
+
+        if(armyLeader.getDeathYear() != null && newArmyLeader.getDeathYear() != armyLeader.getDeathYear()) {
+            newArmyLeader.setDeathYear(armyLeader.getDeathYear());
         }
 
         if(armyLeader.getTitle() != null && newArmyLeader.getTitle() != armyLeader.getTitle()) {

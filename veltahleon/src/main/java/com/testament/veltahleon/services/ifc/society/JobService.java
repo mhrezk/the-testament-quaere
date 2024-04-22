@@ -9,6 +9,7 @@ public interface JobService {
     Collection<Job> getJobsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Job> getJobs();
     Job getJobByID(Long id);
+    Job getJobByName(String name);
     Boolean deleteJobByID(Long id);
     Job saveJob(Job job);
     Job updateJob(Long id, Job job);

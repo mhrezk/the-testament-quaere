@@ -89,12 +89,12 @@ public class PunditServiceImpl implements PunditService {
             newPundit.setReligion(pundit.getReligion());
         }
 
-        if(pundit.getFamily() != null && newPundit.getFamily() != pundit.getFamily()) {
-            newPundit.setFamily(pundit.getFamily());
+        if(pundit.getBirthYear() != null && newPundit.getBirthYear() != pundit.getBirthYear()) {
+            newPundit.setBirthYear(pundit.getBirthYear());
         }
 
-        if(pundit.getYearBirthAndDeath() != null && newPundit.getYearBirthAndDeath() != pundit.getYearBirthAndDeath()) {
-            newPundit.setYearBirthAndDeath(pundit.getYearBirthAndDeath());
+        if(pundit.getDeathYear() != null && newPundit.getDeathYear() != pundit.getDeathYear()) {
+            newPundit.setDeathYear(pundit.getDeathYear());
         }
 
         if(pundit.getTitle() != null && newPundit.getTitle() != pundit.getTitle()) {

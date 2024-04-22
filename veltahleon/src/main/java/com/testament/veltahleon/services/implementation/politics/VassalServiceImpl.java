@@ -65,10 +65,6 @@ public class VassalServiceImpl implements VassalService {
             newVassal.setBiography(vassal.getBiography());
         }
 
-        if(vassal.getFamily() != null && newVassal.getFamily() != vassal.getFamily()) {
-            newVassal.setFamily(vassal.getFamily());
-        }
-
         if(vassal.getReligion() != null && newVassal.getReligion() != vassal.getReligion()) {
             newVassal.setReligion(vassal.getReligion());
         }
@@ -85,8 +81,12 @@ public class VassalServiceImpl implements VassalService {
             newVassal.setYearBeginningAndEnd(vassal.getYearBeginningAndEnd());
         }
 
-        if(vassal.getYearBirthAndDeath() != null && newVassal.getYearBirthAndDeath() != vassal.getYearBirthAndDeath()) {
-            newVassal.setYearBirthAndDeath(vassal.getYearBirthAndDeath());
+        if(vassal.getBirthYear() != null && newVassal.getBirthYear() != vassal.getBirthYear()) {
+            newVassal.setBirthYear(vassal.getBirthYear());
+        }
+
+        if(vassal.getDeathYear() != null && newVassal.getDeathYear() != vassal.getDeathYear()) {
+            newVassal.setDeathYear(vassal.getDeathYear());
         }
 
         if(vassal.getTitle() != null && newVassal.getTitle() != vassal.getTitle()) {

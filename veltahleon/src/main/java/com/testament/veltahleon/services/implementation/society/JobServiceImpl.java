@@ -37,6 +37,11 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    public Job getJobByName(String name) {
+        return jobRepository.findByName(name);
+    }
+
+    @Override
     public Boolean deleteJobByID(Long id) {
         jobRepository.findById(id);
         return Boolean.TRUE;

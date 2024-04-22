@@ -96,6 +96,7 @@ export class RaceComponent implements OnInit {
               },
             });
           this.isClicked = false;
+          this.isTableShown = true;
           this.isLoading.next(false);
           raceForm.resetForm();
           return {
@@ -157,6 +158,7 @@ export class RaceComponent implements OnInit {
         const index = this.dataSubject.value.data.dataRetrieved.findIndex(race => race.id === result.data.dataUpdated.id); //loops through the array and finds the record whose id matches the updated day from the backend
         this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated; //replaces old day with updated day
         this.isUpdated = false;
+        this.isTableShown = true;
         this.isLoading.next(false);
         return {
           dataState: DataState.LOADED,

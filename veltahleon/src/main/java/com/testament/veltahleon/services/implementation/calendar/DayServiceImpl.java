@@ -95,7 +95,7 @@ public class DayServiceImpl implements DayService {
             newDay.setName(day.getName());
         }
 
-        if(day.getDayNumber() != null && newDay.getDayNumber() != day.getDayNumber()) {
+        if(day.getDayNumber() != 0 && newDay.getDayNumber() != day.getDayNumber()) {
             newDay.setDayNumber(day.getDayNumber());
         }
 

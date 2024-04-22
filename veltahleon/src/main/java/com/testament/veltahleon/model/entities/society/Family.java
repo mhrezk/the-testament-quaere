@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.society;
 
+import com.testament.veltahleon.abstraction.Human;
 import com.testament.veltahleon.model.enumeration.Lineage;
 import com.testament.veltahleon.model.enumeration.ClosedAnswer;
 import jakarta.persistence.*;
@@ -12,7 +13,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "families")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +31,13 @@ public class Family {
 //            CascadeType.MERGE,
 //            CascadeType.PERSIST})
 //    private Person person;
+
+//    @OneToOne(cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "person_id")
+//    private Human person;
 
     @Column(name = "person_name")
     private String personName;

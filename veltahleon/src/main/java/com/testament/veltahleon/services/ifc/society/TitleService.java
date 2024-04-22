@@ -8,6 +8,7 @@ public interface TitleService {
 
     Collection<Title> getTitles();
     Title getTitleByID(Long id);
+    Title getTitleByName(String name);
     Boolean deleteTitleByID(Long id);
     Title saveTitle(Title title);
     Title updateTitle(Long id, Title title);

@@ -33,7 +33,7 @@ public class Epoch {
     @NotBlank(message = "Year number cannot be blank!")
     @NotEmpty(message = "Year number cannot be empty!")
     @Column(name = "year_number") //e.g: 3000
-    private Integer yearNumber;
+    private int yearNumber;
 
     @Column(name = "description", columnDefinition = "text")
     private String description;

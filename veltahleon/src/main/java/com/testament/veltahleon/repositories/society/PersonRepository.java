@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Person findByName(String name);
+    boolean existsPersonByName(String name);
     long countByName(String name);
 }

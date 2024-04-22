@@ -82,10 +82,6 @@ public class NationLeaderServiceImpl implements NationLeaderService {
             newNationLeader.setBiography(nationLeader.getBiography());
         }
 
-        if(nationLeader.getFamily() != null && newNationLeader.getFamily() != nationLeader.getFamily()) {
-            newNationLeader.setFamily(nationLeader.getFamily());
-        }
-
         if(nationLeader.getReligion() != null && newNationLeader.getReligion() != nationLeader.getReligion()) {
             newNationLeader.setReligion(nationLeader.getReligion());
         }
@@ -102,8 +98,12 @@ public class NationLeaderServiceImpl implements NationLeaderService {
             newNationLeader.setYearBeginningAndEnd(nationLeader.getYearBeginningAndEnd());
         }
 
-        if(nationLeader.getYearBirthAndDeath() != null && newNationLeader.getYearBirthAndDeath() != nationLeader.getYearBirthAndDeath()) {
-            newNationLeader.setYearBirthAndDeath(nationLeader.getYearBirthAndDeath());
+        if(nationLeader.getBirthYear() != null && newNationLeader.getBirthYear() != nationLeader.getBirthYear()) {
+            newNationLeader.setBirthYear(nationLeader.getBirthYear());
+        }
+
+        if(nationLeader.getDeathYear() != null && nationLeader.getDeathYear() != nationLeader.getDeathYear()) {
+            nationLeader.setDeathYear(nationLeader.getDeathYear());
         }
 
         if(nationLeader.getTitle() != null && newNationLeader.getTitle() != nationLeader.getTitle()) {

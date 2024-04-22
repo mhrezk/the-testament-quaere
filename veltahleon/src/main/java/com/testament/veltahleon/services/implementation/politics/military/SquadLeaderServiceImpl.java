@@ -76,10 +76,6 @@ public class SquadLeaderServiceImpl implements SquadLeaderService {
             newSquadLeader.setBiography(squadLeader.getBiography());
         }
 
-        if(squadLeader.getFamily() != null && newSquadLeader.getFamily() != squadLeader.getFamily()) {
-            newSquadLeader.setFamily(squadLeader.getFamily());
-        }
-
         if(squadLeader.getReligion() != null && newSquadLeader.getReligion() != squadLeader.getReligion()) {
             newSquadLeader.setReligion(squadLeader.getReligion());
         }
@@ -96,8 +92,12 @@ public class SquadLeaderServiceImpl implements SquadLeaderService {
             newSquadLeader.setFamily(squadLeader.getFamily());
         }
 
-        if(squadLeader.getYearBirthAndDeath() != null && newSquadLeader.getYearBirthAndDeath() != squadLeader.getYearBirthAndDeath()) {
-            newSquadLeader.setYearBirthAndDeath(squadLeader.getYearBirthAndDeath());
+        if(squadLeader.getBirthYear() != null && newSquadLeader.getBirthYear() != squadLeader.getBirthYear()) {
+            newSquadLeader.setBirthYear(squadLeader.getBirthYear());
+        }
+
+        if(squadLeader.getDeathYear() != null && newSquadLeader.getDeathYear() != squadLeader.getDeathYear()) {
+            newSquadLeader.setDeathYear(squadLeader.getDeathYear());
         }
 
         if(squadLeader.getTitle() != null && newSquadLeader.getTitle() != squadLeader.getTitle()) {

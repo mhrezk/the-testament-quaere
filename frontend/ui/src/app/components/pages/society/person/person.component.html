@@ -30,7 +30,8 @@
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="DATA_STATE.LOADED">
-          <span *ngIf="isTableShown">
+          <div *ngIf="isTableShown">
+            <span>
               Number of records:
               <select (change)="onTableSizeChange($event)">
                 <option *ngFor="let size of tableSizes">
@@ -38,16 +39,17 @@
                 </option>
               </select>
           </span>
-          <br>
-          <br>
-          <input
-            [(ngModel)]="isMasterSelected"
-            type="checkbox"
-            (change)="checkUncheckAll()"
-            style="cursor: pointer"
-          >
-          &nbsp;&nbsp;&nbsp;
-          <span>Select/Deselect All</span>
+            <br>
+            <br>
+            <input
+              [(ngModel)]="isMasterSelected"
+              type="checkbox"
+              (change)="checkUncheckAll()"
+              style="cursor: pointer"
+            >
+            &nbsp;&nbsp;&nbsp;
+            <span>Select/Deselect All</span>
+          </div>
           <table *ngIf="isTableShown" class="table table-striped table-hover" id="days">
             <thead>
             <tr>

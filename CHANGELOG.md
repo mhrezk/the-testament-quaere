@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.68.0] 2024-04-22
+
+- Added facade class for Person entity
+
 ## [0.67.0] 2024-04-17
 
 - Added customizable familial tree

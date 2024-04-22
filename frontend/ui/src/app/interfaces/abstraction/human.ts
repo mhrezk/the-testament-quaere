@@ -18,8 +18,12 @@ export interface Human {
   raceName?: string;
   religion?: string;
   family?: string;
-  birthYear?: number;
-  deathYear?: number;
+  birthday?: string;
+  birthMonth?: string;
+  birthYear?: string;
+  deathday?: string;
+  deathMonth?: string;
+  deathYear?: string;
   nation?: string;
   title?: string;
   biography?: string;

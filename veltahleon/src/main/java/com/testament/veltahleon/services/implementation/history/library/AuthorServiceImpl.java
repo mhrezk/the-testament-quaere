@@ -81,8 +81,12 @@ public class AuthorServiceImpl implements AuthorService {
             newAuthor.setBooks(author.getBooks());
         }
 
-        if(author.getYearBirthAndDeath() != null && newAuthor.getYearBirthAndDeath() != author.getYearBirthAndDeath()) {
-            newAuthor.setYearBirthAndDeath(author.getYearBirthAndDeath());
+        if(author.getBirthYear() != null && newAuthor.getBirthYear() != author.getBirthYear()) {
+            newAuthor.setBirthYear(author.getBirthYear());
+        }
+
+        if(author.getDeathYear() != null && newAuthor.getDeathYear() != author.getDeathYear()) {
+            newAuthor.setDeathYear(author.getDeathYear());
         }
 
         return authorRepository.save(newAuthor);

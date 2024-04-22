@@ -74,7 +74,7 @@ public class YearController {
     }
 
     @GetMapping("/year/date")
-    public ResponseEntity<CustomResponse> getYearByDate(@RequestParam(value = "dayNumber") Integer day, @RequestParam(value = "monthNumber") Integer month, @RequestParam(value = "yearNumber") Integer year) {
+    public ResponseEntity<CustomResponse> getYearByDate(@RequestParam(value = "dayNumber") int day, @RequestParam(value = "monthNumber") int month, @RequestParam(value = "yearNumber") int year) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

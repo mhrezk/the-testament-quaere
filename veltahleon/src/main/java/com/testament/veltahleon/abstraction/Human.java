@@ -15,8 +15,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
-
 @MappedSuperclass
 @Data
 @SuperBuilder
@@ -43,7 +41,7 @@ public abstract class Human {
     @Column(name = "gender")
     private Gender gender;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
@@ -61,21 +59,42 @@ public abstract class Human {
 //    @ElementCollection(fetch = FetchType.LAZY)
 //    @CollectionTable(name = "years_birth_death_people", joinColumns = @JoinColumn(name = "people_id"))
     //@MapKeyColumn(name = "birth_or_death")
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @Column(name = "year")
+//    private List<Year> yearBirthAndDeath;
+
+//    @ManyToMany
+//    @JoinTable(name = "year_birth_death",
+//            joinColumns = @JoinColumn(name = "people_id"),
+//            inverseJoinColumns = @JoinColumn(name = "year_id"))
+//    private List<Year> yearBirthAndDeath;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @Column(name = "year")
-    private List<Year> yearBirthAndDeath;
+    @JoinColumn(name = "birth_year_id")
+    private Year birthYear;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "death_year_id")
+    private Year deathYear;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "nation_id")
     private Nation nation;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})

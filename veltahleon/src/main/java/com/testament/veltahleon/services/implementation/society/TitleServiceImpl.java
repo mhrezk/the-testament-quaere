@@ -31,6 +31,11 @@ public class TitleServiceImpl implements TitleService {
     }
 
     @Override
+    public Title getTitleByName(String name) {
+        return titleRepository.findByName(name);
+    }
+
+    @Override
     public Boolean deleteTitleByID(Long id) {
         titleRepository.deleteById(id);
         return Boolean.TRUE;

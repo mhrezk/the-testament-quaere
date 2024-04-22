@@ -86,10 +86,6 @@ public class MilitaryLeaderServiceImpl implements MilitaryLeaderService {
             newMilitaryLeader.setBiography(militaryLeader.getBiography());
         }
 
-        if(militaryLeader.getFamily() != null && newMilitaryLeader.getFamily() != militaryLeader.getFamily()) {
-            newMilitaryLeader.setFamily(militaryLeader.getFamily());
-        }
-
         if(militaryLeader.getReligion() != null && newMilitaryLeader.getReligion() != militaryLeader.getReligion()) {
             newMilitaryLeader.setReligion(militaryLeader.getReligion());
         }
@@ -102,8 +98,12 @@ public class MilitaryLeaderServiceImpl implements MilitaryLeaderService {
             newMilitaryLeader.setFamily(militaryLeader.getFamily());
         }
 
-        if(militaryLeader.getYearBirthAndDeath() != null && newMilitaryLeader.getYearBirthAndDeath() != militaryLeader.getYearBirthAndDeath()) {
-            newMilitaryLeader.setYearBirthAndDeath(militaryLeader.getYearBirthAndDeath());
+        if(militaryLeader.getBirthYear() != null && newMilitaryLeader.getBirthYear() != militaryLeader.getBirthYear()) {
+            newMilitaryLeader.setBirthYear(militaryLeader.getBirthYear());
+        }
+
+        if(militaryLeader.getDeathYear() != null && newMilitaryLeader.getDeathYear() != militaryLeader.getDeathYear()) {
+            newMilitaryLeader.setDeathYear(militaryLeader.getDeathYear());
         }
 
         if(militaryLeader.getTitle() != null && newMilitaryLeader.getTitle() != militaryLeader.getTitle()) {

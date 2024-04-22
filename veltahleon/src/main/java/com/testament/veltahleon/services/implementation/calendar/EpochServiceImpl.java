@@ -54,7 +54,7 @@ public class EpochServiceImpl implements EpochService {
             newEpoch.setDescription(epoch.getDescription());
         }
 
-        if(epoch.getYearNumber() != null && newEpoch.getYearNumber() != epoch.getYearNumber()) {
+        if(epoch.getYearNumber() != 0 && newEpoch.getYearNumber() != epoch.getYearNumber()) {
             newEpoch.setYearNumber(epoch.getYearNumber());
         }
 

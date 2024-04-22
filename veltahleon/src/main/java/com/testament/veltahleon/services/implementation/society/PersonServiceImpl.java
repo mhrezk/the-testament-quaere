@@ -44,6 +44,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Boolean doesPersonNameExist(String name) {
+        return personRepository.existsPersonByName(name);
+    }
+
+    @Override
     public Boolean deletePersonByID(Long id) {
         personRepository.deleteById(id);
         return Boolean.TRUE;
@@ -66,6 +71,10 @@ public class PersonServiceImpl implements PersonService {
             newPerson.setNation(person.getNation());
         }
 
+        if(person.getFamily() != null && newPerson.getFamily() != person.getFamily()) {
+            newPerson.setFamily(person.getFamily());
+        }
+
         if(person.getReligion() != null && newPerson.getReligion() != person.getReligion()) {
             newPerson.setReligion(person.getReligion());
         }
@@ -78,16 +87,16 @@ public class PersonServiceImpl implements PersonService {
             newPerson.setGender(person.getGender());
         }
 
-        if(person.getFamily() != null && newPerson.getFamily() != person.getFamily()) {
-            newPerson.setFamily(person.getFamily());
-        }
-
         if(person.getJob() != null && newPerson.getJob() != person.getJob()) {
             newPerson.setJob(person.getJob());
         }
 
-        if(person.getYearBirthAndDeath() != null && newPerson.getYearBirthAndDeath() != person.getYearBirthAndDeath()) {
-            newPerson.setYearBirthAndDeath(person.getYearBirthAndDeath());
+        if(person.getBirthYear() != null && newPerson.getBirthYear() != person.getBirthYear()) {
+            newPerson.setBirthYear(person.getBirthYear());
+        }
+
+        if(person.getDeathYear() != null && newPerson.getDeathYear() != person.getDeathYear()) {
+            newPerson.setDeathYear(person.getDeathYear());
         }
 
         if(person.getImageURL() != null && newPerson.getImageURL() != person.getImageURL()) {

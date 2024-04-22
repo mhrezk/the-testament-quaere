@@ -66,8 +66,8 @@ public class EventController {
         );
     }
 
-    @GetMapping("/event/yearNumber")
-    public ResponseEntity<CustomResponse> getEventsByEventName(@RequestParam(value = "yearNumber") Integer yearNumber) {
+    @GetMapping("/event/year")
+    public ResponseEntity<CustomResponse> getEventsByEventName(@RequestParam(value = "yearNumber") int yearNumber) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

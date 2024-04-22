@@ -83,7 +83,7 @@ public class MonthServiceImpl implements MonthService {
             newMonth.setDescription(month.getDescription());
         }
 
-        if(month.getMonthNumber() != null && newMonth.getMonthNumber() != month.getMonthNumber()) {
+        if(month.getMonthNumber() != 0 && newMonth.getMonthNumber() != month.getMonthNumber()) {
             newMonth.setMonthNumber(month.getMonthNumber());
         }
 
