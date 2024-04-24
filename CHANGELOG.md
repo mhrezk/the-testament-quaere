@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.69.1] 2024-04-24
+
+- Added handler for NoSuchElementException in backend portion
+
 ## [0.69.0] 2024-04-24
 
 - Added facade and mapper classes for Nation entity

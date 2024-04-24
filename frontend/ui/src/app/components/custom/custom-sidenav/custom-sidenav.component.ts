@@ -48,7 +48,7 @@ export class CustomSidenavComponent {
       route: "races"
     },
     {
-      icon: "organization",
+      icon: "workspaces",
       label: "Organizations",
       route: "organizations"
     },

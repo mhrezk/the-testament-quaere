@@ -1,6 +1,5 @@
 package com.testament.veltahleon.handlers;
 
-import com.testament.veltahleon.exceptions.DataNotFoundException;
 import com.testament.veltahleon.responses.CustomResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +9,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
-public class DataNotFoundExceptionHandler {
+public class NoSuchElementExceptionHandler {
 
-    @ExceptionHandler(DataNotFoundException.class)
-    public ResponseEntity<CustomResponse> handleException(DataNotFoundException exception) {
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<CustomResponse> handleException(NoSuchElementException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("error", exception.getMessage());
 
