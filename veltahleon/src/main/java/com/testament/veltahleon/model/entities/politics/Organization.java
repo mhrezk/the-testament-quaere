@@ -34,20 +34,34 @@ public class Organization {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Pundit founder;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "national_id")
     private Nation nation;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+////    @MapKeyColumn(name = "foundation_or_disbandment")
+//    @Column(name = "year")
+//    private List<Year> yearFoundationAndDisbandment;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-//    @MapKeyColumn(name = "foundation_or_disbandment")
-    @Column(name = "year")
-    private List<Year> yearFoundationAndDisbandment;
+    @JoinColumn(name = "foundation_year_id")
+    private Year foundationYear;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "disbandment_year_id")
+    private Year disbandmentYear;
 
     @Column(name = "symbol_url")
     private String urlSymbol;

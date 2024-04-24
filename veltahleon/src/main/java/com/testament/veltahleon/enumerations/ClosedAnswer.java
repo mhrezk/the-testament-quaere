@@ -1,4 +1,4 @@
-package com.testament.veltahleon.model.enumeration;
+package com.testament.veltahleon.enumerations;
 
 import lombok.Getter;
 

@@ -1,10 +1,10 @@
 package com.testament.veltahleon.mappers.society;
 
 import com.testament.veltahleon.dto.society.PersonDTO;
+import com.testament.veltahleon.exceptions.DataNotFoundException;
 import com.testament.veltahleon.facades.society.PersonFacade;
 import com.testament.veltahleon.model.entities.society.Person;
-import com.testament.veltahleon.model.enumeration.Gender;
-import com.testament.veltahleon.services.ifc.history.RaceService;
+import com.testament.veltahleon.enumerations.Gender;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,22 +21,22 @@ public class PersonMapper {
     public PersonDTO convertToDTO(Person person) {
         return PersonDTO.builder()
                 .id(person.getId())
-                .name(person.getName())
+                .name(person.getName().toUpperCase())
                 .gender(String.valueOf(person.getGender()))
-                .raceName(Optional.ofNullable(person.getRace().getName()).orElse("N/A"))
-//                .birthDay(Optional.ofNullable(person.getBirthYear().getDay().getDayNumber()).orElse("N/A"))
-//                .birthMonth(Optional.ofNullable(person.getBirthYear().getMonth().getMonthNumber()).orElse("N/A"))
-//                .birthYear(Optional.ofNullable(person.getBirthYear().getEpoch().getYearNumber()).orElse("N/A"))
-//                .deathDay(Optional.ofNullable(person.getDeathYear().getDay().getDayNumber()).orElse("N/A"))
-//                .deathMonth(Optional.ofNullable(person.getDeathYear().getMonth().getMonthNumber()).orElse("N/A"))
-//                .deathYear(Optional.ofNullable(person.getDeathYear().getEpoch().getYearNumber()).orElse("N/A"))
-//                .nation(Optional.ofNullable(person.getNation().getName()).orElse("N/A"))
-//                .religion(Optional.ofNullable(person.getReligion().getName()).orElse("N/A"))
-//                .family(Optional.ofNullable(person.getFamily().getFamilyName()).orElse("N/A"))
-//                .title(Optional.ofNullable(person.getTitle().getName()).orElse("N/A"))
-//                .job(Optional.ofNullable(person.getJob().getName()).orElse("N/A"))
-//                .biography(Optional.ofNullable(person.getBiography()).orElse("N/A"))
-//                .imageURL(Optional.ofNullable(person.getImageURL()).orElse("N/A"))
+                .raceName(Optional.ofNullable(person.getRace().getName()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database")))
+                .birthDay(String.valueOf(Optional.of(person.getBirthYear().getDay().getDayNumber()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database"))))
+                .birthMonth(String.valueOf(Optional.of(person.getBirthYear().getMonth().getMonthNumber()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database"))))
+                .birthYear(String.valueOf(Optional.of(person.getBirthYear().getEpoch().getYearNumber()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database"))))
+                .deathDay(String.valueOf(Optional.of(person.getDeathYear().getDay().getDayNumber()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database"))))
+                .deathMonth(String.valueOf(Optional.of(person.getDeathYear().getMonth().getMonthNumber()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database"))))
+                .deathYear(String.valueOf(Optional.of(person.getDeathYear().getEpoch().getYearNumber()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database"))))
+                .nation(Optional.ofNullable(person.getNation().getName()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database")))
+                .religion(Optional.ofNullable(person.getReligion().getName()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database")))
+                .family(Optional.ofNullable(person.getFamily().getFamilyName()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database")))
+                .title(Optional.ofNullable(person.getTitle().getName()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database")))
+                .job(Optional.ofNullable(person.getJob().getName()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database")))
+                .biography(Optional.ofNullable(person.getBiography()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database")))
+                .imageURL(Optional.ofNullable(person.getImageURL()).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database")))
                 .build();
     }
 

@@ -1,7 +1,7 @@
 package com.testament.veltahleon.model.entities.politics;
 
 import com.testament.veltahleon.model.entities.places.Nation;
-import com.testament.veltahleon.model.enumeration.RankType;
+import com.testament.veltahleon.enumerations.RankType;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -10,6 +10,7 @@ import java.util.Collection;
 public interface NationRepository extends JpaRepository<Nation, Long> {
 
     Nation findByName(String name);
-    Collection<Nation> findByType_Name(String name);
+    Collection<Nation> findByType(String nationType);
+    Collection<Nation> findByGovernanceType(String governanceType);
     long countByName(String name);
 }

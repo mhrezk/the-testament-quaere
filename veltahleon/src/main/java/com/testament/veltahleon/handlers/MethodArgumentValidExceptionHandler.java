@@ -35,7 +35,7 @@ public class MethodArgumentValidExceptionHandler {
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .status(HttpStatus.BAD_REQUEST)
                 .errorData(errorMap)
-                .issue("Validation error!")
+                .issue("Validation error! Validation constraints are not met!")
                 .build());
     }
 }

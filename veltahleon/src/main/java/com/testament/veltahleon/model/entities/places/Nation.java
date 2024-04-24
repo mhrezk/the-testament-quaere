@@ -1,16 +1,16 @@
 package com.testament.veltahleon.model.entities.places;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.testament.veltahleon.enumerations.GovernanceType;
+import com.testament.veltahleon.enumerations.NationType;
 import com.testament.veltahleon.model.entities.history.Language;
 import com.testament.veltahleon.model.entities.politics.NationLeader;
-import com.testament.veltahleon.model.entities.politics.Pundit;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -70,12 +70,20 @@ public class Nation {
             CascadeType.PERSIST})
     private Set<Province> provinces;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "nation_type_id")
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "nation_type_id")
+//    private NationType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "nation_type")
     private NationType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "governance_type")
+    private GovernanceType governanceType;
 
 //    @OneToMany(mappedBy = "nation", cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,

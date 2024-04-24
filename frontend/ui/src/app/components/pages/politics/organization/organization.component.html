@@ -1,0 +1,161 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Organizations</h2>
+          </div>
+          <div class="col-sm-6">
+            <a class="btn btn-success" (click)="isTableShown = false; isClicked = true">
+              <i class="material-icons">&#xE147;</i>
+              <span>Add Organization</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+        <ng-container *ngSwitchCase="DATA_STATE.LOADING">
+          <div class="col-md-12 single-note-item text-center">
+            <div class="spinner-border text-info" role="status"></div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+          <div *ngIf="isTableShown">
+            <span>
+              Number of records:
+              <select (change)="onTableSizeChange($event)">
+                <option *ngFor="let size of tableSizes">
+                  {{ size }}
+                </option>
+              </select>
+          </span>
+            <br>
+            <br>
+            <input
+              [(ngModel)]="isMasterSelected"
+              type="checkbox"
+              (change)="checkUncheckAll()"
+              style="cursor: pointer"
+            >
+            &nbsp;&nbsp;&nbsp;
+            <span>Select/Deselect All</span>
+          </div>
+          <table *ngIf="isTableShown" class="table table-striped table-hover" id="days">
+            <thead>
+            <tr>
+              <th></th>
+              <th *ngFor="let header of headers">{{ header.value }}</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let organization of appState.appData?.data.dataRetrieved
+            | paginate: {
+              itemsPerPage: tableSize,
+              currentPage: currentPage,
+              totalItems: count
+            }; let i = index;">
+            <tr>
+              <td>
+                <input
+                  [(ngModel)]="organization.isSelected"
+                  type="checkbox"
+                  (change)="isAllSelected()"
+                  style="cursor: pointer"
+                ></td>
+              <td>{{ organization.name }}</td>
+              <td>
+                <span>
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit'"
+                           (click)="isUpdated = true; getOrganizationByID(organization.id); isTableShown = false;"
+                           [style.cursor]="'pointer'"></fa-icon>
+                </span>
+                &nbsp;
+                &nbsp;
+                <span>
+                  <fa-icon [icon]="faTrash" [title]="'Delete'" (click)="deleteOrganization(organization)"
+                           style="cursor: pointer; color: firebrick"></fa-icon>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.ERROR">
+          <div [hidden]="isUpdated || isClicked" style="background-color: indianred">{{ appState.error }}</div>
+        </ng-container>
+        <pagination-controls
+          *ngIf="isTableShown"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Add Organization -->
+<div *ngIf="isClicked" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #organizationForm="ngForm" (ngSubmit)="saveOrganization(organizationForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Organization</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Organization Name</label>
+            <input type="text" ngModel name="name" class="form-control" required>
+          </div>
+          <div class="row">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="isClicked = false; isTableShown = true">Close</button>
+          <button type="submit" [disabled]="isLoading$ | async"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Organization -->
+<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="modifyOrganization(selectedOrganization)">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Organization</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Organization Name</label>
+            <input type="text" [(ngModel)]="selectedOrganization.name" name="name" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="isUpdated = false; isTableShown = true;">Close</button>
+          <button type="submit" [disabled]="isLoading$ | async"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Updating...</span>
+            <span *ngIf="!(isLoading$ | async)">Update</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

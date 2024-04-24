@@ -1,8 +1,7 @@
 package com.testament.veltahleon.model.entities.society;
 
-import com.testament.veltahleon.abstraction.Human;
-import com.testament.veltahleon.model.enumeration.Lineage;
-import com.testament.veltahleon.model.enumeration.ClosedAnswer;
+import com.testament.veltahleon.enumerations.Lineage;
+import com.testament.veltahleon.enumerations.ClosedAnswer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

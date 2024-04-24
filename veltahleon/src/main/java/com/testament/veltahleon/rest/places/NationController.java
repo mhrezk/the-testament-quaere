@@ -117,4 +117,16 @@ public class NationController {
                 .build()
         );
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CustomResponse> modifyNation(@PathVariable Long id, @RequestBody Nation nation) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataUpdated", nationService.modifyNation(id, nation)))
+                .message("Nation updated!")
+                .build()
+        );
+    }
 }

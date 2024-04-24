@@ -14,4 +14,5 @@ public interface OrganizationService {
     Boolean deleteOrganizationByID(Long id);
     Organization saveOrganization(Organization organization);
     Organization updateOrganization(Long id, Organization organization);
+    Organization modifyOrganization(Long id, Organization organization);
 }

@@ -8,23 +8,23 @@ import lombok.*;
 @Getter
 @Setter
 public class PersonDTO {
-    Long id;
-    String name;
-    String gender;
-    String raceName;
-    String family;
-    String religion;
-    String title;
-    String nation;
-    String birthDay;
-    String birthMonth;
-    String birthYear;
-    String deathDay;
-    String deathMonth;
-    String deathYear;
-    String job;
-    String biography;
-    String imageURL;
+    private Long id;
+    private String name;
+    private String gender;
+    private String raceName;
+    private String family;
+    private String religion;
+    private String title;
+    private String nation;
+    private String birthDay;
+    private String birthMonth;
+    private String birthYear;
+    private String deathDay;
+    private String deathMonth;
+    private String deathYear;
+    private String job;
+    private String biography;
+    private String imageURL;
 
     public String getBirthDate() {
         return birthDay + "/" + birthMonth + "/" + birthYear;

@@ -1,6 +1,6 @@
 package com.testament.veltahleon.model.entities.society;
 
-import com.testament.veltahleon.model.enumeration.JobType;
+import com.testament.veltahleon.enumerations.JobType;
 import jakarta.persistence.*;
 import lombok.*;
 

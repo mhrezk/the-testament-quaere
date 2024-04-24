@@ -8,6 +8,7 @@ public interface EpochService {
 
     Collection<Epoch> getEpochs();
     Epoch getEpochByID(Long id);
+    Epoch getEpochByYearNumber(Integer yearNumber);
     Boolean deleteEpochByID(Long id);
     Epoch saveEpoch(Epoch epoch);
     Epoch updateEpoch(Long id, Epoch epoch);

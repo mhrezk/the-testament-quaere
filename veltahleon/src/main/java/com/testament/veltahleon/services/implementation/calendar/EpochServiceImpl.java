@@ -33,6 +33,11 @@ public class EpochServiceImpl implements EpochService {
     }
 
     @Override
+    public Epoch getEpochByYearNumber(Integer yearNumber) {
+        return epochRepository.findByYearNumber(yearNumber);
+    }
+
+    @Override
     public Boolean deleteEpochByID(Long id) {
         epochRepository.deleteById(id);
         return Boolean.TRUE;

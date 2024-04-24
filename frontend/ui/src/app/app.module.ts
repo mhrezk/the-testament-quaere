@@ -37,6 +37,8 @@ import {OrganizationChartComponent} from "./components/pages/hierarchy/organizat
 import { HierarchyComponent } from './components/pages/hierarchy/hierarchy/hierarchy.component';
 import { CustomFamilyTreeComponent } from './components/custom/custom-family-tree/custom-family-tree.component';
 import { FamilyTreeFormComponent } from './components/custom/custom-family-tree/family-tree-form/family-tree-form.component';
+import { OrganizationComponent } from './components/pages/politics/organization/organization.component';
+import { NationComponent } from './components/pages/places/nation/nation.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { FamilyTreeFormComponent } from './components/custom/custom-family-tree/
     InspectorComponent,
     HierarchyComponent,
     CustomFamilyTreeComponent,
-    FamilyTreeFormComponent
+    FamilyTreeFormComponent,
+    OrganizationComponent,
+    NationComponent
   ],
   imports: [
     BrowserModule,

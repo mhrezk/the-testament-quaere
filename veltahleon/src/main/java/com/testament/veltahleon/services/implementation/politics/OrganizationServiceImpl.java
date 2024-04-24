@@ -1,5 +1,6 @@
 package com.testament.veltahleon.services.implementation.politics;
 
+import com.testament.veltahleon.exceptions.DataNotFoundException;
 import com.testament.veltahleon.model.entities.politics.Organization;
 import com.testament.veltahleon.repositories.politics.OrganizationRepository;
 import com.testament.veltahleon.services.ifc.politics.OrganizationService;
@@ -74,8 +75,12 @@ public class OrganizationServiceImpl implements OrganizationService {
             newOrganization.setFounder(organization.getFounder());
         }
 
-        if(organization.getYearFoundationAndDisbandment() != null && newOrganization.getYearFoundationAndDisbandment() != organization.getYearFoundationAndDisbandment()) {
-            newOrganization.setYearFoundationAndDisbandment(organization.getYearFoundationAndDisbandment());
+        if(organization.getFoundationYear() != null && newOrganization.getFoundationYear() != organization.getFoundationYear()) {
+            newOrganization.setFoundationYear(organization.getFoundationYear());
+        }
+
+        if(organization.getDisbandmentYear() != null && newOrganization.getDisbandmentYear() != organization.getDisbandmentYear()) {
+            newOrganization.setDisbandmentYear(organization.getDisbandmentYear());
         }
 
         if(organization.getUrlSymbol() != null && newOrganization.getUrlSymbol() != organization.getUrlSymbol()) {
@@ -83,5 +88,19 @@ public class OrganizationServiceImpl implements OrganizationService {
         }
 
         return organizationRepository.save(newOrganization);
+    }
+
+    @Override
+    public Organization modifyOrganization(Long id, Organization organization) {
+        Organization newOrganization = organizationRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database!"));
+
+        newOrganization.setName(organization.getName());
+        newOrganization.setUrlSymbol(organization.getUrlSymbol());
+        newOrganization.setFoundationYear(organization.getFoundationYear());
+        newOrganization.setDisbandmentYear(organization.getDisbandmentYear());
+        newOrganization.setNation(organization.getNation());
+        newOrganization.setFounder(organization.getFounder());
+
+        return newOrganization;
     }
 }

@@ -8,6 +8,8 @@ import {TimelineComponent} from "./components/pages/timeline/timeline.component"
 import {FamilyTreeComponent} from "./components/pages/family-tree/family-tree.component";
 import {HierarchyComponent} from "./components/pages/hierarchy/hierarchy/hierarchy.component";
 import {CustomFamilyTreeComponent} from "./components/custom/custom-family-tree/custom-family-tree.component";
+import {OrganizationComponent} from "./components/pages/politics/organization/organization.component";
+import {NationComponent} from "./components/pages/places/nation/nation.component";
 
 const routes: Routes = [
   {
@@ -28,8 +30,16 @@ const routes: Routes = [
     component: PersonComponent
   },
   {
+    path: "nations",
+    component: NationComponent
+  },
+  {
     path: "races",
     component: RaceComponent
+  },
+  {
+    path: "organizations",
+    component: OrganizationComponent
   },
   {
     path: "timeline",

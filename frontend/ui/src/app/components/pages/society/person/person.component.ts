@@ -65,8 +65,7 @@ export class PersonComponent implements OnInit {
   ];
 
   constructor(private personService: PersonService,
-              private raceService: RaceService,
-              private modalService: ModalService) {
+              private raceService: RaceService) {
   }
 
   ngOnInit(): void {

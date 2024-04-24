@@ -29,9 +29,9 @@ export class CalendarComponent implements OnInit {
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
+  isTableShown: boolean = false;
   isUpdated: boolean = false;
   isClicked: boolean = false;
-  //isClicked$ = this.isClicked.asObservable();
   faTrash = faTrash;
   faEdit = faEdit;
   headers = [
@@ -53,6 +53,7 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isTableShown = true;
     this.getAllDays();
   }
 
@@ -102,6 +103,7 @@ export class CalendarComponent implements OnInit {
               },
             });
           //document.getElementById("closeModal").click() //close modal
+          this.isTableShown = true;
           this.isClicked = false;
           this.isLoading.next(false);
           dayForm.resetForm(); //resets form
@@ -163,6 +165,7 @@ export class CalendarComponent implements OnInit {
       map((result) => {
         const index = this.dataSubject.value.data.dataRetrieved.findIndex(day => day.id === result.data.dataUpdated.id); //loops through the array and finds the record whose id matches the updated day from the backend
         this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated; //replaces old day with updated day
+        this.isTableShown = true;
         this.isUpdated = false;
         this.isLoading.next(false);
         return {

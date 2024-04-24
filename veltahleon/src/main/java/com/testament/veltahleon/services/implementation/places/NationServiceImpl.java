@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +30,16 @@ public class NationServiceImpl implements NationService {
     @Override
     public Collection<Nation> getNations() {
         return nationRepository.findAll();
+    }
+
+    @Override
+    public Collection<Nation> getNationsByNationType(String nationType) {
+        return nationRepository.findByType(nationType);
+    }
+
+    @Override
+    public Collection<Nation> getNationsByGovernanceType(String governanceType) {
+        return nationRepository.findByGovernanceType(governanceType);
     }
 
     @Override
@@ -88,10 +99,29 @@ public class NationServiceImpl implements NationService {
             newNation.setType(nation.getType());
         }
 
+        if(nation.getGovernanceType() != null && newNation.getGovernanceType() != nation.getGovernanceType()) {
+            newNation.setGovernanceType(nation.getGovernanceType());
+        }
+
         if(nation.getUrlFlag() != null && newNation.getUrlFlag() != nation.getUrlFlag()) {
             newNation.setUrlFlag(nation.getUrlFlag());
         }
 
+        return nationRepository.save(newNation);
+    }
+
+    @Override
+    public Nation modifyNation(Long id, Nation nation) {
+        Nation newNation = nationRepository.findById(id).orElseThrow();
+        newNation.setName(nation.getName());
+        newNation.setDescription(nation.getDescription());
+        newNation.setGovernanceType(nation.getGovernanceType());
+        newNation.setType(nation.getType());
+        newNation.setLeader(nation.getLeader());
+        newNation.setCapital(nation.getCapital());
+        newNation.setUrlFlag(nation.getUrlFlag());
+        newNation.setLanguage(nation.getLanguage());
+        newNation.setProvinces(nation.getProvinces());
         return nationRepository.save(newNation);
     }
 }

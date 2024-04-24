@@ -21,7 +21,7 @@ export interface Human {
   birthday?: string;
   birthMonth?: string;
   birthYear?: string;
-  deathday?: string;
+  deathDay?: string;
   deathMonth?: string;
   deathYear?: string;
   nation?: string;

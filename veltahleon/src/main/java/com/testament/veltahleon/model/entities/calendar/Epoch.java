@@ -6,9 +6,12 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "epochs")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,9 +26,9 @@ public class Epoch {
     @Column(name = "year_name", unique = true) //e.g: Year of Six Emperors
     private String yearName;
 
-    @NotNull(message = "Calendar abbreviation cannot be null!")
-    @NotBlank(message = "Calendar abbreviation cannot be blank!")
-    @NotEmpty(message = "Calendar abbreviation cannot be empty!")
+    @NotNull(message = "Year abbreviation cannot be null!")
+    @NotBlank(message = "Year abbreviation cannot be blank!")
+    @NotEmpty(message = "Year abbreviation cannot be empty!")
     @Column(name = "year_abbreviation") //e.g: ADE
     private String abbreviation;
 

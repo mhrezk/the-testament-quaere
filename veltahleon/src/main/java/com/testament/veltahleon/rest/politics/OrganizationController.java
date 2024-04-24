@@ -107,12 +107,24 @@ public class OrganizationController {
     }
 
     @PatchMapping("/update/organization/{id}")
-    public ResponseEntity<CustomResponse> updateOrganization(@PathVariable Long id, @RequestBody @Valid Organization organization) {
+    public ResponseEntity<CustomResponse> updateOrganization(@PathVariable Long id, @RequestBody Organization organization) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataUpdated", organizationService.updateOrganization(id, organization)))
+                .message("Organization updated!")
+                .build()
+        );
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CustomResponse> modifyOrganization(@PathVariable Long id, @RequestBody Organization organization) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataUpdated", organizationService.modifyOrganization(id, organization)))
                 .message("Organization updated!")
                 .build()
         );

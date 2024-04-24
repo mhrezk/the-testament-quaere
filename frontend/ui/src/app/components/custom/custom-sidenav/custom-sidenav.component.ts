@@ -48,6 +48,11 @@ export class CustomSidenavComponent {
       route: "races"
     },
     {
+      icon: "organization",
+      label: "Organizations",
+      route: "organizations"
+    },
+    {
       icon: "diversity_3",
       label: "Family Trees",
       route: "family-tree"

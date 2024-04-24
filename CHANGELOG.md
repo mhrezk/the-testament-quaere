@@ -1,5 +1,14 @@
 # Change Log
 
+## [0.69.0] 2024-04-24
+
+- Added facade and mapper classes for Nation entity
+- Added facade and mapper classes for Organization entity
+- Added facade and mapper classes for Year entity
+- Added dto class for Month entity
+- Added nation and organization templates for frontend portion
+- Added nation and organization services for frontend portion
+
 ## [0.68.0] 2024-04-22
 
 - Added facade class for Person entity
