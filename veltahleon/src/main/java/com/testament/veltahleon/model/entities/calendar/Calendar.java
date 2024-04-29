@@ -18,7 +18,7 @@ public class Calendar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "year_id")
+    @Column(name = "calendar_id")
     private Long id;
 
     private String name;

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.70.0] 2024-04-28
+
+- Added mapper and dto for Religion, Demon and Fae entities
+
 ## [0.69.1] 2024-04-24
 
 - Added handler for NoSuchElementException in backend portion
