@@ -23,8 +23,6 @@ public class LetterServiceImpl implements LetterService {
 
     @Autowired
     private final LetterRepository letterRepository;
-    @Autowired
-    private final LanguageRepository languageRepository;
 
     @Override
     public Collection<Letter> getLettersWithPagination(int pageNumber, int numberOfRecords) {
@@ -44,6 +42,11 @@ public class LetterServiceImpl implements LetterService {
     @Override
     public Letter getLetterByID(Long id) {
         return letterRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public Letter getLetterByName(String name) {
+        return letterRepository.findByName(name);
     }
 
     @Override
@@ -70,7 +73,7 @@ public class LetterServiceImpl implements LetterService {
         }
 
         if((letter.getLanguage() != null && newLetter.getLanguage() != letter.getLanguage())) {
-            newLetter.setLanguage(checkLanguageForUpdate(letter.getLanguage(), newLetter.getLanguage()));
+            newLetter.setLanguage(letter.getLanguage());
         }
 
         if(letter.getScriptURL() != null && newLetter.getScriptURL() != letter.getScriptURL()) {
@@ -81,18 +84,18 @@ public class LetterServiceImpl implements LetterService {
     }
 
     //Helper Methods
-    private Language checkLanguageForUpdate(Language language, Language newLanguage) {
-        if(language.getName() != null && newLanguage.getName() != language.getName()) {
-            newLanguage.setName(language.getName());
-        }
-
-        if(language.getDescription() != null && newLanguage.getDescription() != language.getDescription()) {
-            newLanguage.setDescription(language.getDescription());
-        }
-
-        if(language.getAlphabetURL() != null && newLanguage.getAlphabetURL() != language.getAlphabetURL()) {
-            newLanguage.setAlphabetURL(language.getAlphabetURL());
-        }
-        return newLanguage;
-    }
+//    private Language checkLanguageForUpdate(Language language, Language newLanguage) {
+//        if(language.getName() != null && newLanguage.getName() != language.getName()) {
+//            newLanguage.setName(language.getName());
+//        }
+//
+//        if(language.getDescription() != null && newLanguage.getDescription() != language.getDescription()) {
+//            newLanguage.setDescription(language.getDescription());
+//        }
+//
+//        if(language.getAlphabetURL() != null && newLanguage.getAlphabetURL() != language.getAlphabetURL()) {
+//            newLanguage.setAlphabetURL(language.getAlphabetURL());
+//        }
+//        return newLanguage;
+//    }
 }

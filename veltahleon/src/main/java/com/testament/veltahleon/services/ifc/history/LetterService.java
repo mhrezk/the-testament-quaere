@@ -11,6 +11,7 @@ public interface LetterService {
     Collection<Letter> getLetters();
     Collection<Letter> getLettersByLanguageName(String languageName);
     Letter getLetterByID(Long id);
+    Letter getLetterByName(String name);
     Boolean deleteLetterByID(Long id);
     Letter saveLetter(Letter letter);
     Letter updateLetter(Long id, Letter letter);

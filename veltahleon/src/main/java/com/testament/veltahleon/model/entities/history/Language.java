@@ -52,6 +52,12 @@ public class Language {
 //            CascadeType.PERSIST})
 //    private List<Nation> nations;
 
+//    @OneToMany(mappedBy = "language", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    private List<Letter> letters;
+
     @Column(name = "description", columnDefinition = "longtext")
     private String description;
 

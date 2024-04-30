@@ -9,5 +9,6 @@ import java.util.Collection;
 public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 
     Collection<Chapter> findByBook_Name(String name);
+    Collection<Chapter> findByChapterNumber(int number);
     long countByBook_Name(String name);
 }

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.71.0] 2024-04-30
+
+- Added mapper and dto for everything except certain entities in politics package
+
 ## [0.70.0] 2024-04-28
 
 - Added mapper and dto for Religion, Demon and Fae entities

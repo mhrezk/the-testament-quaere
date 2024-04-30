@@ -34,7 +34,7 @@ public class Rank {
     @Column(name = "rank_type")
     private RankType rankType;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})

@@ -9,7 +9,8 @@ public interface AuthorService {
     Collection<Author> getAuthorsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Author> getAuthors();
     Author getAuthorByID(Long id);
-    Author getAuthorByName(String name);
+    Author getAuthorByFirstName(String name);
+    Author getAuthorByLastName(String name);
     Author getAuthorByBookName(String name);
     Boolean deleteAuthorByID(Long id);
     Author saveAuthor(Author author);

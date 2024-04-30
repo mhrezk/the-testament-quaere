@@ -27,6 +27,13 @@ public class Capital {
     @Column(name = "name")
     private String name;
 
+    @OneToOne(mappedBy = "capital", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "capital_id")
+    private Nation nation;
+
     @Column(name = "description", columnDefinition = "text")
     private String description;
 }

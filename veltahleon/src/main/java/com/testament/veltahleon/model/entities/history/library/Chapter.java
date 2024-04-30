@@ -18,6 +18,12 @@ public class Chapter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "chapter_number")
+    private Integer chapterNumber;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,

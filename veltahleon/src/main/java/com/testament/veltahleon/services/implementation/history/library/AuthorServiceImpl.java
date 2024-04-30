@@ -37,8 +37,13 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author getAuthorByName(String name) {
-        return authorRepository.findByName(name);
+    public Author getAuthorByFirstName(String name) {
+        return authorRepository.findByFirstName(name);
+    }
+
+    @Override
+    public Author getAuthorByLastName(String name) {
+        return authorRepository.findByLastName(name);
     }
 
     @Override
@@ -61,33 +66,41 @@ public class AuthorServiceImpl implements AuthorService {
     public Author updateAuthor(Long id, Author author) {
         Author newAuthor = authorRepository.findById(id).orElseThrow();
 
-        if(author.getName() != null && newAuthor.getName() != author.getName()) {
-            newAuthor.setName(author.getName());
+        if(author.getFirstName() != null && newAuthor.getFirstName() != author.getFirstName()) {
+            newAuthor.setFirstName(author.getFirstName());
         }
 
-        if(author.getGender() != null && newAuthor.getGender() != author.getGender()) {
-            newAuthor.setGender(author.getGender());
+        if(author.getLastName() != null && newAuthor.getLastName() != author.getLastName()) {
+            newAuthor.setLastName(author.getLastName());
         }
 
-        if(author.getRace() != null && newAuthor.getRace() != author.getRace()) {
-            newAuthor.setRace(author.getRace());
-        }
+//        if(author.getName() != null && newAuthor.getName() != author.getName()) {
+//            newAuthor.setName(author.getName());
+//        }
 
-        if(author.getBiography() != null && newAuthor.getBiography() != author.getBiography()) {
-            newAuthor.setBiography(author.getBiography());
-        }
+//        if(author.getGender() != null && newAuthor.getGender() != author.getGender()) {
+//            newAuthor.setGender(author.getGender());
+//        }
+//
+//        if(author.getRace() != null && newAuthor.getRace() != author.getRace()) {
+//            newAuthor.setRace(author.getRace());
+//        }
+//
+//        if(author.getBiography() != null && newAuthor.getBiography() != author.getBiography()) {
+//            newAuthor.setBiography(author.getBiography());
+//        }
 
         if(author.getBooks() != null && newAuthor.getBooks() != author.getBooks()) {
             newAuthor.setBooks(author.getBooks());
         }
 
-        if(author.getBirthYear() != null && newAuthor.getBirthYear() != author.getBirthYear()) {
-            newAuthor.setBirthYear(author.getBirthYear());
-        }
-
-        if(author.getDeathYear() != null && newAuthor.getDeathYear() != author.getDeathYear()) {
-            newAuthor.setDeathYear(author.getDeathYear());
-        }
+//        if(author.getBirthYear() != null && newAuthor.getBirthYear() != author.getBirthYear()) {
+//            newAuthor.setBirthYear(author.getBirthYear());
+//        }
+//
+//        if(author.getDeathYear() != null && newAuthor.getDeathYear() != author.getDeathYear()) {
+//            newAuthor.setDeathYear(author.getDeathYear());
+//        }
 
         return authorRepository.save(newAuthor);
     }

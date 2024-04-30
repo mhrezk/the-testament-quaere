@@ -1,7 +1,10 @@
-import {Human} from "../../../abstraction/human";
-import {Book} from "./book";
+// import {Human} from "../../../abstraction/human";
+// import {Book} from "./book";
 
-export interface Author extends Human {
+export interface Author {
   id: number;
-  books: Book[];
+  firstName: string;
+  lastName: string;
+  books: string[];
+  //books: Book[];
 }

@@ -28,6 +28,6 @@ public class Event {
     @JoinColumn(name = "year_id")
     private Year year;
 
-    @Column(name = "description", columnDefinition = "text")
+    @Column(name = "description", columnDefinition = "longtext")
     private String description;
 }

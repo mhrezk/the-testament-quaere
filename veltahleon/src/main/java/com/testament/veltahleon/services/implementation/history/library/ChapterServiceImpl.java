@@ -65,6 +65,14 @@ public class ChapterServiceImpl implements ChapterService {
             newChapter.setText(chapter.getText());
         }
 
+        if(chapter.getName() != null && newChapter.getName() != chapter.getName()) {
+            newChapter.setName(chapter.getName());
+        }
+
+        if(chapter.getChapterNumber() != null && newChapter.getChapterNumber() != chapter.getChapterNumber()) {
+            newChapter.setChapterNumber(chapter.getChapterNumber());
+        }
+
         if(chapter.getBook() != null && newChapter.getBook() != chapter.getBook()) {
             newChapter.setBook(chapter.getBook());
         }

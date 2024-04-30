@@ -9,5 +9,6 @@ import java.util.Collection;
 @Repository
 public interface LetterRepository extends JpaRepository<Letter, Long> {
     Collection<Letter> findByLanguage_Name(String languageName);
+    Letter findByName(String letter);
     long countByLanguage_Name(String name);
 }

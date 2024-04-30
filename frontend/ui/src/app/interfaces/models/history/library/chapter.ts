@@ -1,7 +1,10 @@
-import {Book} from "./book";
+//import {Book} from "./book";
 
 export interface Chapter {
   id: number;
-  book: Book;
+  name: string;
+  chapterNumber: number;
+  book: string;
+  //book: Book;
   text: string;
 }

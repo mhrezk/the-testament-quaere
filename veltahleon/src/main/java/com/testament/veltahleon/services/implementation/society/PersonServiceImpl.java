@@ -49,6 +49,14 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person getPersonIfExistsByName(String name) {
+        if(personRepository.existsPersonByName(name)) {
+            return personRepository.findByName(name);
+        }
+        return null;
+    }
+
+    @Override
     public Boolean deletePersonByID(Long id) {
         personRepository.deleteById(id);
         return Boolean.TRUE;
