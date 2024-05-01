@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.73.0] 2024-05-1
+
+- Added HTTP requests for services in politics package
+
 ## [0.72.0] 2024-05-1
 
 - Added HTTP requests for all services except for those in politics package
