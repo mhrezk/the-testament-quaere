@@ -15,6 +15,12 @@ export class RaceService {
 
   constructor(private http: HttpClient) { }
 
+  getPaginatedRaces$ = (number: number, size: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/races?pageNumber=${number}&&pageSize=${size}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
   getRaces$ = <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/races/all`)
     .pipe(
       tap(console.log),

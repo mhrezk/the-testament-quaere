@@ -15,6 +15,12 @@ export class DayService {
   constructor(private http: HttpClient) {}
 
   //Reactive (Dynamic) Observables
+  getPaginatedDays$ = (number: number, size: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/days?pageNumber=${number}&&pageSize=${size}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
   getDays$ = <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/days/all`)
     .pipe(
       tap(console.log),
@@ -43,7 +49,7 @@ export class DayService {
       catchError(this.handleError)
     );
 
-  modifyDay$ = (day: Day) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/day`, day)
+  modifyDay$ = (dayID: number, day: Day) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${dayID}`, day)
     .pipe(
       tap(console.log),
       catchError(this.handleError)

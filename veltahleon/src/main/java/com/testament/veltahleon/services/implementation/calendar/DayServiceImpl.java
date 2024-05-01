@@ -1,6 +1,7 @@
 package com.testament.veltahleon.services.implementation.calendar;
 
 import com.testament.veltahleon.exceptions.DataInsertionException;
+import com.testament.veltahleon.exceptions.DataNotFoundException;
 import com.testament.veltahleon.model.entities.calendar.Day;
 import com.testament.veltahleon.repositories.calendar.DayRepository;
 import com.testament.veltahleon.services.ifc.calendar.DayService;
@@ -110,8 +111,12 @@ public class DayServiceImpl implements DayService {
     }
 
     @Override
-    public Day updateDay(Day day) {
-        return dayRepository.save(day);
+    public Day modifyDay(Long id, Day day) {
+        Day newDay = dayRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Data does not exist in database!"));
+        newDay.setName(day.getName());
+        newDay.setDescription(day.getDescription());
+        newDay.setDayNumber(day.getDayNumber());
+        return dayRepository.save(newDay);
     }
 
     //Helper Methods

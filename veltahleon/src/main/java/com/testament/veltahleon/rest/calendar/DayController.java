@@ -163,13 +163,13 @@ public class DayController {
         );
     }
 
-    @PutMapping("/update/day")
-    public ResponseEntity<CustomResponse> updateDay(@RequestBody Day day) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CustomResponse> modifyDay(@PathVariable Long id, @RequestBody Day day) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataUpdated", dayService.updateDay(day)))
+                .data(Map.of("dataUpdated", dayService.modifyDay(id, day)))
                 .message("Day updated!")
                 .build()
         );

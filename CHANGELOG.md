@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.72.0] 2024-05-1
+
+- Added HTTP requests for all services except for those in politics package
+
 ## [0.71.0] 2024-04-30
 
 - Added mapper and dto for everything except certain entities in politics package

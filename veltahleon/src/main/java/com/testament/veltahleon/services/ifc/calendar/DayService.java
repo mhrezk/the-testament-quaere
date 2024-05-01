@@ -18,6 +18,5 @@ public interface DayService {
     Day saveDay(Day day);
     Collection<Day> saveDays(Collection<Day> days);
     Day updateDay(Long id, Day day);
-
-    Day updateDay(Day day);
+    Day modifyDay(Long id, Day day);
 }
