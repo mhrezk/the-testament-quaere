@@ -1,23 +1,24 @@
-package com.testament.veltahleon.model.entities.dogma.mythology;
+package com.testament.veltahleon.model.entities.history;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "pantheons")
-@Data
+@Table(name = "timelines")
+@Getter
+@Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class Pantheon {
+public class Timeline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "calendar_id")
     private Long id;
 
     private String name;
@@ -26,14 +27,6 @@ public class Pantheon {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @JoinColumn(name = "pantheon_id")
-    private List<Deity> deities;
-
-    //Convenience Method
-    public void addDeity(Deity deity) {
-        if(deities == null) {
-            deities = new ArrayList<>();
-        }
-        deities.add(deity);
-    }
+    @JoinColumn(name = "timeline_id")
+    private List<Event> events;
 }
