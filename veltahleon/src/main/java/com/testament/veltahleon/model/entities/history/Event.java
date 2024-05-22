@@ -19,6 +19,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "incident", columnDefinition = "text")
     private String incident;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,

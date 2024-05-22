@@ -13,6 +13,7 @@ public class PersonDTO {
     private String secondName;
     private String gender;
     private String race;
+    private String rank;
     private String religion;
     private String title;
     private String nation;

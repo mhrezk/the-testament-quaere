@@ -4,12 +4,14 @@ import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.history.Race;
 import com.testament.veltahleon.model.entities.places.Nation;
+import com.testament.veltahleon.model.entities.politics.Rank;
 import com.testament.veltahleon.model.entities.society.Family;
 import com.testament.veltahleon.model.entities.society.Job;
 import com.testament.veltahleon.model.entities.society.Title;
 import com.testament.veltahleon.services.ifc.calendar.YearService;
 import com.testament.veltahleon.services.ifc.history.RaceService;
 import com.testament.veltahleon.services.ifc.places.NationService;
+import com.testament.veltahleon.services.ifc.politics.RankService;
 import com.testament.veltahleon.services.ifc.religion.ReligionService;
 import com.testament.veltahleon.services.ifc.society.FamilyService;
 import com.testament.veltahleon.services.ifc.society.JobService;
@@ -30,6 +32,9 @@ public class PersonFacade {
     public ReligionService religionService;
 
     @Autowired
+    public RankService rankService;
+
+    @Autowired
     public NationService nationService;
 
     @Autowired
@@ -47,6 +52,10 @@ public class PersonFacade {
 
     public Religion getReligion(String religionName) {
         return religionService.getReligionByName(religionName);
+    }
+
+    public Rank getRank(String rankName) {
+        return rankService.getRankByRankName(rankName);
     }
 
     public Job getJob(String jobName) {

@@ -5,6 +5,7 @@ import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.history.Race;
 import com.testament.veltahleon.model.entities.places.Nation;
+import com.testament.veltahleon.model.entities.politics.Rank;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -76,7 +77,6 @@ public class Person {
     @JoinColumn(name = "death_year_id")
     private Year deathYear;
 
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
@@ -90,6 +90,13 @@ public class Person {
             CascadeType.PERSIST})
     @JoinColumn(name = "job_id")
     private Job job;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "rank_id")
+    private Rank rank;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

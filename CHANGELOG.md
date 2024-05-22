@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.74.1] 2024-05-22
+
+- Added Rank attribute to Person entity
+
 ## [0.74.0] 2024-05-22
 
 - Refactored `Person.java` entity

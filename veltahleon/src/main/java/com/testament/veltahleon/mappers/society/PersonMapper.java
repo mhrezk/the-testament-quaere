@@ -38,6 +38,7 @@ public class PersonMapper {
                 .deathYear(String.valueOf(person.getDeathYear().getEpoch().getYearNumber()))
                 .deathYearAbbreviation(person.getDeathYear().getEpoch().getAbbreviation())
                 .religion(Optional.of(person.getReligion().getName()).orElseGet(() -> "None"))
+                .rank(person.getRank().getName())
                 .title(person.getTitle().getName())
                 .nation(person.getNation().getName())
                 .imageURL(person.getImageURL())
@@ -55,6 +56,7 @@ public class PersonMapper {
         p.setGender(Gender.valueOf(personDTO.getGender()));
         p.setRace(personFacade.getRace(personDTO.getRace()));
         p.setReligion(personFacade.getReligion(personDTO.getReligion()));
+        p.setRank(personFacade.getRank(personDTO.getRank()));
         p.setNation(personFacade.getNation(personDTO.getNation()));
         p.setBirthYear(personFacade.getYear(Integer.parseInt(birthDate[0]), Integer.parseInt(birthDate[1]), Integer.parseInt(birthDate[2])));
         p.setDeathYear(personFacade.getYear(Integer.parseInt(deathDate[0]), Integer.parseInt(deathDate[1]), Integer.parseInt(deathDate[2])));
