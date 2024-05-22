@@ -42,8 +42,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBookByAuthorName(String name) {
-        return bookRepository.findByAuthor_Name(name);
+    public Book getBookByAuthorFirstName(String name) {
+        return bookRepository.findByAuthor_FirstName(name);
     }
 
     @Override

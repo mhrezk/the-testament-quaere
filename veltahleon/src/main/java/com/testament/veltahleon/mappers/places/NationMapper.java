@@ -28,7 +28,7 @@ public class NationMapper {
                 .governanceType(String.valueOf(nation.getGovernanceType()))
                 .capital(nation.getCapital().getName())
                 .language(nation.getLanguage().getName())
-                .leader(nation.getLeader().getName())
+                .leader(nation.getLeader().getFirstName() + " " + nation.getLeader().getSecondName())
                 .provinces(nation.getProvinces().stream().map(Province::getName).collect(Collectors.toSet()))
                 .description(nation.getDescription())
                 .urlFlag(nation.getUrlFlag())

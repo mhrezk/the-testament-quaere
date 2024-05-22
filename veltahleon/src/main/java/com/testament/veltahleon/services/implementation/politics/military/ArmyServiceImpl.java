@@ -38,7 +38,7 @@ public class ArmyServiceImpl implements ArmyService {
 
     @Override
     public Army getArmyByLeaderName(String name) {
-        return armyRepository.findByLeader_Name(name);
+        return armyRepository.findByLeader_FirstName(name);
     }
 
     @Override

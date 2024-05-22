@@ -2,10 +2,10 @@ package com.testament.veltahleon.facades.politics;
 
 import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.places.Nation;
-import com.testament.veltahleon.model.entities.politics.Pundit;
+import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.services.ifc.calendar.YearService;
 import com.testament.veltahleon.services.ifc.places.NationService;
-import com.testament.veltahleon.services.ifc.politics.PunditService;
+import com.testament.veltahleon.services.ifc.society.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class OrganizationFacade {
 
     @Autowired
-    private PunditService punditService;
+    private PersonService personService;
 
     @Autowired
     private YearService yearService;
@@ -23,8 +23,8 @@ public class OrganizationFacade {
     @Autowired
     private NationService nationService;
 
-    public Pundit getPundit(String punditName) {
-        return punditService.getPunditByName(punditName);
+    public Person getFounder(String founderName) {
+        return personService.getPersonByName(founderName);
     }
 
     public Nation getNation(String nationName) {

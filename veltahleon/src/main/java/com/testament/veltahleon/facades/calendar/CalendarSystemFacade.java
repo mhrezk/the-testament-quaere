@@ -10,11 +10,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @AllArgsConstructor
-public class CalendarFacade {
+public class CalendarSystemFacade {
 
     @Autowired
     private DayService dayService;
@@ -22,8 +20,8 @@ public class CalendarFacade {
     @Autowired
     private MonthService monthService;
 
-    @Autowired
-    private EpochService epochService;
+//    @Autowired
+//    private EpochService epochService;
 
     public Day getDay(String dayName) {
         return dayService.getDayByName(dayName);
@@ -33,7 +31,7 @@ public class CalendarFacade {
         return monthService.getMonthByName(monthName);
     }
 
-    public Epoch getEpoch(Integer yearNumber) {
-        return epochService.getEpochByYearNumber(yearNumber);
-    }
+//    public Epoch getEpoch(Integer yearNumber) {
+//        return epochService.getEpochByYearNumber(yearNumber);
+//    }
 }

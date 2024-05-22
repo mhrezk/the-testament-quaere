@@ -38,7 +38,7 @@ public class SquadServiceImpl implements SquadService {
 
     @Override
     public Squad getSquadBySquadLeader(String name) {
-        return squadRepository.findByLeader_Name(name);
+        return squadRepository.findByLeader_FirstName(name);
     }
 
     @Override

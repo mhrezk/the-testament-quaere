@@ -40,18 +40,18 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getPersonByName(String name) {
-        return personRepository.findByName(name);
+        return personRepository.findByFirstName(name);
     }
 
     @Override
     public Boolean doesPersonNameExist(String name) {
-        return personRepository.existsPersonByName(name);
+        return personRepository.existsPersonByFirstName(name);
     }
 
     @Override
     public Person getPersonIfExistsByName(String name) {
-        if(personRepository.existsPersonByName(name)) {
-            return personRepository.findByName(name);
+        if(personRepository.existsPersonByFirstName(name)) {
+            return personRepository.findByFirstName(name);
         }
         return null;
     }
@@ -71,17 +71,21 @@ public class PersonServiceImpl implements PersonService {
     public Person updatePerson(Long id, Person person) {
         Person newPerson = personRepository.findById(id).orElseThrow();
 
-        if(person.getName() != null && newPerson.getName() != person.getName()) {
-            newPerson.setName(person.getName());
+        if(person.getFirstName() != null && newPerson.getFirstName() != person.getFirstName()) {
+            newPerson.setFirstName(person.getFirstName());
+        }
+
+        if(person.getSecondName() != null && newPerson.getSecondName() != person.getSecondName()) {
+            newPerson.setSecondName(person.getSecondName());
         }
 
         if(person.getNation() != null && newPerson.getNation() != person.getNation()) {
             newPerson.setNation(person.getNation());
         }
 
-        if(person.getFamily() != null && newPerson.getFamily() != person.getFamily()) {
-            newPerson.setFamily(person.getFamily());
-        }
+//        if(person.getFamily() != null && newPerson.getFamily() != person.getFamily()) {
+//            newPerson.setFamily(person.getFamily());
+//        }
 
         if(person.getReligion() != null && newPerson.getReligion() != person.getReligion()) {
             newPerson.setReligion(person.getReligion());
@@ -125,10 +129,17 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person modifyPerson(Long id, Person person) {
         Person newPerson = personRepository.findById(id).orElseThrow();
-        newPerson.setName(person.getName());
+        newPerson.setFirstName(person.getFirstName());
+        newPerson.setSecondName(person.getSecondName());
         newPerson.setGender(person.getGender());
+        newPerson.setReligion(person.getReligion());
         newPerson.setBiography(person.getBiography());
         newPerson.setImageURL(person.getImageURL());
+        newPerson.setJob(person.getJob());
+        newPerson.setTitle(person.getTitle());
+        newPerson.setBirthYear(person.getBirthYear());
+        newPerson.setDeathYear(person.getDeathYear());
+        newPerson.setNation(person.getNation());
         newPerson.setRace(person.getRace());
         return personRepository.save(newPerson);
     }

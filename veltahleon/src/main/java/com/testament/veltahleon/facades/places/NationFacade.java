@@ -3,11 +3,11 @@ package com.testament.veltahleon.facades.places;
 import com.testament.veltahleon.model.entities.history.Language;
 import com.testament.veltahleon.model.entities.places.Capital;
 import com.testament.veltahleon.model.entities.places.Province;
-import com.testament.veltahleon.model.entities.politics.NationLeader;
+import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.services.ifc.history.LanguageService;
 import com.testament.veltahleon.services.ifc.places.CapitalService;
 import com.testament.veltahleon.services.ifc.places.ProvinceService;
-import com.testament.veltahleon.services.ifc.politics.NationLeaderService;
+import com.testament.veltahleon.services.ifc.society.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class NationFacade {
     private LanguageService languageService;
 
     @Autowired
-    private NationLeaderService nationLeaderService;
+    private PersonService personService;
 
     @Autowired
     private ProvinceService provinceService;
@@ -39,8 +39,8 @@ public class NationFacade {
         return languageService.getLanguageByName(languageName);
     }
 
-    public NationLeader getNationLeader(String nationLeaderName) {
-        return nationLeaderService.getNationLeaderByName(nationLeaderName);
+    public Person getNationLeader(String nationLeaderName) {
+        return personService.getPersonByName(nationLeaderName);
     }
 
     public Province getProvince(String provinceName) {

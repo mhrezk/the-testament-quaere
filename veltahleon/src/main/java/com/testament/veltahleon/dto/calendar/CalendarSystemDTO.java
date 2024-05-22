@@ -9,10 +9,10 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CalendarDTO {
+public class CalendarSystemDTO {
     private Long id;
     private String name;
     private List<String> days;
     private List<String> months;
-    private List<Integer> epochs;
+    //private List<Integer> epochs;
 }

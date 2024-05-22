@@ -1,9 +1,28 @@
-import {Job} from "./job";
-import {Human} from "../../abstraction/human";
+import {Gender} from "../../../enums/gender";
 
-export interface Person extends Human {
+export interface Person {
   id: number;
-  //job?: Job;
+  firstName: string;
+  secondName: string;
+  gender: Gender;
+  race?: string;
+  religion?: string;
+  birthDay?: string;
+  birthDayName?: string;
+  birthMonth?: string;
+  birthMonthName?: string;
+  birthYear?: string;
+  birthYearAbbreviation?: string;
+  deathDay?: string;
+  deathDayName?: string;
+  deathMonth?: string;
+  deathMonthName?: string;
+  deathYear?: string;
+  deathYearAbbreviation?: string;
+  nation?: string;
+  title?: string;
+  biography?: string;
+  imageURL?: string;
   job?: string;
 
   isSelected: boolean;

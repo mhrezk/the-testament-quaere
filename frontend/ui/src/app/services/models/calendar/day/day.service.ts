@@ -49,14 +49,14 @@ export class DayService {
       catchError(this.handleError)
     );
 
-  modifyDay$ = (dayID: number, day: Day) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${dayID}`, day)
+  modifyDay$ = (dayID: number, day: Day) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/day/${dayID}`, day)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
 
   public modifyDay(day: Day): Observable<CustomResponse> {
-    return this.http.put<CustomResponse>(`${this.baseURL}/update/day`, day);
+    return this.http.put<CustomResponse>(`${this.baseURL}/modify/day`, day);
   }
 
   deleteDay$ = (dayID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/day/${dayID}`)

@@ -10,5 +10,5 @@ import java.util.Collection;
 @Repository
 public interface ArmyRepository extends JpaRepository<Army, Long> {
 
-    Army findByLeader_Name(String name);
+    Army findByLeader_FirstName(String name);
 }

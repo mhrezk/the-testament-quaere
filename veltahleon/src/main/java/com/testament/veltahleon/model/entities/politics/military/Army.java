@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.politics.military;
 
+import com.testament.veltahleon.model.entities.society.Person;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,12 +21,19 @@ public class Army {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "army_leader_id")
+//    private ArmyLeader leader;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "army_leader_id")
-    private ArmyLeader leader;
+    private Person leader;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

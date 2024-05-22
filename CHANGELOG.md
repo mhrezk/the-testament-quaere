@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.74.0] 2024-05-22
+
+- Refactored `Person.java` entity
+- Deleted unwanted entity classes
+
 ## [0.73.0] 2024-05-1
 
 - Added HTTP requests for services in politics package

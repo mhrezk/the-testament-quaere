@@ -11,6 +11,6 @@ import java.util.Collection;
 public interface BattleRepository extends JpaRepository<Battle, Long> {
 
     Battle findByName(String name);
-    Collection<Battle> findByArmies_Leader_Name(String name);
-    Collection<Battle> findByNationalLeaders_Name(String name);
+    Collection<Battle> findByArmies_Leader_FirstName(String name);
+    Collection<Battle> findByNationalLeaders_FirstName(String name);
 }

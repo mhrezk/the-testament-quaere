@@ -45,7 +45,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Organization getOrganizationByFounderName(String name) {
-        return organizationRepository.findByFounder_Name(name);
+        return organizationRepository.findByFounder_FirstName(name);
     }
 
     @Override

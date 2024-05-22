@@ -3,7 +3,7 @@ package com.testament.veltahleon.model.entities.politics.military;
 import java.util.List;
 
 import com.testament.veltahleon.model.entities.calendar.Year;
-import com.testament.veltahleon.model.entities.politics.NationLeader;
+import com.testament.veltahleon.model.entities.society.Person;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,13 +38,21 @@ public class Battle {
 //    @Column(name = "nation_leaders")
 //    private Map<String, NationLeader> nationalLeaders;
 
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinTable(name = "nation_leaders_battles", joinColumns = @JoinColumn(name = "nation_leader_id"),
+//            inverseJoinColumns = @JoinColumn(name = "battle_id"))
+//    private List<NationLeader> nationalLeaders;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinTable(name = "nation_leaders_battles", joinColumns = @JoinColumn(name = "nation_leader_id"),
             inverseJoinColumns = @JoinColumn(name = "battle_id"))
-    private List<NationLeader> nationalLeaders;
+    private List<Person> nationalLeaders;
 
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,

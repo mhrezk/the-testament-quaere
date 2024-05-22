@@ -1,7 +1,6 @@
 package com.testament.veltahleon.services.implementation.society;
 
 import com.testament.veltahleon.model.entities.society.Family;
-import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.repositories.society.FamilyRepository;
 import com.testament.veltahleon.services.ifc.society.FamilyService;
 import jakarta.transaction.Transactional;
@@ -109,51 +108,51 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     //Helper Methods
-    private Person checkPersonForUpdate(Person person, Person newPerson) {
-        if(person.getName() != null && newPerson.getName() != person.getName()) {
-            newPerson.setName(person.getName());
-        }
-
-        if(person.getNation() != null && newPerson.getNation() != person.getNation()) {
-            newPerson.setNation(person.getNation());
-        }
-
-        if(person.getReligion() != null && newPerson.getReligion() != person.getReligion()) {
-            newPerson.setReligion(person.getReligion());
-        }
-
-        if(person.getRace() != null && newPerson.getRace() != person.getRace()) {
-            newPerson.setRace(person.getRace());
-        }
-
-        if(person.getGender() != null && newPerson.getGender() != person.getGender()) {
-            newPerson.setGender(person.getGender());
-        }
-
-        if(person.getJob() != null && newPerson.getJob() != person.getJob()) {
-            newPerson.setJob(person.getJob());
-        }
-
-        if(person.getBirthYear() != null && newPerson.getBirthYear() != person.getBirthYear()) {
-            newPerson.setBirthYear(person.getBirthYear());
-        }
-
-        if(person.getDeathYear() != null && newPerson.getDeathYear() != person.getDeathYear()) {
-            newPerson.setDeathYear(person.getDeathYear());
-        }
-
-        if(person.getImageURL() != null && newPerson.getImageURL() != person.getImageURL()) {
-            newPerson.setImageURL(person.getImageURL());
-        }
-
-        if(person.getBiography() != null && newPerson.getBiography() != person.getBiography()) {
-            newPerson.setBiography(person.getBiography());
-        }
-
-        if(person.getTitle() != null && newPerson.getTitle() != person.getTitle()) {
-            newPerson.setTitle(person.getTitle());
-        }
-
-        return newPerson;
-    }
+//    private Person checkPersonForUpdate(Person person, Person newPerson) {
+//        if(person.getName() != null && newPerson.getName() != person.getName()) {
+//            newPerson.setName(person.getName());
+//        }
+//
+//        if(person.getNation() != null && newPerson.getNation() != person.getNation()) {
+//            newPerson.setNation(person.getNation());
+//        }
+//
+//        if(person.getReligion() != null && newPerson.getReligion() != person.getReligion()) {
+//            newPerson.setReligion(person.getReligion());
+//        }
+//
+//        if(person.getRace() != null && newPerson.getRace() != person.getRace()) {
+//            newPerson.setRace(person.getRace());
+//        }
+//
+//        if(person.getGender() != null && newPerson.getGender() != person.getGender()) {
+//            newPerson.setGender(person.getGender());
+//        }
+//
+//        if(person.getJob() != null && newPerson.getJob() != person.getJob()) {
+//            newPerson.setJob(person.getJob());
+//        }
+//
+//        if(person.getBirthYear() != null && newPerson.getBirthYear() != person.getBirthYear()) {
+//            newPerson.setBirthYear(person.getBirthYear());
+//        }
+//
+//        if(person.getDeathYear() != null && newPerson.getDeathYear() != person.getDeathYear()) {
+//            newPerson.setDeathYear(person.getDeathYear());
+//        }
+//
+//        if(person.getImageURL() != null && newPerson.getImageURL() != person.getImageURL()) {
+//            newPerson.setImageURL(person.getImageURL());
+//        }
+//
+//        if(person.getBiography() != null && newPerson.getBiography() != person.getBiography()) {
+//            newPerson.setBiography(person.getBiography());
+//        }
+//
+//        if(person.getTitle() != null && newPerson.getTitle() != person.getTitle()) {
+//            newPerson.setTitle(person.getTitle());
+//        }
+//
+//        return newPerson;
+//    }
 }

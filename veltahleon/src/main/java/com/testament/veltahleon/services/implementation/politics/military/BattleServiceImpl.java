@@ -33,12 +33,12 @@ public class BattleServiceImpl implements BattleService {
 
     @Override
     public Collection<Battle> getBattleByNationLeaderName(String name) {
-        return battleRepository.findByNationalLeaders_Name(name);
+        return battleRepository.findByNationalLeaders_FirstName(name);
     }
 
     @Override
     public Collection<Battle> getBattleByArmyLeaderName(String name) {
-        return battleRepository.findByArmies_Leader_Name(name);
+        return battleRepository.findByArmies_Leader_FirstName(name);
     }
 
     @Override

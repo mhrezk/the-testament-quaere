@@ -1,6 +1,7 @@
 package com.testament.veltahleon.model.entities.politics.military;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.testament.veltahleon.model.entities.society.Person;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,13 +21,21 @@ public class Squad {
     @Column(name = "squad_id")
     private Long id;
 
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "squad_leader_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private SquadLeader leader;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "squad_leader_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private SquadLeader leader;
+    private Person leader;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

@@ -48,7 +48,7 @@ export class EpochService {
       catchError(this.handleError)
     );
 
-  modifyEpoch$ = (epochID: number, epoch: Epoch) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${epochID}`, epoch)
+  modifyEpoch$ = (epochID: number, epoch: Epoch) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/epoch/${epochID}`, epoch)
     .pipe(
       tap(console.log),
       catchError(this.handleError)

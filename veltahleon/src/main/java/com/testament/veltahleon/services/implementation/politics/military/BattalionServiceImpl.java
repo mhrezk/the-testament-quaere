@@ -43,7 +43,7 @@ public class BattalionServiceImpl implements BattalionService {
 
     @Override
     public Battalion getBattalionByLeaderName(String name) {
-        return battalionRepository.findByLeader_Name(name);
+        return battalionRepository.findByLeader_FirstName(name);
     }
 
     @Override

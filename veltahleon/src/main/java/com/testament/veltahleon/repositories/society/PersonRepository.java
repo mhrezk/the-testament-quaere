@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
-    Person findByName(String name);
-    boolean existsPersonByName(String name);
-    long countByName(String name);
+    Person findByFirstName(String name);
+    boolean existsPersonByFirstName(String name);
+    long countByFirstName(String name);
 }

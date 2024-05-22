@@ -3,6 +3,7 @@ package com.testament.veltahleon.model.entities.politics;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.places.Nation;
+import com.testament.veltahleon.model.entities.society.Person;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,13 +27,21 @@ public class Organization {
     @Column(name = "name")
     private String name;
 
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "pundit_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Pundit founder;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @JoinColumn(name = "pundit_id")
+    @JoinColumn(name = "person_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Pundit founder;
+    private Person founder;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

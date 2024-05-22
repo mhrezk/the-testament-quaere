@@ -27,9 +27,6 @@ public class PersonFacade {
     public RaceService raceService;
 
     @Autowired
-    public FamilyService familyService;
-
-    @Autowired
     public ReligionService religionService;
 
     @Autowired
@@ -46,10 +43,6 @@ public class PersonFacade {
 
     public Race getRace(String raceName) {
         return raceService.getRaceByName(raceName);
-    }
-
-    public Family getFamily(String familyName) {
-        return familyService.getFamilyByFamilyName(familyName);
     }
 
     public Religion getReligion(String religionName) {

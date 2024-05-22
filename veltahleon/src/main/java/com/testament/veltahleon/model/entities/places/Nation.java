@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.enumerations.GovernanceType;
 import com.testament.veltahleon.enumerations.NationType;
 import com.testament.veltahleon.model.entities.history.Language;
-import com.testament.veltahleon.model.entities.politics.NationLeader;
+import com.testament.veltahleon.model.entities.society.Person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -47,12 +47,19 @@ public class Nation {
 //    @JoinColumn(name = "continent_id")
 //    private Continent continent;
 
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "nation_leader_id")
+//    private NationLeader leader;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @JoinColumn(name = "nation_leader_id")
-    private NationLeader leader;
+    @JoinColumn(name = "leader_id")
+    private Person leader;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,

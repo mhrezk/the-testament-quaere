@@ -18,7 +18,7 @@ public class OrganizationMapper {
         return OrganizationDTO.builder()
                 .id(organization.getId())
                 .name(organization.getName())
-                .founder(organization.getFounder().getName())
+                .founder(organization.getFounder().getFirstName() + " " + organization.getFounder().getSecondName())
                 .nation(organization.getNation().getName())
                 .urlSymbol(organization.getUrlSymbol())
                 .foundationDay(organization.getFoundationYear().getDay().getDayNumber())
@@ -37,7 +37,7 @@ public class OrganizationMapper {
         organization.setUrlSymbol(organizationDTO.getUrlSymbol());
         organization.setName(organizationDTO.getName());
         organization.setNation(organizationFacade.getNation(organizationDTO.getNation()));
-        organization.setFounder(organizationFacade.getPundit(organizationDTO.getFounder()));
+        organization.setFounder(organizationFacade.getFounder(organizationDTO.getFounder()));
         organization.setFoundationYear(organizationFacade.getYear(Integer.parseInt(foundationDate[0]), Integer.parseInt(foundationDate[1]), Integer.parseInt(foundationDate[2])));
         organization.setDisbandmentYear(organizationFacade.getYear(Integer.parseInt(disbandmentDate[0]), Integer.parseInt(disbandmentDate[1]), Integer.parseInt(disbandmentDate[2])));
         return organization;

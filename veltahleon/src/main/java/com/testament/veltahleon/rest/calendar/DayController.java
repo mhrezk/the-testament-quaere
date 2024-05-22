@@ -163,7 +163,7 @@ public class DayController {
         );
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/modify/day/{id}")
     public ResponseEntity<CustomResponse> modifyDay(@PathVariable Long id, @RequestBody Day day) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())

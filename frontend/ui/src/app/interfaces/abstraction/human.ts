@@ -15,15 +15,17 @@ export interface Human {
   //yearBirthAndDeath?: Year[];
   //nation?: Nation;
   //title?: Title;
-  raceName?: string;
+  race?: string;
   religion?: string;
   family?: string;
   birthday?: string;
   birthMonth?: string;
   birthYear?: string;
+  birthYearAbbreviation?: string;
   deathDay?: string;
   deathMonth?: string;
   deathYear?: string;
+  deathYearAbbreviation?: string;
   nation?: string;
   title?: string;
   biography?: string;
