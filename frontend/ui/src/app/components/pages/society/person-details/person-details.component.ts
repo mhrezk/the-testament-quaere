@@ -52,8 +52,6 @@ export class PersonDetailsComponent implements OnInit {
   getPersonDetailsByFirstNameAndLastName(id: number, firstName: string, secondName: string) {
     this.personDetailsService.getPersonDetailsByFirstNameAndSecondName(id, firstName, secondName).subscribe(result => {
       this.selectedPersonDetails = result.data.datumRetrieved;
-      console.log(result.data.datumRetrieved);
-      console.log(this.selectedPersonDetails);
       this.personDetails.next(result);
     });
   }

@@ -1,5 +1,16 @@
 # Change Log
 
+## [0.76.1] 2024-10-07
+
+- Removed unnecessary console logging on frontend
+
+## [0.76.0] 2024-10-07
+
+- Separated Person and PersonDetails entities
+- Added route for PersonDetails
+- Displayed data on PersonDetails route
+- Allowed data to be edited on PersonDetails route
+
 ## [0.75.0] 2024-05-22
 
 - Added Timeline entity
