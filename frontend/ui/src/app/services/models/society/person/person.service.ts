@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, throwError} from "rxjs";
+import {BehaviorSubject, Observable, throwError} from "rxjs";
 import {CustomResponse} from "../../../../interfaces/custom-response";
 import {Gender} from "../../../../enums/gender";
 import {catchError, tap} from "rxjs/operators";
@@ -12,6 +12,15 @@ import {Person} from "../../../../interfaces/models/society/person";
 })
 export class PersonService {
   private baseURL: string = `${environment.API_URL}/society`;
+
+  private personID = new BehaviorSubject<number>(0);
+  getPersonID$ = this.personID.asObservable();
+
+  private firstName = new BehaviorSubject<string>("");
+  getFirstName$ = this.firstName.asObservable();
+
+  private secondName = new BehaviorSubject<string>("");
+  getSecondName$ = this.secondName.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -49,8 +58,8 @@ export class PersonService {
       catchError(this.handleError)
     );
 
-  public modifyPerson(person: Person): Observable<CustomResponse> {
-    return this.http.put<CustomResponse>(`${this.baseURL}/update/person`, person);
+  public modifyPerson(personID: number, person: Person): Observable<CustomResponse> {
+    return this.http.put<CustomResponse>(`${this.baseURL}/modify/person/${personID}`, person);
   }
 
   deletePerson$ = (personID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/person/${personID}`)
@@ -85,6 +94,15 @@ export class PersonService {
       tap(console.log),
       catchError(this.handleError)
     );
+
+  setFullName(firstName: string, secondName: string) {
+    this.firstName.next(firstName);
+    this.secondName.next(secondName);
+  }
+
+  setPersonID(personID: number) {
+    this.personID.next(personID);
+  }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);

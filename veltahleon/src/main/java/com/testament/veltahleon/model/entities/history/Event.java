@@ -26,8 +26,15 @@ public class Event {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @JoinColumn(name = "year_id")
-    private Year year;
+    @JoinColumn(name = "beginning_year_id")
+    private Year beginningYear;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "ending_year_id")
+    private Year endingYear;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;

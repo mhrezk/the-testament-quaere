@@ -115,12 +115,12 @@ public class PersonController {
     public ResponseEntity<CustomResponse> savePerson(@RequestBody PersonDTO personDTO) {
         //Person person = modelMapper.map(personDTO, Person.class);
         Person person = personMapper.convertToEntity(personDTO);
-        PersonDTO savedPersonDTO = personMapper.convertToDTO(personService.savePerson(person));
+        //PersonDTO savedPersonDTO = personMapper.convertToDTO(personService.savePerson(person));
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataSaved", savedPersonDTO))
+                .data(Map.of("dataSaved", personMapper.convertToDTO(personService.savePerson(person))))
                 .message("Person saved!")
                 .build()
         );
@@ -150,8 +150,8 @@ public class PersonController {
         );
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<CustomResponse> updatePerson(@PathVariable Long id, @RequestBody PersonDTO personDTO) {
+    @PutMapping("/modify/person/{id}")
+    public ResponseEntity<CustomResponse> modifyPerson(@PathVariable Long id, @RequestBody PersonDTO personDTO) {
         Person person = personMapper.convertToEntity(personDTO);
         PersonDTO updatedPersonDTO = personMapper.convertToDTO(personService.modifyPerson(id, person));
         return ResponseEntity.ok(CustomResponse.builder()

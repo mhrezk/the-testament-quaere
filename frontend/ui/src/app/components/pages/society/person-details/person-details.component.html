@@ -1,0 +1,91 @@
+<div *ngIf="!isEditing" class="display-container">
+  <div class="image-container">
+    <img src="https://via.placeholder.com/300x400" alt="Person Image" />
+<!--    <img [src]="personDetails.value.data?.datumRetrieved?.imageURL" alt="Person Image" />-->
+  </div>
+
+  <div class="details-container">
+    <h2>
+      <a [routerLink]="'/people'">
+        {{ personDetails.value.data?.datumRetrieved?.firstName }} {{ personDetails.value.data?.datumRetrieved?.secondName }} @if(personDetails.value.data?.datumRetrieved?.epithet !== "None") { {{ personDetails.value.data?.datumRetrieved?.epithet }} }
+      </a>
+      &nbsp;
+      <span style="float: right">
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit'"
+                           (click)="isEditing = true;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  &nbsp;
+                  <fa-icon [icon]="faTrash"
+                           [title]="'Delete'"
+                           (click)="deletePersonDetails(personDetails.value.data.datumRetrieved?.id)"
+                           style="cursor: pointer; color: firebrick">
+                  </fa-icon>
+      </span>
+    </h2>
+
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Gender:</strong> {{ personDetails.value.data?.datumRetrieved?.gender }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Race:</strong> {{ personDetails.value.data?.datumRetrieved?.raceName || 'N/A' }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Religion:</strong> {{ personDetails.value.data?.datumRetrieved?.religion || 'N/A' }}
+    </div>
+
+    @if(personDetails.value.data?.datumRetrieved?.rank !== 'None') {
+      <div class="detail-item">
+        <strong>Militaristic Rank:</strong> {{ personDetails.value.data?.datumRetrieved?.rank || 'N/A' }}
+      </div>
+    }
+
+    <div class="detail-item">
+      <strong>Nation:</strong> {{ personDetails.value.data?.datumRetrieved?.nation || 'N/A' }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Birth Date:</strong>
+      {{ personDetails.value.data?.datumRetrieved?.birthDay }}/{{ personDetails.value.data?.datumRetrieved?.birthMonth }}/{{ personDetails.value.data?.datumRetrieved?.birthYear }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Death Date:</strong>
+      {{ personDetails.value.data?.datumRetrieved?.deathDay }}/{{ personDetails.value.data?.datumRetrieved?.deathMonth }}/{{ personDetails.value.data?.datumRetrieved?.deathYear }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Year Abbreviation:</strong> {{ personDetails.value.data?.datumRetrieved?.yearAbbreviation || 'N/A' }}
+    </div>
+
+<!--    <div class="detail-item">-->
+<!--      <strong>Calendar System:</strong> {{ personDetails.value.data?.datumRetrieved?.calendarSystem || 'N/A' }}-->
+<!--    </div>-->
+
+    <div class="detail-item">
+      <strong>Job:</strong> {{ personDetails.value.data?.datumRetrieved?.job || 'N/A' }}
+    </div>
+
+<!--    <div class="detail-item">-->
+<!--      <strong>Epithet:</strong> {{ personDetails.value.data?.datumRetrieved?.epithet || 'N/A' }}-->
+<!--    </div>-->
+
+    <div class="detail-item">
+      <strong>Lineage:</strong> {{ personDetails.value.data?.datumRetrieved?.lineage }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Biography:</strong> {{ personDetails.value.data?.datumRetrieved?.biography || 'No biography provided' }}
+    </div>
+  </div>
+</div>
+
+@if (isEditing) {
+  <app-person-details-edit (isEditing)="closeEditing($event)" [personDetails]="personDetails.value.data?.datumRetrieved"></app-person-details-edit>
+}

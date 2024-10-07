@@ -95,24 +95,24 @@ public class RaceController {
     }
 
     @PostMapping("/save/race")
-    public ResponseEntity<CustomResponse> saveRace(@RequestBody @Valid Race Race) {
+    public ResponseEntity<CustomResponse> saveRace(@RequestBody @Valid Race race) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataSaved", raceService.saveRace(Race)))
+                .data(Map.of("dataSaved", raceService.saveRace(race)))
                 .message("Race saved!")
                 .build()
         );
     }
 
     @PatchMapping("/update/race/{id}")
-    public ResponseEntity<CustomResponse> updateRace(@PathVariable("id") Long id, @RequestBody @Valid Race Race) {
+    public ResponseEntity<CustomResponse> updateRace(@PathVariable("id") Long id, @RequestBody @Valid Race race) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataUpdated", raceService.updateRace(id, Race)))
+                .data(Map.of("dataUpdated", raceService.updateRace(id, race)))
                 .message("Race updated!")
                 .build()
         );

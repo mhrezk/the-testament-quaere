@@ -2,7 +2,7 @@ package com.testament.veltahleon.rest.dogma.mythology;
 
 import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.model.entities.dogma.mythology.Angel;
-import com.testament.veltahleon.services.ifc.religion.mythology.AngelService;
+import com.testament.veltahleon.services.ifc.dogma.mythology.AngelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

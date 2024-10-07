@@ -21,6 +21,9 @@ public class Job {
     @Column(name = "job_name")
     private String name;
 
+    @Column(name = "job_description")
+    private String description;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "job_type")
     private JobType jobType;

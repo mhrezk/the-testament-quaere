@@ -66,13 +66,25 @@ public class EventController {
         );
     }
 
-    @GetMapping("/event/year")
-    public ResponseEntity<CustomResponse> getEventsByEventName(@RequestParam(value = "yearNumber") int yearNumber) {
+    @GetMapping("/event/beginning_year")
+    public ResponseEntity<CustomResponse> getEventsByEventBeginningYear(@RequestParam(value = "yearNumber") int yearNumber) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("datumRetrieved", eventService.getEventsByYearNumber(yearNumber)))
+                .data(Map.of("datumRetrieved", eventService.getEventsByBeginningYearNumber(yearNumber)))
+                .message("Event retrieved!")
+                .build()
+        );
+    }
+
+    @GetMapping("/event/ending_year")
+    public ResponseEntity<CustomResponse> getEventsByEventEndingYear(@RequestParam(value = "yearNumber") int yearNumber) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", eventService.getEventsByEndingYearNumber(yearNumber)))
                 .message("Event retrieved!")
                 .build()
         );

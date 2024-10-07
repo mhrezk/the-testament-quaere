@@ -161,7 +161,7 @@ export class CalendarComponent implements OnInit {
 
   modifyDay(day: Day) {
     this.isLoading.next(true);
-    this.appState$ = this.dayService.modifyDay$(day).pipe(
+    this.appState$ = this.dayService.modifyDay$(day.id, day).pipe(
       map((result) => {
         const index = this.dataSubject.value.data.dataRetrieved.findIndex(day => day.id === result.data.dataUpdated.id); //loops through the array and finds the record whose id matches the updated day from the backend
         this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated; //replaces old day with updated day

@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.society;
 
+import com.testament.veltahleon.enumerations.ClosedAnswer;
 import com.testament.veltahleon.enumerations.Gender;
 import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.dogma.Religion;
@@ -47,14 +48,14 @@ public class Person {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "race_id", referencedColumnName = "id")
-    private Race race;
+    private Race raceName;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "religion_id")
-    private Religion religion;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "religion_id")
+//    private Religion religion;
 
 //    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,
@@ -63,55 +64,59 @@ public class Person {
 //    @JoinColumn(name = "family_id", referencedColumnName = "id")
 //    private Family family;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "birth_year_id")
-    private Year birthYear;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "death_year_id")
-    private Year deathYear;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "nation_id")
-    private Nation nation;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "job_id")
-    private Job job;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "rank_id")
-    private Rank rank;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "title_id")
-    //@Column(name = "epithet") //cannot be used with @OneToOne
-    //@PrimaryKeyJoinColumn(name = "epithet")
-    private Title title;
-
-    @Column(name = "biography", columnDefinition = "longtext")
-    private String biography;
-
-    @Column(name = "image_URL")
-    private String imageURL;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "birth_year_id")
+//    private Year birthYear;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "death_year_id")
+//    private Year deathYear;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "nation_id")
+//    private Nation nation;
+//
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "job_id")
+//    private Job job;
+//
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "rank_id")
+//    private Rank rank;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "title_id")
+//    //@Column(name = "epithet") //cannot be used with @OneToOne
+//    //@PrimaryKeyJoinColumn(name = "epithet")
+//    private Title title;
+//
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "is_bastard")
+//    private ClosedAnswer isBastard;
+//
+//    @Column(name = "biography", columnDefinition = "longtext")
+//    private String biography;
+//
+//    @Column(name = "image_URL")
+//    private String imageURL;
 
 //    @OneToMany
 ////    @ElementCollection(fetch = FetchType.LAZY)
@@ -133,5 +138,4 @@ public class Person {
 ////    @OrderColumn(name = "spouses_index")
 //    @Column(name = "spouses")
 //    private List<String> spouses;
-
 }

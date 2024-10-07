@@ -3,7 +3,8 @@ package com.testament.veltahleon.enumerations;
 public enum RankType {
     NAVAL("NAVAL"),
     AERIAL("AERIAL"),
-    TERRESTRIAL("TERRESTRIAL");
+    TERRESTRIAL("TERRESTRIAL"),
+    NONE("NONE");
 
     private final String rankType;
 

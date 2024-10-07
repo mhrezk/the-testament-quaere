@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface ReligionRepository extends JpaRepository<Religion, Long> {
 
     Religion findByName(String name);
+    long countByName(String name);
 }

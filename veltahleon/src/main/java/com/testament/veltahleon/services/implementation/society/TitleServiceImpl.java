@@ -32,7 +32,15 @@ public class TitleServiceImpl implements TitleService {
 
     @Override
     public Title getTitleByName(String name) {
-        return titleRepository.findByName(name);
+        if(titleRepository.countByName(name) <= 0) {
+            Title newTitle = new Title();
+            String firstLetter = name.substring(0, 1).toUpperCase();
+            String word = name.substring(1).toLowerCase();
+            newTitle.setName("The " + firstLetter + word);
+            return titleRepository.save(newTitle);
+        } else {
+            return titleRepository.findByName(name);
+        }
     }
 
     @Override

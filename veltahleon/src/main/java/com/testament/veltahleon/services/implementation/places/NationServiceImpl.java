@@ -49,7 +49,15 @@ public class NationServiceImpl implements NationService {
 
     @Override
     public Nation getNationByName(String name) {
-        return nationRepository.findByName(name);
+        if(nationRepository.countByName(name) <= 0) {
+          Nation newNation = new Nation();
+          String firstLetter = name.substring(0, 1).toUpperCase();
+          String word = name.substring(1).toLowerCase();
+          newNation.setName(firstLetter + word);
+          return nationRepository.save(newNation);
+        } else {
+            return nationRepository.findByName(name);
+        }
     }
 
     @Override

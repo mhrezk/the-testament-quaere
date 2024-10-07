@@ -1,0 +1,38 @@
+<div class="node" [ngClass]="{'male': member.gender === 'male', 'female': member.gender === 'female'}">
+  <div *ngIf="!isEditing">
+    <h3>{{ member.firstName }} {{ member.lastName }}</h3>
+    <p>{{ member.location }} ({{ member.birthYear }} - {{ member.deathYear || 'Present' }})</p>
+    <button (click)="toggleEdit()">Edit</button>
+    <button (click)="onDelete()">Delete</button>
+    <button (click)="onAddSpouse()">Add Spouse</button>
+    <button (click)="onAddChild()">Add Child</button>
+  </div>
+  <div *ngIf="isEditing">
+    <input [(ngModel)]="editMember.firstName" placeholder="First Name">
+    <input [(ngModel)]="editMember.lastName" placeholder="Last Name">
+    <select [(ngModel)]="editMember.gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+    <input [(ngModel)]="editMember.location" placeholder="Location">
+    <input [(ngModel)]="editMember.birthYear" type="number" placeholder="Birth Year">
+    <input [(ngModel)]="editMember.deathYear" type="number" placeholder="Death Year">
+    <button (click)="onSave()">Save</button>
+    <button (click)="onCancel()">Cancel</button>
+  </div>
+</div>
+<div class="spouses">
+  <app-family-member-node
+    *ngFor="let spouseId of member.spouses"
+    [member]="getMemberById(spouseId)"
+    [allMembers]="allMembers"
+  ></app-family-member-node>
+</div>
+<div class="children">
+  <app-family-member-node
+    *ngFor="let childId of member.children"
+    [member]="getMemberById(childId)"
+    [allMembers]="allMembers"
+  ></app-family-member-node>
+</div>

@@ -1,0 +1,149 @@
+<div class="display-container">
+  <div class="image-container">
+    <img src="https://via.placeholder.com/300x400" alt="Person Image" />
+<!--    <img [src]="personDetails.imageURL" alt="Person Image" />-->
+  </div>
+
+  <form #personDetailsForm="ngForm" (ngSubmit)="onSubmit(personDetails)" class="details-container">
+    <h2>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput name="firstName" [(ngModel)]="personDetails.firstName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput name="secondName" [(ngModel)]="personDetails.secondName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input [placeholder]="'Epithet'" matInput name="epithet" [(ngModel)]="personDetails.epithet" />
+      </mat-form-field>
+    </h2>
+
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Gender:</strong>
+      <mat-form-field appearance="outline">
+        <mat-label>Gender</mat-label>
+        <mat-select name="gender" [(ngModel)]="personDetails.gender">
+          <mat-option value="MALE">Male</mat-option>
+          <mat-option value="FEMALE">Female</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <strong>Race:</strong>
+    <mat-form-field appearance="outline">
+      <mat-label>Race</mat-label>
+      <mat-select name="race" [(ngModel)]="personDetails.raceName" (selectionChange)="onSelectRaceHandler($event)">
+        <mat-option *ngFor="let race of races" [value]="race.name">{{ race.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+<!--    <div class="detail-item">-->
+<!--      <strong>Race:</strong>-->
+<!--      <mat-form-field appearance="outline">-->
+<!--        <input matInput name="race" [(ngModel)]="personDetails.raceName" />-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+    <div class="detail-item">
+      <strong>Religion:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="religion" [(ngModel)]="personDetails.religion" />
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Militaristic Rank:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="rank" [(ngModel)]="personDetails.rank" />
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Nation:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="nation" [(ngModel)]="personDetails.nation" />
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Birth Date:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="birthDay" [(ngModel)]="personDetails.birthDay" type="number" placeholder="Day" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="birthMonth" [(ngModel)]="personDetails.birthMonth" type="number" placeholder="Month" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="birthYear" [(ngModel)]="personDetails.birthYear" type="number" placeholder="Year" />
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Death Date:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="deathDay" [(ngModel)]="personDetails.deathDay" type="number" placeholder="Day" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="deathMonth" [(ngModel)]="personDetails.deathMonth" type="number" placeholder="Month" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="deathYear" [(ngModel)]="personDetails.deathYear" type="number" placeholder="Year" />
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Year Abbreviation:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="yearAbbreviation" [(ngModel)]="personDetails.yearAbbreviation" />
+      </mat-form-field>
+    </div>
+
+<!--    <div class="detail-item">-->
+<!--      <strong>Calendar System:</strong>-->
+<!--      <mat-form-field appearance="outline">-->
+<!--        <input matInput name="calendarSystem" [(ngModel)]="personDetails.calendarSystem" />-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+    <div class="detail-item">
+      <strong>Job:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="job" [(ngModel)]="personDetails.job" />
+      </mat-form-field>
+    </div>
+
+<!--    <div class="detail-item">-->
+<!--      <strong>Epithet:</strong>-->
+<!--      <mat-form-field appearance="outline">-->
+<!--        <input matInput name="epithet" [(ngModel)]="personDetails.epithet" />-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+    <div class="detail-item">
+      <strong>Lineage</strong>
+      <mat-form-field appearance="outline">
+        <mat-label>Lineage</mat-label>
+        <mat-select name="lineage" [(ngModel)]="personDetails.lineage">
+          <mat-option *ngFor="let lineage of Object.keys(Lineage)" [value]="lineage">{{ lineage }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Biography:</strong>
+      <mat-form-field appearance="outline">
+        <textarea matInput name="biography" [(ngModel)]="personDetails.biography"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="modal-footer">
+      <button [disabled]="personDetailsForm.invalid" type="button" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="onClose(false)">Close</button>
+    </div>
+  </form>
+</div>

@@ -2,7 +2,7 @@ package com.testament.veltahleon.rest.dogma;
 
 import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.model.entities.dogma.Religion;
-import com.testament.veltahleon.services.ifc.religion.ReligionService;
+import com.testament.veltahleon.services.ifc.dogma.ReligionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

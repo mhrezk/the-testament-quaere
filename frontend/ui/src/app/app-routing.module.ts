@@ -10,6 +10,8 @@ import {HierarchyComponent} from "./components/pages/hierarchy/hierarchy/hierarc
 import {CustomFamilyTreeComponent} from "./components/custom/custom-family-tree/custom-family-tree.component";
 import {OrganizationComponent} from "./components/pages/politics/organization/organization.component";
 import {NationComponent} from "./components/pages/places/nation/nation.component";
+import {PedigreeTreeComponent} from "./components/pages/pedigree-tree/pedigree-tree.component";
+import {PersonDetailsComponent} from "./components/pages/society/person-details/person-details.component";
 
 const routes: Routes = [
   {
@@ -30,6 +32,10 @@ const routes: Routes = [
     component: PersonComponent
   },
   {
+    path: "person-details/:id/:firstName/:secondName",
+    component: PersonDetailsComponent
+  },
+  {
     path: "nations",
     component: NationComponent
   },
@@ -47,7 +53,7 @@ const routes: Routes = [
   },
   {
     path: "family-tree",
-    component: FamilyTreeComponent
+    component: PedigreeTreeComponent
   },
   {
     path: "hierarchy",

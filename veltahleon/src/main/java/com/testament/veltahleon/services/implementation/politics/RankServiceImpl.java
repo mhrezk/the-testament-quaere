@@ -37,7 +37,19 @@ public class RankServiceImpl implements RankService {
 
     @Override
     public Rank getRankByRankName(String name) {
-        return rankRepository.findByName(name);
+        if(rankRepository.countByName(name) <= 0) {
+            Rank newRank = new Rank();
+            String firstLetter = name.substring(0, 1).toUpperCase();
+            String word = name.substring(1).toLowerCase();
+            newRank.setName(firstLetter + word);
+            if(newRank.getName().equals("None")) {
+                newRank.setRankAbove("None");
+                newRank.setRankBelow("None");
+            }
+            return rankRepository.save(newRank);
+        } else {
+            return rankRepository.findByName(name);
+        }
     }
 
     @Override

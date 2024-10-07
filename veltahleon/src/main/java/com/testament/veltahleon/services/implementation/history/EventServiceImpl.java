@@ -33,33 +33,63 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Collection<Event> getEventsByYearNumber(int yearNumber) {
-        return eventRepository.findByYear_Epoch_YearNumber(yearNumber);
+    public Collection<Event> getEventsByBeginningYearNumber(int yearNumber) {
+        return eventRepository.findByBeginningYear_Epoch_YearNumber(yearNumber);
     }
 
     @Override
-    public Collection<Event> getEventsByMonthNumber(int monthNumber) {
-        return eventRepository.findByYear_Month_MonthNumber(monthNumber);
+    public Collection<Event> getEventsByBeginningYearMonthNumber(int monthNumber) {
+        return eventRepository.findByBeginningYear_Month_MonthNumber(monthNumber);
     }
 
     @Override
-    public Collection<Event> getEventsByMonthName(String monthName) {
-        return eventRepository.findByYear_Month_Name(monthName);
+    public Collection<Event> getEventsByBeginningYearMonthName(String monthName) {
+        return eventRepository.findByBeginningYear_Month_Name(monthName);
     }
 
     @Override
-    public Collection<Event> getEventsByDayNumber(int dayNumber) {
-        return eventRepository.findByYear_Day_DayNumber(dayNumber);
+    public Collection<Event> getEventsByBeginningYearDayNumber(int dayNumber) {
+        return eventRepository.findByBeginningYear_Day_DayNumber(dayNumber);
     }
 
     @Override
-    public Collection<Event> getEventsByDayName(String dayName) {
-        return eventRepository.findByYear_Day_Name(dayName);
+    public Collection<Event> getEventsByBeginningYearDayName(String dayName) {
+        return eventRepository.findByBeginningYear_Day_Name(dayName);
+    }
+
+    @Override
+    public Collection<Event> getEventsByEndingYearNumber(int yearNumber) {
+        return eventRepository.findByEndingYear_Epoch_YearNumber(yearNumber);
+    }
+
+    @Override
+    public Collection<Event> getEventsByEndingYearMonthNumber(int monthNumber) {
+        return eventRepository.findByEndingYear_Month_MonthNumber(monthNumber);
+    }
+
+    @Override
+    public Collection<Event> getEventsByEndingYearMonthName(String monthName) {
+        return eventRepository.findByEndingYear_Month_Name(monthName);
+    }
+
+    @Override
+    public Collection<Event> getEventsByEndingYearDayNumber(int dayNumber) {
+        return eventRepository.findByEndingYear_Day_DayNumber(dayNumber);
+    }
+
+    @Override
+    public Collection<Event> getEventsByEndingYearDayName(String dayName) {
+        return eventRepository.findByEndingYear_Day_Name(dayName);
     }
 
     @Override
     public Event getEventByID(Long id) {
         return eventRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public Event getEventByIncidentName(String incidentName) {
+        return eventRepository.findByIncident(incidentName);
     }
 
     @Override
@@ -85,8 +115,12 @@ public class EventServiceImpl implements EventService {
             newEvent.setDescription(event.getDescription());
         }
 
-        if(event.getYear() != null && newEvent.getYear() != event.getYear()) {
-            newEvent.setYear(event.getYear());
+        if(event.getBeginningYear() != null && newEvent.getBeginningYear() != event.getBeginningYear()) {
+            newEvent.setBeginningYear(event.getBeginningYear());
+        }
+
+        if(event.getEndingYear() != null && newEvent.getEndingYear() != event.getEndingYear()) {
+            newEvent.setEndingYear(event.getEndingYear());
         }
 
         return eventRepository.save(newEvent);
@@ -97,7 +131,8 @@ public class EventServiceImpl implements EventService {
         Event newEvent = eventRepository.findById(id).orElseThrow();
         newEvent.setIncident(event.getIncident());
         newEvent.setDescription(event.getDescription());
-        newEvent.setYear(event.getYear());
-        return null;
+        newEvent.setBeginningYear(event.getBeginningYear());
+        newEvent.setEndingYear(event.getEndingYear());
+        return eventRepository.save(newEvent);
     }
 }

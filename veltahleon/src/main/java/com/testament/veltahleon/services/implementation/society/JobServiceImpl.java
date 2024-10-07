@@ -1,5 +1,6 @@
 package com.testament.veltahleon.services.implementation.society;
 
+import com.testament.veltahleon.enumerations.JobType;
 import com.testament.veltahleon.model.entities.society.Job;
 import com.testament.veltahleon.repositories.society.JobRepository;
 import com.testament.veltahleon.services.ifc.society.JobService;
@@ -38,7 +39,15 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Job getJobByName(String name) {
-        return jobRepository.findByName(name);
+        if(jobRepository.countByName(name) <= 0) {
+            Job newJob = new Job();
+            String firstLetter = name.substring(0, 1).toUpperCase();
+            String word = name.substring(1).toLowerCase();
+            newJob.setName(firstLetter + word);
+            return jobRepository.save(newJob);
+        } else {
+            return jobRepository.findByName(name);
+        }
     }
 
     @Override

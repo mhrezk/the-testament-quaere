@@ -17,6 +17,7 @@ import {Person} from "../../../../interfaces/models/society/person";
 import {Race} from "../../../../interfaces/models/history/race";
 import {RaceService} from "../../../../services/models/history/race/race.service";
 import {ModalService} from "../../../../modules/modal/service/custom-modal.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-person',
@@ -42,7 +43,6 @@ export class PersonComponent implements OnInit {
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
 
-  isUpdated: boolean = false;
   isClicked: boolean = false;
   isTableShown: boolean = false;
   isMasterSelected: boolean = false;
@@ -65,12 +65,13 @@ export class PersonComponent implements OnInit {
   ];
 
   constructor(private personService: PersonService,
-              private raceService: RaceService) {
+              private raceService: RaceService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.getPaginatedPeople(this.currentPage, this.tableSize);
-    this.getAllRaces();
+    //this.getAllRaces();
   }
 
   getAllRaces() {
@@ -108,7 +109,7 @@ export class PersonComponent implements OnInit {
   getPersonByID(personID: number) {
     this.personService.getPersonByID(personID).subscribe(result => {
       this.selectedPerson = result.data.datumRetrieved;
-    })
+    });
   }
 
   savePerson(personForm: NgForm) {
@@ -183,32 +184,31 @@ export class PersonComponent implements OnInit {
       );
   }
 
-  modifyPerson(person: Person) {
-    this.isLoading.next(true);
-    this.appState$ = this.personService.modifyPerson$(person.id, person).pipe(
-      map((result) => {
-        const index = this.dataSubject.value.data.dataRetrieved.findIndex(person => person.id === result.data.dataUpdated.id);
-        this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated;
-        this.isUpdated = false;
-        this.isTableShown = true;
-        this.isLoading.next(false);
-        return {
-          dataState: DataState.LOADED,
-          appData: this.dataSubject.value
-        };
-      }),
-      startWith({
-        dataState: DataState.LOADED,
-        appData: this.dataSubject.value
-      }),
-      catchError((caughtError: string) => {
-        return of({
-          dataState: DataState.ERROR,
-          error: caughtError,
-        });
-      })
-    );
-  }
+  // modifyPerson(person: Person) {
+  //   this.isLoading.next(true);
+  //   this.appState$ = this.personService.modifyPerson$(person.id, person).pipe(
+  //     map((result) => {
+  //       const index = this.dataSubject.value.data.dataRetrieved.findIndex(person => person.id === result.data.dataUpdated.id);
+  //       this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated;
+  //       this.isTableShown = true;
+  //       this.isLoading.next(false);
+  //       return {
+  //         dataState: DataState.LOADED,
+  //         appData: this.dataSubject.value
+  //       };
+  //     }),
+  //     startWith({
+  //       dataState: DataState.LOADED,
+  //       appData: this.dataSubject.value
+  //     }),
+  //     catchError((caughtError: string) => {
+  //       return of({
+  //         dataState: DataState.ERROR,
+  //         error: caughtError,
+  //       });
+  //     })
+  //   );
+  // }
 
   filterPeopleByGender(gender: Gender) {
     this.appState$ = this.personService.filterByGender$(gender, this.dataSubject.value)
@@ -270,6 +270,13 @@ export class PersonComponent implements OnInit {
         this.checkedPeople.push(checkedPerson);
       }
     }
+  }
+
+  routeToPersonDetails(personID: number, firstName: string, secondName: string) {
+    this.personService.setFullName(firstName, secondName);
+    this.personService.setPersonID(personID);
+    //this.router.navigateByUrl(`/person-details/${firstName}/${secondName}`);
+    this.router.navigate([`/person-details`, personID, firstName, secondName]);
   }
 
   // openModal(modalTemplate: TemplateRef<any>, size: string, title: string) {

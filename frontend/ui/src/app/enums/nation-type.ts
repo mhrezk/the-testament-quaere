@@ -5,5 +5,6 @@ export enum NationType {
   FEDERATION = "FEDERATION",
   DUCHY = "DUCHY",
   CITY_STATE = "CITY_STATE",
-  REPUBLIC = "REPUBLIC"
+  REPUBLIC = "REPUBLIC",
+  NONE = "NONE"
 }

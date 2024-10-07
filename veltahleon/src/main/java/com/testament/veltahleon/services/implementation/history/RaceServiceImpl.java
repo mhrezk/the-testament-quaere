@@ -40,7 +40,15 @@ public class RaceServiceImpl implements RaceService {
 
     @Override
     public Race getRaceByName(String name) {
-        return raceRepository.findByName(name);
+        if(raceRepository.countByName(name) <= 0) {
+            Race newRace = new Race();
+            String firstLetter = name.substring(0, 1).toUpperCase();
+            String word = name.substring(1).toLowerCase();
+            newRace.setName(firstLetter + word);
+            return raceRepository.save(newRace);
+        } else {
+            return raceRepository.findByName(name);
+        }
     }
 
     @Override
@@ -54,6 +62,9 @@ public class RaceServiceImpl implements RaceService {
         if(raceRepository.countByName(race.getName().toLowerCase()) >= 1) {
             throw new DataInsertionException("Race name");
         }
+        String firstLetter = race.getName().substring(0, 1).toUpperCase();
+        String word = race.getName().substring(1).toLowerCase();
+        race.setName(firstLetter + word);
         return raceRepository.save(race);
     }
 

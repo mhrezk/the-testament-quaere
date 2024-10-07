@@ -1,0 +1,12 @@
+<h1>Family Tree</h1>
+<app-family-member-form (memberAdded)="onMemberAdded($event)"></app-family-member-form>
+<div>
+  <input [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search by name">
+</div>
+<div class="tree">
+  <app-family-member-node
+    *ngFor="let member of rootMembers"
+    [member]="member"
+    [allMembers]="allMembers"
+  ></app-family-member-node>
+</div>

@@ -7,11 +7,11 @@
             <h2>People</h2>
           </div>
           <div class="col-sm-6">
-            <a class="btn btn-success" (click)="isTableShown = false; isClicked = true">
+            <a *ngIf="isTableShown" class="btn btn-success" (click)="isClicked = true; isTableShown = false">
               <i class="material-icons">&#xE147;</i>
               <span>Add Person</span>
             </a>
-            <span>
+            <span *ngIf="isTableShown">
               <select (ngModelChange)="filterPeopleByGender($event)" name="status" ngModel="ALL"
                       class="btn btn-info" style="height: 32.91px;">
                 <option value="ALL">All</option>
@@ -72,17 +72,17 @@
                   (change)="isAllSelected()"
                   style="cursor: pointer"
                 ></td>
-              <td>{{ person.name }}</td>
+              <td><u (click)="routeToPersonDetails(person.id, person.firstName, person.secondName)" style="cursor:pointer;">{{ person.firstName }} {{ person.secondName }}</u></td>
               <td>{{ person.raceName }}</td>
               <td>{{ person.gender }}</td>
               <td>
-                <span>
-                  <fa-icon [icon]="faEdit"
-                           [style.color]="'blue'"
-                           [title]="'Edit'"
-                           (click)="isUpdated = true; getPersonByID(person.id); isTableShown = false;"
-                           [style.cursor]="'pointer'"></fa-icon>
-                </span>
+<!--                <span>-->
+<!--                  <fa-icon [icon]="faEdit"-->
+<!--                           [style.color]="'blue'"-->
+<!--                           [title]="'Edit'"-->
+<!--                           (click)="isUpdated = true; getPersonByID(person.id); isTableShown = false;"-->
+<!--                           [style.cursor]="'pointer'"></fa-icon>-->
+<!--                </span>-->
                 &nbsp;
                 &nbsp;
                 <span>
@@ -95,7 +95,7 @@
           </table>
         </ng-container>
         <ng-container *ngSwitchCase="DATA_STATE.ERROR">
-          <div [hidden]="isUpdated || isClicked" style="background-color: indianred">{{ appState.error }}</div>
+          <div [hidden]="isClicked" style="background-color: indianred">{{ appState.error }}</div>
         </ng-container>
         <pagination-controls
           *ngIf="isTableShown"
@@ -120,30 +120,34 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label>Person Name</label>
-            <input type="text" ngModel name="name" class="form-control" required>
+            <label>First Name</label>
+            <input type="text" ngModel name="firstName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" ngModel name="secondName" class="form-control" required>
           </div>
           <div class="row">
           </div>
           <div class="form-group">
-            <label>Gender</label>
+            <label>Race</label>
+            <input type="text" ngModel name="raceName" class="form-control" required>
+          </div>
+          <br>
+          <div class="form-group">
+            <label>Gender</label> &nbsp;
             <!--            <input type="radio" ngModel name="gender" value="MALE" required>Male-->
             <!--            <input type="radio" ngModel name="gender" value="FEMALE" required>Female-->
-            <select name="gender" ngModel="MALE" class="form-control" required>
+            <!--            <select name="gender" ngModel="MALE" class="form-control" required>-->
+            <select name="gender" ngModel="MALE" required>
               <option value="MALE">Male</option>
               <option value="FEMALE">Female</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Race</label>
-            <select name="raceName" ngModel (change)="onSelectRaceHandler($event)" class="form-control" required>
-              <option *ngFor="let race of races" [value]="race.name">{{ race.name }}</option>
             </select>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="isClicked = false; isTableShown = true">Close</button>
-          <button type="submit" [disabled]="isLoading$ | async"
+          <button type="submit" [disabled]="(isLoading$ | async) || personForm.invalid"
                   class="btn btn-success">
             <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
             <span *ngIf="isLoading$ | async">Saving...</span>
@@ -156,49 +160,54 @@
 </div>
 
 <!-- Edit Person -->
-<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form (ngSubmit)="modifyPerson(selectedPerson)">
-        <div class="modal-header">
-          <h4 class="modal-title">Edit Person</h4>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Person Name</label>
-            <input type="text" [(ngModel)]="selectedPerson.name" name="name" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Gender</label>
-            <select name="gender" [(ngModel)]="selectedPerson.gender" class="form-control" required>
-              <option value="MALE">Male</option>
-              <option value="FEMALE">Female</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Race</label>
-            <select name="raceName" [(ngModel)]="selectedPerson.raceName" (change)="onSelectRaceHandler($event)"
-                    class="form-control" required>
-              <option *ngFor="let race of races" [value]="race.name">{{ race.name }}</option>
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" (click)="isUpdated = false; isTableShown = true;">Close</button>
-          <button type="submit" [disabled]="isLoading$ | async"
-                  class="btn btn-success">
-            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
-            <span *ngIf="isLoading$ | async">Updating...</span>
-            <span *ngIf="!(isLoading$ | async)">Update</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+<!--<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"-->
+<!--     aria-hidden="true">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <form (ngSubmit)="modifyPerson(selectedPerson)">-->
+<!--        <div class="modal-header">-->
+<!--          <h4 class="modal-title">Edit Person</h4>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <div class="form-group">-->
+<!--            <label>First Name</label>-->
+<!--            <input type="text" [(ngModel)]="selectedPerson.firstName" name="firstName" class="form-control" required>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label>Last Name</label>-->
+<!--            <input type="text" [(ngModel)]="selectedPerson.secondName" name="secondName" class="form-control" required>-->
+<!--          </div>-->
+<!--          <br>-->
+<!--          <div class="form-group">-->
+<!--            <label>Gender</label>-->
+<!--            <select name="gender" [(ngModel)]="selectedPerson.gender" required>-->
+<!--              <option value="MALE">Male</option>-->
+<!--              <option value="FEMALE">Female</option>-->
+<!--            </select>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label>Race</label>-->
+<!--            <select name="raceName" [(ngModel)]="selectedPerson.raceName" (change)="onSelectRaceHandler($event)"-->
+<!--                    class="form-control" required>-->
+<!--              <option *ngFor="let race of races" [value]="race.name">{{ race.name }}</option>-->
+<!--            </select>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-danger" (click)="isUpdated = false; isTableShown = true;">Close</button>-->
+<!--          <button type="submit" [disabled]="isLoading$ | async"-->
+<!--                  class="btn btn-success">-->
+<!--            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>-->
+<!--            <span *ngIf="isLoading$ | async">Updating...</span>-->
+<!--            <span *ngIf="!(isLoading$ | async)">Update</span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
-<ng-template #modalTemplate>
-  <div submitForm>
-  </div>
-</ng-template>
+<!--<ng-template #modalTemplate>-->
+<!--  <div submitForm>-->
+<!--  </div>-->
+<!--</ng-template>-->

@@ -3,7 +3,7 @@ package com.testament.veltahleon.mappers.dogma;
 import com.testament.veltahleon.dto.dogma.ReligionDTO;
 import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.dogma.mythology.Deity;
-import com.testament.veltahleon.services.ifc.religion.mythology.DeityService;
+import com.testament.veltahleon.services.ifc.dogma.mythology.DeityService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

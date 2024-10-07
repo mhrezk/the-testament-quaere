@@ -5,16 +5,16 @@ import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.history.Race;
 import com.testament.veltahleon.model.entities.places.Nation;
 import com.testament.veltahleon.model.entities.politics.Rank;
-import com.testament.veltahleon.model.entities.society.Family;
 import com.testament.veltahleon.model.entities.society.Job;
+import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.model.entities.society.Title;
 import com.testament.veltahleon.services.ifc.calendar.YearService;
 import com.testament.veltahleon.services.ifc.history.RaceService;
 import com.testament.veltahleon.services.ifc.places.NationService;
 import com.testament.veltahleon.services.ifc.politics.RankService;
-import com.testament.veltahleon.services.ifc.religion.ReligionService;
-import com.testament.veltahleon.services.ifc.society.FamilyService;
+import com.testament.veltahleon.services.ifc.dogma.ReligionService;
 import com.testament.veltahleon.services.ifc.society.JobService;
+import com.testament.veltahleon.services.ifc.society.PersonService;
 import com.testament.veltahleon.services.ifc.society.TitleService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,9 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class PersonFacade {
+
+    @Autowired
+    public PersonService personService;
 
     @Autowired
     public RaceService raceService;
@@ -45,6 +48,10 @@ public class PersonFacade {
 
     @Autowired
     public YearService yearService;
+
+    public Person getPerson(String firstName, String secondName) {
+        return personService.getPersonByFirstNameAndLastName(firstName, secondName);
+    }
 
     public Race getRace(String raceName) {
         return raceService.getRaceByName(raceName);

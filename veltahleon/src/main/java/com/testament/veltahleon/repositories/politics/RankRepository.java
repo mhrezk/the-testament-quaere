@@ -14,4 +14,5 @@ public interface RankRepository extends JpaRepository<Rank, Long> {
     Rank findByRankAbove(String name);
     Rank findByRankBelow(String name);
     Collection<Rank> findByRankType(String rankType);
+    long countByName(String name);
 }

@@ -9,7 +9,8 @@ public enum JobType {
     MUNICIPAL("Municipality"),
     CIVIL("Private"),
     SERVILE("Slave"),
-    CRIMINAL("Criminal");
+    CRIMINAL("Criminal"),
+    NONE("None");
 
     private final String jobType;
 

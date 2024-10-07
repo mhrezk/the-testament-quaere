@@ -8,6 +8,7 @@ public enum ClosedAnswer {
     NO("No");
 
     private final String answer;
+
     ClosedAnswer(String answer) {
         this.answer = answer;
     }
