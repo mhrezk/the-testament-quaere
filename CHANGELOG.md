@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.77.0] 2024-10-08
+
+- Correctly displayed timelines onto frontend
+
 ## [0.76.1] 2024-10-07
 
 - Removed unnecessary console logging on frontend

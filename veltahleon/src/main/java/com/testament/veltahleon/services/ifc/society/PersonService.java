@@ -17,4 +17,5 @@ public interface PersonService {
     Person savePerson(Person person);
     Person updatePerson(Long id, Person person);
     Person modifyPerson(Long id, Person person);
+    Long countPeople();
 }

@@ -22,20 +22,36 @@ public class Event {
     @Column(name = "incident", columnDefinition = "text")
     private String incident;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "beginning_year_id")
-    private Year beginningYear;
+    @Column(name = "event_day")
+    private Integer eventDay;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "ending_year_id")
-    private Year endingYear;
+    @Column(name = "event_month")
+    private Integer eventMonth;
+
+    @Column(name = "event_year")
+    private Integer eventYear;
+
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "beginning_year_id")
+//    private Year beginningYear;
+
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "ending_year_id")
+//    private Year endingYear;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "event_id")
+    private Timeline timeline;
 }

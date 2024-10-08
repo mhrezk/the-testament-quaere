@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FamilyTreeService } from './family-tree.service';
+import { TimelineService } from './timeline.service';
 
-describe('FamilyTreeService', () => {
-  let service: FamilyTreeService;
+describe('TimelineService', () => {
+  let service: TimelineService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FamilyTreeService);
+    service = TestBed.inject(TimelineService);
   });
 
   it('should be created', () => {

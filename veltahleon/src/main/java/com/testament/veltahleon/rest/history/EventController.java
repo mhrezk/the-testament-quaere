@@ -30,13 +30,13 @@ public class EventController {
 
     @GetMapping("/events")
     public ResponseEntity<CustomResponse> getPaginatedEvents(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        List<Event> events = (List<Event>) eventService.getEventsWithPagination(pageNumber, pageSize);
+        List<Event> events = (List<Event>) eventService.getPaginatedEvents((pageNumber - 1), pageSize);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", events))
-                .message(events.size() + " events retrieved from page: " + (pageNumber + 1))
+                .message(events.size() + " events retrieved from page: " + pageNumber)
                 .build()
         );
     }
@@ -66,25 +66,25 @@ public class EventController {
         );
     }
 
-    @GetMapping("/event/beginning_year")
-    public ResponseEntity<CustomResponse> getEventsByEventBeginningYear(@RequestParam(value = "yearNumber") int yearNumber) {
+    @GetMapping("/event/eventYear")
+    public ResponseEntity<CustomResponse> getEventsByEventYear(@RequestParam(value = "year") int year) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("datumRetrieved", eventService.getEventsByBeginningYearNumber(yearNumber)))
+                .data(Map.of("dataRetrieved", eventService.getEventsByEventYear(year)))
                 .message("Event retrieved!")
                 .build()
         );
     }
 
-    @GetMapping("/event/ending_year")
-    public ResponseEntity<CustomResponse> getEventsByEventEndingYear(@RequestParam(value = "yearNumber") int yearNumber) {
+    @GetMapping("/event/{eventDay}/{eventMonth}/{eventYear}")
+    public ResponseEntity<CustomResponse> getEventByEventDayAndEventMonthAndEventYear(@PathVariable(value = "eventDay") int eventDay, @PathVariable(value = "eventMonth") int eventMonth, @PathVariable(value = "eventYear") int eventYear) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("datumRetrieved", eventService.getEventsByEndingYearNumber(yearNumber)))
+                .data(Map.of("datumRetrieved", eventService.getEventByEventDayAndEventMonthAndEventYear(eventDay, eventMonth, eventYear)))
                 .message("Event retrieved!")
                 .build()
         );
@@ -115,12 +115,24 @@ public class EventController {
     }
 
     @PatchMapping("/update/event/{id}")
-    public ResponseEntity<CustomResponse> updateEvent(@PathVariable Long id, @RequestBody Event Event) {
+    public ResponseEntity<CustomResponse> updateEvent(@PathVariable Long id, @RequestBody Event event) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataUpdated", eventService.updateEvent(id, Event)))
+                .data(Map.of("dataUpdated", eventService.updateEvent(id, event)))
+                .message("Event updated!")
+                .build()
+        );
+    }
+
+    @PutMapping("/modify/event/{id}")
+    public ResponseEntity<CustomResponse> modifyEvent(@PathVariable Long id, @RequestBody Event event) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataUpdated", eventService.modifyEvent(id, event)))
                 .message("Event updated!")
                 .build()
         );

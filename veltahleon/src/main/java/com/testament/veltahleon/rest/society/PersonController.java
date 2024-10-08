@@ -35,16 +35,10 @@ public class PersonController {
 //    private ModelMapper modelMapper;
 
     @GetMapping("/persons")
-    public ResponseEntity<CustomResponse> getPaginatedPersons(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+    public ResponseEntity<CustomResponse> getPaginatedPersons(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "5") int pageSize) {
         List<PersonDTO> personsDTO;
         List<Person> persons;
-        int page = 0;
-        if(pageNumber <= 0) {
-            persons = (List<Person>) personService.getPersonsWithPagination(page, pageSize);
-        } else {
-            page = pageNumber;
-            persons = (List<Person>) personService.getPersonsWithPagination((page - 1), pageSize);
-        }
+        persons = (List<Person>) personService.getPersonsWithPagination((pageNumber - 1), pageSize);
         personsDTO = persons.stream().map(p -> personMapper.convertToDTO(p)).toList();
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
@@ -59,12 +53,25 @@ public class PersonController {
     @GetMapping("/persons/all")
     public ResponseEntity<CustomResponse> getAllPersons() {
         List<Person> persons = (List<Person>) personService.getPersons();
+        List<PersonDTO> personsDTO = persons.stream().map(p -> personMapper.convertToDTO(p)).toList();
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", persons))
+                .data(Map.of("dataRetrieved", personsDTO))
                 .message("All persons retrieved!")
+                .build()
+        );
+    }
+
+    @GetMapping("/persons/all/count")
+    public ResponseEntity<CustomResponse> getAllPersonsCount() {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", personService.countPeople()))
+                .message("Count retrieved!")
                 .build()
         );
     }

@@ -19,8 +19,8 @@ export class CustomSidenavComponent {
     },
     {
       icon: "timeline",
-      label: "Timeline",
-      route: "timeline"
+      label: "Timelines",
+      route: "timelines"
     },
     {
       icon: "language",

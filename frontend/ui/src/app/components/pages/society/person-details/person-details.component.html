@@ -55,10 +55,19 @@
       {{ personDetails.value.data?.datumRetrieved?.birthDay }}/{{ personDetails.value.data?.datumRetrieved?.birthMonth }}/{{ personDetails.value.data?.datumRetrieved?.birthYear }}
     </div>
 
-    <div class="detail-item">
-      <strong>Death Date:</strong>
-      {{ personDetails.value.data?.datumRetrieved?.deathDay }}/{{ personDetails.value.data?.datumRetrieved?.deathMonth }}/{{ personDetails.value.data?.datumRetrieved?.deathYear }}
-    </div>
+    @if(personDetails.value.data?.datumRetrieved?.deathDay === 0 ||
+    personDetails.value.data?.datumRetrieved?.deathMonth === 0 ||
+    personDetails.value.data?.datumRetrieved?.deathYear === 0) {
+      <div class="detail-item">
+        <strong>Death Date:</strong>
+        Present
+      </div>
+    } @else {
+      <div class="detail-item">
+        <strong>Death Date:</strong>
+        {{ personDetails.value.data?.datumRetrieved?.deathDay }}/{{ personDetails.value.data?.datumRetrieved?.deathMonth }}/{{ personDetails.value.data?.datumRetrieved?.deathYear }}
+      </div>
+    }
 
     <div class="detail-item">
       <strong>Year Abbreviation:</strong> {{ personDetails.value.data?.datumRetrieved?.yearAbbreviation || 'N/A' }}

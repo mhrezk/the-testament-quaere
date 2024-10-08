@@ -25,7 +25,7 @@ import {Router} from "@angular/router";
   styleUrl: './person.component.css'
 })
 export class PersonComponent implements OnInit {
-  currentPage:number  = 1;
+  currentPage: number  = 1;
   tableSize: number = 5;
   count: number = 0;
   tableSizes: number[] = [5, 10, 20];
@@ -71,12 +71,21 @@ export class PersonComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPaginatedPeople(this.currentPage, this.tableSize);
+    this.getAllPeopleTotal();
     //this.getAllRaces();
   }
 
   getAllRaces() {
     this.raceService.getRaces$.subscribe(
       result => this.races = result.data.dataRetrieved
+    )
+  }
+
+  getAllPeopleTotal() {
+    this.personService.getAllPeopleCount().subscribe(
+      result => {
+        this.count = result.data.datumRetrieved;
+      }
     )
   }
 
@@ -118,16 +127,25 @@ export class PersonComponent implements OnInit {
       .savePerson$(personForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
-          this.dataSubject.next(
-            {
-              ...result,
-              data: {
-                dataRetrieved: [
-                  result.data.dataSaved,
-                  ...this.dataSubject.value.data.dataRetrieved,
-                ],
-              },
-            });
+          this.dataSubject.next({ //this lists everything in ascending insertion order
+            ...result,
+            data: {
+              dataRetrieved: [
+                ...this.dataSubject.value.data.dataRetrieved, // Keep the existing entries
+                result.data.dataSaved, // Add the new entry at the end
+              ],
+            },
+          });
+          // this.dataSubject.next( //this lists everything in descending insertion order
+          //   {
+          //     ...result,
+          //     data: {
+          //       dataRetrieved: [
+          //         result.data.dataSaved,
+          //         ...this.dataSubject.value.data.dataRetrieved,
+          //       ],
+          //     },
+          //   });
           this.isClicked = false;
           this.isTableShown = true;
           this.isLoading.next(false);
@@ -149,6 +167,7 @@ export class PersonComponent implements OnInit {
           });
         })
       );
+    window.location.reload();
   }
 
   deletePerson(person: Person) {
@@ -182,6 +201,14 @@ export class PersonComponent implements OnInit {
           });
         })
       );
+    this.getAllPeopleTotal();
+  }
+
+  deletePersons(persons: Person[]) {
+    for(let person of persons) {
+      this.personService.deletePerson(person.id).subscribe();
+    }
+    window.location.reload();
   }
 
   // modifyPerson(person: Person) {
@@ -270,6 +297,10 @@ export class PersonComponent implements OnInit {
         this.checkedPeople.push(checkedPerson);
       }
     }
+  }
+
+  hasSelected() {
+    return this.people.some(person => person.isSelected);
   }
 
   routeToPersonDetails(personID: number, firstName: string, secondName: string) {

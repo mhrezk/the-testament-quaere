@@ -10,19 +10,9 @@ import lombok.*;
 public class EventDTO {
     private Long id;
     private String incident;
-    private String beginningDay;
-    private String beginningMonth;
-    private String beginningYear;
-    private String endingDay;
-    private String endingMonth;
-    private String endingYear;
+    private Integer eventDay;
+    private Integer eventMonth;
+    private Integer eventYear;
+    private String timeline;
     private String description;
-
-    public String getBeginningEventYear() {
-        return beginningDay + "/" + beginningMonth + "/" + beginningYear;
-    }
-
-    public String getEndingEventYear() {
-        return endingDay + "/" + endingMonth + "/" + endingYear;
-    }
 }

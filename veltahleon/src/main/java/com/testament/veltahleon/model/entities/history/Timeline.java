@@ -18,15 +18,28 @@ public class Timeline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "calendar_id")
+//    @Column(name = "id")
     private Long id;
 
+    @Column(name = "timeline_name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "timeline_id")
-    private List<Event> events;
+    @Column(name = "beginning_year")
+    private Integer beginningYear;
+
+    @Column(name = "ending_year")
+    private Integer endingYear;
+
+    @Column(name = "beginning_year_abbreviation")
+    private String beginningYearAbbreviation;
+
+    @Column(name = "ending_year_abbreviation")
+    private String endingYearAbbreviation;
+
+//    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "timeline_id")
+//    private List<Event> events;
 }

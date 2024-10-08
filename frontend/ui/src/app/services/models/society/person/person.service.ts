@@ -30,6 +30,10 @@ export class PersonService {
       catchError(this.handleError)
     );
 
+  getAllPeopleCount() {
+    return this.http.get<CustomResponse>(`${this.baseURL}/persons/all/count`)
+  }
+
   getPersonByID$ = (personID: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/person/${personID}`)
     .pipe(
       tap(console.log),
@@ -67,6 +71,10 @@ export class PersonService {
       tap(console.log),
       catchError(this.handleError)
     );
+
+  public deletePerson(personID: number): Observable<CustomResponse> {
+    return this.http.delete<CustomResponse>(`${this.baseURL}/delete/person/${personID}`);
+  }
 
   filterByGender$ = (gender: Gender, response: CustomResponse) =>
     <Observable<CustomResponse>> new Observable<CustomResponse>(

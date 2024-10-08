@@ -1,5 +1,5 @@
-.tree {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
 }

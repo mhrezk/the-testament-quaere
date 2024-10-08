@@ -4,7 +4,7 @@ import {HomeComponent} from "./components/pages/home/home.component";
 import {CalendarComponent} from "./components/pages/calendar/calendar.component";
 import {PersonComponent} from "./components/pages/society/person/person.component";
 import {RaceComponent} from "./components/pages/history/race/race.component";
-import {TimelineComponent} from "./components/pages/timeline/timeline.component";
+import {TimelineComponent} from "./components/pages/history/timeline/timeline.component";
 import {FamilyTreeComponent} from "./components/pages/family-tree/family-tree.component";
 import {HierarchyComponent} from "./components/pages/hierarchy/hierarchy/hierarchy.component";
 import {CustomFamilyTreeComponent} from "./components/custom/custom-family-tree/custom-family-tree.component";
@@ -48,7 +48,7 @@ const routes: Routes = [
     component: OrganizationComponent
   },
   {
-    path: "timeline",
+    path: "timelines",
     component: TimelineComponent
   },
   {

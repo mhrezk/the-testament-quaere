@@ -1,0 +1,280 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Timelines</h2>
+          </div>
+          <div class="col-sm-6">
+            <a *ngIf="isTableShown" class="btn btn-success" (click)="isClicked = true; isTableShown = false">
+              <i class="material-icons">&#xE147;</i>
+              <span>Add Timeline</span>
+            </a>
+<!--            <span *ngIf="isTableShown">-->
+<!--              <select (ngModelChange)="filterPeopleByGender($event)" name="status" ngModel="ALL"-->
+<!--                      class="btn btn-info" style="height: 32.91px;">-->
+<!--                <option value="ALL">All</option>-->
+<!--                <option value="MALE">Male</option>-->
+<!--                <option value="FEMALE">Female</option>-->
+<!--              </select>-->
+<!--            </span>-->
+          </div>
+        </div>
+      </div>
+      <br>
+      <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+        <ng-container *ngSwitchCase="DATA_STATE.LOADING">
+          <div class="col-md-12 single-note-item text-center">
+            <div class="spinner-border text-info" role="status"></div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+          <div *ngIf="isTableShown">
+            <span>
+              Number of records:
+              <select (change)="onTableSizeChange($event)">
+                <option *ngFor="let size of tableSizes">
+                  {{ size }}
+                </option>
+              </select>
+            </span>
+            <br>
+            <br>
+            <input
+              [(ngModel)]="isMasterSelected"
+              type="checkbox"
+              (change)="checkUncheckAll()"
+              style="cursor: pointer"
+            >
+            &nbsp;&nbsp;&nbsp;
+            <span>Select/Deselect All</span>
+            &nbsp;
+            @if(hasSelected()) {<button type="button" class="btn btn-danger" (click)="deleteTimelines(this.checkedTimelines)">Delete Selection</button>}
+          </div>
+          <table *ngIf="isTableShown" class="table table-striped table-hover" id="days">
+            <thead>
+            <tr>
+              <th></th>
+              <th *ngFor="let header of headers">{{ header.value }}</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let timeline of appState.appData?.data.dataRetrieved
+            | paginate: {
+              itemsPerPage: tableSize,
+              currentPage: currentPage,
+              totalItems: count
+            }; let i = index;">
+            <tr>
+              <td>
+                <input
+                  [(ngModel)]="timeline.isSelected"
+                  type="checkbox"
+                  (change)="isAllSelected()"
+                  style="cursor: pointer"
+                ></td>
+<!--              <td><u (click)="routeToEvents(person.id, person.firstName, person.secondName)" style="cursor:pointer;">{{ person.firstName }} {{ person.secondName }}</u></td>-->
+              <td>{{ timeline.name }}</td>
+              <td>{{ timeline.beginningYear }} {{ timeline.yearAbbreviation }} <strong>---</strong> @if(timeline.endingYear === null || timeline.endingYear === 0) {
+                Present
+              } @else {
+                {{ timeline.endingYear }}
+              } {{ timeline.yearAbbreviation }}</td>
+              <td>
+                <span>
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit'"
+                           (click)="isUpdated = true; getTimelineByID(timeline.id); isTableShown = false;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                </span>
+                &nbsp;
+                &nbsp;
+                <span>
+                  <fa-icon [icon]="faTrash" [title]="'Delete'" (click)="deleteTimeline(timeline)"
+                           style="cursor: pointer; color: firebrick"></fa-icon>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.ERROR">
+          <div [hidden]="isClicked" style="background-color: indianred">{{ appState.error }}</div>
+        </ng-container>
+        <pagination-controls
+          *ngIf="isTableShown"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Add Timeline -->
+<div *ngIf="isClicked" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #timelineForm="ngForm" (ngSubmit)="saveTimeline(timelineForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Timeline</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Timeline Name</label>
+            <input type="text" ngModel name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Beginning Year</label>
+            <input type="number" min="1" ngModel name="beginningYear" class="form-control" required>
+          </div>
+          <div class="row">
+          </div>
+          <div class="form-group">
+            <label>Ending Year</label>
+            <input type="number" min="0" ngModel name="endingYear" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Year Abbreviation</label>
+            <input type="text" ngModel name="yearAbbreviation" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="isClicked = false; isTableShown = true">Close</button>
+          <button type="submit" [disabled]="(isLoading$ | async) || timelineForm.invalid"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Timeline -->
+<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="modifyTimeline(selectedTimeline)">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Person</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Timeline Name</label>
+            <input type="text" [(ngModel)]="selectedTimeline.name" name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Beginning Year</label>
+            <input type="number" min="1" [(ngModel)]="selectedTimeline.beginningYear" name="beginningYear" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Ending Year</label>
+            <input type="number" min="0" [(ngModel)]="selectedTimeline.endingYear" name="endingYear" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Year Abbreviation</label>
+            <input type="text" [(ngModel)]="selectedTimeline.yearAbbreviation" name="yearAbbreviation" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="isUpdated = false; isTableShown = true;">Close</button>
+          <button type="submit" [disabled]="isLoading$ | async"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Updating...</span>
+            <span *ngIf="!(isLoading$ | async)">Update</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--<div class="container">-->
+<!--  <div class="timeline">-->
+<!--    <ul>-->
+<!--      <li>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 1</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 2</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 3</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 4</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 4</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 4</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 4</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 4</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 4</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</div>-->

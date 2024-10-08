@@ -38,7 +38,7 @@
                   {{ size }}
                 </option>
               </select>
-          </span>
+            </span>
             <br>
             <br>
             <input
@@ -49,6 +49,8 @@
             >
             &nbsp;&nbsp;&nbsp;
             <span>Select/Deselect All</span>
+            &nbsp;
+            @if(hasSelected()) {<button type="button" class="btn btn-danger" (click)="deletePersons(this.checkedPeople)">Delete Selection</button>}
           </div>
           <table *ngIf="isTableShown" class="table table-striped table-hover" id="days">
             <thead>

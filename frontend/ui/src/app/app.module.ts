@@ -25,6 +25,7 @@ import { OrganizationChartModule }
 
 import { NgxSimpleTextEditorModule } from 'ngx-simple-text-editor';
 import {NgxPaginationModule} from "ngx-pagination";
+//import { PaginationModule } from 'ngx-pagination';
 //import { QuillModule } from "ngx-quill";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +36,7 @@ import { CalendarComponent } from './components/pages/calendar/calendar.componen
 import { PersonComponent } from './components/pages/society/person/person.component';
 import { RaceComponent } from './components/pages/history/race/race.component';
 import {ModalModule} from "./modules/modal/modal.module";
-import { TimelineComponent } from './components/pages/timeline/timeline.component';
+import { TimelineComponent } from './components/pages/history/timeline/timeline.component';
 import { FamilyTreeComponent } from './components/pages/family-tree/family-tree.component';
 import { InspectorComponent } from './components/pages/hierarchy/inspector/inspector.component';
 import {OrganizationChartComponent} from "./components/pages/hierarchy/organization-chart/organization-chart.component";
@@ -44,16 +45,15 @@ import { CustomFamilyTreeComponent } from './components/custom/custom-family-tre
 import { FamilyTreeFormComponent } from './components/custom/custom-family-tree/family-tree-form/family-tree-form.component';
 import { OrganizationComponent } from './components/pages/politics/organization/organization.component';
 import { NationComponent } from './components/pages/places/nation/nation.component';
-import { FamilyMemberNodeComponent } from './components/pages/pedigree-tree/family-member-node/family-member-node.component';
 import { PedigreeTreeComponent } from './components/pages/pedigree-tree/pedigree-tree.component';
 import { PersonDetailsComponent } from './components/pages/society/person-details/person-details.component';
 import {MatCard, MatCardActions, MatCardContent, MatCardTitle} from "@angular/material/card";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import { FilterPipe } from './pipes/filter/filter.pipe';
-import { FamilyMemberFormComponent } from './components/pages/pedigree-tree/family-member-form/family-member-form.component';
 import { FamilyNgTreeComponent } from './components/pages/pedigree-tree/family-ng-tree/family-ng-tree.component';
 import { PersonDetailsEditComponent } from './components/pages/society/person-details/person-details-edit/person-details-edit.component';
+import { TimelineDisplayComponent } from './components/pages/history/timeline/timeline-display/timeline-display.component';
 
 @NgModule({
   declarations: [
@@ -72,13 +72,12 @@ import { PersonDetailsEditComponent } from './components/pages/society/person-de
     FamilyTreeFormComponent,
     OrganizationComponent,
     NationComponent,
-    FamilyMemberNodeComponent,
     PedigreeTreeComponent,
     PersonDetailsComponent,
     FilterPipe,
-    FamilyMemberFormComponent,
     FamilyNgTreeComponent,
-    PersonDetailsEditComponent
+    PersonDetailsEditComponent,
+    TimelineDisplayComponent
   ],
   imports: [
     BrowserModule,

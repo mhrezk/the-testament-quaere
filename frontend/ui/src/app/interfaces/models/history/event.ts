@@ -1,6 +1,9 @@
 export interface Event {
   id: number;
   incident: string;
-  year: string;
+  eventDay: number;
+  eventMonth: number;
+  eventYear: number;
   description: string;
+  timeline: string;
 }

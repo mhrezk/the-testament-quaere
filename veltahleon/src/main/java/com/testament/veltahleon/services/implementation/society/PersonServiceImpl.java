@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -84,12 +85,15 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person savePerson(Person person) {
-        PersonDetails personDetails = new PersonDetails();
         personRepository.save(person);
-        Job job = personDetailsFacade.createJob();
-        Religion religion = personDetailsFacade.createReligion();
-        Nation nation = personDetailsFacade.createNation();
-        Rank rank = personDetailsFacade.createRank();
+        PersonDetails newPersonDetails = generatePersonDetails();
+        newPersonDetails.setPerson(person);
+        personDetailsRepository.save(newPersonDetails);
+        return person;
+    }
+
+    private PersonDetails generatePersonDetails() {
+        PersonDetails personDetails = new PersonDetails();
         personDetails.setYearAbbreviation(null);
         personDetails.setLineage(Lineage.NONE);
         personDetails.setBirthDay(0);
@@ -98,14 +102,12 @@ public class PersonServiceImpl implements PersonService {
         personDetails.setDeathDay(0);
         personDetails.setDeathMonth(0);
         personDetails.setDeathYear(0);
-        personDetails.setPerson(person);
-        personDetails.setRank(rank);
-        personDetails.setReligion(religion);
-        personDetails.setJob(job);
-        personDetails.setNation(nation);
+        personDetails.setRank(personDetailsFacade.createRank());
+        personDetails.setReligion(personDetailsFacade.createReligion());
+        personDetails.setJob(personDetailsFacade.createJob());
+        personDetails.setNation(personDetailsFacade.createNation());
         personDetails.setImageURL(null);
-        personDetailsRepository.save(personDetails);
-        return person;
+        return personDetails;
     }
 
     @Override
@@ -183,6 +185,11 @@ public class PersonServiceImpl implements PersonService {
         personRepository.save(newPerson);
         personDetailsRepository.save(newPersonDetails);
         return newPerson;
+    }
+
+    @Override
+    public Long countPeople() {
+        return personRepository.count();
     }
 
     //Helper Methods
