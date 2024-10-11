@@ -36,10 +36,6 @@ public class Timeline {
     @Column(name = "ending_year_abbreviation")
     private String endingYearAbbreviation;
 
-//    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-//            CascadeType.DETACH,
-//            CascadeType.MERGE,
-//            CascadeType.PERSIST})
-//    @JoinColumn(name = "timeline_id")
+//    @OneToMany(mappedBy = "timeline")
 //    private List<Event> events;
 }

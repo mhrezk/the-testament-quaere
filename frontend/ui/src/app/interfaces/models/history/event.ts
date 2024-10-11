@@ -5,5 +5,6 @@ export interface Event {
   eventMonth: number;
   eventYear: number;
   description: string;
+  yearAbbreviation: string;
   timeline: string;
 }

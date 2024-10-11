@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.78.0] 2024-10-08
+
+- Finalized event addition to a timeline
+- Added delete functionality for event node
+- Added edit functionality for individual event node
+- Added addition functionality to insert new nodes at particular indexes
+
 ## [0.77.0] 2024-10-08
 
 - Correctly displayed timelines onto frontend

@@ -12,6 +12,7 @@ public interface TimelineService {
     Collection<Timeline> getTimelinesByBeginningYearAndEndingYear(int beginningYear, int endingYear);
     Collection<Timeline> getTimelinesByEndingYearAbbreviation(String abbreviation);
     Timeline getTimelineById(Long id);
+//    Timeline getTimelineByEventIDs(Long... eventIDs);
     Timeline getTimelineByName(String name);
     Timeline saveTimeline(Timeline timeline);
     Boolean deleteTimelineByID(Long id);

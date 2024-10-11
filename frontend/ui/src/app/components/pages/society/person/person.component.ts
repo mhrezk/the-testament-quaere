@@ -146,6 +146,7 @@ export class PersonComponent implements OnInit {
           //       ],
           //     },
           //   });
+          this.people.push(result.data.dataSaved);
           this.isClicked = false;
           this.isTableShown = true;
           this.isLoading.next(false);
@@ -167,7 +168,6 @@ export class PersonComponent implements OnInit {
           });
         })
       );
-    window.location.reload();
   }
 
   deletePerson(person: Person) {

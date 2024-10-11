@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface TimelineRepository extends JpaRepository<Timeline, Long> {
     Timeline findByName(String name);
+//    Timeline findByEvents_Id(Long... eventIDs);
     List<Timeline> findByBeginningYearAndEndingYear(int beginningYear, int endingYear);
     List<Timeline> findByEndingYearAbbreviation(String endingYearAbbreviation);
     List<Timeline> findByBeginningYear(int beginningYear);

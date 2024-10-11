@@ -8,7 +8,7 @@ import {TimelineService} from "../../../../services/models/history/timeline/time
 import {catchError} from "rxjs/operators";
 import {Timeline} from "../../../../interfaces/models/history/timeline";
 import {NgForm} from "@angular/forms";
-import {Person} from "../../../../interfaces/models/society/person";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-timeline',
@@ -31,10 +31,13 @@ export class TimelineComponent implements OnInit {
   timelines: Timeline[];
   checkedTimelines: Timeline[];
 
+  isAddingEvent: boolean = false;
   isClicked: boolean = false;
   isUpdated: boolean = false;
   isTableShown: boolean = false;
   isMasterSelected: boolean = false;
+
+  timelineName: string;
 
   faTrash = faTrash;
   faEdit = faEdit;
@@ -62,7 +65,8 @@ export class TimelineComponent implements OnInit {
     // }
   ];
 
-  constructor(private timelineService: TimelineService) {
+  constructor(private timelineService: TimelineService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -124,6 +128,7 @@ export class TimelineComponent implements OnInit {
               ],
             },
           });
+          this.timelines.push(result.data.dataSaved);
           this.isClicked = false;
           this.isTableShown = true;
           this.isLoading.next(false);
@@ -144,7 +149,6 @@ export class TimelineComponent implements OnInit {
           });
         })
       );
-    window.location.reload();
   }
 
   modifyTimeline(timeline: Timeline) {
@@ -248,5 +252,11 @@ export class TimelineComponent implements OnInit {
 
   hasSelected() {
     return this.timelines.some(timeline => timeline.isSelected);
+  }
+
+  routeToEvents(name: string) {
+    this.timelineService.setName(name);
+    this.router.navigateByUrl(`/timeline-display/${name}`);
+    //this.router.navigate([`/person-details`, personID, firstName, secondName]);
   }
 }

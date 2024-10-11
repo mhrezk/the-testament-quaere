@@ -23,7 +23,7 @@ public interface EventService {
     Event getEventByIncidentName(String incidentName);
     Event getEventByEventDayAndEventMonthAndEventYear(int day, int month, int year);
     Boolean deleteEventByID(Long id);
-    Event saveEvent(Event event);
+    Event saveEvent(Event event, String timelineName);
     Event updateEvent(Long id, Event event);
     Event modifyEvent(Long id, Event event);
 }

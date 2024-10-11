@@ -5,7 +5,7 @@ export interface Timeline {
   endingYear?: number;
   beginningYearAbbreviation?: string;
   endingYearAbbreviation?: string;
-  // events: number[];
+  events?: number[];
   // events: Event[];
 
   isSelected?: boolean;

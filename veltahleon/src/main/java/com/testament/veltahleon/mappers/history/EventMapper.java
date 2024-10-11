@@ -27,6 +27,7 @@ public class EventMapper {
                 .eventMonth(event.getEventMonth())
                 .eventYear(event.getEventYear())
                 .timeline(event.getTimeline().getName())
+                .yearAbbreviation(event.getYearAbbreviation())
                 .description(event.getDescription())
                 .build();
     }
@@ -40,6 +41,7 @@ public class EventMapper {
         event.setEventYear(eventDTO.getEventYear());
         event.setTimeline(timelineService.getTimelineByName(eventDTO.getTimeline()));
         event.setDescription(eventDTO.getDescription());
+        event.setYearAbbreviation(eventDTO.getYearAbbreviation());
         return event;
     }
 }

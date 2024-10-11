@@ -1,5 +1,5 @@
 import {Component, computed, signal} from '@angular/core';
-import {EditorConfig, ST_BUTTONS, UNDO_BUTTON, SEPARATOR, BOLD_BUTTON, ITALIC_BUTTON} from 'ngx-simple-text-editor';
+//import {EditorConfig, ST_BUTTONS, UNDO_BUTTON, SEPARATOR, BOLD_BUTTON, ITALIC_BUTTON} from 'ngx-simple-text-editor';
 
 @Component({
   selector: 'app-root',

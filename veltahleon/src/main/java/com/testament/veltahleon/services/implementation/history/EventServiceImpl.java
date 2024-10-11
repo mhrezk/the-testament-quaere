@@ -1,7 +1,9 @@
 package com.testament.veltahleon.services.implementation.history;
 
 import com.testament.veltahleon.model.entities.history.Event;
+import com.testament.veltahleon.model.entities.history.Timeline;
 import com.testament.veltahleon.repositories.history.EventRepository;
+import com.testament.veltahleon.repositories.history.TimelineRepository;
 import com.testament.veltahleon.services.ifc.history.EventService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,9 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private final EventRepository eventRepository;
+
+    @Autowired
+    private final TimelineRepository timelineRepository;
 
     @Override
     public Collection<Event> getPaginatedEvents(int pageNumber, int numberOfRecords) {
@@ -114,7 +119,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event saveEvent(Event event) {
+    public Event saveEvent(Event event, String timelineName) {
+        Timeline timeline = timelineRepository.findByName(timelineName);
+        event.setTimeline(timeline);
         return eventRepository.save(event);
     }
 
@@ -142,6 +149,10 @@ public class EventServiceImpl implements EventService {
             newEvent.setEventYear(event.getEventYear());
         }
 
+        if(event.getTimeline() != null && newEvent.getTimeline() != event.getTimeline()) {
+            newEvent.setTimeline(event.getTimeline());
+        }
+
 //        if(event.getBeginningYear() != null && newEvent.getBeginningYear() != event.getBeginningYear()) {
 //            newEvent.setBeginningYear(event.getBeginningYear());
 //        }
@@ -161,6 +172,8 @@ public class EventServiceImpl implements EventService {
         newEvent.setEventDay(event.getEventDay());
         newEvent.setEventMonth(event.getEventMonth());
         newEvent.setEventYear(event.getEventYear());
+        newEvent.setTimeline(event.getTimeline());
+        newEvent.setYearAbbreviation(event.getYearAbbreviation());
         return eventRepository.save(newEvent);
     }
 }

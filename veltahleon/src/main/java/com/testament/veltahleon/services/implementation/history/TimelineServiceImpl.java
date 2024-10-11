@@ -56,6 +56,11 @@ public class TimelineServiceImpl implements TimelineService {
         return timelineRepository.findById(id).orElseThrow();
     }
 
+//    @Override
+//    public Timeline getTimelineByEventIDs(Long... eventIDs) {
+//        return timelineRepository.findByEvents_Id(eventIDs);
+//    }
+
     @Override
     public Timeline getTimelineByName(String name) {
         return timelineRepository.findByName(name);

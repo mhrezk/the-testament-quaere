@@ -68,10 +68,22 @@ public class TimelineController {
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("datumRetrieved", timelineService.getTimelineById(id)))
-                .message("All timelines retrieved!")
+                .message("Timeline retrieved!")
                 .build()
         );
     }
+
+//    @GetMapping("/timeline/events")
+//    public ResponseEntity<CustomResponse> getPaginatedTimelines(@RequestParam(value = "id") Long... eventIDs) {
+//        return ResponseEntity.ok(CustomResponse.builder()
+//                .timestamp(LocalDateTime.now())
+//                .status(HttpStatus.OK)
+//                .statusCode(HttpStatus.OK.value())
+//                .data(Map.of("datumRetrieved", timelineService.getTimelineByEventIDs(eventIDs)))
+//                .message("Timeline retrieved!")
+//                .build()
+//        );
+//    }
 
     @PostMapping("/save/timeline")
     public ResponseEntity<CustomResponse> saveTimeline(@RequestBody @Valid Timeline timeline) {

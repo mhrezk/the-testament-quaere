@@ -14,5 +14,6 @@ public class EventDTO {
     private Integer eventMonth;
     private Integer eventYear;
     private String timeline;
+    private String yearAbbreviation;
     private String description;
 }

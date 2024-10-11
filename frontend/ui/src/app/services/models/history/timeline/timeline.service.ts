@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../../../environments/environment";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
+import {BehaviorSubject, Observable, throwError} from "rxjs";
 import {CustomResponse} from "../../../../interfaces/custom-response";
 import {catchError, tap} from "rxjs/operators";
 import {Timeline} from "../../../../interfaces/models/history/timeline";
@@ -11,6 +11,9 @@ import {Timeline} from "../../../../interfaces/models/history/timeline";
 })
 export class TimelineService {
   private baseURL: string = `${environment.API_URL}/history`;
+
+  private name = new BehaviorSubject<string>("");
+  getName$ = this.name.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -48,6 +51,10 @@ export class TimelineService {
 
   public deleteTimeline(timelineID: number): Observable<CustomResponse> {
     return this.http.delete<CustomResponse>(`${this.baseURL}/delete/timeline/${timelineID}`);
+  }
+
+  setName(name: string) {
+    this.name.next(name);
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

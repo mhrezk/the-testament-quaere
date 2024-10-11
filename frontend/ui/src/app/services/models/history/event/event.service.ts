@@ -20,7 +20,17 @@ export class EventService {
       catchError(this.handleError)
     );
 
-  saveEvent$ = (event: Event) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/save/event`, event)
+  getEventsOfTimeline$ = (timeline: string) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/events/${timeline}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  getEventByID(id: number) {
+    return this.http.get<CustomResponse>(`${this.baseURL}/event/${id}`)
+  }
+
+  saveEvent$ = (event: Event, timeline: string) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/save/event/${timeline}`, event)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
@@ -31,6 +41,10 @@ export class EventService {
       tap(console.log),
       catchError(this.handleError)
     );
+
+  modifyEvent(eventID: number, event: Event) {
+    return this.http.put<CustomResponse>(`${this.baseURL}/modify/event/${eventID}`, event);
+  }
 
   deleteEvent$ = (eventID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/event/${eventID}`)
     .pipe(

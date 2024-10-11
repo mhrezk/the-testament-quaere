@@ -75,12 +75,12 @@
                   style="cursor: pointer"
                 ></td>
 <!--              <td><u (click)="routeToEvents(person.id, person.firstName, person.secondName)" style="cursor:pointer;">{{ person.firstName }} {{ person.secondName }}</u></td>-->
-              <td>{{ timeline.name }}</td>
-              <td>{{ timeline.beginningYear }} {{ timeline.yearAbbreviation }} <strong>---</strong> @if(timeline.endingYear === null || timeline.endingYear === 0) {
+              <td><u style="cursor:pointer;" (click)="routeToEvents(timeline.name)">{{ timeline.name }}</u></td>
+              <td class="date-container">{{ timeline.beginningYear }} {{ timeline.beginningYearAbbreviation }} <div class="hyphen"></div> @if(timeline.endingYear === null || timeline.endingYear === 0) {
                 Present
               } @else {
                 {{ timeline.endingYear }}
-              } {{ timeline.yearAbbreviation }}</td>
+              } {{ timeline.endingYearAbbreviation }}</td>
               <td>
                 <span>
                   <fa-icon [icon]="faEdit"
@@ -134,15 +134,17 @@
             <label>Beginning Year</label>
             <input type="number" min="1" ngModel name="beginningYear" class="form-control" required>
           </div>
-          <div class="row">
+          <div class="form-group">
+            <label>Beginning Year Abbreviation</label>
+            <input type="text" ngModel name="beginningYearAbbreviation" class="form-control">
           </div>
           <div class="form-group">
             <label>Ending Year</label>
             <input type="number" min="0" ngModel name="endingYear" class="form-control">
           </div>
           <div class="form-group">
-            <label>Year Abbreviation</label>
-            <input type="text" ngModel name="yearAbbreviation" class="form-control">
+            <label>Ending Year Abbreviation</label>
+            <input type="text" ngModel name="endingYearAbbreviation" class="form-control">
           </div>
         </div>
         <div class="modal-footer">
@@ -166,7 +168,7 @@
     <div class="modal-content">
       <form (ngSubmit)="modifyTimeline(selectedTimeline)">
         <div class="modal-header">
-          <h4 class="modal-title">Edit Person</h4>
+          <h4 class="modal-title">Edit Timeline</h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
@@ -178,12 +180,16 @@
             <input type="number" min="1" [(ngModel)]="selectedTimeline.beginningYear" name="beginningYear" class="form-control" required>
           </div>
           <div class="form-group">
+            <label>Beginning Year Abbreviation</label>
+            <input type="text" [(ngModel)]="selectedTimeline.beginningYearAbbreviation" name="beginningYearAbbreviation" class="form-control">
+          </div>
+          <div class="form-group">
             <label>Ending Year</label>
             <input type="number" min="0" [(ngModel)]="selectedTimeline.endingYear" name="endingYear" class="form-control">
           </div>
           <div class="form-group">
-            <label>Year Abbreviation</label>
-            <input type="text" [(ngModel)]="selectedTimeline.yearAbbreviation" name="yearAbbreviation" class="form-control">
+            <label>Ending Year Abbreviation</label>
+            <input type="text" [(ngModel)]="selectedTimeline.endingYearAbbreviation" name="endingYearAbbreviation" class="form-control">
           </div>
         </div>
         <div class="modal-footer">
@@ -199,82 +205,3 @@
     </div>
   </div>
 </div>
-
-<!--<div class="container">-->
-<!--  <div class="timeline">-->
-<!--    <ul>-->
-<!--      <li>-->
-<!--        <div class="timeline-content">-->
-<!--          <h3 class="date">20th may, 2010</h3>-->
-<!--          <h1>Heading 1</h1>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
-<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <div class="timeline-content">-->
-<!--          <h3 class="date">20th may, 2010</h3>-->
-<!--          <h1>Heading 2</h1>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
-<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <div class="timeline-content">-->
-<!--          <h3 class="date">20th may, 2010</h3>-->
-<!--          <h1>Heading 3</h1>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
-<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <div class="timeline-content">-->
-<!--          <h3 class="date">20th may, 2010</h3>-->
-<!--          <h1>Heading 4</h1>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
-<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <div class="timeline-content">-->
-<!--          <h3 class="date">20th may, 2010</h3>-->
-<!--          <h1>Heading 4</h1>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
-<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <div class="timeline-content">-->
-<!--          <h3 class="date">20th may, 2010</h3>-->
-<!--          <h1>Heading 4</h1>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
-<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <div class="timeline-content">-->
-<!--          <h3 class="date">20th may, 2010</h3>-->
-<!--          <h1>Heading 4</h1>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
-<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <div class="timeline-content">-->
-<!--          <h3 class="date">20th may, 2010</h3>-->
-<!--          <h1>Heading 4</h1>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
-<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <div class="timeline-content">-->
-<!--          <h3 class="date">20th may, 2010</h3>-->
-<!--          <h1>Heading 4</h1>-->
-<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
-<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </div>-->
-<!--</div>-->

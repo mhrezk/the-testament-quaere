@@ -1,1 +1,320 @@
-<p>timeline-display works!</p>
+<!--<div class="container">-->
+<!--  <div class="timeline">-->
+<!--    <div class="row">-->
+<!--      <div class="col-sm-6">-->
+<!--      </div>-->
+<!--      <div class="col-sm-6">-->
+<!--        <a style="width: 200px" class="btn btn-success">-->
+<!--          <i class="material-icons">&#xE147;</i>-->
+<!--          <span>Add Event</span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">-->
+<!--      <ng-container *ngSwitchCase="DATA_STATE.LOADING">-->
+<!--        <div class="col-md-12 single-note-item text-center">-->
+<!--          <div class="spinner-border text-info" role="status"></div>-->
+<!--        </div>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngSwitchCase="DATA_STATE.LOADED">-->
+<!--        <ul *ngFor="let event of appState.appData?.data.dataRetrieved; let i = index;">-->
+<!--          <li>-->
+<!--            <div class="timeline-content">-->
+<!--              <h3 class="date">{{ event.eventDay }}/{{ event.eventMonth }}/{{ event.eventYear }}</h3>-->
+<!--              <h1>{{ event.incident }}</h1>-->
+<!--              <p>{{ event.description }}</p>-->
+<!--            </div>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngSwitchCase="DATA_STATE.ERROR">-->
+<!--        <div style="background-color: indianred">{{ appState.error }}</div>-->
+<!--      </ng-container>-->
+<!--    </ng-container>-->
+<!--&lt;!&ndash;    <ul>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--        <div class="timeline-content">-->
+<!--          <h3 class="date">20th may, 2010</h3>-->
+<!--          <h1>Heading 1</h1>-->
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut-->
+<!--            eos placeat laborum, quibusdam exercitationem labore.</p>-->
+<!--        </div>-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="timeline-content">&ndash;&gt;-->
+<!--&lt;!&ndash;          <h3 class="date">20th may, 2010</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;          <h1>Heading 2</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut&ndash;&gt;-->
+<!--&lt;!&ndash;            eos placeat laborum, quibusdam exercitationem labore.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="timeline-content">&ndash;&gt;-->
+<!--&lt;!&ndash;          <h3 class="date">20th may, 2010</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;          <h1>Heading 3</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut&ndash;&gt;-->
+<!--&lt;!&ndash;            eos placeat laborum, quibusdam exercitationem labore.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="timeline-content">&ndash;&gt;-->
+<!--&lt;!&ndash;          <h3 class="date">20th may, 2010</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;          <h1>Heading 4</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut&ndash;&gt;-->
+<!--&lt;!&ndash;            eos placeat laborum, quibusdam exercitationem labore.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="timeline-content">&ndash;&gt;-->
+<!--&lt;!&ndash;          <h3 class="date">20th may, 2010</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;          <h1>Heading 4</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut&ndash;&gt;-->
+<!--&lt;!&ndash;            eos placeat laborum, quibusdam exercitationem labore.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="timeline-content">&ndash;&gt;-->
+<!--&lt;!&ndash;          <h3 class="date">20th may, 2010</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;          <h1>Heading 4</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut&ndash;&gt;-->
+<!--&lt;!&ndash;            eos placeat laborum, quibusdam exercitationem labore.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="timeline-content">&ndash;&gt;-->
+<!--&lt;!&ndash;          <h3 class="date">20th may, 2010</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;          <h1>Heading 4</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut&ndash;&gt;-->
+<!--&lt;!&ndash;            eos placeat laborum, quibusdam exercitationem labore.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="timeline-content">&ndash;&gt;-->
+<!--&lt;!&ndash;          <h3 class="date">20th may, 2010</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;          <h1>Heading 4</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut&ndash;&gt;-->
+<!--&lt;!&ndash;            eos placeat laborum, quibusdam exercitationem labore.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--&lt;!&ndash;      <li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="timeline-content">&ndash;&gt;-->
+<!--&lt;!&ndash;          <h3 class="date">20th may, 2010</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;          <h1>Heading 4</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut&ndash;&gt;-->
+<!--&lt;!&ndash;            eos placeat laborum, quibusdam exercitationem labore.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--&lt;!&ndash;    </ul>&ndash;&gt;-->
+<!--  </div>-->
+<!--</div>-->
+<ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+  <ng-container *ngSwitchCase="DATA_STATE.LOADING">
+    <div class="col-md-12 single-note-item text-center">
+      <div class="spinner-border text-info" role="status"></div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+    <h1>Timeline: <a [routerLink]="'/timelines'">{{ timeline }}</a>
+      <fa-icon [icon]="faPlusCircle"
+               [style.color]="'darkgreen'"
+               [title]="'Add'"
+               (click)="isClicked = true; isEventShown = false;"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+    </h1>
+    @if(appState.appData?.data.dataRetrieved.length <= 0) {
+      <h1>No data present!</h1>
+    } @else {
+      <div *ngIf="isEventShown" class="container">
+        <div class="timeline">
+          <ul>
+            <li *ngFor="let event of appState.appData?.data.dataRetrieved; let i = index">
+              <div class="timeline-content">
+                @if((event.eventDay === 0 || event.eventDay === null) || (event.eventMonth === 0 || event.eventMonth === null)) {
+                  <h2 style="font-size: 25px" class="date">{{ event.eventYear }} {{ event.yearAbbreviation}}</h2>
+                } @else {
+                  <h2 style="font-size: 25px" class="date">{{ event.eventDay }}/{{ event.eventMonth }}/{{ event.eventYear }} {{ event.yearAbbreviation}}</h2>
+                }
+                <h1>
+                  {{ event.incident }}
+                  <fa-icon [icon]="faTrash"
+                           [style.color]="'white'"
+                           style="float: right"
+                           [title]="'Delete'"
+                           (click)="deleteEvent(event)"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'white'"
+                           style="float: right"
+                           [title]="'Edit'"
+                           (click)="isUpdated = true; getEventByID(event.id); isEventShown = false;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  <fa-icon [icon]="faPlusCircle"
+                           [style.color]="'white'"
+                           style="float: right"
+                           [title]="'Add'"
+                           (click)="isNodeAdded = true; isEventShown = false; specifiedIndex = i + 1;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                </h1>
+                <p>{{ event.description }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    }
+  </ng-container>
+  <ng-container *ngSwitchCase="DATA_STATE.ERROR">
+    <div [hidden]="isClicked || isNodeAdded" style="background-color: indianred">{{ appState.error }}</div>
+  </ng-container>
+</ng-container>
+
+<!-- Add Event -->
+<div *ngIf="isClicked" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="eventModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #eventForm="ngForm" (ngSubmit)="saveEvent(eventForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Event</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Incident</label>
+            <input type="text" ngModel name="incident" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Event Day</label>
+            <input type="number" min="0" ngModel name="eventDay" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Event Month</label>
+            <input type="number" min="0" ngModel name="eventMonth" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Event Year</label>
+            <input type="number" min="1" ngModel name="eventYear" class="form-control" required>
+            <span class="mat-body-2 text-muted">Required</span>
+          </div>
+          <div class="form-group">
+            <label>Year Abbreviation</label>
+            <input type="text" ngModel name="yearAbbreviation" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea [placeholder]="'Enter event description'" ngModel name="description" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="isClicked = false; isEventShown = true">Close</button>
+          <button type="submit" [disabled]="(isLoading$ | async) || eventForm.invalid"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Event -->
+<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="eventModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="modifyEvent(selectedEvent)">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Event</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Incident</label>
+            <input type="text" [(ngModel)]="selectedEvent.incident" name="incident" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Event Day</label>
+            <input type="number" min="0" [(ngModel)]="selectedEvent.eventDay" name="eventDay" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Event Month</label>
+            <input type="text" min="0" [(ngModel)]="selectedEvent.eventMonth" name="eventMonth" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Event Year</label>
+            <input type="number" min="1" [(ngModel)]="selectedEvent.eventYear" name="eventYear" class="form-control" required>
+            <span class="mat-body-2 text-muted">Required</span>
+          </div>
+          <div class="form-group">
+            <label>Year Abbreviation</label>
+            <input type="text" [(ngModel)]="selectedEvent.yearAbbreviation" name="yearAbbreviation" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea [(ngModel)]="selectedEvent.description" name="description" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="isUpdated = false; isEventShown = true;">Close</button>
+          <button type="submit" [disabled]="isLoading$ | async"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Updating...</span>
+            <span *ngIf="!(isLoading$ | async)">Update</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Add Event at Index-->
+<div *ngIf="isNodeAdded" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="eventModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #eventForm="ngForm" (ngSubmit)="saveEventAtParticularIndex(eventForm, specifiedIndex)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Event</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Incident</label>
+            <input type="text" ngModel name="incident" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Event Day</label>
+            <input type="number" min="0" ngModel name="eventDay" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Event Month</label>
+            <input type="number" min="0" ngModel name="eventMonth" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Event Year</label>
+            <input type="number" min="1" ngModel name="eventYear" class="form-control" required>
+            <span class="mat-body-2 text-muted">Required</span>
+          </div>
+          <div class="form-group">
+            <label>Year Abbreviation</label>
+            <input type="text" ngModel name="yearAbbreviation" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea [placeholder]="'Enter event description'" ngModel name="description" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="isNodeAdded = false; isEventShown = true">Close</button>
+          <button type="submit" [disabled]="(isLoading$ | async) || eventForm.invalid"
+                  class="btn btn-success">
+            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

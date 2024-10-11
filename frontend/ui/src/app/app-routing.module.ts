@@ -12,6 +12,9 @@ import {OrganizationComponent} from "./components/pages/politics/organization/or
 import {NationComponent} from "./components/pages/places/nation/nation.component";
 import {PedigreeTreeComponent} from "./components/pages/pedigree-tree/pedigree-tree.component";
 import {PersonDetailsComponent} from "./components/pages/society/person-details/person-details.component";
+import {
+  TimelineDisplayComponent
+} from "./components/pages/history/timeline/timeline-display/timeline-display.component";
 
 const routes: Routes = [
   {
@@ -50,6 +53,9 @@ const routes: Routes = [
   {
     path: "timelines",
     component: TimelineComponent
+  },{
+    path: "timeline-display/:name",
+    component: TimelineDisplayComponent
   },
   {
     path: "family-tree",

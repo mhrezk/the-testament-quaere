@@ -31,6 +31,9 @@ public class Event {
     @Column(name = "event_year")
     private Integer eventYear;
 
+    @Column(name = "year_abbreviation")
+    private String yearAbbreviation;
+
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,
 //            CascadeType.MERGE,
@@ -52,6 +55,6 @@ public class Event {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "timeline_id")
     private Timeline timeline;
 }
