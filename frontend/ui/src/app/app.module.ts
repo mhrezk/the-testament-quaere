@@ -25,8 +25,8 @@ import { OrganizationChartModule }
 
 import { NgxSimpleTextEditorModule } from 'ngx-simple-text-editor';
 import {NgxPaginationModule} from "ngx-pagination";
+import { QuillModule } from "ngx-quill";
 //import { PaginationModule } from 'ngx-pagination';
-//import { QuillModule } from "ngx-quill";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,6 +54,7 @@ import { FilterPipe } from './pipes/filter/filter.pipe';
 import { FamilyNgTreeComponent } from './components/pages/pedigree-tree/family-ng-tree/family-ng-tree.component';
 import { PersonDetailsEditComponent } from './components/pages/society/person-details/person-details-edit/person-details-edit.component';
 import { TimelineDisplayComponent } from './components/pages/history/timeline/timeline-display/timeline-display.component';
+import { PersonDetailsBiographyComponent } from './components/pages/society/person-details/person-details-biography/person-details-biography.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { TimelineDisplayComponent } from './components/pages/history/timeline/ti
     FilterPipe,
     FamilyNgTreeComponent,
     PersonDetailsEditComponent,
-    TimelineDisplayComponent
+    TimelineDisplayComponent,
+    PersonDetailsBiographyComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +112,8 @@ import { TimelineDisplayComponent } from './components/pages/history/timeline/ti
     MatCardTitle,
     MatCard,
     MatOption,
-    MatSelect
+    MatSelect,
+    QuillModule.forRoot()
   ],
   providers: [
     provideClientHydration(),

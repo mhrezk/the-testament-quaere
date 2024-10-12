@@ -1,13 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NgForm} from "@angular/forms";
 import {PersonDetailsService} from "../../../../../services/models/society/person-details/person-details.service";
 import {PersonDetails} from "../../../../../interfaces/models/society/person-details";
 import {Router} from "@angular/router";
-import {PersonService} from "../../../../../services/models/society/person/person.service";
 import {RaceService} from "../../../../../services/models/history/race/race.service";
 import {Race} from "../../../../../interfaces/models/history/race";
-import {firstValueFrom} from "rxjs";
+//import {firstValueFrom} from "rxjs";
 import {Lineage} from "../../../../../enums/lineage";
+//import DOMPurify from 'dompurify';
 
 @Component({
   selector: 'app-person-details-edit',
@@ -15,6 +14,9 @@ import {Lineage} from "../../../../../enums/lineage";
   styleUrl: './person-details-edit.component.css'
 })
 export class PersonDetailsEditComponent implements OnInit {
+  protected readonly Object = Object;
+  protected readonly Lineage = Lineage;
+
   races: Race[];
   selectedRace: string;
   updatedPersonDetails: PersonDetails;
@@ -44,6 +46,7 @@ export class PersonDetailsEditComponent implements OnInit {
   onSubmit(personDetails: PersonDetails) {
     this.personDetailsService.modifyPersonDetails(this.personDetails.id, personDetails).subscribe();
     console.log(this.personDetails);
+    console.log(this.personDetails.biography);
     //this.updatedPersonDetails.emit(personDetailsForm.value);
     this.onClose(false);
     this.router.navigateByUrl(`/person-details/${this.personDetails.id}/${personDetails.firstName}/${personDetails.secondName}`);
@@ -67,7 +70,4 @@ export class PersonDetailsEditComponent implements OnInit {
       result => this.races = result.data.dataRetrieved
     )
   }
-
-  protected readonly Object = Object;
-  protected readonly Lineage = Lineage;
 }

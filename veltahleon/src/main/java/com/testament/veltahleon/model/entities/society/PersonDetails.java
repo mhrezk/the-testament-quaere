@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.society;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.enumerations.ClosedAnswer;
 import com.testament.veltahleon.enumerations.Lineage;
 import com.testament.veltahleon.model.entities.calendar.Year;
@@ -30,6 +31,7 @@ public class PersonDetails {
             CascadeType.REMOVE
     })
     @JoinColumn(name = "person_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Person person;
 
     @Column(name = "birth_day")
@@ -61,6 +63,7 @@ public class PersonDetails {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "religion_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Religion religion;
 
 //    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
@@ -89,6 +92,7 @@ public class PersonDetails {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "nation_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Nation nation;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
@@ -96,6 +100,7 @@ public class PersonDetails {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "job_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Job job;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
@@ -103,6 +108,7 @@ public class PersonDetails {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "rank_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Rank rank;
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
@@ -126,6 +132,7 @@ public class PersonDetails {
     private Lineage lineage;
 
     @Column(name = "biography", columnDefinition = "longtext")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private String biography;
 
     @Column(name = "image_URL")

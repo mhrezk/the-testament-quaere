@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.79.0] 2024-10-08
+
+- Added text editor for biography
+- Biography can now be edited separately through PatchMapping
+
 ## [0.78.0] 2024-10-08
 
 - Finalized event addition to a timeline

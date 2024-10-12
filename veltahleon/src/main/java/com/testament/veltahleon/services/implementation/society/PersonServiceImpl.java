@@ -106,6 +106,7 @@ public class PersonServiceImpl implements PersonService {
         personDetails.setReligion(personDetailsFacade.createReligion());
         personDetails.setJob(personDetailsFacade.createJob());
         personDetails.setNation(personDetailsFacade.createNation());
+        personDetails.setBiography(null);
         personDetails.setImageURL(null);
         return personDetails;
     }
@@ -170,6 +171,9 @@ public class PersonServiceImpl implements PersonService {
 //            newPerson.setIsBastard(person.getIsBastard());
 //        }
 
+        PersonDetails newPersonDetails = personDetailsRepository.findById(id).orElseThrow();
+        newPersonDetails.setPerson(newPerson);
+        personDetailsRepository.save(newPersonDetails);
         return personRepository.save(newPerson);
     }
 

@@ -13,13 +13,13 @@
       <span style="float: right">
                   <fa-icon [icon]="faEdit"
                            [style.color]="'blue'"
-                           [title]="'Edit'"
+                           [title]="'Edit Personal Details'"
                            (click)="isEditing = true;"
                            [style.cursor]="'pointer'">
                   </fa-icon>
                   &nbsp;
                   <fa-icon [icon]="faTrash"
-                           [title]="'Delete'"
+                           [title]="'Delete Person'"
                            (click)="deletePersonDetails(personDetails.value.data.datumRetrieved?.id)"
                            style="cursor: pointer; color: firebrick">
                   </fa-icon>
@@ -89,12 +89,30 @@
       <strong>Lineage:</strong> {{ personDetails.value.data?.datumRetrieved?.lineage }}
     </div>
 
-    <div class="detail-item">
-      <strong>Biography:</strong> {{ personDetails.value.data?.datumRetrieved?.biography || 'No biography provided' }}
-    </div>
+<!--    <div class="detail-item">-->
+<!--      <strong>Biography:</strong> {{ personDetails.value.data?.datumRetrieved?.biography || 'No biography provided' }}-->
+<!--      <button (click)="isBiography = !isBiography" class="stylish-button" style="text-align: center; background-color: cornflowerblue;-->
+<!--      color: lightyellow;">Biography</button>-->
+<!--    </div>-->
   </div>
 </div>
 
 @if (isEditing) {
   <app-person-details-edit (isEditing)="closeEditing($event)" [personDetails]="personDetails.value.data?.datumRetrieved"></app-person-details-edit>
+}
+
+@if (isBiography) {
+  <app-person-details-biography (isBiography)="closeBiographyEditing($event)" [personDetails]="personDetails.value.data?.datumRetrieved"></app-person-details-biography>
+} @else {
+  <h2>
+    Biography
+    <fa-icon [icon]="faEdit"
+             [style.color]="'cornflowerblue'"
+             [title]="'Edit Biography'"
+             (click)="isBiography = !isBiography;"
+             [style.cursor]="'pointer'">
+    </fa-icon>
+  </h2>
+  <hr>
+  <div [innerHTML]="personDetails.value.data?.datumRetrieved?.biography"></div>
 }

@@ -36,6 +36,93 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
     }
 
     @Override
+    public PersonDetails updatePersonDetails(Long id, PersonDetails personDetails) {
+        PersonDetails newPersonDetails = personDetailsRepository.findById(id).orElseThrow();
+        Person newPerson = personRepository.findById(id).orElseThrow();
+
+        if(personDetails.getPerson().getFirstName() != null && newPerson.getFirstName() != personDetails.getPerson().getFirstName()) {
+            newPerson.setFirstName(personDetails.getPerson().getFirstName());
+        }
+
+        if(personDetails.getPerson().getSecondName() != null && newPerson.getSecondName() != personDetails.getPerson().getSecondName()) {
+            newPerson.setSecondName(personDetails.getPerson().getSecondName());
+        }
+
+        if(personDetails.getPerson().getGender() != null && newPerson.getGender() != personDetails.getPerson().getGender()) {
+            newPerson.setGender(personDetails.getPerson().getGender());
+        }
+
+        if(personDetails.getPerson().getRaceName() != null && newPerson.getRaceName() != personDetails.getPerson().getRaceName()) {
+            newPerson.setRaceName(personDetails.getPerson().getRaceName());
+        }
+
+        newPersonDetails.setPerson(newPerson);
+
+        if(personDetails.getBiography() != null && newPersonDetails.getBiography() != personDetails.getBiography()) {
+            newPersonDetails.setBiography(personDetails.getBiography());
+        }
+
+        if(personDetails.getBirthDay() != null && newPersonDetails.getBirthDay() != personDetails.getBirthDay()) {
+            newPersonDetails.setBirthDay(personDetails.getBirthDay());
+        }
+
+        if(personDetails.getBirthMonth() != null && newPersonDetails.getBirthMonth() != personDetails.getBirthMonth()) {
+            newPersonDetails.setBirthMonth(personDetails.getBirthMonth());
+        }
+
+        if(personDetails.getBirthYear() != null && newPersonDetails.getBirthYear() != personDetails.getBirthYear()) {
+            newPersonDetails.setBirthYear(personDetails.getBirthYear());
+        }
+
+        if(personDetails.getDeathDay() != null && newPersonDetails.getDeathDay() != personDetails.getDeathDay()) {
+            newPersonDetails.setDeathDay(personDetails.getDeathDay());
+        }
+
+        if(personDetails.getDeathMonth() != null && newPersonDetails.getDeathMonth() != personDetails.getDeathMonth()) {
+            newPersonDetails.setDeathMonth(personDetails.getDeathMonth());
+        }
+
+        if(personDetails.getDeathYear() != null && newPersonDetails.getDeathYear() != personDetails.getDeathYear()) {
+            newPersonDetails.setDeathYear(personDetails.getDeathYear());
+        }
+
+        if(personDetails.getJob() != null && newPersonDetails.getJob() != personDetails.getJob()) {
+            newPersonDetails.setJob(personDetails.getJob());
+        }
+
+        if(personDetails.getEpithet() != null && newPersonDetails.getEpithet() != personDetails.getEpithet()) {
+            newPersonDetails.setEpithet(personDetails.getEpithet());
+        }
+
+        if(personDetails.getLineage() != null && newPersonDetails.getLineage() != personDetails.getLineage()) {
+            newPersonDetails.setLineage(personDetails.getLineage());
+        }
+
+        if(personDetails.getRank() != null && newPersonDetails.getRank() != personDetails.getRank()) {
+            newPersonDetails.setRank(personDetails.getRank());
+        }
+
+        if(personDetails.getReligion() != null && newPersonDetails.getReligion() != personDetails.getReligion()) {
+            newPersonDetails.setReligion(personDetails.getReligion());
+        }
+
+        if(personDetails.getNation() != null && newPersonDetails.getNation() != personDetails.getNation()) {
+            newPersonDetails.setNation(personDetails.getNation());
+        }
+
+        if(personDetails.getImageURL() != null && newPersonDetails.getImageURL() != personDetails.getImageURL()) {
+            newPersonDetails.setImageURL(personDetails.getImageURL());
+        }
+
+        if(personDetails.getYearAbbreviation() != null && newPersonDetails.getYearAbbreviation() != personDetails.getYearAbbreviation()) {
+            newPersonDetails.setYearAbbreviation(personDetails.getYearAbbreviation());
+        }
+
+        return personDetailsRepository.save(newPersonDetails);
+    }
+
+
+    @Override
     public PersonDetails modifyPersonDetails(Long id, PersonDetails personDetails) {
         PersonDetails newPersonDetails = personDetailsRepository.findById(id).orElseThrow();
         Person newPerson = personRepository.findById(id).orElseThrow();

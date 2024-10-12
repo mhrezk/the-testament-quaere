@@ -51,6 +51,20 @@ public class PersonDetailsController {
         );
     }
 
+    @PatchMapping("/update/personDetails/{id}")
+    public ResponseEntity<CustomResponse> updatePersonDetails(@PathVariable Long id, @RequestBody PersonDetailsDTO personDetailsDTO) {
+        PersonDetails personDetails = personDetailsMapper.convertToEntity(personDetailsDTO);
+        //PersonDetailsDTO updatedPersonDetailsDTO = personDetailsMapper.convertToDTO(personDetailsService.modifyPersonDetails(id, personDetails));
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataUpdated", personDetailsService.updatePersonDetails(id, personDetails)))
+                .message("Person details updated!")
+                .build()
+        );
+    }
+
     @PutMapping("/modify/personDetails/{id}")
     public ResponseEntity<CustomResponse> modifyPersonDetails(@PathVariable Long id, @RequestBody PersonDetailsDTO personDetailsDTO) {
         PersonDetails personDetails = personDetailsMapper.convertToEntity(personDetailsDTO);

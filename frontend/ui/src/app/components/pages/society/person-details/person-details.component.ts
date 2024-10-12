@@ -22,11 +22,15 @@ import {Lineage} from "../../../../enums/lineage";
 })
 export class PersonDetailsComponent implements OnInit {
   isEditing: boolean = false;
+  isBiography: boolean = false;
+
   faTrash = faTrash;
   faEdit = faEdit;
+
   firstName: string;
   secondName: string;
   personID: number;
+
   selectedPersonDetails: PersonDetails;
   personDetails = new BehaviorSubject<CustomResponse>(null);
   lineage: Lineage;
@@ -65,6 +69,10 @@ export class PersonDetailsComponent implements OnInit {
 
   closeEditing(editable: boolean) {
     this.isEditing = editable;
+  }
+
+  closeBiographyEditing(editable: boolean) {
+    this.isBiography = editable;
   }
 
   onFinishedEditing(personDetails: PersonDetails) {

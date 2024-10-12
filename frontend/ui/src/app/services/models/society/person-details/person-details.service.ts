@@ -28,11 +28,15 @@ export class PersonDetailsService {
     return this.http.delete<CustomResponse>(`${this.baseURL}/delete/personDetails/${id}`);
   }
 
-  modifyPersonDetails$ = (personDetailsID: number, personDetails: PersonDetails) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/personDetails/${personDetailsID}`, personDetails)
+  modifyPersonDetails$ = (personDetailsID: number, personDetails: PersonDetails) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/personDetails/${personDetailsID}`, personDetails)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
+
+  updatePersonDetails(personDetailsID: number, personDetails: PersonDetails) {
+    return this.http.patch<CustomResponse>(`${this.baseURL}/update/personDetails/${personDetailsID}`, personDetails)
+  }
 
   public modifyPersonDetails(id: number, personDetails: PersonDetails): Observable<CustomResponse> {
     return this.http.put<CustomResponse>(`${this.baseURL}/modify/personDetails/${id}`, personDetails);

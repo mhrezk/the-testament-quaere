@@ -15,6 +15,9 @@ import {PersonDetailsComponent} from "./components/pages/society/person-details/
 import {
   TimelineDisplayComponent
 } from "./components/pages/history/timeline/timeline-display/timeline-display.component";
+import {
+  PersonDetailsBiographyComponent
+} from "./components/pages/society/person-details/person-details-biography/person-details-biography.component";
 
 const routes: Routes = [
   {
