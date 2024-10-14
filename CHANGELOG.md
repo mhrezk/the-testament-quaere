@@ -1,11 +1,18 @@
 # Change Log
 
-## [0.79.0] 2024-10-08
+## [0.80.0] 2024-10-12
+
+- Adjusted module for family trees (Balkan)
+- Added marital status for person details
+- Added default image for created person
+- Added API endpoint for person image
+
+## [0.79.0] 2024-10-10
 
 - Added text editor for biography
 - Biography can now be edited separately through PatchMapping
 
-## [0.78.0] 2024-10-08
+## [0.78.0] 2024-10-10
 
 - Finalized event addition to a timeline
 - Added delete functionality for event node

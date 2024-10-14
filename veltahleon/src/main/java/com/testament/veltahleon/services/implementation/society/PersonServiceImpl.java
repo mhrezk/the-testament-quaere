@@ -2,12 +2,9 @@ package com.testament.veltahleon.services.implementation.society;
 
 
 import com.testament.veltahleon.enumerations.Lineage;
+import com.testament.veltahleon.enumerations.MaritalStatus;
 import com.testament.veltahleon.facades.society.PersonDetailsFacade;
-import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.history.Race;
-import com.testament.veltahleon.model.entities.places.Nation;
-import com.testament.veltahleon.model.entities.politics.Rank;
-import com.testament.veltahleon.model.entities.society.Job;
 import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.model.entities.society.PersonDetails;
 import com.testament.veltahleon.repositories.society.PersonDetailsRepository;
@@ -19,9 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -96,6 +93,7 @@ public class PersonServiceImpl implements PersonService {
         PersonDetails personDetails = new PersonDetails();
         personDetails.setYearAbbreviation(null);
         personDetails.setLineage(Lineage.NONE);
+        personDetails.setMaritalStatus(MaritalStatus.SINGLE);
         personDetails.setBirthDay(0);
         personDetails.setBirthMonth(0);
         personDetails.setBirthYear(0);
@@ -107,8 +105,12 @@ public class PersonServiceImpl implements PersonService {
         personDetails.setJob(personDetailsFacade.createJob());
         personDetails.setNation(personDetailsFacade.createNation());
         personDetails.setBiography(null);
-        personDetails.setImageURL(null);
+        personDetails.setImageURL(defaultImageURL("default.png"));
         return personDetails;
+    }
+
+    private String defaultImageURL(String imageName) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/society/personDetails/images/" + imageName).toUriString();
     }
 
     @Override

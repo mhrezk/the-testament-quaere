@@ -1,0 +1,55 @@
+<!--<div class="family-tree">-->
+<!--  &lt;!&ndash; Button to create root member &ndash;&gt;-->
+<!--  <button *ngIf="!rootMember" (click)="toggleRootForm()">Create Family Tree</button>-->
+
+<!--  &lt;!&ndash; Form for creating root member &ndash;&gt;-->
+<!--  <form *ngIf="showRootForm" (ngSubmit)="createRootMember(rootMemberData)">-->
+<!--    <input [(ngModel)]="rootMemberData.name" name="rootName" placeholder="Name" required />-->
+<!--    <input [(ngModel)]="rootMemberData.born" name="rootBorn" type="number" placeholder="Born Year" required />-->
+<!--    <select [(ngModel)]="rootMemberData.gender" name="rootGender" required>-->
+<!--      <option value="">Select Gender</option>-->
+<!--      <option value="male">Male</option>-->
+<!--      <option value="female">Female</option>-->
+<!--    </select>-->
+<!--    <button type="submit">Submit</button>-->
+<!--    <button type="button" (click)="toggleRootForm()">Cancel</button>-->
+<!--  </form>-->
+
+<!--  &lt;!&ndash; Display the root member &ndash;&gt;-->
+<!--  <div *ngIf="rootMember" class="member" [ngStyle]="{'background-color': rootMember.gender === 'male' ? 'lightblue' : 'lightpink'}">-->
+<!--    <h3>{{ rootMember.name }} ({{ rootMember.born }})</h3>-->
+<!--    <button (click)="toggleRootForm()">Add Parent</button>-->
+<!--    <button (click)="toggleRootForm()">Add Spouse</button>-->
+<!--    <button (click)="toggleRootForm()">Add Child</button>-->
+<!--    <button (click)="deleteRootMember()">Delete</button>-->
+
+<!--    &lt;!&ndash; Display parents, spouses, and children &ndash;&gt;-->
+<!--    <div *ngFor="let parent of rootMember.parents">-->
+<!--      <app-family-member-node [member]="parent" (edit)="editMember(parent, $event)" (delete)="deleteMember(parent)"></app-family-member-node>-->
+<!--    </div>-->
+<!--    <div *ngFor="let spouse of rootMember.spouses">-->
+<!--      <app-family-member-node [member]="spouse" (edit)="editMember(spouse, $event)" (delete)="deleteMember(spouse)"></app-family-member-node>-->
+<!--    </div>-->
+<!--    <div *ngFor="let child of rootMember.children">-->
+<!--      <app-family-member-node [member]="child" (edit)="editMember(child, $event)" (delete)="deleteMember(child)"></app-family-member-node>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="family-tree-container">
+  <button *ngIf="!rootMember" (click)="openForm('root')">Create Family Tree</button>
+  <app-family-member-form *ngIf="showForm"
+                   [formType]="formType"
+                   [member]="selectedMember"
+                   (formSubmit)="handleFormSubmit($event)">
+  </app-family-member-form>
+  <div *ngIf="rootMember" class="tree">
+    <app-family-member-node [member]="rootMember"
+                       (addParent)="openForm('parent', $event)"
+                       (addSpouse)="openForm('spouse', $event)"
+                       (addChild)="openForm('child', $event)"
+                       (editMember)="openForm('edit', $event)"
+                       (deleteMember)="deleteMember($event)">
+    </app-family-member-node>
+  </div>
+</div>

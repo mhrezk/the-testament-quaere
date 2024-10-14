@@ -45,16 +45,17 @@ import { CustomFamilyTreeComponent } from './components/custom/custom-family-tre
 import { FamilyTreeFormComponent } from './components/custom/custom-family-tree/family-tree-form/family-tree-form.component';
 import { OrganizationComponent } from './components/pages/politics/organization/organization.component';
 import { NationComponent } from './components/pages/places/nation/nation.component';
-import { PedigreeTreeComponent } from './components/pages/pedigree-tree/pedigree-tree.component';
 import { PersonDetailsComponent } from './components/pages/society/person-details/person-details.component';
 import {MatCard, MatCardActions, MatCardContent, MatCardTitle} from "@angular/material/card";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import { FilterPipe } from './pipes/filter/filter.pipe';
-import { FamilyNgTreeComponent } from './components/pages/pedigree-tree/family-ng-tree/family-ng-tree.component';
 import { PersonDetailsEditComponent } from './components/pages/society/person-details/person-details-edit/person-details-edit.component';
 import { TimelineDisplayComponent } from './components/pages/history/timeline/timeline-display/timeline-display.component';
 import { PersonDetailsBiographyComponent } from './components/pages/society/person-details/person-details-biography/person-details-biography.component';
+import { PedigreeTreeComponent } from './components/pages/society/pedigree-tree/pedigree-tree.component';
+import { FamilyMemberNodeComponent } from './components/pages/society/pedigree-tree/family-member-node/family-member-node.component';
+import { FamilyMemberFormComponent } from './components/pages/society/pedigree-tree/family-member-form/family-member-form.component';
 
 @NgModule({
   declarations: [
@@ -73,13 +74,14 @@ import { PersonDetailsBiographyComponent } from './components/pages/society/pers
     FamilyTreeFormComponent,
     OrganizationComponent,
     NationComponent,
-    PedigreeTreeComponent,
     PersonDetailsComponent,
     FilterPipe,
-    FamilyNgTreeComponent,
     PersonDetailsEditComponent,
     TimelineDisplayComponent,
-    PersonDetailsBiographyComponent
+    PersonDetailsBiographyComponent,
+    PedigreeTreeComponent,
+    FamilyMemberNodeComponent,
+    FamilyMemberFormComponent
   ],
   imports: [
     BrowserModule,

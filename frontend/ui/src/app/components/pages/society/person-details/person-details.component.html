@@ -1,7 +1,7 @@
 <div *ngIf="!isEditing" class="display-container">
   <div class="image-container">
-    <img src="https://via.placeholder.com/300x400" alt="Person Image" />
-<!--    <img [src]="personDetails.value.data?.datumRetrieved?.imageURL" alt="Person Image" />-->
+<!--    <img src="https://via.placeholder.com/300x400" alt="Person Image" />-->
+    <img [src]="personDetails.value.data?.datumRetrieved?.imageURL" alt="Person Image" />
   </div>
 
   <div class="details-container">
@@ -60,7 +60,7 @@
     personDetails.value.data?.datumRetrieved?.deathYear === 0) {
       <div class="detail-item">
         <strong>Death Date:</strong>
-        Present
+        Alive
       </div>
     } @else {
       <div class="detail-item">
@@ -89,11 +89,9 @@
       <strong>Lineage:</strong> {{ personDetails.value.data?.datumRetrieved?.lineage }}
     </div>
 
-<!--    <div class="detail-item">-->
-<!--      <strong>Biography:</strong> {{ personDetails.value.data?.datumRetrieved?.biography || 'No biography provided' }}-->
-<!--      <button (click)="isBiography = !isBiography" class="stylish-button" style="text-align: center; background-color: cornflowerblue;-->
-<!--      color: lightyellow;">Biography</button>-->
-<!--    </div>-->
+    <div class="detail-item">
+      <strong>Marital Status:</strong> {{ personDetails.value.data?.datumRetrieved?.maritalStatus }}
+    </div>
   </div>
 </div>
 
@@ -101,7 +99,10 @@
   <app-person-details-edit (isEditing)="closeEditing($event)" [personDetails]="personDetails.value.data?.datumRetrieved"></app-person-details-edit>
 }
 
-@if (isBiography) {
+@if(isEditing) {
+  <hr>
+}
+@else if (isBiography) {
   <app-person-details-biography (isBiography)="closeBiographyEditing($event)" [personDetails]="personDetails.value.data?.datumRetrieved"></app-person-details-biography>
 } @else {
   <h2>

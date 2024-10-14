@@ -98,6 +98,10 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
             newPersonDetails.setLineage(personDetails.getLineage());
         }
 
+        if(personDetails.getMaritalStatus() != null && newPersonDetails.getMaritalStatus() != personDetails.getMaritalStatus()) {
+            newPersonDetails.setMaritalStatus(personDetails.getMaritalStatus());
+        }
+
         if(personDetails.getRank() != null && newPersonDetails.getRank() != personDetails.getRank()) {
             newPersonDetails.setRank(personDetails.getRank());
         }
@@ -146,6 +150,7 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         //newPersonDetails.setCalendarSystem(personDetails.getCalendarSystem());
         newPersonDetails.setBiography(personDetails.getBiography());
         newPersonDetails.setLineage(personDetails.getLineage());
+        newPersonDetails.setMaritalStatus(personDetails.getMaritalStatus());
         newPersonDetails.setImageURL(personDetails.getImageURL());
         return personDetailsRepository.save(newPersonDetails);
     }

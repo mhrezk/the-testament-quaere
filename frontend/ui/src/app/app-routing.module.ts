@@ -10,14 +10,11 @@ import {HierarchyComponent} from "./components/pages/hierarchy/hierarchy/hierarc
 import {CustomFamilyTreeComponent} from "./components/custom/custom-family-tree/custom-family-tree.component";
 import {OrganizationComponent} from "./components/pages/politics/organization/organization.component";
 import {NationComponent} from "./components/pages/places/nation/nation.component";
-import {PedigreeTreeComponent} from "./components/pages/pedigree-tree/pedigree-tree.component";
+//import {PedigreeTreeComponent} from "./components/pages/society/pedigree-tree/pedigree-tree.component";
 import {PersonDetailsComponent} from "./components/pages/society/person-details/person-details.component";
 import {
   TimelineDisplayComponent
 } from "./components/pages/history/timeline/timeline-display/timeline-display.component";
-import {
-  PersonDetailsBiographyComponent
-} from "./components/pages/society/person-details/person-details-biography/person-details-biography.component";
 
 const routes: Routes = [
   {
@@ -62,7 +59,7 @@ const routes: Routes = [
   },
   {
     path: "family-tree",
-    component: PedigreeTreeComponent
+    component: FamilyTreeComponent
   },
   {
     path: "hierarchy",

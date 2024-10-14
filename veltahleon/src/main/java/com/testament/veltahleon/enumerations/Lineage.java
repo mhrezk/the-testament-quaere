@@ -7,6 +7,7 @@ public enum Lineage {
     HOUSE("House"),
     CLAN("Clan"),
     FAMILY("Family"),
+    ORPHAN("Orphan"),
     NONE("None");
 
     private final String lineage;

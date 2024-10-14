@@ -135,16 +135,17 @@
     </div>
 
     <div class="detail-item">
-      <strong>Biography:</strong>
-<!--      <quill-editor [(ngModel)]="personDetails.biography"></quill-editor>-->
-<!--      <st-editor [(ngModel)]="personDetails.biography" [config]="config"></st-editor>-->
+      <strong>Marital Status</strong>
       <mat-form-field appearance="outline">
-        <textarea matInput name="biography" [(ngModel)]="personDetails.biography"></textarea>
+        <mat-label>Marital Status</mat-label>
+        <mat-select name="maritalStatus" [(ngModel)]="personDetails.maritalStatus">
+          <mat-option *ngFor="let maritalStatus of Object.keys(MaritalStatus)" [value]="maritalStatus">{{ maritalStatus }}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
     <div class="modal-footer">
-      <button [disabled]="personDetailsForm.invalid" type="button" class="btn btn-success" type="submit">Save</button>
+      <button [disabled]="personDetailsForm.invalid" class="btn btn-success" type="submit">Save</button>
       <button type="button" class="btn btn-danger" (click)="onClose(false)">Close</button>
     </div>
   </form>

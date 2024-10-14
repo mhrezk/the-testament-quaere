@@ -1,21 +1,15 @@
 package com.testament.veltahleon.mappers.society;
 
 import com.testament.veltahleon.dto.society.PersonDetailsDTO;
-import com.testament.veltahleon.enumerations.ClosedAnswer;
 import com.testament.veltahleon.enumerations.Gender;
 import com.testament.veltahleon.enumerations.Lineage;
+import com.testament.veltahleon.enumerations.MaritalStatus;
 import com.testament.veltahleon.facades.society.PersonFacade;
-import com.testament.veltahleon.model.entities.dogma.Religion;
-import com.testament.veltahleon.model.entities.politics.Rank;
-import com.testament.veltahleon.model.entities.society.Job;
 import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.model.entities.society.PersonDetails;
-import com.testament.veltahleon.model.entities.society.Title;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -46,6 +40,7 @@ public class PersonDetailsMapper {
                 .yearAbbreviation(personDetails.getYearAbbreviation())
                 .imageURL(personDetails.getImageURL())
                 .lineage(String.valueOf(personDetails.getLineage()))
+                .maritalStatus(String.valueOf(personDetails.getMaritalStatus()))
                 .build();
     }
 
@@ -74,6 +69,7 @@ public class PersonDetailsMapper {
         personDetails.setYearAbbreviation(personDetailsDTO.getYearAbbreviation());
 //        personDetails.setCalendarSystem(personDetailsDTO.getCalendarSystem());
         personDetails.setLineage(Lineage.valueOf(personDetailsDTO.getLineage()));
+        personDetails.setMaritalStatus(MaritalStatus.valueOf(personDetailsDTO.getMaritalStatus()));
         personDetails.setImageURL(personDetailsDTO.getImageURL());
         return personDetails;
     }

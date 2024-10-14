@@ -12,7 +12,7 @@
               <span>Add Person</span>
             </a>
             <span *ngIf="isTableShown">
-              <select (ngModelChange)="filterPeopleByGender($event)" name="status" ngModel="ALL"
+              <select (change)="filterPeopleByGender($event)" name="gender"
                       class="btn btn-info" style="height: 32.91px;">
                 <option value="ALL">All</option>
                 <option value="MALE">Male</option>

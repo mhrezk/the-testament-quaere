@@ -1,6 +1,7 @@
 import {Gender} from "../../../enums/gender";
 import {ClosedAnswer} from "../../../enums/closed-answer";
 import {Lineage} from "../../../enums/lineage";
+import {MaritalStatus} from "../../../enums/marital-status";
 
 export interface PersonDetails {
   id: number;
@@ -31,6 +32,7 @@ export interface PersonDetails {
   imageURL?: string;
   job?: string;
   lineage?: Lineage;
+  maritalStatus?: MaritalStatus;
   // isBastard?: ClosedAnswer;
 
   isSelected: boolean;

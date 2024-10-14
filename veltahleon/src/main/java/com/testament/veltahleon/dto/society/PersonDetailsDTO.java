@@ -35,4 +35,5 @@ public class PersonDetailsDTO {
     private String biography;
     private String imageURL;
     private String lineage;
+    private String maritalStatus;
 }

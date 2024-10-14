@@ -1,0 +1,27 @@
+<form [formGroup]="familyForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name:</label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+  <div>
+    <label for="born">Born:</label>
+    <input id="born" type="number" formControlName="born">
+  </div>
+  <div>
+    <label for="died">Died:</label>
+    <input id="died" type="number" formControlName="died">
+  </div>
+  <div>
+    <label for="location">Location:</label>
+    <input id="location" type="text" formControlName="location">
+  </div>
+  <div>
+    <label for="gender">Gender:</label>
+    <select id="gender" formControlName="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="!familyForm.valid">Submit</button>
+</form>

@@ -6,6 +6,7 @@ import {RaceService} from "../../../../../services/models/history/race/race.serv
 import {Race} from "../../../../../interfaces/models/history/race";
 //import {firstValueFrom} from "rxjs";
 import {Lineage} from "../../../../../enums/lineage";
+import {MaritalStatus} from "../../../../../enums/marital-status";
 //import DOMPurify from 'dompurify';
 
 @Component({
@@ -70,4 +71,6 @@ export class PersonDetailsEditComponent implements OnInit {
       result => this.races = result.data.dataRetrieved
     )
   }
+
+  protected readonly MaritalStatus = MaritalStatus;
 }

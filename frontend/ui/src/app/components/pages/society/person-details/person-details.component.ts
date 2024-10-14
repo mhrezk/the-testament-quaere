@@ -33,7 +33,6 @@ export class PersonDetailsComponent implements OnInit {
 
   selectedPersonDetails: PersonDetails;
   personDetails = new BehaviorSubject<CustomResponse>(null);
-  lineage: Lineage;
 
   appState$: Observable<AppState<CustomResponse>>;
   protected readonly DATA_STATE = DataState;
@@ -57,6 +56,7 @@ export class PersonDetailsComponent implements OnInit {
     this.personDetailsService.getPersonDetailsByFirstNameAndSecondName(id, firstName, secondName).subscribe(result => {
       this.selectedPersonDetails = result.data.datumRetrieved;
       this.personDetails.next(result);
+      console.log(this.selectedPersonDetails);
     });
   }
 

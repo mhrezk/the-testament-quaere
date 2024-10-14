@@ -77,26 +77,26 @@ export class PersonService {
   }
 
   filterByGender$ = (gender: Gender, response: CustomResponse) =>
-    <Observable<CustomResponse>> new Observable<CustomResponse>(
-      subscriber => {
+    <Observable<CustomResponse>>new Observable<CustomResponse>((subscriber) => {
         console.log(response);
-        subscriber.next(
-          gender === Gender.ALL ?
-            {
-              ...response,
-              message: `People gender have been filtered by: ${gender}`
-            } :
-            {
-              ...response,
-              message: response.data.dataRetrieved?.filter(person => person.gender === gender).length > 0 ?
-                `People have been filtered by gender type: ${gender === Gender.MALE ? 'Male' : 'Female'}`:
-                `No people found of gender type: ${gender}`,
-              data: {
-                dataRetrieved: response.data.dataRetrieved?.filter(person => person.gender === gender)
-              }
-            }
-        );
-        subscriber.complete(); //emits the data contained within subscriber.next()
+        const people = response.data?.dataRetrieved || [];
+        const filteredPeople =
+          gender === Gender.ALL
+            ? people
+            : people.filter((person) => person.gender === gender);
+        const message =
+          filteredPeople.length > 0
+            ? `People filtered by ${gender}`
+            : `No people of ${gender} gender found`;
+
+        subscriber.next({
+          ...response,
+          message,
+          data: {
+            dataRetrieved: filteredPeople,
+          },
+        });
+        subscriber.complete();
       }
     ).pipe(
       tap(console.log),

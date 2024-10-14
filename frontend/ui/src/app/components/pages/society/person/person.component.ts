@@ -37,6 +37,7 @@ export class PersonComponent implements OnInit {
   selectedRace: string;
 
   appState$: Observable<AppState<CustomResponse>>;
+
   readonly gender = Gender;
   protected readonly DATA_STATE = DataState;
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
@@ -237,25 +238,24 @@ export class PersonComponent implements OnInit {
   //   );
   // }
 
-  filterPeopleByGender(gender: Gender) {
-    this.appState$ = this.personService.filterByGender$(gender, this.dataSubject.value)
+  filterPeopleByGender(event: Event): void {
+    const genderValue: String = (event.target as HTMLInputElement).value;
+    const gender: Gender = Gender[genderValue as keyof typeof Gender];
+    this.appState$ = this.personService
+      .filterByGender$(gender, this.dataSubject.value)
       .pipe(
-        map((result) => {
-          this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
+        map((response) => {
           return {
             dataState: DataState.LOADED,
-            appData: result,
+            appData: response,
           };
         }),
         startWith({
           dataState: DataState.LOADED,
-          appData: this.dataSubject.value
+          appData: this.dataSubject.value,
         }),
-        catchError((caughtError: string) => {
-          return of({
-            dataState: DataState.ERROR,
-            error: caughtError,
-          });
+        catchError((error: string) => {
+          return of({ dataState: DataState.ERROR, error });
         })
       );
   }
