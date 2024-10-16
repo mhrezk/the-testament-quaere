@@ -31,13 +31,15 @@ public class PersonDetailsMapper {
                 .rank(personDetails.getRank().getName())
                 .nation(personDetails.getNation().getName())
                 .epithet(personDetails.getEpithet())
+                .age(personDetails.getAge())
                 .birthDay(personDetails.getBirthDay())
                 .birthMonth(personDetails.getBirthMonth())
                 .birthYear(personDetails.getBirthYear())
+                .birthYearAbbreviation(personDetails.getBirthYearAbbreviation())
                 .deathDay(personDetails.getDeathDay())
                 .deathMonth(personDetails.getDeathMonth())
                 .deathYear(personDetails.getDeathYear())
-                .yearAbbreviation(personDetails.getYearAbbreviation())
+                .deathYearAbbreviation(personDetails.getDeathYearAbbreviation())
                 .imageURL(personDetails.getImageURL())
                 .lineage(String.valueOf(personDetails.getLineage()))
                 .maritalStatus(String.valueOf(personDetails.getMaritalStatus()))
@@ -60,13 +62,15 @@ public class PersonDetailsMapper {
         personDetails.setReligion(personFacade.getReligion(personDetailsDTO.getReligion()));
         personDetails.setEpithet(personDetailsDTO.getEpithet());
         personDetails.setBiography(personDetailsDTO.getBiography());
+        personDetails.setAge(personDetailsDTO.getAge());
         personDetails.setBirthDay(personDetailsDTO.getBirthDay());
         personDetails.setBirthMonth(personDetailsDTO.getBirthMonth());
         personDetails.setBirthYear(personDetailsDTO.getBirthYear());
-        personDetails.setDeathDay(personDetails.getDeathDay());
+        personDetails.setBirthYearAbbreviation(personDetailsDTO.getBirthYearAbbreviation());
+        personDetails.setDeathDay(personDetailsDTO.getDeathDay());
         personDetails.setDeathMonth(personDetailsDTO.getDeathMonth());
         personDetails.setDeathYear(personDetailsDTO.getDeathYear());
-        personDetails.setYearAbbreviation(personDetailsDTO.getYearAbbreviation());
+        personDetails.setDeathYearAbbreviation(personDetailsDTO.getDeathYearAbbreviation());
 //        personDetails.setCalendarSystem(personDetailsDTO.getCalendarSystem());
         personDetails.setLineage(Lineage.valueOf(personDetailsDTO.getLineage()));
         personDetails.setMaritalStatus(MaritalStatus.valueOf(personDetailsDTO.getMaritalStatus()));

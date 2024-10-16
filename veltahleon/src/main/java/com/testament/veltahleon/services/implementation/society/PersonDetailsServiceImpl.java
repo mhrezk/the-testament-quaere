@@ -118,8 +118,12 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
             newPersonDetails.setImageURL(personDetails.getImageURL());
         }
 
-        if(personDetails.getYearAbbreviation() != null && newPersonDetails.getYearAbbreviation() != personDetails.getYearAbbreviation()) {
-            newPersonDetails.setYearAbbreviation(personDetails.getYearAbbreviation());
+        if(personDetails.getDeathYearAbbreviation() != null && newPersonDetails.getDeathYearAbbreviation() != personDetails.getDeathYearAbbreviation()) {
+            newPersonDetails.setDeathYearAbbreviation(personDetails.getDeathYearAbbreviation());
+        }
+
+        if(personDetails.getBirthYearAbbreviation() != null && newPersonDetails.getBirthYearAbbreviation() != personDetails.getBirthYearAbbreviation()) {
+            newPersonDetails.setBirthYearAbbreviation(personDetails.getBirthYearAbbreviation());
         }
 
         return personDetailsRepository.save(newPersonDetails);
@@ -143,10 +147,11 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         newPersonDetails.setBirthDay(personDetails.getBirthDay());
         newPersonDetails.setBirthMonth(personDetails.getBirthMonth());
         newPersonDetails.setBirthYear(personDetails.getBirthYear());
+        newPersonDetails.setBirthYearAbbreviation(personDetails.getBirthYearAbbreviation());
         newPersonDetails.setDeathDay(personDetails.getDeathDay());
         newPersonDetails.setDeathMonth(personDetails.getDeathMonth());
         newPersonDetails.setDeathYear(personDetails.getDeathYear());
-        newPersonDetails.setYearAbbreviation(personDetails.getYearAbbreviation());
+        newPersonDetails.setDeathYearAbbreviation(personDetails.getDeathYearAbbreviation());
         //newPersonDetails.setCalendarSystem(personDetails.getCalendarSystem());
         newPersonDetails.setBiography(personDetails.getBiography());
         newPersonDetails.setLineage(personDetails.getLineage());

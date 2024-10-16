@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.81.0] 2024-10-15
+
+- Implemented design for Balkan family tree
+- Created entity classes for family trees
+
 ## [0.80.0] 2024-10-12
 
 - Adjusted module for family trees (Balkan)

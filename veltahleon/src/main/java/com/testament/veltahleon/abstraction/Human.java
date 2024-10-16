@@ -4,7 +4,6 @@ import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.history.Race;
 import com.testament.veltahleon.model.entities.places.Nation;
 import com.testament.veltahleon.model.entities.dogma.Religion;
-import com.testament.veltahleon.model.entities.society.SocietyTree;
 import com.testament.veltahleon.model.entities.society.Title;
 import com.testament.veltahleon.enumerations.Gender;
 
@@ -47,13 +46,6 @@ public abstract class Human {
             CascadeType.PERSIST})
     @JoinColumn(name = "religion_id")
     private Religion religion;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "family_id", referencedColumnName = "id")
-    private SocietyTree societyTree;
 
     //@OneToMany
 //    @ElementCollection(fetch = FetchType.LAZY)

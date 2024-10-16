@@ -5,7 +5,7 @@ import {CalendarComponent} from "./components/pages/calendar/calendar.component"
 import {PersonComponent} from "./components/pages/society/person/person.component";
 import {RaceComponent} from "./components/pages/history/race/race.component";
 import {TimelineComponent} from "./components/pages/history/timeline/timeline.component";
-import {FamilyTreeComponent} from "./components/pages/family-tree/family-tree.component";
+import {FamilyTreeBalkanComponent} from "./components/pages/family-tree-balkan/family-tree-balkan.component";
 import {HierarchyComponent} from "./components/pages/hierarchy/hierarchy/hierarchy.component";
 import {CustomFamilyTreeComponent} from "./components/custom/custom-family-tree/custom-family-tree.component";
 import {OrganizationComponent} from "./components/pages/politics/organization/organization.component";
@@ -15,6 +15,7 @@ import {PersonDetailsComponent} from "./components/pages/society/person-details/
 import {
   TimelineDisplayComponent
 } from "./components/pages/history/timeline/timeline-display/timeline-display.component";
+//import {LineageTreeComponent} from "./components/pages/society/lineage-tree/lineage-tree.component";
 
 const routes: Routes = [
   {
@@ -58,15 +59,19 @@ const routes: Routes = [
     component: TimelineDisplayComponent
   },
   {
-    path: "family-tree",
-    component: FamilyTreeComponent
+    path: "family-tree-balkan",
+    component: FamilyTreeBalkanComponent
+  },
+  {
+    path: "family-tree-balkan/:firstName/:secondName",
+    component: FamilyTreeBalkanComponent
   },
   {
     path: "hierarchy",
     component: HierarchyComponent
   },
   {
-    path: "custom-family-tree",
+    path: "custom-family-tree-balkan",
     component: CustomFamilyTreeComponent
   }
 ];

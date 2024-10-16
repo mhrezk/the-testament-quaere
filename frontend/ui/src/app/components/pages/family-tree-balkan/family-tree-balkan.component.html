@@ -1,0 +1,65 @@
+<button type="button" style="float: right" class="btn btn-danger" (click)="routeToHome()">Close</button>
+<!--<form *ngIf="!showTree" #personForm="ngForm" (ngSubmit)="onSubmit(personForm)">-->
+<!--  <div>-->
+<!--    <label for="name">Name:</label>-->
+<!--    <input id="name" type="text" name="name" ngModel required />-->
+<!--  </div>-->
+
+<!--  <div>-->
+<!--    <label for="age">Age:</label>-->
+<!--    <input id="age" type="number" name="age" ngModel required />-->
+<!--  </div>-->
+
+<!--  <div>-->
+<!--    <label for="location">Location:</label>-->
+<!--    <input id="location" type="text" name="location" ngModel required />-->
+<!--  </div>-->
+
+<!--  <div>-->
+<!--    <label for="gender">Gender:</label>-->
+<!--    <select id="gender" name="gender" ngModel required>-->
+<!--      <option value="male">Male</option>-->
+<!--      <option value="female">Female</option>-->
+<!--    </select>-->
+<!--  </div>-->
+
+<!--  <button type="submit">Add to Tree</button>-->
+<!--</form>-->
+
+<div *ngIf="!showTree" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #personForm="ngForm" (ngSubmit)="onSubmit(personForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Root Person</h4>
+          <button type="button" class="close-button">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" ngModel name="firstName" class="form-input" placeholder="Enter First Name" required>
+          </div>
+          <div class="form-group">
+            <label for="secondName">Last Name</label>
+            <input type="text" id="secondName" ngModel name="secondName" class="form-input" placeholder="Enter Last Name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" ngModel required class="form-select">
+              <option value="" disabled selected>Select Gender</option>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="cancel-button">Close</button>
+          <button type="submit" class="submit-button">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<h2 *ngIf="showTree">Family of {{ name }}</h2>
+<div id="tree"></div>

@@ -3,7 +3,6 @@ import {BehaviorSubject, map, Observable, of, startWith, throwError} from "rxjs"
 import {AppState} from "../../../../interfaces/app-state";
 import {CustomResponse} from "../../../../interfaces/custom-response";
 import {DataState} from "../../../../enums/data-state";
-import {catchError, tap} from "rxjs/operators";
 import {PersonDetails} from "../../../../interfaces/models/society/person-details";
 import {PersonDetailsService} from "../../../../services/models/society/person-details/person-details.service";
 import {PersonService} from "../../../../services/models/society/person/person.service";
@@ -13,7 +12,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {Lineage} from "../../../../enums/lineage";
+import {Gender} from "../../../../enums/gender";
+import {Family} from "../../../../interfaces/models/society/family";
 
 @Component({
   selector: 'app-person-details',
@@ -23,6 +23,7 @@ import {Lineage} from "../../../../enums/lineage";
 export class PersonDetailsComponent implements OnInit {
   isEditing: boolean = false;
   isBiography: boolean = false;
+  isFamilyTree: boolean = false;
 
   faTrash = faTrash;
   faEdit = faEdit;
@@ -31,12 +32,16 @@ export class PersonDetailsComponent implements OnInit {
   secondName: string;
   personID: number;
 
+  peronDetailsFamilyMap: Family;
+  family: Family;
+  familyNodeSubject = new BehaviorSubject<Family>(null)
+  familyNodeSubject$ = this.familyNodeSubject.asObservable();
+
   selectedPersonDetails: PersonDetails;
   personDetails = new BehaviorSubject<CustomResponse>(null);
 
   appState$: Observable<AppState<CustomResponse>>;
   protected readonly DATA_STATE = DataState;
-  private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
 
@@ -53,10 +58,26 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   getPersonDetailsByFirstNameAndLastName(id: number, firstName: string, secondName: string) {
+    // const result = await this.personDetailsService.getPersonDetailsByFirstNameAndSecondName(id, firstName, secondName).toPromise();
+    // this.personDetails.next(result);
+    // this.peronDetailsFamilyMap = {
+    //       firstName: result.data.datumRetrieved.firstName,
+    //       secondName: result.data.datumRetrieved.secondName,
+    //       gender: result.data.datumRetrieved.gender,
+    //     };
+    // this.familyNodeSubject.next(this.peronDetailsFamilyMap);
     this.personDetailsService.getPersonDetailsByFirstNameAndSecondName(id, firstName, secondName).subscribe(result => {
       this.selectedPersonDetails = result.data.datumRetrieved;
       this.personDetails.next(result);
       console.log(this.selectedPersonDetails);
+      // this.peronDetailsFamilyMap = {
+      //   firstName: result.data.datumRetrieved.firstName,
+      //   secondName: result.data.datumRetrieved.secondName,
+      //   gender: result.data.datumRetrieved.gender,
+      // };
+
+      this.familyNodeSubject.next(this.peronDetailsFamilyMap);
+      console.log(this.familyNodeSubject.value);
     });
   }
 
@@ -82,6 +103,10 @@ export class PersonDetailsComponent implements OnInit {
   // onSubmit(form: any) {
   //   console.log('Form Submitted!', form.value);
   // }
+
+  routeToFamilyTree(firstName: string, secondName: string) {
+    this.router.navigateByUrl(`/family-tree/${firstName}/${secondName}`)
+  }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);

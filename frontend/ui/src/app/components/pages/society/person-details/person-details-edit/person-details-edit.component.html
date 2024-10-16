@@ -1,7 +1,10 @@
 <div class="display-container">
   <div class="image-container">
-    <img src="https://via.placeholder.com/300x400" alt="Person Image" />
-<!--    <img [src]="personDetails.imageURL" alt="Person Image" />-->
+<!--    <img src="https://via.placeholder.com/300x400" alt="Person Image" />-->
+    <img [src]="personDetails.imageURL" alt="Person Image" />
+    @if(personDetails.imageURL.split("/")[personDetails.imageURL.split("/").length - 1] === "default.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
   </div>
 
   <form #personDetailsForm="ngForm" (ngSubmit)="onSubmit(personDetails)" class="details-container">
@@ -71,6 +74,13 @@
     </div>
 
     <div class="detail-item">
+      <strong>Age:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="age" [(ngModel)]="personDetails.age" />
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
       <strong>Birth Date:</strong>
       <mat-form-field appearance="outline">
         <input matInput name="birthDay" [(ngModel)]="personDetails.birthDay" type="number" placeholder="Day" />
@@ -80,6 +90,9 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <input matInput name="birthYear" [(ngModel)]="personDetails.birthYear" type="number" placeholder="Year" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="birthYearAbbreviation" [(ngModel)]="personDetails.birthYearAbbreviation" type="number" placeholder="Birth Year Abbreviation" />
       </mat-form-field>
     </div>
 
@@ -94,12 +107,8 @@
       <mat-form-field appearance="outline">
         <input matInput name="deathYear" [(ngModel)]="personDetails.deathYear" type="number" placeholder="Year" />
       </mat-form-field>
-    </div>
-
-    <div class="detail-item">
-      <strong>Year Abbreviation:</strong>
       <mat-form-field appearance="outline">
-        <input matInput name="yearAbbreviation" [(ngModel)]="personDetails.yearAbbreviation" />
+        <input matInput name="deathYearAbbreviation" [(ngModel)]="personDetails.deathYearAbbreviation" type="number" placeholder="Death Year Abbreviation" />
       </mat-form-field>
     </div>
 

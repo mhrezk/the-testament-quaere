@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { createFamilyTreeControl } from './family-tree-form/family-tree-form.types';
 
 @Component({
-  selector: 'app-custom-family-tree',
+  selector: 'app-custom-family-tree-balkan',
   templateUrl: './custom-family-tree.component.html',
   styleUrl: './custom-family-tree.component.css'
 })

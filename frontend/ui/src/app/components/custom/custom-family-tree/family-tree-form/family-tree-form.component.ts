@@ -15,7 +15,7 @@ import {
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-family-tree-form',
+  selector: 'app-family-tree-balkan-form',
   templateUrl: './family-tree-form.component.html',
   styleUrl: './family-tree-form.component.css',
   providers: [

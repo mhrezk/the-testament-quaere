@@ -35,6 +35,9 @@ public class PersonDetails {
     //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Person person;
 
+    @Column(name = "age")
+    private Integer age;
+
     @Column(name = "birth_day")
     private Integer birthDay;
 
@@ -43,6 +46,9 @@ public class PersonDetails {
 
     @Column(name = "birth_year")
     private Integer birthYear;
+
+    @Column(name = "birth_year_abbreviation")
+    private String birthYearAbbreviation;
 
     @Column(name = "death_day")
     private Integer deathDay;
@@ -53,8 +59,8 @@ public class PersonDetails {
     @Column(name = "death_year")
     private Integer deathYear;
 
-    @Column(name = "year_abbreviation")
-    private String yearAbbreviation;
+    @Column(name = "death_year_abbreviation")
+    private String deathYearAbbreviation;
 
 //    @Column(name = "calendar_system")
 //    private String calendarSystem;

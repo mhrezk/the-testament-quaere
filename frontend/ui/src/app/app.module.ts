@@ -37,7 +37,7 @@ import { PersonComponent } from './components/pages/society/person/person.compon
 import { RaceComponent } from './components/pages/history/race/race.component';
 import {ModalModule} from "./modules/modal/modal.module";
 import { TimelineComponent } from './components/pages/history/timeline/timeline.component';
-import { FamilyTreeComponent } from './components/pages/family-tree/family-tree.component';
+import { FamilyTreeBalkanComponent } from './components/pages/family-tree-balkan/family-tree-balkan.component';
 import { InspectorComponent } from './components/pages/hierarchy/inspector/inspector.component';
 import {OrganizationChartComponent} from "./components/pages/hierarchy/organization-chart/organization-chart.component";
 import { HierarchyComponent } from './components/pages/hierarchy/hierarchy/hierarchy.component';
@@ -56,6 +56,8 @@ import { PersonDetailsBiographyComponent } from './components/pages/society/pers
 import { PedigreeTreeComponent } from './components/pages/society/pedigree-tree/pedigree-tree.component';
 import { FamilyMemberNodeComponent } from './components/pages/society/pedigree-tree/family-member-node/family-member-node.component';
 import { FamilyMemberFormComponent } from './components/pages/society/pedigree-tree/family-member-form/family-member-form.component';
+import { CommunityComponent } from './components/pages/society/community/community.component';
+import { FamilyTreeComponent } from './components/pages/society/community/family-tree/family-tree.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,7 @@ import { FamilyMemberFormComponent } from './components/pages/society/pedigree-t
     PersonComponent,
     RaceComponent,
     TimelineComponent,
-    FamilyTreeComponent,
+    FamilyTreeBalkanComponent,
     OrganizationChartComponent,
     InspectorComponent,
     HierarchyComponent,
@@ -81,7 +83,9 @@ import { FamilyMemberFormComponent } from './components/pages/society/pedigree-t
     PersonDetailsBiographyComponent,
     PedigreeTreeComponent,
     FamilyMemberNodeComponent,
-    FamilyMemberFormComponent
+    FamilyMemberFormComponent,
+    CommunityComponent,
+    FamilyTreeComponent
   ],
   imports: [
     BrowserModule,

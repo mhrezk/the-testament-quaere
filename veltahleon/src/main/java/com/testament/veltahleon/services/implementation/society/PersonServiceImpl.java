@@ -91,15 +91,17 @@ public class PersonServiceImpl implements PersonService {
 
     private PersonDetails generatePersonDetails() {
         PersonDetails personDetails = new PersonDetails();
-        personDetails.setYearAbbreviation(null);
         personDetails.setLineage(Lineage.NONE);
         personDetails.setMaritalStatus(MaritalStatus.SINGLE);
+        personDetails.setAge(0);
         personDetails.setBirthDay(0);
         personDetails.setBirthMonth(0);
         personDetails.setBirthYear(0);
+        personDetails.setBirthYearAbbreviation(null);
         personDetails.setDeathDay(0);
         personDetails.setDeathMonth(0);
         personDetails.setDeathYear(0);
+        personDetails.setDeathYearAbbreviation(null);
         personDetails.setRank(personDetailsFacade.createRank());
         personDetails.setReligion(personDetailsFacade.createReligion());
         personDetails.setJob(personDetailsFacade.createJob());

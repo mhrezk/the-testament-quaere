@@ -16,7 +16,7 @@ import {Gender} from "../../../../enums/gender";
 import {Person} from "../../../../interfaces/models/society/person";
 import {Race} from "../../../../interfaces/models/history/race";
 import {RaceService} from "../../../../services/models/history/race/race.service";
-import {ModalService} from "../../../../modules/modal/service/custom-modal.service";
+//import {ModalService} from "../../../../modules/modal/service/custom-modal.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -43,6 +43,9 @@ export class PersonComponent implements OnInit {
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
+
+  countSubject = new BehaviorSubject<number>(0)
+  count$ = this.countSubject.asObservable();
 
   isClicked: boolean = false;
   isTableShown: boolean = false;
@@ -85,7 +88,7 @@ export class PersonComponent implements OnInit {
   getAllPeopleTotal() {
     this.personService.getAllPeopleCount().subscribe(
       result => {
-        this.count = result.data.datumRetrieved;
+        this.countSubject.next(result.data.datumRetrieved);
       }
     )
   }
@@ -209,6 +212,7 @@ export class PersonComponent implements OnInit {
     for(let person of persons) {
       this.personService.deletePerson(person.id).subscribe();
     }
+    this.getAllPeopleTotal();
     window.location.reload();
   }
 

@@ -55,7 +55,7 @@ export class CustomSidenavComponent {
     {
       icon: "diversity_3",
       label: "Family Trees",
-      route: "family-tree"
+      route: "family-tree-balkan"
     },
     {
       icon: "account_tree",
@@ -65,7 +65,7 @@ export class CustomSidenavComponent {
     {
       icon: "account_tree",
       label: "Custom Family Tree",
-      route: "custom-family-tree"
+      route: "custom-family-tree-balkan"
     }
   ]);
 

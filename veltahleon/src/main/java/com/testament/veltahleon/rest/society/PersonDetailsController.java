@@ -31,6 +31,8 @@ public class PersonDetailsController {
     @Autowired
     private PersonDetailsMapper personDetailsMapper;
 
+    public final String imagePath = "src/main/resources/assets/images/people/";
+
     @GetMapping("/personDetails/{id}/{firstName}/{secondName}")
     public ResponseEntity<CustomResponse> getPersonDetailsByPersonName(@PathVariable String firstName, @PathVariable String secondName) {
         PersonDetailsDTO personDetailsDTO = personDetailsMapper.convertToDTO(personDetailsService.getPersonByFirstNameAndSecondName(firstName, secondName));
@@ -46,8 +48,8 @@ public class PersonDetailsController {
 
     @GetMapping(path = "/personDetails/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getPersonalImage(@PathVariable("imageName") String imageName) throws IOException {
-        Path image = Paths.get(System.getProperty("user.dir") + "/src/main/resources/assets/images/people/" + imageName);
-        return Files.readAllBytes(image);
+        //Path image = Paths.get("src/main/resources/assets/images/people/" + imageName);
+        return Files.readAllBytes(Path.of(imagePath + imageName));
     }
 
     @DeleteMapping("/delete/personDetails/{id}")

@@ -5,8 +5,6 @@ import com.testament.veltahleon.enumerations.Gender;
 import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.history.Race;
-import com.testament.veltahleon.model.entities.places.Nation;
-import com.testament.veltahleon.model.entities.politics.Rank;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

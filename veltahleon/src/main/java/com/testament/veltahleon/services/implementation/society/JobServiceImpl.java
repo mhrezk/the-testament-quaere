@@ -1,6 +1,5 @@
 package com.testament.veltahleon.services.implementation.society;
 
-import com.testament.veltahleon.enumerations.JobType;
 import com.testament.veltahleon.model.entities.society.Job;
 import com.testament.veltahleon.repositories.society.JobRepository;
 import com.testament.veltahleon.services.ifc.society.JobService;

@@ -1,15 +1,12 @@
 package com.testament.veltahleon.mappers.society;
 
 import com.testament.veltahleon.dto.society.PersonDTO;
-import com.testament.veltahleon.enumerations.ClosedAnswer;
 import com.testament.veltahleon.facades.society.PersonFacade;
 import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.enumerations.Gender;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor
