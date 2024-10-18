@@ -10,7 +10,8 @@ import java.util.List;
 @Getter
 @Setter
 public class FamilyDTO {
-    private String id;
+    private Long id;
+    private String stringID;
     private String motherID;
     private String fatherID;
     private List<String> spouseIDs;

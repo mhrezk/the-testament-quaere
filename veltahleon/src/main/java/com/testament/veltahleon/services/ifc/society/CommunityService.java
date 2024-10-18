@@ -13,5 +13,6 @@ public interface CommunityService {
     Community saveCommunity(Community community);
     Community updateCommunity(Long id, Community community);
     Community modifyCommunity(Long id, Community community);
-
+    Long countCommunities();
+    void updateCommunitySize(Integer size, Long id);
 }

@@ -146,12 +146,13 @@ public class PersonController {
     }
 
     @PatchMapping("/update/person/{id}")
-    public ResponseEntity<CustomResponse> updatePerson(@PathVariable Long id, @RequestBody Person person) {
+    public ResponseEntity<CustomResponse> updatePerson(@PathVariable Long id, @RequestBody PersonDTO personDTO) {
+        Person person = personMapper.convertToEntity(personDTO);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataUpdated", personService.updatePerson(id, person)))
+                .data(Map.of("dataUpdated", personMapper.convertToDTO(personService.updatePerson(id, person))))
                 .message("Person updated!")
                 .build()
         );
@@ -160,12 +161,11 @@ public class PersonController {
     @PutMapping("/modify/person/{id}")
     public ResponseEntity<CustomResponse> modifyPerson(@PathVariable Long id, @RequestBody PersonDTO personDTO) {
         Person person = personMapper.convertToEntity(personDTO);
-        PersonDTO updatedPersonDTO = personMapper.convertToDTO(personService.modifyPerson(id, person));
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataUpdated", updatedPersonDTO))
+                .data(Map.of("dataUpdated", personMapper.convertToDTO(personService.modifyPerson(id, person))))
                 .message("Person updated!")
                 .build()
         );

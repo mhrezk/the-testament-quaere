@@ -2,6 +2,7 @@ package com.testament.veltahleon.model.entities.society;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Data
@@ -19,6 +20,10 @@ public class Community {
 
     @Column(name = "community_name")
     private String name;
+
+    @Column(name = "community_size")
+    @ColumnDefault("0")
+    private Integer communitySize;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;

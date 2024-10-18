@@ -23,7 +23,10 @@ public class Family {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
+
+    @Column(name = "string_id")
+    private String stringID;
 
     @Column(name = "father_id")
     private String fatherID;

@@ -56,7 +56,7 @@ export class PersonService {
       catchError(this.handleError)
     );
 
-  modifyPerson$ = (personID: number, person: Person) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${personID}`, person)
+  modifyPerson$ = (personID: number, person: Person) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/person/${personID}`, person)
     .pipe(
       tap(console.log),
       catchError(this.handleError)

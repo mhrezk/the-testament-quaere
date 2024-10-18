@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -61,6 +60,10 @@ public class CommunityServiceImpl implements CommunityService {
             newCommunity.setName(community.getName());
         }
 
+        if(community.getCommunitySize() != null && newCommunity.getCommunitySize() != community.getCommunitySize()) {
+            newCommunity.setCommunitySize(community.getCommunitySize());
+        }
+
         if(community.getDescription() != null && newCommunity.getDescription() != community.getDescription()) {
             newCommunity.setDescription(community.getDescription());
         }
@@ -72,7 +75,18 @@ public class CommunityServiceImpl implements CommunityService {
     public Community modifyCommunity(Long id, Community community) {
         Community newCommunity = communityRepository.findById(id).orElseThrow();
         newCommunity.setName(community.getName());
+        newCommunity.setCommunitySize(community.getCommunitySize());
         newCommunity.setDescription(community.getDescription());
         return communityRepository.save(newCommunity);
+    }
+
+    @Override
+    public Long countCommunities() {
+        return communityRepository.count();
+    }
+
+    @Override
+    public void updateCommunitySize(Integer size, Long id) {
+        communityRepository.updateCommunitySize(size, id);
     }
 }

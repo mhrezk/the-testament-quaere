@@ -28,6 +28,7 @@ public class FamilyMapper {
                 //.nation(family.getNation().getName())
                 //.age(family.getAge())
                 .communityName(family.getCommunity().getName())
+                .stringID(family.getStringID())
                 .imageURL(family.getImageURL())
                 .build();
     }
@@ -35,6 +36,7 @@ public class FamilyMapper {
     public Family convertToEntity(FamilyDTO familyDTO) {
         Family family = new Family();
         family.setId(familyDTO.getId());
+        family.setStringID(familyDTO.getStringID());
         family.setFirstName(familyDTO.getFirstName());
         family.setSecondName(familyDTO.getSecondName());
         //family.setAge(familyDTO.getAge());

@@ -48,6 +48,7 @@ export class PersonComponent implements OnInit {
   count$ = this.countSubject.asObservable();
 
   isClicked: boolean = false;
+  isUpdated: boolean = false;
   isTableShown: boolean = false;
   isMasterSelected: boolean = false;
 
@@ -172,6 +173,7 @@ export class PersonComponent implements OnInit {
           });
         })
       );
+    this.getAllPeopleTotal();
   }
 
   deletePerson(person: Person) {
@@ -213,34 +215,34 @@ export class PersonComponent implements OnInit {
       this.personService.deletePerson(person.id).subscribe();
     }
     this.getAllPeopleTotal();
-    window.location.reload();
   }
 
-  // modifyPerson(person: Person) {
-  //   this.isLoading.next(true);
-  //   this.appState$ = this.personService.modifyPerson$(person.id, person).pipe(
-  //     map((result) => {
-  //       const index = this.dataSubject.value.data.dataRetrieved.findIndex(person => person.id === result.data.dataUpdated.id);
-  //       this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated;
-  //       this.isTableShown = true;
-  //       this.isLoading.next(false);
-  //       return {
-  //         dataState: DataState.LOADED,
-  //         appData: this.dataSubject.value
-  //       };
-  //     }),
-  //     startWith({
-  //       dataState: DataState.LOADED,
-  //       appData: this.dataSubject.value
-  //     }),
-  //     catchError((caughtError: string) => {
-  //       return of({
-  //         dataState: DataState.ERROR,
-  //         error: caughtError,
-  //       });
-  //     })
-  //   );
-  // }
+  modifyPerson(person: Person) {
+    this.isLoading.next(true);
+    this.appState$ = this.personService.modifyPerson$(person.id, person).pipe(
+      map((result) => {
+        const index = this.dataSubject.value.data.dataRetrieved.findIndex(person => person.id === result.data.dataUpdated.id);
+        this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated;
+        this.isTableShown = true;
+        this.isUpdated = false;
+        this.isLoading.next(false);
+        return {
+          dataState: DataState.LOADED,
+          appData: this.dataSubject.value
+        };
+      }),
+      startWith({
+        dataState: DataState.LOADED,
+        appData: this.dataSubject.value
+      }),
+      catchError((caughtError: string) => {
+        return of({
+          dataState: DataState.ERROR,
+          error: caughtError,
+        });
+      })
+    );
+  }
 
   filterPeopleByGender(event: Event): void {
     const genderValue: String = (event.target as HTMLInputElement).value;

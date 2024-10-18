@@ -54,8 +54,8 @@ export class CustomSidenavComponent {
     },
     {
       icon: "diversity_3",
-      label: "Family Trees",
-      route: "family-tree-balkan"
+      label: "Communities",
+      route: "communities"
     },
     {
       icon: "account_tree",

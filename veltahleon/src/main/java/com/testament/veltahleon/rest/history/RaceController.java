@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,15 +28,17 @@ public class RaceController {
     @Autowired
     private RaceService raceService;
 
+    public final String imagePath = "src/main/resources/assets/images/races/";
+
     @GetMapping("/races")
     public ResponseEntity<CustomResponse> getPaginatedRaces(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        List<Race> races = (List<Race>) raceService.getRacesWithPagination(pageNumber, pageSize);
+        List<Race> races = (List<Race>) raceService.getRacesWithPagination((pageNumber - 1), pageSize);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", races))
-                .message(races.size() + " races retrieved from page: " + (pageNumber + 1))
+                .message(races.size() + " races retrieved from page: " + pageNumber)
                 .build()
         );
     }
@@ -49,6 +52,18 @@ public class RaceController {
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", races))
                 .message("All races retrieved!")
+                .build()
+        );
+    }
+
+    @GetMapping("/races/all/count")
+    public ResponseEntity<CustomResponse> getAllRacesCount() {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", raceService.countRaces()))
+                .message("Count retrieved!")
                 .build()
         );
     }
@@ -77,9 +92,21 @@ public class RaceController {
         );
     }
 
-    @GetMapping(value = "/race/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE})
-    public byte[] getRaceImage(@PathVariable("fileName") String fileName) throws IOException {
-        return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/races/" + fileName));
+    @GetMapping("/race/{raceName}/exist")
+    public ResponseEntity<CustomResponse> getPersonNameExistence(@PathVariable(value = "raceName") String raceName) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", raceService.doesRaceNameExist(raceName)))
+                .message("Race name exists!")
+                .build()
+        );
+    }
+
+    @GetMapping(path = "/races/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getPersonalImage(@PathVariable("imageName") String imageName) throws IOException {
+        return Files.readAllBytes(Path.of(imagePath + imageName));
     }
 
     @DeleteMapping("/delete/race/{id}")
@@ -118,13 +145,13 @@ public class RaceController {
         );
     }
 
-    @PutMapping("/update/race")
-    public ResponseEntity<CustomResponse> updateRace(@RequestBody Race race) {
+    @PutMapping("/modify/race/{id}")
+    public ResponseEntity<CustomResponse> modifyRace(@PathVariable Long id, @RequestBody Race race) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataUpdated", raceService.updateRace(race)))
+                .data(Map.of("dataUpdated", raceService.modifyRace(id, race)))
                 .message("Race updated!")
                 .build()
         );

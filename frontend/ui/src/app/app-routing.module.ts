@@ -15,6 +15,12 @@ import {PersonDetailsComponent} from "./components/pages/society/person-details/
 import {
   TimelineDisplayComponent
 } from "./components/pages/history/timeline/timeline-display/timeline-display.component";
+import {CommunityComponent} from "./components/pages/society/community/community.component";
+import {
+  CommunityDisplayComponent
+} from "./components/pages/society/community/community-display/community-display.component";
+import {FamilyTreeComponent} from "./components/pages/society/community/family-tree/family-tree.component";
+import {RaceDisplayComponent} from "./components/pages/history/race/race-display/race-display.component";
 //import {LineageTreeComponent} from "./components/pages/society/lineage-tree/lineage-tree.component";
 
 const routes: Routes = [
@@ -48,6 +54,10 @@ const routes: Routes = [
     component: RaceComponent
   },
   {
+    path: "races/:id/:name",
+    component: RaceDisplayComponent
+  },
+  {
     path: "organizations",
     component: OrganizationComponent
   },
@@ -63,8 +73,20 @@ const routes: Routes = [
     component: FamilyTreeBalkanComponent
   },
   {
+    path: "communities",
+    component: CommunityComponent
+  },
+  {
+    path: "communities/:id/:name",
+    component: CommunityDisplayComponent
+  },
+  {
     path: "family-tree-balkan/:firstName/:secondName",
     component: FamilyTreeBalkanComponent
+  },
+  {
+    path: "family-tree/:id/:name/:size",
+    component: FamilyTreeComponent
   },
   {
     path: "hierarchy",

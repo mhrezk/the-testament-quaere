@@ -5,17 +5,23 @@
     @if(personDetails.value.data?.datumRetrieved?.imageURL.split("/")[personDetails.value.data?.datumRetrieved?.imageURL.split("/").length - 1] === "default.png") {
       <h3 style="text-align: center">Default Image</h3>
     }
-    <button style="display: block; margin: 0 auto;"
-            (click)="isFamilyTree = true;
-            this.family = this.familyNodeSubject.value;
-            routeToFamilyTree(personDetails.value.data?.datumRetrieved?.firstName, personDetails.value.data?.datumRetrieved?.secondName);">Family Tree</button>
+<!--    <button style="display: block; margin: 0 auto;"-->
+<!--            (click)="isFamilyTree = true;-->
+<!--            this.family = this.familyNodeSubject.value;-->
+<!--            routeToFamilyTree(personDetails.value.data?.datumRetrieved?.firstName, personDetails.value.data?.datumRetrieved?.secondName);">Family Tree</button>-->
   </div>
 
   <div class="details-container">
     <h2>
-      <a [routerLink]="'/people'">
+      <fa-icon [icon]="faCircleArrowLeft"
+               [style.color]="'red'"
+               [title]="'Return to People'"
+               (click)="routeToPeople()"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+      <b>
         {{ personDetails.value.data?.datumRetrieved?.firstName }} {{ personDetails.value.data?.datumRetrieved?.secondName }} @if(personDetails.value.data?.datumRetrieved?.epithet !== "None") { {{ personDetails.value.data?.datumRetrieved?.epithet }} }
-      </a>
+      </b>
       &nbsp;
       <span style="float: right">
                   <fa-icon [icon]="faEdit"
@@ -126,6 +132,6 @@
   <div [innerHTML]="personDetails.value.data?.datumRetrieved?.biography"></div>
 }
 
-@if(isFamilyTree) {
-  <app-family-tree [familyNode]="family"></app-family-tree>
-}
+<!--@if(isFamilyTree) {-->
+<!--  <app-family-tree [familyNode]="family"></app-family-tree>-->
+<!--}-->

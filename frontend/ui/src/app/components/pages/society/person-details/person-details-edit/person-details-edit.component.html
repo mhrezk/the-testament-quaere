@@ -62,7 +62,7 @@
     <div class="detail-item">
       <strong>Militaristic Rank:</strong>
       <mat-form-field appearance="outline">
-        <input matInput name="rank" [(ngModel)]="personDetails.rank" />
+        <input matInput name="rank" [(ngModel)]="personDetails.rank" placeholder="Enter militaristic rank if available"/>
       </mat-form-field>
     </div>
 
@@ -92,7 +92,7 @@
         <input matInput name="birthYear" [(ngModel)]="personDetails.birthYear" type="number" placeholder="Year" />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <input matInput name="birthYearAbbreviation" [(ngModel)]="personDetails.birthYearAbbreviation" type="number" placeholder="Birth Year Abbreviation" />
+        <input matInput name="birthYearAbbreviation" [(ngModel)]="personDetails.birthYearAbbreviation" type="text" placeholder="Year Abbr." />
       </mat-form-field>
     </div>
 
@@ -108,7 +108,7 @@
         <input matInput name="deathYear" [(ngModel)]="personDetails.deathYear" type="number" placeholder="Year" />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <input matInput name="deathYearAbbreviation" [(ngModel)]="personDetails.deathYearAbbreviation" type="number" placeholder="Death Year Abbreviation" />
+        <input matInput name="deathYearAbbreviation" [(ngModel)]="personDetails.deathYearAbbreviation" type="text" placeholder="Year Abbr." />
       </mat-form-field>
     </div>
 

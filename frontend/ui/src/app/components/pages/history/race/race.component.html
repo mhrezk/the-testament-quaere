@@ -22,17 +22,55 @@
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+          <div *ngIf="isTableShown">
+            <span>
+              Number of records:
+              <select (change)="onTableSizeChange($event)">
+                <option *ngFor="let size of tableSizes">
+                  {{ size }}
+                </option>
+              </select>
+            </span>
+            <br>
+            <br>
+            <input
+              [(ngModel)]="isMasterSelected"
+              type="checkbox"
+              (change)="checkUncheckAll()"
+              style="cursor: pointer"
+            >
+            &nbsp;&nbsp;&nbsp;
+            <span>Select/Deselect All</span>
+            &nbsp;
+            @if (hasSelected()) {
+              <button type="button" class="btn btn-danger" (click)="deleteRaces(this.checkedRaces)">Delete Selection
+              </button>
+            }
+          </div>
           <table *ngIf="isTableShown" class="table table-striped table-hover" id="days">
             <thead>
             <tr>
+              <th></th>
               <th *ngFor="let header of headers">{{ header.value }}</th>
               <th></th>
               <th>Actions</th>
             </tr>
             </thead>
-            <tbody *ngFor="let race of appState.appData?.data.dataRetrieved; let i = index;">
+            <tbody *ngFor="let race of appState.appData?.data.dataRetrieved
+            | paginate: {
+              itemsPerPage: tableSize,
+              currentPage: currentPage,
+              totalItems: count$ | async
+            }; let i = index;">
             <tr>
-              <td>{{ race.name }}</td>
+              <td>
+                <input
+                  [(ngModel)]="race.isSelected"
+                  type="checkbox"
+                  (change)="isAllSelected()"
+                  style="cursor: pointer"
+                ></td>
+              <td><u style="cursor: pointer" (click)="routeToDisplay(race.id, race.name)">{{ race.name }}</u></td>
               <td></td>
               <td>
                   <span>
@@ -56,39 +94,44 @@
         <ng-container *ngSwitchCase="DATA_STATE.ERROR">
           <div [hidden]="isUpdated || isClicked" style="background-color: indianred">{{ appState.error }}</div>
         </ng-container>
+        <pagination-controls
+          *ngIf="isTableShown"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
       </ng-container>
     </div>
   </div>
 </div>
 
 <!-- Add Race -->
-<div *ngIf="isClicked" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
-     aria-hidden="true">
+<div *ngIf="isClicked" class="modal-container">
   <div class="modal-dialog">
     <div class="modal-content">
       <form #raceForm="ngForm" (ngSubmit)="saveRace(raceForm)">
         <div class="modal-header">
           <h4 class="modal-title">Add Race</h4>
+          <button type="button" class="close-button" (click)="isClicked = false; isTableShown = true">×</button>
         </div>
+        <br>
         <div class="modal-body">
           <div class="form-group">
-            <label>Race Name</label>
-            <input type="text" ngModel name="name" class="form-control" required>
+            <label>Name</label>
+            <input type="text" id="name" ngModel name="name" class="form-input" placeholder="Enter Name" required>
           </div>
           <div class="form-group">
-            <label>Race Description</label>
-            <input type="text" ngModel name="description" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Image URL</label>
-            <input type="text" ngModel name="imageURL" class="form-control" required>
+            <label>Description</label>
+            <textarea type="text" ngModel name="description" class="form-input"
+                      placeholder="Enter Description"></textarea>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" (click)="isClicked = false; isTableShown = true">Close</button>
-          <button type="submit" [disabled]="isLoading$ | async"
-                  class="btn btn-success">
-            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
+          <button type="button" class="cancel-button" (click)="isClicked = false; isTableShown = true">Close</button>
+          <button type="submit" [ngClass]="{'disabled': raceForm.invalid}"
+                  [disabled]="(isLoading$ | async) || raceForm.invalid" class="submit-button">
+            <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
             <span *ngIf="isLoading$ | async">Saving...</span>
             <span *ngIf="!(isLoading$ | async)">Add</span>
           </button>
@@ -99,38 +142,53 @@
 </div>
 
 <!-- Edit Race -->
-<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
-     aria-hidden="true">
+<div *ngIf="isUpdated" class="modal-container">
   <div class="modal-dialog">
     <div class="modal-content">
       <form (ngSubmit)="modifyRace(selectedRace)">
         <div class="modal-header">
-          <h4 class="modal-title">Edit Person</h4>
+          <h4 class="modal-title">Edit Race</h4>
+          <button type="button" class="close-button" (click)="isUpdated = false; isTableShown = true">×</button>
         </div>
+        <br>
         <div class="modal-body">
           <div class="form-group">
-            <label>Race Name</label>
-            <input type="text" [(ngModel)]="selectedRace.name" name="name" class="form-control" required>
+            <label>Name</label>
+            <input type="text" [(ngModel)]="selectedRace.name" name="name" class="form-input" required>
+            <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
           </div>
           <div class="form-group">
-            <label>Race Description</label>
-            <input type="text" [(ngModel)]="selectedRace.description" name="description" class="form-control" required>
+            <label>Description</label>
+            <textarea type="text" [(ngModel)]="selectedRace.description" name="description"
+                      class="form-input"></textarea>
           </div>
-          <div class="form-group">
-            <label>Image URL</label>
-            <input type="text" [(ngModel)]="selectedRace.imageURL" name="imageURL" class="form-control" required>
+          <div class="modal-footer">
+            <button type="button" class="cancel-button" (click)="isUpdated = false; isTableShown = true">Close</button>
+            <button type="submit" [ngClass]="{'disabled': isLoading$ | async}" [disabled]="isLoading$ | async"
+                    class="submit-button">
+              <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+              <span *ngIf="isLoading$ | async">Updating...</span>
+              <span *ngIf="!(isLoading$ | async)">Update</span>
+            </button>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" (click)="isUpdated = false; isTableShown = true">Close</button>
-          <button type="submit" [disabled]="isLoading$ | async"
-                  class="btn btn-success">
-            <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
-            <span *ngIf="isLoading$ | async">Updating...</span>
-            <span *ngIf="!(isLoading$ | async)">Update</span>
-          </button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div *ngIf="showError" class="overlay">
+  <div class="error-container">
+    <div class="error-header">
+      Error
+      <button style="float:right" type="button" class="close-button" (click)="showError = false; isTableShown = true">×</button>
+    </div>
+    <div class="error-body">
+      The racial name <strong><u>{{ enteredName }}</u></strong> {{ errorMessage }}
+    </div>
+    <div class="error-footer">
+      <button class="close-btn" (click)="showError = false; isTableShown = true;">Close Window</button>
     </div>
   </div>
 </div>

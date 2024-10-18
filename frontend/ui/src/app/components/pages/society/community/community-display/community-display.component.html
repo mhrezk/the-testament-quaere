@@ -1,0 +1,34 @@
+<h1 style="cursor: pointer;">
+  <fa-icon [icon]="faCircleArrowLeft"
+           [style.color]="'red'"
+           [title]="'Return to Communities'"
+           (click)="routeToCommunities()"
+           [style.cursor]="'pointer'">
+  </fa-icon>
+  &nbsp;
+  <b>
+    <u>{{ selectedCommunity.name }}</u>
+  </b>
+  <button style="float: right" class="stylized-button" (click)="routeToFamilyTree(selectedCommunity.id, selectedCommunity.name, selectedCommunity.communitySize)">
+    <i class="fas fa-users"></i> Family Tree
+  </button>
+</h1>
+<h2>
+  Description
+  <fa-icon [icon]="faEdit"
+           [style.color]="'blue'"
+           [title]="'Edit Description'"
+           (click)="isEditing = !isEditing;"
+           [style.cursor]="'pointer'">
+  </fa-icon>
+</h2>
+<hr>
+@if(isEditing) {
+  <st-editor [(ngModel)]="selectedCommunity.description" [config]="config"></st-editor>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="isEditing = false">Close Text Editor</button>
+    <button type="button" class="btn btn-success" (click)="updateDescription()">Update Description</button>
+  </div>
+} @else {
+  <div [innerHTML]="selectedCommunity.description"></div>
+}

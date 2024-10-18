@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, throwError} from "rxjs";
+import {BehaviorSubject, Observable, throwError} from "rxjs";
 import {CustomResponse} from "../../../../interfaces/custom-response";
 import {catchError, tap} from "rxjs/operators";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
@@ -12,6 +12,12 @@ import { Race } from '../../../../interfaces/models/history/race';
 })
 export class RaceService {
   private baseURL: string = `${environment.API_URL}/history`;
+
+  raceName = new BehaviorSubject<string>("");
+  getRaceName$ = this.raceName.asObservable();
+
+  raceID = new BehaviorSubject<number>(0);
+  getRaceID$ = this.raceID.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -27,11 +33,19 @@ export class RaceService {
       catchError(this.handleError)
     );
 
+  getAllRacesCount() {
+    return this.http.get<CustomResponse>(`${this.baseURL}/races/all/count`)
+  }
+
   getRaceByID$ = (raceID: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/race/${raceID}`)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
+
+  getRaceBydID(raceID: number) {
+    return this.http.get<CustomResponse>(`${this.baseURL}/race/${raceID}`);
+  }
 
   getRaceByName$ = (raceName: string) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/race?name=${raceName}`)
     .pipe(
@@ -43,26 +57,34 @@ export class RaceService {
     return this.http.get<CustomResponse>(`${this.baseURL}/race/${raceID}`);
   }
 
+  doesRaceNameExist(raceName: string) {
+    return this.http.get<CustomResponse>(`${this.baseURL}/race/${raceName}/exist`);
+  }
+
   saveRace$ = (race: Race) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/save/race`, race)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
 
-  updateRace$ = (raceID: number, race: Race) => <Observable<CustomResponse>>this.http.patch<CustomResponse>(`${this.baseURL}/update/person/${raceID}`, race)
+  updateRace$ = (raceID: number, race: Race) => <Observable<CustomResponse>>this.http.patch<CustomResponse>(`${this.baseURL}/update/race/${raceID}`, race)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
 
-  modifyRace$ = (race: Race) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/race`, race)
+  updateRace(raceID: number, race: Race) {
+    return this.http.patch<CustomResponse>(`${this.baseURL}/update/race/${raceID}`, race);
+  }
+
+  modifyRace$ = (raceID: number, race: Race) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/race/${raceID}`, race)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
 
-  public modifyRace(race: Race): Observable<CustomResponse> {
-    return this.http.put<CustomResponse>(`${this.baseURL}/update/race`, race);
+  public modifyRace(raceID: number, race: Race): Observable<CustomResponse> {
+    return this.http.put<CustomResponse>(`${this.baseURL}/modify/race/${raceID}`, race);
   }
 
   deleteRace$ = (raceID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/race/${raceID}`)
@@ -70,6 +92,15 @@ export class RaceService {
       tap(console.log),
       catchError(this.handleError)
     );
+
+  deleteRace(raceID: number) {
+    return this.http.delete<CustomResponse>(`${this.baseURL}/delete/race/${raceID}`);
+  }
+
+  setRaceDetails(raceID: number, raceName: string) {
+    this.raceID.next(raceID);
+    this.raceName.next(raceName);
+  }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);

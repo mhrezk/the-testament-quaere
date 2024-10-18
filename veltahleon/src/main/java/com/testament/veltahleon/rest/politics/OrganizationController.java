@@ -29,13 +29,13 @@ public class OrganizationController {
 
     @GetMapping("/organizations")
     public ResponseEntity<CustomResponse> getPaginatedOrganizations(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        List<Organization> organizations = (List<Organization>) organizationService.getOrganizationsWithPagination(pageNumber, pageSize);
+        List<Organization> organizations = (List<Organization>) organizationService.getOrganizationsWithPagination((pageNumber - 1), pageSize);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", organizations))
-                .message(organizations.size() + " organizations retrieved from page: " + (pageNumber + 1))
+                .message(organizations.size() + " organizations retrieved from page: " + pageNumber)
                 .build()
         );
     }

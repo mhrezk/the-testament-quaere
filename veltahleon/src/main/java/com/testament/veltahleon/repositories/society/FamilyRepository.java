@@ -7,9 +7,11 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface FamilyRepository extends JpaRepository<Family, String> {
+public interface FamilyRepository extends JpaRepository<Family, Long> {
     Collection<Family> findByCommunity_Name(String name);
     Collection<Family> findByFatherID(String fatherID);
     Collection<Family> findByMotherID(String motherID);
     Family findByFirstNameAndSecondName(String firstName, String secondName);
+    Family findByStringID(String ID);
+    long countByCommunity_Name(String name);
 }

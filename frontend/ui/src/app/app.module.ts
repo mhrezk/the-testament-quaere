@@ -58,6 +58,8 @@ import { FamilyMemberNodeComponent } from './components/pages/society/pedigree-t
 import { FamilyMemberFormComponent } from './components/pages/society/pedigree-tree/family-member-form/family-member-form.component';
 import { CommunityComponent } from './components/pages/society/community/community.component';
 import { FamilyTreeComponent } from './components/pages/society/community/family-tree/family-tree.component';
+import { CommunityDisplayComponent } from './components/pages/society/community/community-display/community-display.component';
+import { RaceDisplayComponent } from './components/pages/history/race/race-display/race-display.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { FamilyTreeComponent } from './components/pages/society/community/family
     FamilyMemberNodeComponent,
     FamilyMemberFormComponent,
     CommunityComponent,
-    FamilyTreeComponent
+    FamilyTreeComponent,
+    CommunityDisplayComponent,
+    RaceDisplayComponent
   ],
   imports: [
     BrowserModule,

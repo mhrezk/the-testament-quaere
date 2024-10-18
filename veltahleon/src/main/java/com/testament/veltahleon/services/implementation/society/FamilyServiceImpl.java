@@ -1,6 +1,7 @@
 package com.testament.veltahleon.services.implementation.society;
 
 import com.testament.veltahleon.model.entities.society.Family;
+import com.testament.veltahleon.repositories.society.CommunityRepository;
 import com.testament.veltahleon.repositories.society.FamilyRepository;
 import com.testament.veltahleon.services.ifc.society.FamilyService;
 import jakarta.transaction.Transactional;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,15 +21,41 @@ public class FamilyServiceImpl implements FamilyService {
     @Autowired
     private FamilyRepository familyRepository;
 
+    @Autowired
+    private CommunityRepository communityRepository;
+
     @Override
-    public Collection<Family> getFamilyByCommunityName(String communityName) {
+    public Collection<Family> getFamiliesByCommunityName(String communityName) {
         return familyRepository.findByCommunity_Name(communityName);
     }
 
     @Override
-    public Boolean deleteByID(String id) {
+    public Collection<Family> saveFamilies(Collection<Family> families, Integer size, Long communityID) {
+        familyRepository.deleteAll();
+        communityRepository.updateCommunitySize(size, communityID);
+        return familyRepository.saveAll(families);
+    }
+
+    @Override
+    public Boolean deleteFamilyByID(Long id) {
         familyRepository.deleteById(id);
         return Boolean.TRUE;
+    }
+
+    @Override
+    public Boolean deleteAllFamilies() {
+        familyRepository.deleteAll();
+        return Boolean.TRUE;
+    }
+
+    @Override
+    public Family getFamilyByID(Long id) {
+        return familyRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public Family getFamilyByStringID(String id) {
+        return familyRepository.findByStringID(id);
     }
 
     @Override
@@ -38,8 +64,12 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     @Override
-    public Family updateFamily(String id, Family family) {
+    public Family updateFamily(Long id, Family family) {
         Family newFamily = familyRepository.findById(id).orElseThrow();
+
+        if(family.getStringID() != null && newFamily.getStringID() != family.getStringID()) {
+            newFamily.setStringID(family.getStringID());
+        }
 
         if(family.getFirstName() != null && newFamily.getFirstName() != family.getFirstName()) {
             newFamily.setFirstName(family.getFirstName());
@@ -77,8 +107,9 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     @Override
-    public Family modifyFamily(String id, Family family) {
+    public Family modifyFamily(Long id, Family family) {
         Family newFamily = familyRepository.findById(id).orElseThrow();
+        newFamily.setStringID(family.getStringID());
         newFamily.setFirstName(family.getFirstName());
         newFamily.setSecondName(family.getSecondName());
         newFamily.setFatherID(family.getFatherID());
@@ -88,5 +119,10 @@ public class FamilyServiceImpl implements FamilyService {
         newFamily.setImageURL(family.getImageURL());
         newFamily.setCommunity(family.getCommunity());
         return familyRepository.save(newFamily);
+    }
+
+    @Override
+    public Long countFamiliesByCommunityName(String name) {
+        return familyRepository.countByCommunity_Name(name);
     }
 }

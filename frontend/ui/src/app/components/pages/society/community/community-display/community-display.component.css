@@ -1,0 +1,22 @@
+/*Button Design*/
+.stylized-button {
+  background: #27ae60;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.stylized-button:hover {
+  background: #218c53;
+}
+
+.stylized-button i {
+  font-size: 18px;
+}

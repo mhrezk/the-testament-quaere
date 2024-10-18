@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.82.0] 2024-10-18
+
+- Implemented fully functional family tree
+- Edited modal for Race entity in Angular
+- Added checkboxes for Race records in Angular
+- Corrected incorrect API endpoints
+
 ## [0.81.0] 2024-10-15
 
 - Implemented design for Balkan family tree

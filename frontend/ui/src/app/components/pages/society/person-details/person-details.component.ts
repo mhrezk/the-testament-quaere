@@ -8,11 +8,10 @@ import {PersonDetailsService} from "../../../../services/models/society/person-d
 import {PersonService} from "../../../../services/models/society/person/person.service";
 import {
   faTrash,
-  faEdit,
+  faEdit, faCircleArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {Gender} from "../../../../enums/gender";
 import {Family} from "../../../../interfaces/models/society/family";
 
 @Component({
@@ -27,6 +26,7 @@ export class PersonDetailsComponent implements OnInit {
 
   faTrash = faTrash;
   faEdit = faEdit;
+  faCircleArrowLeft = faCircleArrowLeft;
 
   firstName: string;
   secondName: string;
@@ -70,14 +70,6 @@ export class PersonDetailsComponent implements OnInit {
       this.selectedPersonDetails = result.data.datumRetrieved;
       this.personDetails.next(result);
       console.log(this.selectedPersonDetails);
-      // this.peronDetailsFamilyMap = {
-      //   firstName: result.data.datumRetrieved.firstName,
-      //   secondName: result.data.datumRetrieved.secondName,
-      //   gender: result.data.datumRetrieved.gender,
-      // };
-
-      this.familyNodeSubject.next(this.peronDetailsFamilyMap);
-      console.log(this.familyNodeSubject.value);
     });
   }
 
@@ -104,12 +96,11 @@ export class PersonDetailsComponent implements OnInit {
   //   console.log('Form Submitted!', form.value);
   // }
 
-  routeToFamilyTree(firstName: string, secondName: string) {
-    this.router.navigateByUrl(`/family-tree/${firstName}/${secondName}`)
+  routeToPeople() {
+    this.router.navigate(['/people']);
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    console.log(error);
-    return throwError(`Error: ${error.error.issue}`);
+  routeToFamilyTree(firstName: string, secondName: string) {
+    this.router.navigateByUrl(`/family-tree/${firstName}/${secondName}`)
   }
 }
