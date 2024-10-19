@@ -3,17 +3,15 @@ package com.testament.veltahleon.model.entities.history;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
-@Table(name = "races")
+@Table(name = "sub_races")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class Race {
+public class SubRace {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +26,10 @@ public class Race {
     @Column(name = "image_URL")
     private String imageURL;
 
-//    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-//            CascadeType.DETACH,
-//            CascadeType.MERGE,
-//            CascadeType.PERSIST})
-//    @JoinColumn(name = "race_id")
-//    private List<SubRace> subRaces;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "race_id", referencedColumnName = "id")
+    private Race race;
 }

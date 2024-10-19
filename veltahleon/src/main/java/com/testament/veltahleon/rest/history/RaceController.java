@@ -93,7 +93,7 @@ public class RaceController {
     }
 
     @GetMapping("/race/{raceName}/exist")
-    public ResponseEntity<CustomResponse> getPersonNameExistence(@PathVariable(value = "raceName") String raceName) {
+    public ResponseEntity<CustomResponse> getRaceNameExistence(@PathVariable(value = "raceName") String raceName) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -105,7 +105,7 @@ public class RaceController {
     }
 
     @GetMapping(path = "/races/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
-    public byte[] getPersonalImage(@PathVariable("imageName") String imageName) throws IOException {
+    public byte[] getRacialImage(@PathVariable("imageName") String imageName) throws IOException {
         return Files.readAllBytes(Path.of(imagePath + imageName));
     }
 

@@ -60,6 +60,7 @@ import { CommunityComponent } from './components/pages/society/community/communi
 import { FamilyTreeComponent } from './components/pages/society/community/family-tree/family-tree.component';
 import { CommunityDisplayComponent } from './components/pages/society/community/community-display/community-display.component';
 import { RaceDisplayComponent } from './components/pages/history/race/race-display/race-display.component';
+import { SubRaceComponent } from './components/pages/history/race/sub-race/sub-race.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { RaceDisplayComponent } from './components/pages/history/race/race-displ
     CommunityComponent,
     FamilyTreeComponent,
     CommunityDisplayComponent,
-    RaceDisplayComponent
+    RaceDisplayComponent,
+    SubRaceComponent
   ],
   imports: [
     BrowserModule,

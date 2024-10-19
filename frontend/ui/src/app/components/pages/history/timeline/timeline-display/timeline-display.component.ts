@@ -10,7 +10,6 @@ import {catchError} from "rxjs/operators";
 import {NgForm} from "@angular/forms";
 import {TimelineService} from "../../../../../services/models/history/timeline/timeline.service";
 import {Router} from "@angular/router";
-import {result} from "lodash";
 
 @Component({
   selector: 'app-timeline-display',

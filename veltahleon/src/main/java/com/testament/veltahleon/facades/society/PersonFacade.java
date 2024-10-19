@@ -3,6 +3,7 @@ package com.testament.veltahleon.facades.society;
 import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.history.Race;
+import com.testament.veltahleon.model.entities.history.SubRace;
 import com.testament.veltahleon.model.entities.places.Nation;
 import com.testament.veltahleon.model.entities.politics.Rank;
 import com.testament.veltahleon.model.entities.society.Job;
@@ -10,6 +11,7 @@ import com.testament.veltahleon.model.entities.society.Person;
 import com.testament.veltahleon.model.entities.society.Title;
 import com.testament.veltahleon.services.ifc.calendar.YearService;
 import com.testament.veltahleon.services.ifc.history.RaceService;
+import com.testament.veltahleon.services.ifc.history.SubRaceService;
 import com.testament.veltahleon.services.ifc.places.NationService;
 import com.testament.veltahleon.services.ifc.politics.RankService;
 import com.testament.veltahleon.services.ifc.dogma.ReligionService;
@@ -30,6 +32,9 @@ public class PersonFacade {
 
     @Autowired
     public RaceService raceService;
+
+    @Autowired
+    public SubRaceService subRaceService;
 
     @Autowired
     public ReligionService religionService;
@@ -55,6 +60,10 @@ public class PersonFacade {
 
     public Race getRace(String raceName) {
         return raceService.getRaceByName(raceName);
+    }
+
+    public SubRace getSubRace(String subRaceName) {
+        return subRaceService.getSubRaceByName(subRaceName);
     }
 
     public Religion getReligion(String religionName) {

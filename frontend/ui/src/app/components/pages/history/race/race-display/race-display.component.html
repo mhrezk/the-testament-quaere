@@ -14,18 +14,19 @@
                (click)="routeToRaces()"
                [style.cursor]="'pointer'">
       </fa-icon>
+      Race:
       <b>
         {{ race.value.data?.datumRetrieved?.name }}
       </b>
       &nbsp;
       <span style="float: right">
-                  <fa-icon [icon]="faEdit"
-                           [style.color]="'blue'"
-                           [title]="'Edit Racial Details'"
-                           (click)="isEditing = true;"
-                           [style.cursor]="'pointer'">
-                  </fa-icon>
-                  &nbsp;
+<!--                  <fa-icon [icon]="faEdit"-->
+<!--                           [style.color]="'blue'"-->
+<!--                           [title]="'Edit Racial Details'"-->
+<!--                           (click)="isEditing = true;"-->
+<!--                           [style.cursor]="'pointer'">-->
+<!--                  </fa-icon>-->
+<!--                  &nbsp;-->
                   <fa-icon [icon]="faTrash"
                            [title]="'Delete Race'"
                            (click)="deleteRace(race.value.data?.datumRetrieved?.id)"
@@ -35,10 +36,9 @@
     </h2>
 
     <mat-divider></mat-divider>
-
-    <div class="detail-item">
-      <strong>Sub Races:</strong>
-    </div>
+    <button style="float: right" class="stylized-button" (click)="routeToSubRaces(selectedRace.id, selectedRace.name)">
+      <i class="fas fa-users"></i> Sub-races
+    </button>
   </div>
 </div>
 

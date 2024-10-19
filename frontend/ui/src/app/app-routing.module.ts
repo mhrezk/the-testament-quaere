@@ -21,6 +21,7 @@ import {
 } from "./components/pages/society/community/community-display/community-display.component";
 import {FamilyTreeComponent} from "./components/pages/society/community/family-tree/family-tree.component";
 import {RaceDisplayComponent} from "./components/pages/history/race/race-display/race-display.component";
+import {SubRaceComponent} from "./components/pages/history/race/sub-race/sub-race.component";
 //import {LineageTreeComponent} from "./components/pages/society/lineage-tree/lineage-tree.component";
 
 const routes: Routes = [
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: "races/:id/:name",
     component: RaceDisplayComponent
+  },
+  {
+    path: "sub-races/race/:id/:name",
+    component: SubRaceComponent
   },
   {
     path: "organizations",

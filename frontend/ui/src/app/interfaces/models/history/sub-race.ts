@@ -1,9 +1,9 @@
-export interface Race {
+export interface SubRace {
   id: number;
   name: string;
   description: string;
   imageURL: string;
-  //subRaces: string[];
+  race: string;
 
   isSelected: boolean;
 }

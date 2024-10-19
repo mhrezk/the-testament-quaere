@@ -1,36 +1,35 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BehaviorSubject, map, Observable, of, startWith} from "rxjs";
-import {catchError} from "rxjs/operators";
-import {NgForm} from "@angular/forms";
+import {AppState} from "../../../../../interfaces/app-state";
+import {CustomResponse} from "../../../../../interfaces/custom-response";
+import {DataState} from "../../../../../enums/data-state";
 import {
   faTrash,
-  faEdit,
+  faEdit, faCircleArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
-
-import {AppState} from "../../../../interfaces/app-state";
-import {CustomResponse} from "../../../../interfaces/custom-response";
-import {DataState} from "../../../../enums/data-state";
-import { RaceService } from '../../../../services/models/history/race/race.service';
-import { Race } from '../../../../interfaces/models/history/race';
-import {Router} from "@angular/router";
+import {SubRace} from "../../../../../interfaces/models/history/sub-race";
+import {ActivatedRoute, Router} from "@angular/router";
+import {SubRaceService} from "../../../../../services/models/history/sub-race/sub-race.service";
+import {catchError} from "rxjs/operators";
+import {NgForm} from "@angular/forms";
 
 @Component({
-  selector: 'app-race',
-  templateUrl: './race.component.html',
-  styleUrl: './race.component.css'
+  selector: 'app-sub-race',
+  templateUrl: './sub-race.component.html',
+  styleUrl: './sub-race.component.css'
 })
-export class RaceComponent implements OnInit {
+export class SubRaceComponent implements OnInit {
   currentPage: number  = 1;
   tableSize: number = 5;
   count: number = 0;
   tableSizes: number[] = [5, 10, 20];
 
+  selectedSubRace: SubRace;
+  subRaces: SubRace[] = [];
+  checkedSubRaces: SubRace[] = [];
+
   countSubject = new BehaviorSubject<number>(0)
   count$ = this.countSubject.asObservable();
-
-  selectedRace: Race;
-  races: Race[] = [];
-  checkedRaces: Race[] = [];
 
   appState$: Observable<AppState<CustomResponse>>;
   protected readonly DATA_STATE = DataState;
@@ -45,6 +44,8 @@ export class RaceComponent implements OnInit {
   showError: boolean = false;
 
   enteredName: string;
+  raceName: string;
+  raceID: string;
 
   doesExist = new BehaviorSubject<CustomResponse>(null);
 
@@ -52,42 +53,44 @@ export class RaceComponent implements OnInit {
 
   faTrash = faTrash;
   faEdit = faEdit;
+  faCircleArrowLeft = faCircleArrowLeft;
 
   headers = [
     {
       key: 'name',
-      value: 'Race',
-    },
-    // {
-    //   key: 'description',
-    //   value: 'Description'
-    // }
+      value: 'Sub-race',
+    }
   ];
 
-
-  constructor(private raceService: RaceService,
+  constructor(private subRaceService: SubRaceService,
               private router: Router,
-              /*private changeDetection: ChangeDetectorRef*/) {}
+              private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.getPaginatedRaces(this.currentPage, this.tableSize);
-    this.getAllRacesTotal();
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.raceName = params.get("name");
+    });
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.raceID = params.get("id");
+    });
+    this.getPaginatedSubRacesByRaceName(this.raceName, this.currentPage, this.tableSize);
+    this.getAllSubRacesTotal();
   }
 
-  getAllRacesTotal() {
-    this.raceService.getAllRacesCount().subscribe(
+  getAllSubRacesTotal() {
+    this.subRaceService.getAllSubRacesCount().subscribe(
       result => {
         this.countSubject.next(result.data.datumRetrieved);
       }
     )
   }
 
-  getPaginatedRaces(pageNumber: number, pageSize: number) {
+  getPaginatedSubRaces(pageNumber: number, pageSize: number) {
     this.isTableShown = true;
-    this.appState$ = this.raceService.getPaginatedRaces$(pageNumber, pageSize)
+    this.appState$ = this.subRaceService.getPaginatedSubRaces$(pageNumber, pageSize)
       .pipe(
         map((result) => {
-          this.races = result.data.dataRetrieved;
+          this.subRaces = result.data.dataRetrieved;
           this.dataSubject.next(result);
           return {
             dataState: DataState.LOADED,
@@ -107,32 +110,55 @@ export class RaceComponent implements OnInit {
       );
   }
 
-  getRaceByID(raceID: number) {
-    this.raceService.getRaceByID(raceID).subscribe(result => {
-      this.selectedRace = result.data.datumRetrieved;
-    })
+  getPaginatedSubRacesByRaceName(raceName: string, pageNumber: number, pageSize: number) {
+    this.isTableShown = true;
+    this.appState$ = this.subRaceService.getPaginatedSubRacesByRaceName$(raceName, pageNumber, pageSize)
+      .pipe(
+        map((result) => {
+          this.subRaces = result.data.dataRetrieved;
+          this.dataSubject.next(result);
+          return {
+            dataState: DataState.LOADED,
+            appData: result,
+          };
+        }),
+        startWith({
+          dataState: DataState.LOADING,
+          // appData: null
+        }),
+        catchError((caughtError: string) => {
+          return of({
+            dataState: DataState.ERROR,
+            error: caughtError,
+          });
+        })
+      );
   }
 
-  async doesRaceNameExist(raceName: string) {
-    const result = await this.raceService.doesRaceNameExist(raceName).toPromise();
-    // this.raceService.doesRaceNameExist(raceName).subscribe(result => {
-    //   this.doesExist.next(result.data.datumRetrieved);
-    //   //this.changeDetection.detectChanges();
-    // });
+  async getSubRaceByID(subRaceID: number) {
+    const result = await this.subRaceService.getSubRaceByID(subRaceID).toPromise();
+    this.selectedSubRace = result.data.datumRetrieved;
+    // this.subRaceService.getSubRaceByID(subRaceID).subscribe(result => {
+    //   this.selectedSubRace = result.data.datumRetrieved;
+    // })
+  }
+
+  async doesSubRaceNameExist(raceName: string) {
+    const result = await this.subRaceService.doesSubRaceNameExist(raceName).toPromise();
     this.doesExist.next(result);
     console.log(this.doesExist.value.data.datumRetrieved);
     return this.doesExist.value.data.datumRetrieved;
   }
 
-  async saveRace(raceForm: NgForm) {
-    if(await this.doesRaceNameExist(raceForm.value.name)) {
-      this.enteredName = raceForm.value.name;
+  async saveSubRace(subRaceForm: NgForm) {
+    if(await this.doesSubRaceNameExist(subRaceForm.value.name)) {
+      this.enteredName = subRaceForm.value.name;
       this.showError = true;
       this.isClicked = false;
     } else {
       this.isLoading.next(true);
-      this.appState$ = this.raceService
-        .saveRace$(raceForm.value) //or dayForm.value as Day or <Day> dayForm.value
+      this.appState$ = this.subRaceService
+        .saveSubRace$(subRaceForm.value, this.raceName) //or dayForm.value as Day or <Day> dayForm.value
         .pipe(
           map((result) => {
             this.dataSubject.next({ //this lists everything in ascending insertion order
@@ -147,7 +173,7 @@ export class RaceComponent implements OnInit {
             this.isClicked = false;
             this.isTableShown = true;
             this.isLoading.next(false);
-            raceForm.resetForm();
+            subRaceForm.resetForm();
             return {
               dataState: DataState.LOADED,
               appData: this.dataSubject.value,
@@ -165,21 +191,21 @@ export class RaceComponent implements OnInit {
             });
           })
         );
-      this.getAllRacesTotal();
+      this.getAllSubRacesTotal();
     }
   }
 
-  deleteRace(race: Race) {
-    this.appState$ = this.raceService
-      .deleteRace$(race.id) //or dayForm.value as Day or <Day> dayForm.value
+  deleteSubRace(subRace: SubRace) {
+    this.appState$ = this.subRaceService
+      .deleteSubRace$(subRace.id) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
           this.dataSubject.next(
             {
               ...result,
               data: {
-                dataRetrieved: this.dataSubject.value.data.dataRetrieved.filter((r) =>
-                  r.id !== race.id //delete the record that matches r.id === race.id
+                dataRetrieved: this.dataSubject.value.data.dataRetrieved.filter((s) =>
+                  s.id !== subRace.id //delete the record that matches r.id === race.id
                 )
               }
             }
@@ -200,15 +226,12 @@ export class RaceComponent implements OnInit {
           });
         })
       );
-    this.getAllRacesTotal();
-    if(race.name.toLowerCase() === "none") {
-      window.location.reload();
-    }
+    this.getAllSubRacesTotal();
   }
 
-  modifyRace(race: Race) {
+  modifySubRace(subRace: SubRace) {
     this.isLoading.next(true);
-    this.appState$ = this.raceService.modifyRace$(race.id, race).pipe(
+    this.appState$ = this.subRaceService.modifySubRace$(subRace.id, this.raceName, subRace).pipe(
       map((result) => {
         const index = this.dataSubject.value.data.dataRetrieved.findIndex(race => race.id === result.data.dataUpdated.id); //loops through the array and finds the record whose id matches the updated day from the backend
         this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated; //replaces old day with updated day
@@ -233,63 +256,54 @@ export class RaceComponent implements OnInit {
     );
   }
 
-  deleteRaces(races: Race[]) {
-    for(let race of races) {
-      this.raceService.deleteRace(race.id).subscribe();
+  deleteSubRaces(subRaces: SubRace[]) {
+    for(let subRace of subRaces) {
+      this.subRaceService.deleteSubRace(subRace.id).subscribe();
     }
-    this.getAllRacesTotal();
+    this.getAllSubRacesTotal();
   }
 
   onTableDataChange(event: any) {
     this.currentPage = event;
-    this.getPaginatedRaces(this.currentPage, this.tableSize);
+    this.getPaginatedSubRaces(this.currentPage, this.tableSize);
   }
 
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.currentPage = 1;
-    this.getPaginatedRaces(this.currentPage, this.tableSize);
+    this.getPaginatedSubRaces(this.currentPage, this.tableSize);
   }
 
   checkUncheckAll() {
-    for(let race of this.races) {
-      race.isSelected = this.isMasterSelected;
+    for(let subRace of this.subRaces) {
+      subRace.isSelected = this.isMasterSelected;
     }
-    this.getCheckedRaces();
+    this.getCheckedSubRaces();
   }
 
   isAllSelected() {
-    this.isMasterSelected = this.races.every(race => race.isSelected);
-    this.getCheckedRaces();
+    this.isMasterSelected = this.subRaces.every(subRace => subRace.isSelected);
+    this.getCheckedSubRaces();
   }
 
-  getCheckedRaces() {
-    this.checkedRaces = [];
-    for(let checkedRace of this.races) {
+  getCheckedSubRaces() {
+    this.checkedSubRaces = [];
+    for(let checkedRace of this.subRaces) {
       if(checkedRace.isSelected) {
-        this.checkedRaces.push(checkedRace);
+        this.checkedSubRaces.push(checkedRace);
       }
     }
   }
 
   hasSelected() {
-    return this.races.some(race => race.isSelected);
+    return this.subRaces.some(subRace => subRace.isSelected);
   }
 
-  // validateRaceName(event: Event) {
-  //   const input = (event.target as HTMLInputElement).value;
-  //   this.doesRaceNameExist(input.toUpperCase());
-  //   console.log(this.doesExist.value);
-  //   console.log(this.errorMessage);
-  //   if(this.doesExist.value) {
-  //     this.errorMessage = "Name already exists in the database!"
-  //   } else {
-  //     this.errorMessage = null;
-  //   }
-  // }
+  routeToDisplay(subRaceID: number, subRaceName: string) {
+    this.router.navigateByUrl(`/sub-races/${subRaceID}/${subRaceName}`)
+  }
 
-  routeToDisplay(raceID: number, raceName: string) {
-    this.raceService.setRaceDetails(raceID, raceName);
-    this.router.navigateByUrl(`races/${raceID}/${raceName}`);
+  routeToRaceDisplay(raceID: number, raceName: string) {
+    this.router.navigateByUrl(`/races/${raceID}/${raceName}`)
   }
 }

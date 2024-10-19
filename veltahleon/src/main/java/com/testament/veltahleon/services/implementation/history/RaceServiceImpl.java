@@ -2,7 +2,10 @@ package com.testament.veltahleon.services.implementation.history;
 
 import com.testament.veltahleon.exceptions.DataInsertionException;
 import com.testament.veltahleon.model.entities.history.Race;
+import com.testament.veltahleon.model.entities.history.SubRace;
 import com.testament.veltahleon.repositories.history.RaceRepository;
+import com.testament.veltahleon.repositories.history.SubRaceRepository;
+import com.testament.veltahleon.repositories.society.PersonRepository;
 import com.testament.veltahleon.services.ifc.history.RaceService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @Service
@@ -23,6 +27,12 @@ public class RaceServiceImpl implements RaceService {
 
     @Autowired
     private RaceRepository raceRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    @Autowired
+    private SubRaceRepository subRaceRepository;
 
     @Override
     public Collection<Race> getRacesWithPagination(int pageNumber, int numberOfRecords) {
@@ -46,6 +56,7 @@ public class RaceServiceImpl implements RaceService {
 //            String firstLetter = name.substring(0, 1).toUpperCase();
 //            String word = name.substring(1).toLowerCase();
             newRace.setName(name.toUpperCase());
+            newRace.setImageURL(defaultImageURL("default.png"));
             return raceRepository.save(newRace);
         } else {
             return raceRepository.findByName(name);
@@ -54,6 +65,13 @@ public class RaceServiceImpl implements RaceService {
 
     @Override
     public Boolean deleteRaceByID(Long id) {
+        // Find the default race ("None" or any suitable placeholder)
+        Race defaultRace = getRaceByName("None");
+
+        // Update the race of all people associated with the race to be deleted
+        personRepository.updateRaceForPeople(id, defaultRace.getId());
+        List<SubRace> subRaces = (List<SubRace>) subRaceRepository.findByRace_Name(raceRepository.findById(id).orElseThrow().getName());
+        subRaceRepository.deleteAllById(subRaces.stream().map(SubRace::getId).toList());
         raceRepository.deleteById(id);
         return Boolean.TRUE;
     }
@@ -100,13 +118,12 @@ public class RaceServiceImpl implements RaceService {
         newRace.setName(race.getName().toUpperCase());
         newRace.setDescription(race.getDescription());
         newRace.setImageURL(race.getImageURL());
-        System.out.println(newRace.getName());
         return raceRepository.save(newRace);
     }
 
     @Override
     public Boolean doesRaceNameExist(String name) {
-        return raceRepository.existsRacesByName(name.toUpperCase());
+        return raceRepository.existsRaceByName(name.toUpperCase());
     }
 
     @Override

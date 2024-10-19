@@ -62,7 +62,11 @@ export class RaceDisplayComponent implements OnInit {
     this.isDescription = false;
   }
 
+  routeToSubRaces(raceID: number, raceName: string) {
+    this.router.navigateByUrl(`/sub-races/race/${raceID}/${raceName}`);
+  }
+
   routeToRaces() {
-    this.router.navigateByUrl("/races");
+    this.router.navigateByUrl(`/races`);
   }
 }

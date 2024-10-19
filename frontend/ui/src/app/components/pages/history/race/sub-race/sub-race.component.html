@@ -4,12 +4,20 @@
       <div class="table-title">
         <div class="row">
           <div class="col-sm-6">
-            <h2>Races</h2>
+            <h2>
+              <fa-icon [icon]="faCircleArrowLeft"
+                       [style.color]="'yellowGreen'"
+                       [title]="'Return to ' + raceName"
+                       (click)="routeToRaceDisplay(+raceID, raceName)"
+                       [style.cursor]="'pointer'">
+              </fa-icon>
+              Sub-races of {{ raceName }}
+            </h2>
           </div>
           <div class="col-sm-6">
             <a class="btn btn-success" data-bs-toggle="modal" (click)="isClicked = true; isTableShown = false">
               <i class="material-icons">&#xE147;</i>
-              <span>Add Race</span>
+              <span>Add Sub-race</span>
             </a>
           </div>
         </div>
@@ -43,7 +51,7 @@
             <span>Select/Deselect All</span>
             &nbsp;
             @if (hasSelected()) {
-              <button type="button" class="btn btn-danger" (click)="deleteRaces(this.checkedRaces)">Delete Selection
+              <button type="button" class="btn btn-danger" (click)="deleteSubRaces(this.checkedSubRaces)">Delete Selection
               </button>
             }
           </div>
@@ -56,7 +64,7 @@
               <th>Actions</th>
             </tr>
             </thead>
-            <tbody *ngFor="let race of appState.appData?.data.dataRetrieved
+            <tbody *ngFor="let subRace of appState.appData?.data.dataRetrieved
             | paginate: {
               itemsPerPage: tableSize,
               currentPage: currentPage,
@@ -65,29 +73,27 @@
             <tr>
               <td>
                 <input
-                  [(ngModel)]="race.isSelected"
+                  [(ngModel)]="subRace.isSelected"
                   type="checkbox"
                   (change)="isAllSelected()"
                   style="cursor: pointer"
                 ></td>
-              <td><u style="cursor: pointer" (click)="routeToDisplay(race.id, race.name)">{{ race.name }}</u></td>
+              <td><u style="cursor: pointer" (click)="routeToDisplay(subRace.id, subRace.name)">{{ subRace.name }}</u></td>
               <td></td>
               <td>
                   <span>
                     <fa-icon [icon]="faEdit"
                              [style.color]="'blue'"
                              [title]="'Edit'"
-                             (click)="isUpdated = true; getRaceByID(race.id); isTableShown = false;"
+                             (click)="isUpdated = true; getSubRaceByID(subRace.id); isTableShown = false;"
                              [style.cursor]="'pointer'"></fa-icon>
                   </span>
-                @if(race.name.toLowerCase() !== "none") {
                   &nbsp;&nbsp;
                   <span>
-                    <fa-icon [icon]="faTrash" [title]="'Delete'" (click)="deleteRace(race)"
+                    <fa-icon [icon]="faTrash" [title]="'Delete'" (click)="deleteSubRace(subRace)"
                              style="cursor: pointer; color: firebrick">
                     </fa-icon>
                   </span>
-                }
               </td>
             </tr>
             </tbody>
@@ -108,13 +114,13 @@
   </div>
 </div>
 
-<!-- Add Race -->
+<!-- Add Sub-race -->
 <div *ngIf="isClicked" class="modal-container">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form #raceForm="ngForm" (ngSubmit)="saveRace(raceForm)">
+      <form #subRaceForm="ngForm" (ngSubmit)="saveSubRace(subRaceForm)">
         <div class="modal-header">
-          <h4 class="modal-title">Add Race</h4>
+          <h4 class="modal-title">Add Sub-race</h4>
           <button type="button" class="close-button" (click)="isClicked = false; isTableShown = true">×</button>
         </div>
         <br>
@@ -131,8 +137,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="cancel-button" (click)="isClicked = false; isTableShown = true">Close</button>
-          <button type="submit" [ngClass]="{'disabled': raceForm.invalid}"
-                  [disabled]="(isLoading$ | async) || raceForm.invalid" class="submit-button">
+          <button type="submit" [ngClass]="{'disabled': subRaceForm.invalid}"
+                  [disabled]="(isLoading$ | async) || subRaceForm.invalid" class="submit-button">
             <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
             <span *ngIf="isLoading$ | async">Saving...</span>
             <span *ngIf="!(isLoading$ | async)">Add</span>
@@ -143,24 +149,24 @@
   </div>
 </div>
 
-<!-- Edit Race -->
+<!-- Edit Sub-race -->
 <div *ngIf="isUpdated" class="modal-container">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form (ngSubmit)="modifyRace(selectedRace)">
+      <form (ngSubmit)="modifySubRace(selectedSubRace)">
         <div class="modal-header">
-          <h4 class="modal-title">Edit Race</h4>
+          <h4 class="modal-title">Edit Sub-race</h4>
           <button type="button" class="close-button" (click)="isUpdated = false; isTableShown = true">×</button>
         </div>
         <br>
         <div class="modal-body">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" [(ngModel)]="selectedRace.name" name="name" class="form-input" required>
+            <input type="text" [(ngModel)]="selectedSubRace.name" name="name" class="form-input" required>
           </div>
           <div class="form-group">
             <label>Description</label>
-            <textarea type="text" [(ngModel)]="selectedRace.description" name="description"
+            <textarea type="text" [(ngModel)]="selectedSubRace.description" name="description"
                       class="form-input"></textarea>
           </div>
           <div class="modal-footer">
@@ -186,7 +192,7 @@
       <button style="float:right" type="button" class="close-button" (click)="showError = false; isTableShown = true">×</button>
     </div>
     <div class="error-body">
-      The racial name <strong><u>{{ enteredName }}</u></strong> {{ errorMessage }}
+      The sub-racial name <strong><u>{{ enteredName }}</u></strong> {{ errorMessage }}
     </div>
     <div class="error-footer">
       <button class="close-btn" (click)="showError = false; isTableShown = true;">Close Window</button>

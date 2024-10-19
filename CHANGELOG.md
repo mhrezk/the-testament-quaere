@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.83.0] 2024-10-19
+
+- Added sub-races for races
+- Added CRUD for sub-races
+
 ## [0.82.0] 2024-10-18
 
 - Implemented fully functional family tree
