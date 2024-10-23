@@ -22,8 +22,14 @@ public class Race {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description", columnDefinition = "text")
+    @Column(name = "description", columnDefinition = "longtext")
     private String description;
+
+    @Column(name = "lifespan_min")
+    private Integer minimumLifespan;
+
+    @Column(name = "lifespan_max")
+    private Integer maximumLifespan;
 
     @Column(name = "image_URL")
     private String imageURL;

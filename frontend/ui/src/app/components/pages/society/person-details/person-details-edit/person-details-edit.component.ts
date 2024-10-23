@@ -17,6 +17,7 @@ import {MaritalStatus} from "../../../../../enums/marital-status";
 export class PersonDetailsEditComponent implements OnInit {
   protected readonly Object = Object;
   protected readonly Lineage = Lineage;
+  protected readonly MaritalStatus = MaritalStatus;
 
   races: Race[];
   selectedRace: string;
@@ -72,5 +73,9 @@ export class PersonDetailsEditComponent implements OnInit {
     )
   }
 
-  protected readonly MaritalStatus = MaritalStatus;
+  get lineageKeys() {
+    return Object.keys(Lineage).filter(
+      (key) => key !== 'All' && isNaN(Number(key))
+    );
+  }
 }

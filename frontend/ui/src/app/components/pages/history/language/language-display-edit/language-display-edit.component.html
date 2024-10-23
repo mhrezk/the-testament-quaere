@@ -1,0 +1,25 @@
+<div class="display-container">
+  <div class="image-container">
+    <img [src]="selectedLanguage.alphabetURL" alt="Alphabetical Image"/>
+    @if (selectedLanguage.alphabetURL.split("/")[selectedLanguage.alphabetURL.split("/").length - 1] === "arabic.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+  <form #languageForm="ngForm" (ngSubmit)="onSubmit(selectedLanguage)" class="details-container">
+    <div class="details-container">
+      <h2>
+        <div class="detail-item">
+          <strong>Name:</strong>
+          <mat-form-field appearance="outline">
+            <input type="text" matInput name="name" [(ngModel)]="selectedLanguage.name" required/>
+          </mat-form-field>
+        </div>
+      </h2>
+      <mat-divider></mat-divider>
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="languageForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="closeEditing(false)">Close</button>
+    </div>
+  </form>
+</div>

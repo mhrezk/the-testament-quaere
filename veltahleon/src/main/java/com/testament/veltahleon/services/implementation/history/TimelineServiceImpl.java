@@ -1,6 +1,8 @@
 package com.testament.veltahleon.services.implementation.history;
 
+import com.testament.veltahleon.model.entities.history.Event;
 import com.testament.veltahleon.model.entities.history.Timeline;
+import com.testament.veltahleon.repositories.history.EventRepository;
 import com.testament.veltahleon.repositories.history.TimelineRepository;
 import com.testament.veltahleon.services.ifc.history.TimelineService;
 import jakarta.transaction.Transactional;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +23,9 @@ public class TimelineServiceImpl implements TimelineService {
 
     @Autowired
     private TimelineRepository timelineRepository;
+
+    @Autowired
+    private EventRepository eventRepository;
 
     @Override
     public Collection<Timeline> getPaginatedTimelines(int pageNumber, int pageSize) {
@@ -73,6 +79,8 @@ public class TimelineServiceImpl implements TimelineService {
 
     @Override
     public Boolean deleteTimelineByID(Long id) {
+        List<Event> events = eventRepository.findByTimeline_Name(timelineRepository.findById(id).orElseThrow().getName());
+        eventRepository.deleteAllById(events.stream().map(Event::getId).toList());
         timelineRepository.deleteById(id);
         return Boolean.TRUE;
     }

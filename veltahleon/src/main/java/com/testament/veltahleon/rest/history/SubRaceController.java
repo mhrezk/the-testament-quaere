@@ -139,13 +139,13 @@ public class SubRaceController {
     }
 
     @GetMapping("/subRace/race")
-    public ResponseEntity<CustomResponse> getSubRaceByRaceName(@RequestParam(value = "raceName") String raceName) {
+    public ResponseEntity<CustomResponse> getSubRaceByRaceName(@RequestParam(value = "name") String name) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("datumRetrieved", subRaceService.getSubRacesByRaceName(raceName)))
-                .message("Sub-races of " + raceName + " retrieved!")
+                .data(Map.of("datumRetrieved", subRaceService.getSubRacesByRaceName(name)))
+                .message("Sub-races of " + name + " retrieved!")
                 .build()
         );
     }

@@ -1,0 +1,72 @@
+<div *ngIf="!isEditing" class="display-container">
+  <div class="image-container">
+    <img [src]="selectedLanguage.alphabetURL" alt="Alphabetical Image" />
+    @if(selectedLanguage.alphabetURL.split("/")[selectedLanguage.alphabetURL.split("/").length - 1] === "arabic.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+  <div class="details-container">
+    <h2>
+      <fa-icon [icon]="faCircleArrowLeft"
+               [style.color]="'red'"
+               [title]="'Return to Languages'"
+               (click)="routeToLanguages()"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+      Language:
+      <b>
+        {{ selectedLanguage.name }}
+      </b>
+      <br>
+      Number of Letters:
+      @if(selectedLanguage.alphabetSize === null || selectedLanguage.alphabetSize === undefined) {
+        0
+      } @else {
+        <b>
+          {{ selectedLanguage.alphabetSize }}
+        </b>
+      }
+      &nbsp;
+      <span style="float: right">
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit Name'"
+                           (click)="isEditing = true; routeToLanguageEdit(languageID, languageName)"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+      </span>
+    </h2>
+    <mat-divider></mat-divider>
+    <button style="float: right" class="stylized-button" (click)="routeToLetters(selectedLanguage.id, selectedLanguage.name, selectedLanguage.alphabetSize)">
+      <i class="fas fa-users"></i> Letters
+    </button>
+  </div>
+</div>
+
+@if(isEditing) {
+  <app-language-display-edit (isEditing)="closeEditing($event)"></app-language-display-edit>
+} @else {
+  @if(isDescription) {
+    <h2>Description</h2>
+    <hr>
+    <st-editor [(ngModel)]="selectedLanguage.description" [config]="config"></st-editor>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="isDescription = false">Close Description</button>
+      <button type="button" class="btn btn-success" (click)="updateDescription()">Save Description</button>
+    </div>
+  } @else {
+    <h2>
+      Description
+      <fa-icon [icon]="faEdit"
+               [style.color]="'cornflowerblue'"
+               [title]="'Edit Description'"
+               (click)="isDescription = !isDescription;"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+    </h2>
+    <hr>
+    <div [innerHTML]="selectedLanguage.description"></div>
+  }
+}
+
+

@@ -22,6 +22,18 @@ import {
 import {FamilyTreeComponent} from "./components/pages/society/community/family-tree/family-tree.component";
 import {RaceDisplayComponent} from "./components/pages/history/race/race-display/race-display.component";
 import {SubRaceComponent} from "./components/pages/history/race/sub-race/sub-race.component";
+import {
+  SubRaceDisplayComponent
+} from "./components/pages/history/race/sub-race/sub-race-display/sub-race-display.component";
+import {RaceDisplayEditComponent} from "./components/pages/history/race/race-display-edit/race-display-edit.component";
+import {LanguageComponent} from "./components/pages/history/language/language.component";
+import {
+  LanguageDisplayComponent
+} from "./components/pages/history/language/language-display/language-display.component";
+import {
+  LanguageDisplayEditComponent
+} from "./components/pages/history/language/language-display-edit/language-display-edit.component";
+import {LetterComponent} from "./components/pages/history/letter/letter.component";
 //import {LineageTreeComponent} from "./components/pages/society/lineage-tree/lineage-tree.component";
 
 const routes: Routes = [
@@ -51,6 +63,22 @@ const routes: Routes = [
     component: NationComponent
   },
   {
+    path: "languages",
+    component: LanguageComponent
+  },
+  {
+    path: "languages/:id/:name",
+    component: LanguageDisplayComponent
+  },
+  {
+    path: "languages/:id/:name/edit",
+    component: LanguageDisplayEditComponent
+  },
+  {
+    path: "letters/language/:id/:name/:size",
+    component: LetterComponent
+  },
+  {
     path: "races",
     component: RaceComponent
   },
@@ -59,8 +87,16 @@ const routes: Routes = [
     component: RaceDisplayComponent
   },
   {
+    path: "races/:id/:name/edit",
+    component: RaceDisplayEditComponent
+  },
+  {
     path: "sub-races/race/:id/:name",
     component: SubRaceComponent
+  },
+  {
+    path: "sub-races/:id/:name",
+    component: SubRaceDisplayComponent
   },
   {
     path: "organizations",

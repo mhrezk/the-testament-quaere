@@ -1,0 +1,220 @@
+<h2 *ngIf="!isEditingDescription">
+  <fa-icon [icon]="faCircleArrowLeft"
+           [style.color]="'red'"
+           [title]="'Return to ' + languageName"
+           (click)="routeToLanguage(+languageID, languageName)"
+           [style.cursor]="'pointer'">
+  </fa-icon>
+  Language:
+  <b>
+    {{ languageName }}
+  </b>
+</h2>
+<mat-divider *ngIf="!isEditingDescription"></mat-divider>
+<div *ngIf="!isEditingDescription">
+  <strong>Alphabet Size:</strong> {{ count$ | async }}
+</div>
+<button *ngIf="!isEditingDescription" class="add-btn" (click)="isClicked = true; isTableShown = false">Add Letter</button>
+<!--<br>-->
+<!--<input-->
+<!--  [(ngModel)]="isMasterSelected"-->
+<!--  type="checkbox"-->
+<!--  (change)="checkUncheckAll()"-->
+<!--  style="cursor: pointer"-->
+<!--&gt;-->
+<!--&nbsp;&nbsp;&nbsp;-->
+<!--<span>Select/Deselect All</span>-->
+<!--&nbsp;-->
+<!--@if (hasSelected()) {-->
+<!--  <button type="button" class="btn btn-danger" (click)="deleteLetters(this.checkedLetters)">Delete Selection-->
+<!--  </button>-->
+<!--}-->
+<div class="container">
+  <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+    <ng-container *ngSwitchCase="DATA_STATE.LOADING">
+      <div class="col-md-12 single-note-item text-center">
+        <div class="spinner-border text-info" role="status"></div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+      <div *ngIf="isTableShown">
+        <div class="row">
+          <div *ngFor="let letter of appState.appData?.data.dataRetrieved" class="letter-card">
+            <div class="image-space">
+              <img [src]="letter.scriptURL" alt="{{ letter.name }} Script">
+            </div>
+            <div style="cursor: pointer" (click)="isDisplayed = true; isTableShown = false; getLetterByID(letter.id)"
+                 class="letter">
+<!--              <input-->
+<!--                [(ngModel)]="letter.isSelected"-->
+<!--                type="checkbox"-->
+<!--                (change)="isAllSelected()"-->
+<!--                style="cursor: pointer"-->
+<!--              >-->
+              {{ letter.name }}
+            </div>
+            <!--            <button class="edit-btn" (click)="isUpdated = true; getLetterByID(letter.id)">Edit</button>-->
+            <br>
+            <span>
+              <fa-icon [icon]="faEdit"
+                       [title]="'Edit Letter'"
+                       (click)="isUpdated = true; getLetterByID(letter.id)"
+                       style="cursor: pointer; color: blue">
+              </fa-icon>
+              &nbsp;
+            <fa-icon [icon]="faTrash"
+                     [title]="'Delete Letter'"
+                     (click)="deleteLetter(letter)"
+                     style="cursor: pointer; color: firebrick">
+            </fa-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="DATA_STATE.ERROR">
+      <div [hidden]="isUpdated || isClicked" style="background-color: indianred">{{ appState.error }}</div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<!-- Add Letter -->
+<div *ngIf="isClicked" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #letterForm="ngForm" (ngSubmit)="saveLetter(letterForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Letter</h4>
+          <button type="button" class="close-button" (click)="isClicked = false; isTableShown = true">×</button>
+        </div>
+        <br>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="name" ngModel name="name" class="form-input" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label>International Phonetic Alphabet (IPA)</label>
+            <input type="text" ngModel name="ipa" class="form-input" placeholder="Enter Phonetic Sound">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea type="text" ngModel name="description" class="form-input"
+                      placeholder="Enter Description"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="cancel-button" (click)="isClicked = false; isTableShown = true">Close</button>
+          <button type="submit" [ngClass]="{'disabled': letterForm.invalid}"
+                  [disabled]="(isLoading$ | async) || letterForm.invalid" class="submit-button">
+            <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Letter -->
+<div *ngIf="isUpdated" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="modifyLetter(selectedLetter)">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Letter</h4>
+          <button type="button" class="close-button" (click)="isUpdated = false; isTableShown = true">×</button>
+        </div>
+        <br>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="selectedLetter.name" name="name" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>International Phonetic Alphabet (IPA)</label>
+            <input type="text" [(ngModel)]="selectedLetter.ipa" name="ipa" class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea type="text" [(ngModel)]="selectedLetter.description" name="description"
+                      class="form-input"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="cancel-button" (click)="isUpdated = false; isTableShown = true">Close</button>
+            <button type="submit" [ngClass]="{'disabled': isLoading$ | async}" [disabled]="isLoading$ | async"
+                    class="submit-button">
+              <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+              <span *ngIf="isLoading$ | async">Updating...</span>
+              <span *ngIf="!(isLoading$ | async)">Update</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Letter Display Modal -->
+<div *ngIf="isDisplayed" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Letter Information</h4>
+        <button type="button" class="close-button" (click)="isDisplayed = false; isTableShown = true">×</button>
+      </div>
+      <br>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Name: <u>{{ selectedLetter.name }}</u></label>
+        </div>
+        <div class="form-group">
+          <label>International Phonetic Alphabet (IPA)</label> {{ selectedLetter.ipa }}
+        </div>
+        <div class="form-group">
+          <label>
+            Description
+            <fa-icon [icon]="faEdit"
+                     [title]="'Edit Description'"
+                     (click)="isDisplayed = false; isEditingDescription = true; isTableShown = false;"
+                     style="cursor: pointer; color: blue">
+            </fa-icon>
+          </label>
+          <div [innerHTML]="selectedLetter.description"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="cancel-button" (click)="isDisplayed = false; isTableShown = true">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Letter Description Modal -->
+@if(isEditingDescription) {
+  <h2>Editing Letter: {{ selectedLetter.name }}</h2>
+  <hr>
+  <st-editor [(ngModel)]="selectedLetter.description" [config]="config"></st-editor>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="isEditingDescription = false; isDisplayed = false; isTableShown = true">Close Description</button>
+    <button type="button" class="btn btn-success" (click)="updateDescription(selectedLetter)">Save Description</button>
+  </div>
+}
+
+<!-- Error Modal-->
+<!--<div *ngIf="showError" class="overlay">-->
+<!--  <div class="error-container">-->
+<!--    <div class="error-header">-->
+<!--      Error-->
+<!--      <button style="float:right" type="button" class="close-button" (click)="showError = false; isTableShown = true">×</button>-->
+<!--    </div>-->
+<!--    <div class="error-body">-->
+<!--      The letter name <strong><u>{{ enteredName }}</u></strong> {{ errorMessage }}-->
+<!--    </div>-->
+<!--    <div class="error-footer">-->
+<!--      <button class="close-btn" (click)="showError = false; isTableShown = true;">Close Window</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+

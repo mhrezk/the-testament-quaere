@@ -14,7 +14,6 @@ import { v4 as uuidv4 } from 'uuid';
 import * as convert from 'xml-js';
 import {Root} from "../../../../../interfaces/models/society/family-node/root";
 import {Attributes2} from "../../../../../interfaces/models/society/family-node/attributes2";
-import {Node} from "../../../../../interfaces/models/society/family-node/node";
 import {faCircleArrowLeft} from "@fortawesome/free-solid-svg-icons";
 import {NodeAttributes} from "../../../../../interfaces/models/society/family-node/node-attributes";
 
@@ -410,11 +409,12 @@ export class FamilyTreeComponent implements OnInit {
   }
 
   routeToCommunityDescription(communityID: string, communityName: string) {
+    this.router.navigate(['communities', communityID, communityName]);
     //const submit = document.getElementById("exit")
-    if(this.clickCount < 1) {
-      this.showWarning = true;
-      //console.log(submit);
-    }
+    // if(this.clickCount < 1) {
+    //   this.showWarning = true;
+    //   //console.log(submit);
+    // }
     // submit.addEventListener("click", () => {
     //   this.router.navigate(['communities', communityID, communityName])
     // });

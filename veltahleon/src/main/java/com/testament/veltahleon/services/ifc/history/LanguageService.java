@@ -15,4 +15,7 @@ public interface LanguageService {
     Language saveLanguage(Language language);
     Collection<Language> saveLanguages(Collection<Language> languages);
     Language updateLanguage(Long id, Language language);
+    Language modifyLanguage(Long id, Language language);
+    Boolean doesLanguageNameExist(String name);
+    Long countLanguages();
 }

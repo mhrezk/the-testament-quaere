@@ -64,13 +64,22 @@
             }; let i = index;">
             <tr>
               <td>
-                <input
-                  [(ngModel)]="race.isSelected"
-                  type="checkbox"
-                  (change)="isAllSelected()"
-                  style="cursor: pointer"
-                ></td>
-              <td><u style="cursor: pointer" (click)="routeToDisplay(race.id, race.name)">{{ race.name }}</u></td>
+                @if(race.name.toLowerCase() !== "none") {
+                  <input
+                    [(ngModel)]="race.isSelected"
+                    type="checkbox"
+                    (change)="isAllSelected()"
+                    style="cursor: pointer"
+                  >
+                }
+                </td>
+              <td>
+                @if(race.name.toLowerCase() === "none") {
+                  <b>{{ race.name }}</b>
+                } @else {
+                  <u style="cursor: pointer" (click)="routeToDisplay(race.id, race.name)">{{ race.name }}</u>
+                }
+              </td>
               <td></td>
               <td>
                   <span>

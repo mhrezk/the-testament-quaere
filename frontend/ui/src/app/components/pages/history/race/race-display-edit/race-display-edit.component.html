@@ -1,0 +1,38 @@
+<div class="display-container">
+  <div class="image-container">
+    <img [src]="selectedRace.imageURL" alt="Racial Image"/>
+    @if (selectedRace.imageURL.split("/")[selectedRace.imageURL.split("/").length - 1] === "default.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+  <form #raceForm="ngForm" (ngSubmit)="onSubmit(selectedRace)" class="details-container">
+    <div class="details-container">
+      <h2>
+        <div class="detail-item">
+          <strong>Name:</strong>
+          <mat-form-field appearance="outline">
+            <input type="text" matInput name="name" [(ngModel)]="selectedRace.name" required/>
+          </mat-form-field>
+        </div>
+      </h2>
+      <mat-divider></mat-divider>
+      <div class="detail-item">
+        <strong>Minimum Lifespan:</strong>
+        <mat-form-field appearance="outline">
+          <input type="number" matInput name="minimumLifespan" [(ngModel)]="selectedRace.minimumLifespan" required/>
+        </mat-form-field>
+      </div>
+
+      <div class="detail-item">
+        <strong>Maximum Lifespan:</strong>
+        <mat-form-field appearance="outline">
+          <input type="number" matInput name="maximumLifespan" [(ngModel)]="selectedRace.maximumLifespan"/>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="raceForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="closeEditing(false)">Close</button>
+    </div>
+  </form>
+</div>

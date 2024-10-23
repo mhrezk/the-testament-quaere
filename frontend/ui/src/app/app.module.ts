@@ -61,6 +61,12 @@ import { FamilyTreeComponent } from './components/pages/society/community/family
 import { CommunityDisplayComponent } from './components/pages/society/community/community-display/community-display.component';
 import { RaceDisplayComponent } from './components/pages/history/race/race-display/race-display.component';
 import { SubRaceComponent } from './components/pages/history/race/sub-race/sub-race.component';
+import { SubRaceDisplayComponent } from './components/pages/history/race/sub-race/sub-race-display/sub-race-display.component';
+import { RaceDisplayEditComponent } from './components/pages/history/race/race-display-edit/race-display-edit.component';
+import { LanguageComponent } from './components/pages/history/language/language.component';
+import { LetterComponent } from './components/pages/history/letter/letter.component';
+import { LanguageDisplayComponent } from './components/pages/history/language/language-display/language-display.component';
+import { LanguageDisplayEditComponent } from './components/pages/history/language/language-display-edit/language-display-edit.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +97,13 @@ import { SubRaceComponent } from './components/pages/history/race/sub-race/sub-r
     FamilyTreeComponent,
     CommunityDisplayComponent,
     RaceDisplayComponent,
-    SubRaceComponent
+    SubRaceComponent,
+    SubRaceDisplayComponent,
+    RaceDisplayEditComponent,
+    LanguageComponent,
+    LetterComponent,
+    LanguageDisplayComponent,
+    LanguageDisplayEditComponent,
   ],
   imports: [
     BrowserModule,

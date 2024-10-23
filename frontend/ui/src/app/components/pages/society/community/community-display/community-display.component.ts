@@ -51,7 +51,7 @@ export class CommunityDisplayComponent implements OnInit {
     this.isEditing = false;
   }
 
-  routeToFamilyTree(communityID: number, communityName: string, communitySize: number = 0) {
+  routeToFamilyTree(communityID: number, communityName: string, communitySize: number) {
     if(communitySize === null) {
       communitySize = 0;
     }

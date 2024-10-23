@@ -65,6 +65,9 @@ public class Letter {
     @Column(name = "script_URL")
     private String scriptURL;
 
+    @Column(name = "description", columnDefinition = "longtext")
+    private String description;
+
     //Convenience Methods
 //    public void addLanguage(Language language) {
 //        if(languages == null) {

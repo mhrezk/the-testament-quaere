@@ -80,6 +80,7 @@ export class RaceComponent implements OnInit {
         this.countSubject.next(result.data.datumRetrieved);
       }
     )
+    console.log(this.countSubject.value);
   }
 
   getPaginatedRaces(pageNumber: number, pageSize: number) {

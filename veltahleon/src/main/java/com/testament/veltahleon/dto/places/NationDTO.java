@@ -2,6 +2,7 @@ package com.testament.veltahleon.dto.places;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -13,9 +14,10 @@ public class NationDTO {
     private Long id;
     private String name;
     private String capital;
-    private String leader;
+    private String leaderFirstName;
+    private String leaderSecondName;
     private String language;
-    private Set<String> provinces;
+    private List<String> provinces;
     private String type;
     private String governanceType;
     private String description;

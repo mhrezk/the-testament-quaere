@@ -13,4 +13,5 @@ public class LetterDTO {
     private String ipa;
     private String language;
     private String scriptURL;
+    private String description;
 }

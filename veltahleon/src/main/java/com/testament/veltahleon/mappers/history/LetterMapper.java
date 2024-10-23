@@ -21,6 +21,7 @@ public class LetterMapper {
                 .ipa(letter.getIpa())
                 .language(letter.getLanguage().getName())
                 .scriptURL(letter.getScriptURL())
+                .description(letter.getDescription())
                 .build();
     }
 
@@ -29,6 +30,7 @@ public class LetterMapper {
         letter.setName(letterDTO.getName());
         letter.setIpa(letterDTO.getIpa());
         letter.setScriptURL(letterDTO.getScriptURL());
+        letter.setDescription(letterDTO.getDescription());
         letter.setLanguage(languageService.getLanguageByName(letterDTO.getLanguage()));
         return letter;
     }

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.84.0] 2024-10-23
+
+- Added languages and letters for each language
+
 ## [0.83.0] 2024-10-19
 
 - Added sub-races for races

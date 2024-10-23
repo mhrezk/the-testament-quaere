@@ -13,6 +13,10 @@ import {CustomResponse} from "../../../../interfaces/custom-response";
 import {DataState} from "../../../../enums/data-state";
 import {Nation} from "../../../../interfaces/models/places/nation";
 import {NationService} from "../../../../services/models/places/nation/nation.service";
+import {Router} from "@angular/router";
+import {NationType} from "../../../../enums/nation-type";
+import {GovernanceType} from "../../../../enums/governance-type";
+import {Lineage} from "../../../../enums/lineage";
 
 @Component({
   selector: 'app-nation',
@@ -25,11 +29,19 @@ export class NationComponent implements OnInit {
   count: number = 0;
   tableSizes: number[] = [5, 10, 20];
 
+  nationTypes: NationType;
+  governanceTypes: GovernanceType;
+  GovernanceType = GovernanceType;
+  NationType = NationType;
+
   appState$: Observable<AppState<CustomResponse>>;
   protected readonly DATA_STATE = DataState;
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
+
+  countSubject = new BehaviorSubject<number>(0)
+  count$ = this.countSubject.asObservable();
 
   selectedNation: Nation;
   nations: Nation[];
@@ -45,11 +57,12 @@ export class NationComponent implements OnInit {
   headers = [
     {
       key: 'name',
-      value: 'Nation Name',
+      value: 'Nation',
     }
   ];
 
-  constructor(private nationService: NationService) {
+  constructor(private nationService: NationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -61,7 +74,9 @@ export class NationComponent implements OnInit {
     this.appState$ = this.nationService.getPaginatedNations$(pageNumber, pageSize)
       .pipe(
         map((result) => {
+          this.nations = result.data.dataRetrieved;
           this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
+          this.countSubject.next(result.data.dataRetrieved.length);
           this.isTableShown = true;
           return {
             dataState: DataState.LOADED,
@@ -81,10 +96,9 @@ export class NationComponent implements OnInit {
       );
   }
 
-  getNationByID(nationID: number) {
-    this.nationService.getNationByID(nationID).subscribe(result => {
-      this.selectedNation = result.data.datumRetrieved;
-    })
+  async getNationByID(nationID: number) {
+    const result = await this.nationService.getNationByID(nationID).toPromise();
+    this.selectedNation = result.data.datumRetrieved;
   }
 
   saveNation(nationForm: NgForm) {
@@ -107,6 +121,7 @@ export class NationComponent implements OnInit {
           this.isClicked = false;
           this.isTableShown = true;
           this.isLoading.next(false);
+          this.countSubject.next(this.dataSubject.value.data.dataRetrieved.length);
           return {
             dataState: DataState.LOADED,
             appData: this.dataSubject.value,
@@ -141,6 +156,7 @@ export class NationComponent implements OnInit {
               }
             }
           );
+          this.countSubject.next(result.data.dataRetrieved.length);
           return {
             dataState: DataState.LOADED,
             appData: this.dataSubject.value,
@@ -157,6 +173,12 @@ export class NationComponent implements OnInit {
           });
         })
       );
+  }
+
+  deleteNations(nations: Nation[]) {
+    for(let nation of nations) {
+      this.nationService.deleteNation(nation.id).subscribe();
+    }
   }
 
   modifyNation(Nation: Nation) {
@@ -218,4 +240,30 @@ export class NationComponent implements OnInit {
     }
   }
 
+  hasSelected() {
+    return this.nations.some(nation => nation.isSelected);
+  }
+
+  // Convert enum values into an array for iteration
+  get nationTypeKeys() {
+    return Object.keys(NationType).filter(
+      (key) => key !== 'ALL' && isNaN(Number(key))
+    );
+  }
+
+  get nationTypeValues() {
+    return Object.values(this.nationTypes);
+  }
+
+  get governanceTypeKeys() {
+    return Object.keys(GovernanceType).filter(
+      (key) => key !== 'ALL' && isNaN(Number(key))
+    );
+  }
+
+  get governanceTypeValues() {
+    return Object.values(this.governanceTypes);
+  }
+
+  protected readonly Object = Object;
 }

@@ -1,7 +1,9 @@
 package com.testament.veltahleon.services.implementation.society;
 
 import com.testament.veltahleon.model.entities.society.Community;
+import com.testament.veltahleon.model.entities.society.Family;
 import com.testament.veltahleon.repositories.society.CommunityRepository;
+import com.testament.veltahleon.repositories.society.FamilyRepository;
 import com.testament.veltahleon.services.ifc.society.CommunityService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +23,9 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Autowired
     private CommunityRepository communityRepository;
+
+    @Autowired
+    private FamilyRepository familyRepository;
 
     @Override
     public Collection<Community> getCommunitiesWithPagination(int pageNumber, int numberOfRecords) {
@@ -43,6 +49,8 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Override
     public Boolean deleteCommunityByID(Long id) {
+        List<Family> families = (List<Family>) familyRepository.findByCommunity_Name(communityRepository.findById(id).orElseThrow().getName());
+        familyRepository.deleteAllById(families.stream().map(Family::getId).toList());
         communityRepository.deleteById(id);
         return Boolean.TRUE;
     }

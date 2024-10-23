@@ -56,6 +56,8 @@ public class RaceServiceImpl implements RaceService {
 //            String firstLetter = name.substring(0, 1).toUpperCase();
 //            String word = name.substring(1).toLowerCase();
             newRace.setName(name.toUpperCase());
+            newRace.setMinimumLifespan(0);
+            newRace.setMaximumLifespan(0);
             newRace.setImageURL(defaultImageURL("default.png"));
             return raceRepository.save(newRace);
         } else {
@@ -65,11 +67,13 @@ public class RaceServiceImpl implements RaceService {
 
     @Override
     public Boolean deleteRaceByID(Long id) {
-        // Find the default race ("None" or any suitable placeholder)
-        Race defaultRace = getRaceByName("None");
+        if(personRepository.count() > 0) {
+            // Find the default race ("None" or any suitable placeholder)
+            Race defaultRace = getRaceByName("None");
 
-        // Update the race of all people associated with the race to be deleted
-        personRepository.updateRaceForPeople(id, defaultRace.getId());
+            // Update the race of all people associated with the race to be deleted
+            personRepository.updateRaceForPeople(id, defaultRace.getId());
+        }
         List<SubRace> subRaces = (List<SubRace>) subRaceRepository.findByRace_Name(raceRepository.findById(id).orElseThrow().getName());
         subRaceRepository.deleteAllById(subRaces.stream().map(SubRace::getId).toList());
         raceRepository.deleteById(id);
@@ -84,6 +88,8 @@ public class RaceServiceImpl implements RaceService {
 //            String firstLetter = race.getName().substring(0, 1).toUpperCase();
 //            String word = race.getName().substring(1).toLowerCase();
             race.setName(race.getName().toUpperCase());
+            race.setMinimumLifespan(0);
+            race.setMaximumLifespan(0);
             race.setImageURL(defaultImageURL("default.png"));
             return raceRepository.save(race);
         }
@@ -99,6 +105,14 @@ public class RaceServiceImpl implements RaceService {
 
         if(race.getName() != null && newRace.getName() != race.getName()) {
             newRace.setName(race.getName().toUpperCase());
+        }
+
+        if(race.getMinimumLifespan() != null && newRace.getMinimumLifespan() != race.getMinimumLifespan()) {
+            newRace.setMinimumLifespan(race.getMinimumLifespan());
+        }
+
+        if(race.getMaximumLifespan() != null && newRace.getMaximumLifespan() != race.getMaximumLifespan()) {
+            newRace.setMaximumLifespan(race.getMaximumLifespan());
         }
 
         if(race.getDescription() != null && newRace.getDescription() != race.getDescription()) {
@@ -117,6 +131,8 @@ public class RaceServiceImpl implements RaceService {
         Race newRace = raceRepository.findById(id).orElseThrow();
         newRace.setName(race.getName().toUpperCase());
         newRace.setDescription(race.getDescription());
+        newRace.setMinimumLifespan(race.getMinimumLifespan());
+        newRace.setMaximumLifespan(race.getMaximumLifespan());
         newRace.setImageURL(race.getImageURL());
         return raceRepository.save(newRace);
     }

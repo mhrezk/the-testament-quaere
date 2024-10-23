@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,8 +29,10 @@ public class NationMapper {
                 .governanceType(String.valueOf(nation.getGovernanceType()))
                 .capital(nation.getCapital().getName())
                 .language(nation.getLanguage().getName())
-                .leader(nation.getLeader().getFirstName() + " " + nation.getLeader().getSecondName())
-                .provinces(nation.getProvinces().stream().map(Province::getName).collect(Collectors.toSet()))
+                .leaderFirstName(nation.getLeader().getFirstName())
+                .leaderSecondName(nation.getLeader().getSecondName())
+                .provinces(nation.getProvinces().stream().map(Province::getName).toList())
+                //.provinces(nation.getProvinces().stream().map(Province::getName).collect(Collectors.toSet()))
                 .description(nation.getDescription())
                 .urlFlag(nation.getUrlFlag())
                 .build();
@@ -37,13 +40,15 @@ public class NationMapper {
 
     public Nation convertToEntity(NationDTO nationDTO) {
         Nation nation = new Nation();
-        Set<String> provinceNames = nationDTO.getProvinces();
+        nation.setId(nationDTO.getId());
         nation.setName(nationDTO.getName());
+        List<String> provinceNames = nationDTO.getProvinces();
+        //Set<String> provinceNames = nationDTO.getProvinces();
         nation.setType(NationType.valueOf(nationDTO.getType()));
         nation.setGovernanceType(GovernanceType.valueOf(nationDTO.getGovernanceType()));
         nation.setCapital(nationFacade.getCapital(nationDTO.getCapital()));
         nation.setLanguage(nationFacade.getLanguage(nationDTO.getLanguage()));
-        nation.setLeader(nationFacade.getNationLeader(nationDTO.getLeader()));
+        nation.setLeader(nationFacade.getNationLeader(nationDTO.getLeaderFirstName(), nationDTO.getLeaderSecondName()));
         nation.setDescription(nationDTO.getDescription());
         nation.setUrlFlag(nationDTO.getUrlFlag());
         nation.setProvinces(nationFacade.getProvinces(provinceNames));

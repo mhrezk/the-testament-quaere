@@ -1,0 +1,187 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Languages</h2>
+          </div>
+          <div class="col-sm-6">
+            <a *ngIf="isTableShown" class="btn btn-success" (click)="isClicked = true; isTableShown = false">
+              <i class="material-icons">&#xE147;</i>
+              <span>Add Language</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+        <ng-container *ngSwitchCase="DATA_STATE.LOADING">
+          <div class="col-md-12 single-note-item text-center">
+            <div class="spinner-border text-info" role="status"></div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+          <div *ngIf="isTableShown">
+            <span>
+              Number of records:
+              <select (change)="onTableSizeChange($event)">
+                <option *ngFor="let size of tableSizes">
+                  {{ size }}
+                </option>
+              </select>
+            </span>
+            <br>
+            <br>
+            <input
+              [(ngModel)]="isMasterSelected"
+              type="checkbox"
+              (change)="checkUncheckAll()"
+              style="cursor: pointer"
+            >
+            &nbsp;&nbsp;&nbsp;
+            <span>Select/Deselect All</span>
+            &nbsp;
+            @if(hasSelected()) {<button type="button" class="btn btn-danger" (click)="deleteLanguages(this.checkedLanguages)">Delete Selection</button>}
+          </div>
+          <table *ngIf="isTableShown" class="table table-striped table-hover" id="days">
+            <thead>
+            <tr>
+              <th></th>
+              <th *ngFor="let header of headers">{{ header.value }}</th>
+              <th></th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let language of appState.appData?.data.dataRetrieved
+            | paginate: {
+              itemsPerPage: tableSize,
+              currentPage: currentPage,
+              totalItems: count$ | async
+            }; let i = index;">
+            <tr>
+              <td>
+                <input
+                  [(ngModel)]="language.isSelected"
+                  type="checkbox"
+                  (change)="isAllSelected()"
+                  style="cursor: pointer"
+                ></td>
+              <td><u (click)="routeToLanguages(language.id, language.name)" style="cursor:pointer;">{{ language.name }}</u></td>
+              <td></td>
+              <td>
+                <span>
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit'"
+                           (click)="isUpdated = true; getLanguageByID(language.id); isTableShown = false;"
+                           [style.cursor]="'pointer'"></fa-icon>
+                </span>
+                &nbsp;
+                &nbsp;
+                <span>
+                  <fa-icon [icon]="faTrash" [title]="'Delete'" (click)="deleteLanguage(language)"
+                           style="cursor: pointer; color: firebrick"></fa-icon>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.ERROR">
+          <div [hidden]="isClicked" style="background-color: indianred">{{ appState.error }}</div>
+        </ng-container>
+        <pagination-controls
+          *ngIf="isTableShown"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Add Language -->
+<div *ngIf="isClicked" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #languageForm="ngForm" (ngSubmit)="saveLanguage(languageForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Language</h4>
+          <button type="button" class="close-button" (click)="isClicked = false; isTableShown = true">×</button>
+        </div>
+        <br>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Language</label>
+            <input type="text" id="name" ngModel name="name" class="form-input" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea type="text" id="description" ngModel name="description" class="form-input" placeholder="Enter Description"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="cancel-button" (click)="isClicked = false; isTableShown = true">Close</button>
+          <button type="submit" [ngClass]="{'disabled': languageForm.invalid}" [disabled]="(isLoading$ | async) || languageForm.invalid" class="submit-button">
+            <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Language -->
+<div *ngIf="isUpdated" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="modifyLanguage(selectedLanguage)">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Language</h4>
+          <button type="button" class="close-button" (click)="isUpdated = false; isTableShown = true">×</button>
+        </div>
+        <br>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Language</label>
+            <input type="text" [(ngModel)]="selectedLanguage.name" name="firstName" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea type="text" [(ngModel)]="selectedLanguage.description" name="secondName" class="form-input"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="cancel-button" (click)="isUpdated = false; isTableShown = true">Close</button>
+            <button type="submit" [ngClass]="{'disabled': isLoading$ | async}" [disabled]="isLoading$ | async" class="submit-button">
+              <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+              <span *ngIf="isLoading$ | async">Updating...</span>
+              <span *ngIf="!(isLoading$ | async)">Update</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div *ngIf="showError" class="overlay">
+  <div class="error-container">
+    <div class="error-header">
+      Error
+      <button style="float:right" type="button" class="close-button" (click)="showError = false; isTableShown = true">×</button>
+    </div>
+    <div class="error-body">
+      The linguistic name <strong><u>{{ enteredName }}</u></strong> {{ errorMessage }}
+    </div>
+    <div class="error-footer">
+      <button class="close-btn" (click)="showError = false; isTableShown = true;">Close Window</button>
+    </div>
+  </div>
+</div>
+

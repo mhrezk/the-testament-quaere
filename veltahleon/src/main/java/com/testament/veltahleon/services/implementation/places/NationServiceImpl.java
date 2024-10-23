@@ -1,5 +1,7 @@
 package com.testament.veltahleon.services.implementation.places;
 
+import com.testament.veltahleon.enumerations.GovernanceType;
+import com.testament.veltahleon.enumerations.NationType;
 import com.testament.veltahleon.model.entities.places.Nation;
 import com.testament.veltahleon.repositories.places.NationRepository;
 import com.testament.veltahleon.services.ifc.places.NationService;
@@ -9,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
 import java.util.List;
@@ -51,9 +54,11 @@ public class NationServiceImpl implements NationService {
     public Nation getNationByName(String name) {
         if(nationRepository.countByName(name) <= 0) {
           Nation newNation = new Nation();
-          String firstLetter = name.substring(0, 1).toUpperCase();
-          String word = name.substring(1).toLowerCase();
-          newNation.setName(firstLetter + word);
+//          String firstLetter = name.substring(0, 1).toUpperCase();
+//          String word = name.substring(1).toLowerCase();
+          newNation.setName(name.toUpperCase());
+          newNation.setType(NationType.NONE);
+          newNation.setGovernanceType(GovernanceType.NONE);
           return nationRepository.save(newNation);
         } else {
             return nationRepository.findByName(name);
@@ -68,7 +73,13 @@ public class NationServiceImpl implements NationService {
 
     @Override
     public Nation saveNation(Nation nation) {
+        nation.setName(nation.getName().toUpperCase());
+        nation.setUrlFlag(defaultFlagURL("square.png"));
         return nationRepository.save(nation);
+    }
+
+    private String defaultFlagURL(String imageName) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/places/nations/images/" + imageName).toUriString();
     }
 
     @Override
@@ -76,7 +87,7 @@ public class NationServiceImpl implements NationService {
         Nation newNation = nationRepository.findById(id).orElseThrow();
 
         if(nation.getName() != null && newNation.getName() != nation.getName()) {
-            newNation.setName(nation.getName());
+            newNation.setName(nation.getName().toUpperCase());
         }
 
         if(nation.getDescription() != null && newNation.getDescription() != nation.getDescription()) {
@@ -121,7 +132,7 @@ public class NationServiceImpl implements NationService {
     @Override
     public Nation modifyNation(Long id, Nation nation) {
         Nation newNation = nationRepository.findById(id).orElseThrow();
-        newNation.setName(nation.getName());
+        newNation.setName(nation.getName().toUpperCase());
         newNation.setDescription(nation.getDescription());
         newNation.setGovernanceType(nation.getGovernanceType());
         newNation.setType(nation.getType());

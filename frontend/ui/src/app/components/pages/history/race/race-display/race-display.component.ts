@@ -30,30 +30,31 @@ export class RaceDisplayComponent implements OnInit {
 
   faEdit = faEdit;
   faCircleArrowLeft = faCircleArrowLeft;
-  faTrash = faTrash;
 
   constructor(private raceService: RaceService,
               private router: Router) {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.raceService.getRaceID$.subscribe(result => this.raceID = result);
     this.raceService.getRaceName$.subscribe(result => this.raceName = result);
-    this.getRaceByID(this.raceID);
+    await this.getRaceByID(this.raceID);
   }
 
-  getRaceByID(raceID: number) {
-    this.raceService.getRaceByID(raceID).subscribe(result => {
-      this.selectedRace = result.data.datumRetrieved;
-      this.race.next(result);
-    });
-    this.selectedRace = this.race.value.data.datumRetrieved;
+  async getRaceByID(raceID: number) {
+    const result = await this.raceService.getRaceByID(raceID).toPromise();
+    // this.raceService.getRaceByID(raceID).subscribe(result => {
+    //   this.selectedRace = result.data.datumRetrieved;
+    //   this.race.next(result);
+    // });
+    this.selectedRace = result.data.datumRetrieved;
     console.log(this.selectedRace);
   }
 
   deleteRace(raceID: number) {
     this.raceService.deleteRace(raceID).subscribe();
+    this.raceService.getAllRacesCount().subscribe();
     this.router.navigateByUrl("/races");
   }
 
@@ -68,5 +69,13 @@ export class RaceDisplayComponent implements OnInit {
 
   routeToRaces() {
     this.router.navigateByUrl(`/races`);
+  }
+
+  routeToRaceEdit(raceID: number, raceName: string) {
+    this.router.navigateByUrl(`/races/${raceID}/${raceName}/edit`);
+  }
+
+  closeEditing(doneEditing: boolean) {
+    this.isEditing = doneEditing;
   }
 }

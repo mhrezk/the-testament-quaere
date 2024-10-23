@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,10 @@ public class Language {
 //            CascadeType.MERGE,
 //            CascadeType.PERSIST})
 //    private List<Letter> letters;
+
+    @Column(name = "alphabet_size", columnDefinition="Integer default '0'")
+    //@ColumnDefault("0")
+    private Integer alphabetSize;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;

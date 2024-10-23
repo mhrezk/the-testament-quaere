@@ -1,8 +1,9 @@
 export enum Lineage {
-  ALL = "ALL",
+  ALL = "All",
   HOUSE = "House",
   CLAN = "Clan",
   FAMILY = "Family",
   ORPHAN = "Orphan",
+  ADOPTED = "Adopted",
   NONE = "None"
 }

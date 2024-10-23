@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -28,15 +29,17 @@ public class LanguageController {
     @Autowired
     private LanguageService languageService;
 
+    public final String imagePath = "src/main/resources/assets/images/languages/";
+
     @GetMapping("/languages")
     public ResponseEntity<CustomResponse> getPaginatedLanguages(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        List<Language> languages = (List<Language>) languageService.getLanguagesWithPagination(pageNumber, pageSize);
+        List<Language> languages = (List<Language>) languageService.getLanguagesWithPagination((pageNumber - 1), pageSize);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", languages))
-                .message(languages.size() + " languages retrieved from page: " + (pageNumber + 1))
+                .message(languages.size() + " languages retrieved from page: " + pageNumber)
                 .build()
         );
     }
@@ -54,6 +57,18 @@ public class LanguageController {
         );
     }
 
+    @GetMapping("/languages/all/count")
+    public ResponseEntity<CustomResponse> getAllLanguagesCount() {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", languageService.countLanguages()))
+                .message("Count retrieved!")
+                .build()
+        );
+    }
+
     @GetMapping("/language/{id}")
     public ResponseEntity<CustomResponse> getLanguageByID(@PathVariable Long id) {
         return ResponseEntity.ok(CustomResponse.builder()
@@ -67,7 +82,7 @@ public class LanguageController {
     }
 
     @GetMapping("/language/name")
-    public ResponseEntity<CustomResponse> getLanguagesByLanguageName(@RequestParam(value = "languageName") String languageName) {
+    public ResponseEntity<CustomResponse> getLanguageByName(@RequestParam(value = "languageName") String languageName) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -78,9 +93,21 @@ public class LanguageController {
         );
     }
 
-    @GetMapping(value = "/language/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE})
-    public byte[] getAlphabet(@PathVariable("fileName") String fileName) throws IOException {
-        return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/languages/alphabet/" + fileName));
+    @GetMapping("/language/{languageName}/exist")
+    public ResponseEntity<CustomResponse> getLanguageNameExistence(@PathVariable(value = "languageName") String languageName) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", languageService.doesLanguageNameExist(languageName)))
+                .message("Race name exists!")
+                .build()
+        );
+    }
+
+    @GetMapping(path = "/languages/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getLinguisticImage(@PathVariable("imageName") String imageName) throws IOException {
+        return Files.readAllBytes(Path.of(imagePath + imageName));
     }
 
     @PostMapping("/save/language")
@@ -139,6 +166,18 @@ public class LanguageController {
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataUpdated", languageService.updateLanguage(id, language)))
+                .message("Language updated!")
+                .build()
+        );
+    }
+
+    @PutMapping("/modify/language/{id}")
+    public ResponseEntity<CustomResponse> modifyLanguage(@PathVariable Long id, @RequestBody Language language) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataUpdated", languageService.modifyLanguage(id, language)))
                 .message("Language updated!")
                 .build()
         );

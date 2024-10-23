@@ -1,7 +1,6 @@
 package com.testament.veltahleon.mappers.history;
 
 import com.testament.veltahleon.dto.history.SubRaceDTO;
-import com.testament.veltahleon.facades.society.PersonFacade;
 import com.testament.veltahleon.model.entities.history.SubRace;
 import com.testament.veltahleon.services.ifc.history.RaceService;
 import lombok.AllArgsConstructor;
@@ -21,6 +20,7 @@ public class SubRaceMapper {
                 .name(subRace.getName())
                 .description(subRace.getDescription())
                 .race(subRace.getRace().getName())
+                .imageURL(subRace.getImageURL())
                 .build();
     }
 
@@ -30,6 +30,7 @@ public class SubRaceMapper {
         subRace.setName(subRaceDTO.getName());
         subRace.setDescription(subRaceDTO.getDescription());
         subRace.setRace(raceService.getRaceByName(raceName));
+        subRace.setImageURL(subRaceDTO.getImageURL());
         return subRace;
     }
 }

@@ -1,0 +1,59 @@
+<div *ngIf="!isEditing" class="display-container">
+  <div class="image-container">
+    <img [src]="selectedSubRace.imageURL" alt="Sub-racial Image" />
+    @if(selectedSubRace.imageURL.split("/")[selectedSubRace.imageURL.split("/").length - 1] === "default.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+  <div class="details-container">
+    <h2>
+      <fa-icon [icon]="faCircleArrowLeft"
+               [style.color]="'red'"
+               [title]="'Return to Sub-races'"
+               (click)="routeToSubRaces(raceID, selectedSubRace.race)"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+      Sub-race:
+      <b>
+        {{ selectedSubRace.name }}
+      </b>
+      &nbsp;
+      <span style="float: right">
+        <fa-icon [icon]="faTrash"
+                 [title]="'Delete Sub-race'"
+                 (click)="deleteSubRace(selectedSubRace.id, raceID, selectedSubRace.race)"
+                 style="cursor: pointer; color: firebrick">
+        </fa-icon>
+      </span>
+    </h2>
+
+    <mat-divider></mat-divider>
+  </div>
+</div>
+
+@if(isEditing) {
+  <hr>
+} @else {
+  @if(isDescription) {
+    <h2>Description</h2>
+    <hr>
+    <st-editor [(ngModel)]="selectedSubRace.description" [config]="config"></st-editor>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="isDescription = false">Close Description</button>
+      <button type="button" class="btn btn-success" (click)="updateDescription()">Save Description</button>
+    </div>
+  } @else {
+    <h2>
+      Description
+      <fa-icon [icon]="faEdit"
+               [style.color]="'cornflowerblue'"
+               [title]="'Edit Description'"
+               (click)="isDescription = !isDescription;"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+    </h2>
+    <hr>
+    <div [innerHTML]="selectedSubRace.description"></div>
+  }
+}
+

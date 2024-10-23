@@ -1,0 +1,80 @@
+/*Button Design*/
+.stylized-button {
+  background: #27ae60;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.stylized-button:hover {
+  background: #218c53;
+}
+
+.stylized-button i {
+  font-size: 18px;
+}
+
+.display-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+}
+
+.image-container {
+  flex: 0 0 300px;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.details-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+mat-divider {
+  margin: 10px 0;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-item strong {
+  color: #333;
+  font-weight: bold;
+}
+
+.stylish-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.stylish-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.stylish-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

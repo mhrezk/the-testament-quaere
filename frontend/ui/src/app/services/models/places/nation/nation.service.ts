@@ -59,6 +59,10 @@ export class NationService {
       catchError(this.handleError)
     );
 
+  deleteNation(nationID: number) {
+    return this.http.delete<CustomResponse>(`${this.baseURL}/delete/nation/${nationID}`);
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
     return throwError(`Error: ${error.error.issue}`);
