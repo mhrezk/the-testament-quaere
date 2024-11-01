@@ -75,7 +75,7 @@ export class PersonDetailsEditComponent implements OnInit {
 
   get lineageKeys() {
     return Object.keys(Lineage).filter(
-      (key) => key !== 'All' && isNaN(Number(key))
+      (key) => key !== 'ALL' && isNaN(Number(key))
     );
   }
 }

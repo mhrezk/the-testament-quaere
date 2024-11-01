@@ -32,7 +32,14 @@ public class Capital {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "capital_id")
-    private Nation nation;
+    private NationDetails nationDetails;
+
+    @OneToOne(mappedBy = "capital", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "capital_id")
+    private Province province;
 
     @Column(name = "description", columnDefinition = "text")
     private String description;

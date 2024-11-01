@@ -8,7 +8,7 @@ public interface ProvinceService {
 
     Collection<Province> getProvincesWithPagination(int pageNumber, int numberOfRecords);
     Collection<Province> getProvinces();
-    Collection<Province> getProvincesByNationName(String name);
+    //Collection<Province> getProvincesByNationName(String name);
     Province getProvinceByID(Long id);
     Province getProvinceByName(String name);
     long getNumberOfProvincesInNation(String provinceName);

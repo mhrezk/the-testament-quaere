@@ -117,8 +117,7 @@
 </div>
 
 <!-- Add Timeline -->
-<div *ngIf="isClicked" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
-     aria-hidden="true">
+<div *ngIf="isClicked" class="modal-container">
   <div class="modal-dialog">
     <div class="modal-content">
       <form #timelineForm="ngForm" (ngSubmit)="saveTimeline(timelineForm)">
@@ -149,7 +148,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="isClicked = false; isTableShown = true">Close</button>
-          <button type="submit" [disabled]="(isLoading$ | async) || timelineForm.invalid"
+          <button type="submit" [ngClass]="{'disabled': timelineForm.invalid}" [disabled]="(isLoading$ | async) || timelineForm.invalid"
                   class="btn btn-success">
             <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
             <span *ngIf="isLoading$ | async">Saving...</span>
@@ -162,8 +161,7 @@
 </div>
 
 <!-- Edit Timeline -->
-<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="dayModalLabel"
-     aria-hidden="true">
+<div *ngIf="isUpdated" class="modal-container">
   <div class="modal-dialog">
     <div class="modal-content">
       <form (ngSubmit)="modifyTimeline(selectedTimeline)">
@@ -194,7 +192,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="isUpdated = false; isTableShown = true;">Close</button>
-          <button type="submit" [disabled]="isLoading$ | async"
+          <button type="submit" [ngClass]="{'disabled': isLoading$ | async}" [disabled]="isLoading$ | async"
                   class="btn btn-success">
             <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
             <span *ngIf="isLoading$ | async">Updating...</span>

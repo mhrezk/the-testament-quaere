@@ -41,11 +41,11 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
         Person newPerson = personRepository.findById(id).orElseThrow();
 
         if(personDetails.getPerson().getFirstName() != null && newPerson.getFirstName() != personDetails.getPerson().getFirstName()) {
-            newPerson.setFirstName(personDetails.getPerson().getFirstName());
+            newPerson.setFirstName(personDetails.getPerson().getFirstName().toUpperCase());
         }
 
         if(personDetails.getPerson().getSecondName() != null && newPerson.getSecondName() != personDetails.getPerson().getSecondName()) {
-            newPerson.setSecondName(personDetails.getPerson().getSecondName());
+            newPerson.setSecondName(personDetails.getPerson().getSecondName().toUpperCase());
         }
 
         if(personDetails.getPerson().getGender() != null && newPerson.getGender() != personDetails.getPerson().getGender()) {
@@ -134,8 +134,8 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
     public PersonDetails modifyPersonDetails(Long id, PersonDetails personDetails) {
         PersonDetails newPersonDetails = personDetailsRepository.findById(id).orElseThrow();
         Person newPerson = personRepository.findById(id).orElseThrow();
-        newPerson.setFirstName(personDetails.getPerson().getFirstName());
-        newPerson.setSecondName(personDetails.getPerson().getSecondName());
+        newPerson.setFirstName(personDetails.getPerson().getFirstName().toUpperCase());
+        newPerson.setSecondName(personDetails.getPerson().getSecondName().toUpperCase());
         newPerson.setRaceName(personDetails.getPerson().getRaceName());
         newPerson.setGender(personDetails.getPerson().getGender());
         newPersonDetails.setPerson(newPerson);

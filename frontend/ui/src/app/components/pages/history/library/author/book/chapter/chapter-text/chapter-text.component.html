@@ -1,0 +1,5 @@
+<st-editor [(ngModel)]="chapter.text" [config]="config"></st-editor>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="isTextEdited(false)">Close Chapter Text Editor</button>
+  <button type="button" class="btn btn-success" (click)="updateText()">Save Chapter Text</button>
+</div>

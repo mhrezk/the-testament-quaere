@@ -9,9 +9,11 @@ public interface ChapterService {
     Collection<Chapter> getChaptersWithPagination(int pageNumber, int numberOfRecords);
     Collection<Chapter> getChapters();
     Collection<Chapter> getChaptersByBookName(String name);
+    Collection<Chapter> getPaginatedChaptersByBookName(String name, int pageNumber, int numberOfRecords);
     long getNumberOfChaptersPerBook(String bookName);
-    Chapter getChapterByID(Long id);
     Boolean deleteChapterByID(Long id);
-    Chapter saveChapter(Chapter chapter);
+    Chapter getChapterByID(Long id);
+    Chapter saveChapter(Chapter chapter, String bookName);
     Chapter updateChapter(Long id, Chapter chapter);
+    Chapter modifyChapter(Long id, Chapter chapter);
 }

@@ -10,8 +10,8 @@ import {Router} from "@angular/router";
   styleUrl: './person-details-biography.component.css'
 })
 export class PersonDetailsBiographyComponent {
-    @Input() personDetails: PersonDetails;
-    @Output() isBiography = new EventEmitter<boolean>();
+  @Input() personDetails: PersonDetails;
+  @Output() isBiography = new EventEmitter<boolean>();
 
   config: EditorConfig = {
     placeholder: 'Type something...',
@@ -22,8 +22,7 @@ export class PersonDetailsBiographyComponent {
     this.isBiography.emit(editable);
   }
 
-  constructor(private personDetailsService: PersonDetailsService,
-              private router: Router) {
+  constructor(private personDetailsService: PersonDetailsService) {
 
   }
 

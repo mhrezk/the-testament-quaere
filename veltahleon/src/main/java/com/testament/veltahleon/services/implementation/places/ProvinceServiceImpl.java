@@ -31,10 +31,10 @@ public class ProvinceServiceImpl implements ProvinceService {
         return provinceRepository.findAll();
     }
 
-    @Override
-    public Collection<Province> getProvincesByNationName(String name) {
-        return provinceRepository.findByNation_Name(name);
-    }
+//    @Override
+//    public Collection<Province> getProvincesByNationName(String name) {
+//        return provinceRepository.findByNation_Name(name);
+//    }
 
     @Override
     public Province getProvinceByID(Long id) {
@@ -78,9 +78,9 @@ public class ProvinceServiceImpl implements ProvinceService {
             newProvince.setCapital(province.getCapital());
         }
 
-        if(province.getNation() != null && newProvince.getNation() != province.getNation()) {
-            newProvince.setNation(province.getNation());
-        }
+//        if(province.getNation() != null && newProvince.getNation() != province.getNation()) {
+//            newProvince.setNation(province.getNation());
+//        }
 
         return provinceRepository.save(newProvince);
     }

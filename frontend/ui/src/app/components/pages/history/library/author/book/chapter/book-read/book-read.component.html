@@ -1,0 +1,30 @@
+<div *ngIf="(appState$ | async) as appState" class="chapter-container">
+  <div *ngFor="let chapter of appState.appData?.data.dataRetrieved
+            | paginate: {
+              itemsPerPage: tableSize,
+              currentPage: currentPage,
+              totalItems: count$ | async
+            }; let i = index;" class="chapter-number">
+    <fa-icon [icon]="faCircleArrowLeft"
+             style="float: left"
+             [style.color]="'red'"
+             [title]="'Return to ' + bookName"
+             (click)="routeToBookDisplay(+bookID)"
+             [style.cursor]="'pointer'">
+    </fa-icon>
+    Chapter Number: {{ chapter.chapterNumber }}
+    <div class="chapter-title">
+      @if (chapter.name) {
+        {{ chapter.name }}
+      }
+    </div>
+    <div [innerHTML]="chapter.text" class="chapter-text">
+    </div>
+    <pagination-controls
+      previousLabel="Previous"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>

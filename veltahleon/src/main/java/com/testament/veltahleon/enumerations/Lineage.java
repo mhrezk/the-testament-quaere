@@ -4,12 +4,12 @@ import lombok.Getter;
 
 @Getter
 public enum Lineage {
-    HOUSE("House"),
-    CLAN("Clan"),
-    FAMILY("Family"),
-    ORPHAN("Orphan"),
-    ADOPTED("Adopted"),
-    NONE("None");
+    HOUSE("HOUSE"),
+    CLAN("CLAN"),
+    FAMILY("FAMILY"),
+    ORPHAN("ORPHAN"),
+    ADOPTED("ADOPTED"),
+    NONE("NONE");
 
     private final String lineage;
 

@@ -96,33 +96,33 @@ public class CapitalServiceImpl implements CapitalService {
             newNation.setName(nation.getName());
         }
 
-        if(nation.getDescription() != null && newNation.getDescription() != nation.getDescription()) {
-            newNation.setDescription(nation.getDescription());
-        }
-
-        if(nation.getCapital() != null && newNation.getCapital() != nation.getCapital()) {
-            newNation.setCapital(nation.getCapital());
-        }
-
-//        if(nation.getContinent() != null && newNation.getContinent() != nation.getContinent()) {
-//            newNation.setContinent(nation.getContinent());
+//        if(nation.getDescription() != null && newNation.getDescription() != nation.getDescription()) {
+//            newNation.setDescription(nation.getDescription());
 //        }
-
-        if(nation.getLeader() != null && newNation.getLeader() != nation.getLeader()) {
-            newNation.setLeader(nation.getLeader());
-        }
-
-        if(nation.getLanguage() != null && newNation.getLanguage() != nation.getLanguage()) {
-            newNation.setLanguage(nation.getLanguage());
-        }
-
-        if(nation.getProvinces() != null && newNation.getProvinces() != nation.getProvinces()) {
-            newNation.setProvinces(nation.getProvinces());
-        }
-
-        if(nation.getType() != null && newNation.getType() != nation.getType()) {
-            newNation.setType(nation.getType());
-        }
+//
+//        if(nation.getCapital() != null && newNation.getCapital() != nation.getCapital()) {
+//            newNation.setCapital(nation.getCapital());
+//        }
+//
+////        if(nation.getContinent() != null && newNation.getContinent() != nation.getContinent()) {
+////            newNation.setContinent(nation.getContinent());
+////        }
+//
+//        if(nation.getLeader() != null && newNation.getLeader() != nation.getLeader()) {
+//            newNation.setLeader(nation.getLeader());
+//        }
+//
+//        if(nation.getLanguage() != null && newNation.getLanguage() != nation.getLanguage()) {
+//            newNation.setLanguage(nation.getLanguage());
+//        }
+//
+//        if(nation.getProvinces() != null && newNation.getProvinces() != nation.getProvinces()) {
+//            newNation.setProvinces(nation.getProvinces());
+//        }
+//
+//        if(nation.getType() != null && newNation.getType() != nation.getType()) {
+//            newNation.setType(nation.getType());
+//        }
 
         return newNation;
     }

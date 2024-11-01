@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.85.0] 2024-10-23
+
+- Created CRUD for books
+- Added CRUD for chapters
+- Added book reading display with all chapters per book
+
 ## [0.84.0] 2024-10-23
 
 - Added languages and letters for each language

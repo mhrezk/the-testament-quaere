@@ -34,6 +34,20 @@ import {
   LanguageDisplayEditComponent
 } from "./components/pages/history/language/language-display-edit/language-display-edit.component";
 import {LetterComponent} from "./components/pages/history/letter/letter.component";
+import {AuthorComponent} from "./components/pages/history/library/author/author.component";
+import {
+  AuthorDisplayComponent
+} from "./components/pages/history/library/author/author-display/author-display.component";
+import {BookComponent} from "./components/pages/history/library/author/book/book.component";
+import {BookDisplayComponent} from "./components/pages/history/library/author/book/book-display/book-display.component";
+import {ChapterComponent} from "./components/pages/history/library/author/book/chapter/chapter.component";
+import {
+  ChapterDisplayComponent
+} from "./components/pages/history/library/author/book/chapter/chapter-display/chapter-display.component";
+import {
+  ChapterDisplayEditComponent
+} from "./components/pages/history/library/author/book/chapter/chapter-display-edit/chapter-display-edit.component";
+import {BookReadComponent} from "./components/pages/history/library/author/book/chapter/book-read/book-read.component";
 //import {LineageTreeComponent} from "./components/pages/society/lineage-tree/lineage-tree.component";
 
 const routes: Routes = [
@@ -101,6 +115,38 @@ const routes: Routes = [
   {
     path: "organizations",
     component: OrganizationComponent
+  },
+  {
+    path: "library",
+    component: AuthorComponent
+  },
+  {
+    path: "author/:id/:firstName/:lastName",
+    component: AuthorDisplayComponent
+  },
+  {
+    path: "author/:id/:firstName/:lastName/books",
+    component: BookComponent
+  },
+  {
+    path: "author/:id/:firstName/:lastName/books/:bookID",
+    component: BookDisplayComponent
+  },
+  {
+    path: "author/:id/:firstName/:lastName/books/book/:bookID/:name/chapters/read/all",
+    component: BookReadComponent
+  },
+  {
+    path: "author/:id/:firstName/:lastName/books/book/:bookID/:name/chapters",
+    component: ChapterComponent
+  },
+  {
+    path: "author/:id/:firstName/:lastName/books/book/:bookID/:name/chapters/chapter/:chapterID",
+    component: ChapterDisplayComponent
+  },
+  {
+    path: "author/:id/:firstName/:lastName/books/book/:bookID/:name/chapters/chapter/:chapterID/edit",
+    component: ChapterDisplayEditComponent
   },
   {
     path: "timelines",

@@ -34,12 +34,12 @@ public class Nation {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "capital_id")
-    private Capital capital;
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "capital_id")
+//    private Capital capital;
 
 //    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,
@@ -55,28 +55,28 @@ public class Nation {
 //    @JoinColumn(name = "nation_leader_id")
 //    private NationLeader leader;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "leader_id")
-    private Person leader;
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "leader_id")
+//    private Person leader;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "language_id", referencedColumnName = "id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Language language;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "language_id", referencedColumnName = "id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Language language;
 
     //private String language;
 
-    @OneToMany(mappedBy = "nation", cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    private List<Province> provinces;
+//    @OneToMany(mappedBy = "nation", cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    private List<Province> provinces;
     //private Set<Province> provinces;
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
@@ -100,9 +100,9 @@ public class Nation {
 //            CascadeType.PERSIST})
 //    private List<Pundit> pundits;
 
-    @Column(name = "description", columnDefinition = "longtext")
-    private String description;
-
-    @Column(name = "flag_url", nullable = true)
-    private String urlFlag;
+//    @Column(name = "description", columnDefinition = "longtext")
+//    private String description;
+//
+//    @Column(name = "flag_url", nullable = true)
+//    private String urlFlag;
 }

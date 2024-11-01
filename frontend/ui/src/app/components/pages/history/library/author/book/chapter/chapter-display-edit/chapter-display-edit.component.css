@@ -1,0 +1,49 @@
+/* General Container for Chapter */
+.chapter-container {
+  max-width: 2000px;
+  padding: 40px;
+  margin: 20px auto;
+  background-color: #f5f0e1; /* Tradeback novel paper color */
+  color: #2c2c2c; /* Deep gray text color */
+  font-family: 'Georgia', serif;
+  line-height: 1.6;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+/* Flex layout for Chapter Number and Chapter Title */
+.chapter-number,
+.chapter-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.75em;
+  margin-bottom: 10px;
+  color: #5a5a5a;
+}
+
+/* Ensure input fields have proper sizing */
+.chapter-number input,
+.chapter-title input {
+  flex: 1;
+  max-width: 200px;
+  margin-left: 15px;
+  font-size: 1em;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Adjust modal footer button alignment */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+}

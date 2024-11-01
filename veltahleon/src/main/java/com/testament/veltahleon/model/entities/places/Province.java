@@ -36,9 +36,9 @@ public class Province {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST})
-    @JoinColumn(name = "nation_id")
+    @JoinColumn(name = "nation_details_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Nation nation;
+    private NationDetails nationDetails;
 
     @Column(name = "description", columnDefinition = "text")
     private String description;

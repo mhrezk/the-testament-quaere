@@ -1,0 +1,37 @@
+/* General Container for Chapter */
+.chapter-container {
+  max-width: 2000px;
+  padding: 40px;
+  margin: 20px auto;
+  background-color: #f5f0e1; /* Tradeback novel paper color */
+  color: #2c2c2c; /* Deep gray text color */
+  font-family: 'Georgia', serif;
+  line-height: 1.6;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+/* Chapter Number */
+.chapter-number {
+  font-size: 2.5em;
+  color: #5a5a5a;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Chapter Title */
+.chapter-title {
+  font-size: 1.75em;
+  text-align: center;
+  color: #333333;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+/* Chapter Text */
+.chapter-text {
+  font-size: 1.1em;
+  color: #2c2c2c;
+  text-align: justify;
+  padding: 0 10px;
+}

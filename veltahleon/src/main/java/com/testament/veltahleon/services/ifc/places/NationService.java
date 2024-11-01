@@ -16,4 +16,5 @@ public interface NationService {
     Nation saveNation(Nation nation);
     Nation updateNation(Long id, Nation nation);
     Nation modifyNation(Long id, Nation nation);
+    long countNations();
 }

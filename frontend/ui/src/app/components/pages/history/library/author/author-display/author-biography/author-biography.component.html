@@ -1,0 +1,8 @@
+<h2>Biography</h2>
+<hr>
+<st-editor [(ngModel)]="author.biography" [config]="config"></st-editor>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="isBiographyEdited(false)">Close Biography</button>
+  <button type="button" class="btn btn-success" (click)="updateBiography()">Save Biography</button>
+</div>
+

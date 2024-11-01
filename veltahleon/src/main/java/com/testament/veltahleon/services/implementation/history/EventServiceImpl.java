@@ -33,6 +33,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public Collection<Event> getPaginatedEventsByTimelineName(String timelineName, int pageNumber, int numberOfRecords) {
+        return eventRepository.findByTimeline_Name(timelineName, PageRequest.of(pageNumber, numberOfRecords)).toList();
+    }
+
+    @Override
     public Collection<Event> getEvents() {
         return eventRepository.findAll();
     }

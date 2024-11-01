@@ -1,4 +1,5 @@
 import {Component, computed, Input, signal} from '@angular/core';
+import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 export type MenuItem = {
   icon: string;
@@ -58,6 +59,11 @@ export class CustomSidenavComponent {
       route: "communities"
     },
     {
+      icon: "books",
+      label: "Library",
+      route: "library"
+    },
+    {
       icon: "account_tree",
       label: "Hierarchy",
       route: "hierarchy"
@@ -75,5 +81,12 @@ export class CustomSidenavComponent {
   };
 
   profilePictureSize = computed(() => this.sidenavCollapsed() ? '32' : '100');
+
+  // Method to handle the rearranging of menu items
+  drop(event: CdkDragDrop<MenuItem[]>) {
+    const currentItems = this.menuItems();
+    moveItemInArray(currentItems, event.previousIndex, event.currentIndex);
+    this.menuItems.set([...currentItems]); // Update the signal with the new order
+  }
 }
 

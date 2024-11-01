@@ -34,8 +34,8 @@ public class NationFacade {
     @Autowired
     private PersonService personService;
 
-    @Autowired
-    private ProvinceService provinceService;
+//    @Autowired
+//    private ProvinceService provinceService;
 
     public Capital getCapital(String capitalName) {
         return capitalService.getCapitalByName(capitalName);
@@ -53,13 +53,13 @@ public class NationFacade {
         return nationService.getNationByName(name);
     }
 
-    public Province getProvince(String provinceName) {
-        return provinceService.getProvinceByName(provinceName);
-    }
-
-    public List<Province> getProvinces(List<String> provinces) {
-        return provinces.stream().map(p -> provinceService.getProvinceByName(p)).toList();
-    }
+//    public Province getProvince(String provinceName) {
+//        return provinceService.getProvinceByName(provinceName);
+//    }
+//
+//    public List<Province> getProvinces(List<String> provinces) {
+//        return provinces.stream().map(p -> provinceService.getProvinceByName(p)).toList();
+//    }
 
 //    public Set<Province> getProvinces(Set<String> provinces) {
 //        return provinces.stream().map(p -> provinceService.getProvinceByName(p)).collect(Collectors.toSet());

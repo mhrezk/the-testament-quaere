@@ -7,9 +7,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -23,15 +27,17 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
+    public final String imagePath = "src/main/resources/assets/images/authors/";
+
     @GetMapping("/authors")
     public ResponseEntity<CustomResponse> getPaginatedAuthors(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-        List<Author> authors = (List<Author>) authorService.getAuthorsWithPagination(pageNumber, pageSize);
+        List<Author> authors = (List<Author>) authorService.getAuthorsWithPagination((pageNumber - 1), pageSize);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", authors))
-                .message(authors.size() + " authors retrieved from page: " + (pageNumber + 1))
+                .message(authors.size() + " authors retrieved from page: " + pageNumber)
                 .build()
         );
     }
@@ -49,6 +55,18 @@ public class AuthorController {
         );
     }
 
+    @GetMapping("/authors/all/count")
+    public ResponseEntity<CustomResponse> getAllAuthorsCount() {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataRetrieved", authorService.countAuthors()))
+                .message("Count retrieved!")
+                .build()
+        );
+    }
+
     @GetMapping("/author/{id}")
     public ResponseEntity<CustomResponse> getAuthorByID(@PathVariable Long id) {
         return ResponseEntity.ok(CustomResponse.builder()
@@ -59,6 +77,11 @@ public class AuthorController {
                 .message("Author retrieved!")
                 .build()
         );
+    }
+
+    @GetMapping(path = "/authors/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getAuthorImage(@PathVariable("imageName") String imageName) throws IOException {
+        return Files.readAllBytes(Path.of(imagePath + imageName));
     }
 
     @DeleteMapping("/delete/author/{id}")
@@ -92,6 +115,18 @@ public class AuthorController {
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataUpdated", authorService.updateAuthor(id, author)))
+                .message("Author updated!")
+                .build()
+        );
+    }
+
+    @PutMapping("/modify/author/{id}")
+    public ResponseEntity<CustomResponse> modifyAuthor(@PathVariable("id") Long id, @RequestBody @Valid Author author) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataUpdated", authorService.modifyAuthor(id, author)))
                 .message("Author updated!")
                 .build()
         );

@@ -173,7 +173,7 @@
 </ng-container>
 
 <!-- Add Event -->
-<div *ngIf="isClicked" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="eventModalLabel">
+<div *ngIf="isClicked" class="modal-container">
   <div class="modal-dialog">
     <div class="modal-content">
       <form #eventForm="ngForm" (ngSubmit)="saveEvent(eventForm)">
@@ -182,7 +182,10 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label>Incident</label>
+            <label>
+              Incident
+              <span class="mat-body-2 text-muted">Required</span>
+            </label>
             <input type="text" ngModel name="incident" class="form-control" required>
           </div>
           <div class="form-group">
@@ -194,9 +197,11 @@
             <input type="number" min="0" ngModel name="eventMonth" class="form-control">
           </div>
           <div class="form-group">
-            <label>Event Year</label>
+            <label>
+              Event Year
+              <span class="mat-body-2 text-muted">Required</span>
+            </label>
             <input type="number" min="1" ngModel name="eventYear" class="form-control" required>
-            <span class="mat-body-2 text-muted">Required</span>
           </div>
           <div class="form-group">
             <label>Year Abbreviation</label>
@@ -209,7 +214,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="isClicked = false; isEventShown = true">Close</button>
-          <button type="submit" [disabled]="(isLoading$ | async) || eventForm.invalid"
+          <button type="submit" [ngClass]="{'disabled': eventForm.invalid}" [disabled]="(isLoading$ | async) || eventForm.invalid"
                   class="btn btn-success">
             <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
             <span *ngIf="isLoading$ | async">Saving...</span>
@@ -222,7 +227,7 @@
 </div>
 
 <!-- Edit Event -->
-<div *ngIf="isUpdated" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="eventModalLabel">
+<div *ngIf="isUpdated" class="modal-container">
   <div class="modal-dialog">
     <div class="modal-content">
       <form (ngSubmit)="modifyEvent(selectedEvent)">
@@ -231,7 +236,10 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label>Incident</label>
+            <label>
+              Incident
+              <span class="mat-body-2 text-muted">Required</span>
+            </label>
             <input type="text" [(ngModel)]="selectedEvent.incident" name="incident" class="form-control" required>
           </div>
           <div class="form-group">
@@ -243,9 +251,11 @@
             <input type="text" min="0" [(ngModel)]="selectedEvent.eventMonth" name="eventMonth" class="form-control">
           </div>
           <div class="form-group">
-            <label>Event Year</label>
+            <label>
+              Event Year
+              <span class="mat-body-2 text-muted">Required</span>
+            </label>
             <input type="number" min="1" [(ngModel)]="selectedEvent.eventYear" name="eventYear" class="form-control" required>
-            <span class="mat-body-2 text-muted">Required</span>
           </div>
           <div class="form-group">
             <label>Year Abbreviation</label>
@@ -258,7 +268,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="isUpdated = false; isEventShown = true;">Close</button>
-          <button type="submit" [disabled]="isLoading$ | async"
+          <button type="submit" [ngClass]="{'disabled': isLoading$ | async}" [disabled]="isLoading$ | async"
                   class="btn btn-success">
             <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
             <span *ngIf="isLoading$ | async">Updating...</span>
@@ -271,7 +281,7 @@
 </div>
 
 <!-- Add Event at Index-->
-<div *ngIf="isNodeAdded" style="margin: auto; width: 50%" tabindex="-1" aria-labelledby="eventModalLabel">
+<div *ngIf="isNodeAdded" class="modal-container">
   <div class="modal-dialog">
     <div class="modal-content">
       <form #eventForm="ngForm" (ngSubmit)="saveEventAtParticularIndex(eventForm, specifiedIndex)">
@@ -280,7 +290,10 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label>Incident</label>
+            <label>
+              Incident
+              <span class="mat-body-2 text-muted">Required</span>
+            </label>
             <input type="text" ngModel name="incident" class="form-control" required>
           </div>
           <div class="form-group">
@@ -292,9 +305,11 @@
             <input type="number" min="0" ngModel name="eventMonth" class="form-control">
           </div>
           <div class="form-group">
-            <label>Event Year</label>
+            <label>
+              Event Year
+              <span class="mat-body-2 text-muted">Required</span>
+            </label>
             <input type="number" min="1" ngModel name="eventYear" class="form-control" required>
-            <span class="mat-body-2 text-muted">Required</span>
           </div>
           <div class="form-group">
             <label>Year Abbreviation</label>
@@ -307,7 +322,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="isNodeAdded = false; isEventShown = true">Close</button>
-          <button type="submit" [disabled]="(isLoading$ | async) || eventForm.invalid"
+          <button type="submit" [ngClass]="{'disabled': eventForm.invalid}" [disabled]="(isLoading$ | async) || eventForm.invalid"
                   class="btn btn-success">
             <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
             <span *ngIf="isLoading$ | async">Saving...</span>

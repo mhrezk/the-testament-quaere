@@ -18,15 +18,24 @@ public class BookMapper {
         return BookDTO.builder()
                 .id(book.getId())
                 .name(book.getName())
-                .authorFirstName(book.getAuthor().getFirstName())
-                .authorLastName(book.getAuthor().getLastName())
+                .releaseDate(book.getReleaseDate())
+                .releaseYearAbbreviation(book.getReleaseYearAbbreviation())
+//                .authorFirstName(book.getAuthor().getFirstName())
+//                .authorLastName(book.getAuthor().getLastName())
+                .description(book.getDescription())
+                .coverURL(book.getCoverURL())
                 .build();
     }
 
-    public Book convertToEntity(BookDTO bookDTO) {
+    public Book convertToEntity(BookDTO bookDTO, Long authorID) {
         Book book = new Book();
+        book.setId(bookDTO.getId());
         book.setName(bookDTO.getName());
-        book.setAuthor(authorService.getAuthorByFirstName(bookDTO.getAuthorFirstName()));
+        book.setDescription(bookDTO.getDescription());
+        book.setReleaseDate(bookDTO.getReleaseDate());
+        book.setReleaseYearAbbreviation(bookDTO.getReleaseYearAbbreviation());
+        book.setCoverURL(bookDTO.getCoverURL());
+        book.setAuthor(authorService.getAuthorByID(authorID));
         return book;
     }
 }

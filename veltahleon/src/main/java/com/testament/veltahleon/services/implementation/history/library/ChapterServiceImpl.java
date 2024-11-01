@@ -1,6 +1,7 @@
 package com.testament.veltahleon.services.implementation.history.library;
 
 import com.testament.veltahleon.model.entities.history.library.Chapter;
+import com.testament.veltahleon.repositories.history.library.BookRepository;
 import com.testament.veltahleon.repositories.history.library.ChapterRepository;
 import com.testament.veltahleon.services.ifc.history.library.ChapterService;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +22,9 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Autowired
     private ChapterRepository chapterRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @Override
     public Collection<Chapter> getChaptersWithPagination(int pageNumber, int numberOfRecords) {
@@ -34,6 +39,11 @@ public class ChapterServiceImpl implements ChapterService {
     @Override
     public Collection<Chapter> getChaptersByBookName(String name) {
         return chapterRepository.findByBook_Name(name);
+    }
+
+    @Override
+    public Collection<Chapter> getPaginatedChaptersByBookName(String name, int pageNumber, int numberOfRecords) {
+        return chapterRepository.findByBook_Name(name, PageRequest.of(pageNumber, numberOfRecords)).toList();
     }
 
     @Override
@@ -53,7 +63,8 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public Chapter saveChapter(Chapter chapter) {
+    public Chapter saveChapter(Chapter chapter, String bookName) {
+        chapter.setBook(bookRepository.findByName(bookName));
         return chapterRepository.save(chapter);
     }
 
@@ -73,10 +84,19 @@ public class ChapterServiceImpl implements ChapterService {
             newChapter.setChapterNumber(chapter.getChapterNumber());
         }
 
-        if(chapter.getBook() != null && newChapter.getBook() != chapter.getBook()) {
-            newChapter.setBook(chapter.getBook());
-        }
+//        if(chapter.getBook() != null && newChapter.getBook() != chapter.getBook()) {
+//            newChapter.setBook(chapter.getBook());
+//        }
 
         return chapterRepository.save(newChapter);
+    }
+
+    @Override
+    public Chapter modifyChapter(Long id, Chapter chapter) {
+        Chapter newChapter = chapterRepository.findById(id).orElseThrow();
+        newChapter.setName(chapter.getName());
+        newChapter.setText(chapter.getText());
+        newChapter.setChapterNumber(chapter.getChapterNumber());
+        return null;
     }
 }

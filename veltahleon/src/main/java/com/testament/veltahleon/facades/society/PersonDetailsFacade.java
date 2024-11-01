@@ -60,7 +60,7 @@ public class PersonDetailsFacade {
         Nation nation = new Nation();
         nation.setName("None");
         if(nationRepository.countByName(nation.getName()) <= 0) {
-            nation.setDescription(null);
+//            nation.setDescription(null);
             return nationRepository.save(nation);
         } else {
             return nationRepository.findByName(nation.getName());

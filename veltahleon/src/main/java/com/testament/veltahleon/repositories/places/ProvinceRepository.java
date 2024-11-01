@@ -11,6 +11,6 @@ public interface ProvinceRepository extends JpaRepository<Province, Long> {
 
     Province findByName(String name);
     Province findByCapital_Name(String name);
-    Collection<Province> findByNation_Name(String name);
+    //Collection<Province> findByNation_Name(String name);
     long countByName(String name);
 }

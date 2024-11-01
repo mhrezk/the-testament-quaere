@@ -31,6 +31,18 @@ public class Book {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Author author;
 
+    @Column(name = "description", columnDefinition = "longtext")
+    private String description;
+
+    @Column(name = "release_date")
+    private Integer releaseDate;
+
+    @Column(name = "release_year_abbreviation")
+    private String releaseYearAbbreviation;
+
+    @Column(name = "cover_URL")
+    private String coverURL;
+
 //    @OneToMany(mappedBy = "book", cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,
 //            CascadeType.MERGE,

@@ -7,4 +7,6 @@ export interface Chapter {
   book: string;
   //book: Book;
   text: string;
+
+  isSelected: boolean;
 }

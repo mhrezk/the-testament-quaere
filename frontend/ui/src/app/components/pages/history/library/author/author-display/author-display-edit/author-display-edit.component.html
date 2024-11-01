@@ -1,0 +1,66 @@
+<div class="display-container">
+  <div class="image-container">
+    <!--    <img src="https://via.placeholder.com/300x400" alt="Person Image" />-->
+    <img [src]="author.imageURL" alt="Person Image" />
+    @if(author.imageURL.split("/")[author.imageURL.split("/").length - 1] === "default.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <form #authorForm="ngForm" (ngSubmit)="onSubmit(author)" class="details-container">
+    <h2>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput name="firstName" [(ngModel)]="author.firstName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Middle Name</mat-label>
+        <input matInput name="middleName" [(ngModel)]="author.middleName"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput name="lastName" [(ngModel)]="author.lastName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Pen Name</mat-label>
+        <input matInput name="middleName" [(ngModel)]="author.penName"/>
+      </mat-form-field>
+    </h2>
+
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Gender:</strong>
+      <mat-form-field appearance="outline">
+        <mat-label>Gender</mat-label>
+        <mat-select name="gender" [(ngModel)]="author.gender">
+          <mat-option value="MALE">Male</mat-option>
+          <mat-option value="FEMALE">Female</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Birth Date:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="birthYear" [(ngModel)]="author.birthYear" type="number" placeholder="Year" />
+      </mat-form-field>
+      <strong>Death Date:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="deathYear" [(ngModel)]="author.deathYear" type="number" placeholder="Year" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="birthYearAbbreviation" [(ngModel)]="author.birthYearAbbreviation" type="text" placeholder="Year Abbr." />
+      </mat-form-field>
+    </div>
+
+    <div class="modal-footer">
+      <button [disabled]="authorForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="onClose(false)">Close</button>
+    </div>
+  </form>
+</div>
+

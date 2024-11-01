@@ -30,6 +30,7 @@ export class RaceDisplayComponent implements OnInit {
 
   faEdit = faEdit;
   faCircleArrowLeft = faCircleArrowLeft;
+  faTrash = faTrash;
 
   constructor(private raceService: RaceService,
               private router: Router) {
@@ -53,7 +54,7 @@ export class RaceDisplayComponent implements OnInit {
   }
 
   deleteRace(raceID: number) {
-    this.raceService.deleteRace(raceID).subscribe();
+    this.raceService.deleteRace$(raceID).subscribe();
     this.raceService.getAllRacesCount().subscribe();
     this.router.navigateByUrl("/races");
   }

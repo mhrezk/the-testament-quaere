@@ -12,4 +12,8 @@ public class BookDTO {
     private String name;
     private String authorFirstName;
     private String authorLastName;
+    private String description;
+    private Integer releaseDate;
+    private String releaseYearAbbreviation;
+    private String coverURL;
 }

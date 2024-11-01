@@ -182,9 +182,17 @@
             <input type="text" [(ngModel)]="selectedNation.name" name="name" class="form-input" required>
           </div>
           <div class="form-group">
-            <label>Description</label>
-            <textarea type="text" [(ngModel)]="selectedNation.description" name="description"
-                      class="form-input"></textarea>
+            <label >Nation Type</label>
+            <select name="type" [(ngModel)]="selectedNation.type" class="form-select">
+              <option value="" disabled selected>Select Nation type</option>
+              <option *ngFor="let type of nationTypeKeys" [value]="selectedNation.type">{{ selectedNation.type }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Governance Type</label>
+            <select name="governanceType" [(ngModel)]="selectedNation.governanceType" class="form-select">
+              <option *ngFor="let type of governanceTypeKeys" [value]="selectedNation.governanceType">{{ selectedNation.governanceType }}</option>
+            </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="cancel-button" (click)="isUpdated = false; isTableShown = true">Close</button>
@@ -209,7 +217,7 @@
 <!--      <button style="float:right" type="button" class="close-button" (click)="showError = false; isTableShown = true">×</button>-->
 <!--    </div>-->
 <!--    <div class="error-body">-->
-<!--      The racial name <strong><u>{{ enteredName }}</u></strong> {{ errorMessage }}-->
+<!--      The national name <strong><u>{{ enteredName }}</u></strong> {{ errorMessage }}-->
 <!--    </div>-->
 <!--    <div class="error-footer">-->
 <!--      <button class="close-btn" (click)="showError = false; isTableShown = true;">Close Window</button>-->

@@ -15,14 +15,14 @@ export interface Nation {
   // language: Language;
   // provinces: Province[];
   //type: NationType;
-  capital: string;
-  leader: string;
-  language: string;
-  provinces: string[];
+  // capital: string;
+  // leader: string;
+  // language: string;
+  // provinces: string[];
   type: NationType;
   governanceType: GovernanceType;
-  description: string;
-  urlFlag: string;
+  // description: string;
+  // urlFlag: string;
 
   isSelected: boolean;
 }

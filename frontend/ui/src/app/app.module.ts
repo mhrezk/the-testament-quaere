@@ -67,6 +67,19 @@ import { LanguageComponent } from './components/pages/history/language/language.
 import { LetterComponent } from './components/pages/history/letter/letter.component';
 import { LanguageDisplayComponent } from './components/pages/history/language/language-display/language-display.component';
 import { LanguageDisplayEditComponent } from './components/pages/history/language/language-display-edit/language-display-edit.component';
+import { AuthorComponent } from './components/pages/history/library/author/author.component';
+import { BookComponent } from './components/pages/history/library/author/book/book.component';
+import { ChapterComponent } from './components/pages/history/library/author/book/chapter/chapter.component';
+import { AuthorDisplayComponent } from './components/pages/history/library/author/author-display/author-display.component';
+import { AuthorBiographyComponent } from './components/pages/history/library/author/author-display/author-biography/author-biography.component';
+import { AuthorDisplayEditComponent } from './components/pages/history/library/author/author-display/author-display-edit/author-display-edit.component';
+import { BookDisplayComponent } from './components/pages/history/library/author/book/book-display/book-display.component';
+import { BookDisplayEditComponent } from './components/pages/history/library/author/book/book-display-edit/book-display-edit.component';
+import { BookDescriptionComponent } from './components/pages/history/library/author/book/book-description/book-description.component';
+import { ChapterDisplayComponent } from './components/pages/history/library/author/book/chapter/chapter-display/chapter-display.component';
+import { ChapterDisplayEditComponent } from './components/pages/history/library/author/book/chapter/chapter-display-edit/chapter-display-edit.component';
+import { ChapterTextComponent } from './components/pages/history/library/author/book/chapter/chapter-text/chapter-text.component';
+import { BookReadComponent } from './components/pages/history/library/author/book/chapter/book-read/book-read.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +117,19 @@ import { LanguageDisplayEditComponent } from './components/pages/history/languag
     LetterComponent,
     LanguageDisplayComponent,
     LanguageDisplayEditComponent,
+    AuthorComponent,
+    BookComponent,
+    ChapterComponent,
+    AuthorDisplayComponent,
+    AuthorBiographyComponent,
+    AuthorDisplayEditComponent,
+    BookDisplayComponent,
+    BookDisplayEditComponent,
+    BookDescriptionComponent,
+    ChapterDisplayComponent,
+    ChapterDisplayEditComponent,
+    ChapterTextComponent,
+    BookReadComponent,
   ],
   imports: [
     BrowserModule,

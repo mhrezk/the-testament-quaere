@@ -52,6 +52,12 @@ export class NationComponent implements OnInit {
   isTableShown: boolean = false;
   isMasterSelected: boolean = false;
 
+  enteredName: string;
+
+  doesExist = new BehaviorSubject<CustomResponse>(null);
+
+  errorMessage: string = "already exists in the database! Duplicate entries are disallowed!";
+
   faTrash = faTrash;
   faEdit = faEdit;
   headers = [

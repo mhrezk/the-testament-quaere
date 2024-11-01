@@ -1,0 +1,226 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Authors</h2>
+          </div>
+          <div class="col-sm-6">
+            <a class="btn btn-success" data-bs-toggle="modal" (click)="isClicked = true; isTableShown = false">
+              <i class="material-icons">&#xE147;</i>
+              <span>Add Author</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+        <ng-container *ngSwitchCase="DATA_STATE.LOADING">
+          <div class="col-md-12 single-note-item text-center">
+            <div class="spinner-border text-info" role="status"></div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+          <div *ngIf="isTableShown">
+            <span>
+              Number of records:
+              <select (change)="onTableSizeChange($event)">
+                <option *ngFor="let size of tableSizes">
+                  {{ size }}
+                </option>
+              </select>
+            </span>
+            <br>
+            <br>
+            <input
+              [(ngModel)]="isMasterSelected"
+              type="checkbox"
+              (change)="checkUncheckAll()"
+              style="cursor: pointer"
+            >
+            &nbsp;&nbsp;&nbsp;
+            <span>Select/Deselect All</span>
+            &nbsp;
+            @if (hasSelected()) {
+              <button type="button" class="btn btn-danger" (click)="deleteAuthors(this.checkedAuthors)">Delete Selection
+              </button>
+            }
+          </div>
+          <table *ngIf="isTableShown" class="table table-striped table-hover" id="days">
+            <thead>
+            <tr>
+              <th></th>
+              <th *ngFor="let header of headers">{{ header.value }}</th>
+              <th></th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let author of appState.appData?.data.dataRetrieved
+            | paginate: {
+              itemsPerPage: tableSize,
+              currentPage: currentPage,
+              totalItems: count$ | async
+            }; let i = index;">
+            <tr>
+              <td>
+                <input
+                  [(ngModel)]="author.isSelected"
+                  type="checkbox"
+                  (change)="isAllSelected()"
+                  style="cursor: pointer"
+                >
+
+              </td>
+              <td>
+                <u (click)="isDisplaying = true; routeToDisplay(author.id, author.firstName, author.lastName)" style="cursor: pointer">{{ author.firstName }} @if(author.middleName) {{{ author.middleName }}} {{ author.lastName }}</u>
+              </td>
+              <td>@if(author.penName){{{ author.penName}}} @else {N/A}</td>
+              <td>{{ author.gender }}</td>
+              <td></td>
+              <td>
+                  <span>
+                    <fa-icon [icon]="faEdit"
+                             [style.color]="'blue'"
+                             [title]="'Edit'"
+                             (click)="isUpdated = true; getAuthorByID(author.id); isTableShown = false;"
+                             [style.cursor]="'pointer'"></fa-icon>
+                  </span>
+                &nbsp;&nbsp;
+                <span>
+                    <fa-icon [icon]="faTrash" [title]="'Delete'" (click)="deleteAuthor(author)"
+                             style="cursor: pointer; color: firebrick">
+                    </fa-icon>
+                  </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.ERROR">
+          <div [hidden]="isUpdated || isClicked" style="background-color: indianred">{{ appState.error }}</div>
+        </ng-container>
+        <pagination-controls
+          *ngIf="isTableShown"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Add Author -->
+<div *ngIf="isClicked" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #authorForm="ngForm" (ngSubmit)="saveAuthor(authorForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Author</h4>
+          <button type="button" class="close-button" (click)="isClicked = false; isTableShown = true">×</button>
+        </div>
+        <br>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" ngModel name="firstName" class="form-input" placeholder="Enter First Name" required>
+          </div>
+          <div class="form-group">
+            <label>Middle Name</label>
+            <input type="text" ngModel name="middleName" class="form-input" placeholder="Enter Middle Name">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" ngModel name="lastName" class="form-input" placeholder="Enter Last Name" required>
+          </div>
+          <div class="form-group">
+            <label>Pen Name</label>
+            <input type="text" ngModel name="penName" class="form-input" placeholder="Enter Pen Name">
+          </div>
+          <div class="form-group">
+            <label>Biography</label>
+            <textarea type="text" ngModel name="biography" class="form-input"
+                      placeholder="Enter Biography"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" ngModel required class="form-select">
+            <option value="" disabled selected>Select Gender</option>
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="cancel-button" (click)="isClicked = false; isTableShown = true">Close</button>
+          <button type="submit" [ngClass]="{'disabled': authorForm.invalid}"
+                  [disabled]="(isLoading$ | async) || authorForm.invalid" class="submit-button">
+            <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Author -->
+<div *ngIf="isUpdated" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="modifyAuthor(selectedAuthor)">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Author</h4>
+          <button type="button" class="close-button" (click)="isUpdated = false; isTableShown = true">×</button>
+        </div>
+        <br>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" [(ngModel)]="selectedAuthor.firstName" name="firstName" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>Middle Name</label>
+            <input type="text" [(ngModel)]="selectedAuthor.middleName" name="middleName" class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" [(ngModel)]="selectedAuthor.lastName" name="lastName" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>Pen Name</label>
+            <input type="text" [(ngModel)]="selectedAuthor.penName" name="penName" class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Biography</label>
+            <textarea type="text" [(ngModel)]="selectedAuthor.biography" name="biography"
+                      class="form-input"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Gender</label>
+            <select name="gender" [(ngModel)]="selectedAuthor.gender" required>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="cancel-button" (click)="isUpdated = false; isTableShown = true">Close</button>
+            <button type="submit" [ngClass]="{'disabled': isLoading$ | async}" [disabled]="isLoading$ | async"
+                    class="submit-button">
+              <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+              <span *ngIf="isLoading$ | async">Updating...</span>
+              <span *ngIf="!(isLoading$ | async)">Update</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+@if(isDisplaying) {
+  <app-author-display></app-author-display>
+}

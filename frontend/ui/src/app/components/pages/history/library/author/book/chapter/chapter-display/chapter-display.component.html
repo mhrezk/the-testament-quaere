@@ -1,0 +1,52 @@
+<div *ngIf="!isEditing" class="chapter-container">
+  <h1 class="chapter-number">
+    <fa-icon [icon]="faCircleArrowLeft"
+             style="float: left"
+             [style.color]="'red'"
+             [title]="'Return to Chapters'"
+             (click)="routeToChapters(+bookID, bookName)"
+             [style.cursor]="'pointer'">
+    </fa-icon>
+    Chapter Number: {{ selectedChapter.chapterNumber || 'N/A' }}
+    <span style="float: right">
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit Chapter Details'"
+                           (click)="isEditing = true; routeToChapterDisplayEdit()"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  &nbsp;
+                  <fa-icon [icon]="faTrash"
+                           [title]="'Delete Chapter'"
+                           (click)="deleteChapter(selectedChapter.id)"
+                           style="cursor: pointer; color: firebrick">
+                  </fa-icon>
+      </span>
+  </h1>
+  <h2 class="chapter-title">
+    @if(selectedChapter.name) {{{ selectedChapter.name }}}
+  </h2>
+
+  @if (isEditing) {
+    <app-chapter-display-edit></app-chapter-display-edit>
+  }
+
+  @if(isEditing) {
+    <hr>
+  }
+  @else if (isText) {
+    <app-chapter-text (isText)="closeTextEditor($event)" [chapter]="selectedChapter"></app-chapter-text>
+  } @else {
+    <h2>
+      Text
+      <fa-icon [icon]="faEdit"
+               [style.color]="'cornflowerblue'"
+               [title]="'Edit Text'"
+               (click)="isText = !isText;"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+    </h2>
+    <hr>
+    <div [innerHTML]="selectedChapter.text"></div>
+  }
+</div>

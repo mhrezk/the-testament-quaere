@@ -10,7 +10,7 @@ import {Author} from "../../../../../interfaces/models/history/library/author";
   providedIn: 'root'
 })
 export class AuthorService {
-  private baseURL: string = `${environment.API_URL}/history`;
+  private baseURL: string = `${environment.API_URL}/history/library`;
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +25,10 @@ export class AuthorService {
       tap(console.log),
       catchError(this.handleError)
     );
+
+  getAllAuthorsCount() {
+    return this.http.get<CustomResponse>(`${this.baseURL}/authors/all/count`)
+  }
 
   getAuthorByID$ = (authorID: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/author/${authorID}`)
     .pipe(
@@ -48,14 +52,14 @@ export class AuthorService {
       catchError(this.handleError)
     );
 
-  modifyAuthor$ = (authorID: number, author: Author) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${authorID}`, author)
+  modifyAuthor$ = (authorID: number, author: Author) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/author/${authorID}`, author)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
 
-  public modifyAuthor(author: Author): Observable<CustomResponse> {
-    return this.http.put<CustomResponse>(`${this.baseURL}/update/author`, author);
+  public modifyAuthor(authorID: number, author: Author): Observable<CustomResponse> {
+    return this.http.put<CustomResponse>(`${this.baseURL}/modify/author/${authorID}`, author);
   }
 
   deleteAuthor$ = (authorID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/author/${authorID}`)
@@ -63,6 +67,10 @@ export class AuthorService {
       tap(console.log),
       catchError(this.handleError)
     );
+
+  deleteAuthor(authorID: number) {
+    return this.http.delete<CustomResponse>(`${this.baseURL}/delete/author/${authorID}`);
+  }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);

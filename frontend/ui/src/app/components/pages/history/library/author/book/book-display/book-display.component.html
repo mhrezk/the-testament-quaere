@@ -1,0 +1,78 @@
+<div *ngIf="!isEditing" class="display-container">
+  <div class="image-container">
+    <img [src]="selectedBook.coverURL" alt="Book Cover" />
+    @if(selectedBook.coverURL.split("/")[selectedBook.coverURL.split("/").length - 1] === "quran.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <div class="details-container">
+    <h2>
+      <fa-icon [icon]="faCircleArrowLeft"
+               [style.color]="'red'"
+               [title]="'Return to Books'"
+               (click)="routeToBooks(+authorID, authorFirstName, authorLastName)"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+      <b>
+        {{ selectedBook.name }}
+      </b>
+      &nbsp;
+      <span style="float: right">
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit Book Details'"
+                           (click)="isEditing = true;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  &nbsp;
+                  <fa-icon [icon]="faTrash"
+                           [title]="'Delete Book'"
+                           (click)="deleteBook(selectedBook.id)"
+                           style="cursor: pointer; color: firebrick">
+                  </fa-icon>
+      </span>
+    </h2>
+    <button style="float: right" class="book-button" (click)="routeToChapters(selectedBook.id, selectedBook.name)">
+      <i class="fas fa-book-reader"></i> Chapters
+    </button>
+    <button style="float: right" class="book-button" (click)="readAllChapters(selectedBook.id, selectedBook.name)">
+      <i class="fas fa-book-atlas"></i> Read Book
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Author: </strong>
+      {{ authorFirstName }} {{ authorLastName }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Release Date: </strong>
+      {{ selectedBook.releaseDate }} {{ selectedBook.releaseYearAbbreviation }}
+    </div>
+  </div>
+</div>
+
+@if (isEditing) {
+  <app-book-display-edit (isEditing)="closeEditing($event)" [authorID]="+authorID" [book]="selectedBook"></app-book-display-edit>
+}
+
+@if(isEditing) {
+  <hr>
+}
+@else if (isDescription) {
+  <app-book-description (isDescription)="closeDescriptionEditing($event)" [authorID]="+authorID" [book]="selectedBook"></app-book-description>
+} @else {
+  <h2>
+    Description
+    <fa-icon [icon]="faEdit"
+             [style.color]="'cornflowerblue'"
+             [title]="'Edit Description'"
+             (click)="isDescription = !isDescription;"
+             [style.cursor]="'pointer'">
+    </fa-icon>
+  </h2>
+  <hr>
+  <div [innerHTML]="selectedBook.description"></div>
+}

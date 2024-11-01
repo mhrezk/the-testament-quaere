@@ -7,11 +7,16 @@ import java.util.Collection;
 public interface BookService {
 
     Collection<Book> getBooksWithPagination(int pageNumber, int numberOfRecords);
+    Collection<Book> getBooksWithPaginationByAuthorName(Long id, String firstName, String lastName, int pageNumber, int numberOfRecords);
     Collection<Book> getBooks();
+    Collection<Book> getBooksByAuthorFirstName(String name);
+    Collection<Book> getBooksByAuthorFirstNameAndAuthorLastNameAndAuthorID(String firstName, String lastName, Long id);
     Book getBookByID(Long id);
     Book getBookByBookName(String name);
-    Book getBookByAuthorFirstName(String name);
-    Boolean deleteBookByID(Long id);
-    Book saveBook(Book book);
+    Book saveBook(Book book, String authorFirstName, String authorLastName, Long authorID);
     Book updateBook(Long id, Book book);
+    Book modifyBook(Long id, Book book);
+    Boolean deleteBookByID(Long id);
+    long countBooks();
+    long countBooksByAuthorNameAndAuthorID(Long id, String firstName, String lastName);
 }

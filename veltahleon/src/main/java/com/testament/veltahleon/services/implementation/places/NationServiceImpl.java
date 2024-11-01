@@ -74,13 +74,13 @@ public class NationServiceImpl implements NationService {
     @Override
     public Nation saveNation(Nation nation) {
         nation.setName(nation.getName().toUpperCase());
-        nation.setUrlFlag(defaultFlagURL("square.png"));
+        //nation.setUrlFlag(defaultFlagURL("square.png"));
         return nationRepository.save(nation);
     }
 
-    private String defaultFlagURL(String imageName) {
-        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/places/nations/images/" + imageName).toUriString();
-    }
+//    private String defaultFlagURL(String imageName) {
+//        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/places/nations/images/" + imageName).toUriString();
+//    }
 
     @Override
     public Nation updateNation(Long id, Nation nation) {
@@ -90,29 +90,29 @@ public class NationServiceImpl implements NationService {
             newNation.setName(nation.getName().toUpperCase());
         }
 
-        if(nation.getDescription() != null && newNation.getDescription() != nation.getDescription()) {
-            newNation.setDescription(nation.getDescription());
-        }
-
-        if(nation.getCapital() != null && newNation.getCapital() != nation.getCapital()) {
-            newNation.setCapital(nation.getCapital());
-        }
+//        if(nation.getDescription() != null && newNation.getDescription() != nation.getDescription()) {
+//            newNation.setDescription(nation.getDescription());
+//        }
+//
+//        if(nation.getCapital() != null && newNation.getCapital() != nation.getCapital()) {
+//            newNation.setCapital(nation.getCapital());
+//        }
 
 //        if(nation.getContinent() != null && newNation.getContinent() != nation.getContinent()) {
 //            newNation.setContinent(nation.getContinent());
 //        }
 
-        if(nation.getLeader() != null && newNation.getLeader() != nation.getLeader()) {
-            newNation.setLeader(nation.getLeader());
-        }
-
-        if(nation.getLanguage() != null && newNation.getLanguage() != nation.getLanguage()) {
-            newNation.setLanguage(nation.getLanguage());
-        }
-
-        if(nation.getProvinces() != null && newNation.getProvinces() != nation.getProvinces()) {
-            newNation.setProvinces(nation.getProvinces());
-        }
+//        if(nation.getLeader() != null && newNation.getLeader() != nation.getLeader()) {
+//            newNation.setLeader(nation.getLeader());
+//        }
+//
+//        if(nation.getLanguage() != null && newNation.getLanguage() != nation.getLanguage()) {
+//            newNation.setLanguage(nation.getLanguage());
+//        }
+//
+//        if(nation.getProvinces() != null && newNation.getProvinces() != nation.getProvinces()) {
+//            newNation.setProvinces(nation.getProvinces());
+//        }
 
         if(nation.getType() != null && newNation.getType() != nation.getType()) {
             newNation.setType(nation.getType());
@@ -122,9 +122,9 @@ public class NationServiceImpl implements NationService {
             newNation.setGovernanceType(nation.getGovernanceType());
         }
 
-        if(nation.getUrlFlag() != null && newNation.getUrlFlag() != nation.getUrlFlag()) {
-            newNation.setUrlFlag(nation.getUrlFlag());
-        }
+//        if(nation.getUrlFlag() != null && newNation.getUrlFlag() != nation.getUrlFlag()) {
+//            newNation.setUrlFlag(nation.getUrlFlag());
+//        }
 
         return nationRepository.save(newNation);
     }
@@ -133,14 +133,19 @@ public class NationServiceImpl implements NationService {
     public Nation modifyNation(Long id, Nation nation) {
         Nation newNation = nationRepository.findById(id).orElseThrow();
         newNation.setName(nation.getName().toUpperCase());
-        newNation.setDescription(nation.getDescription());
+        //newNation.setDescription(nation.getDescription());
         newNation.setGovernanceType(nation.getGovernanceType());
         newNation.setType(nation.getType());
-        newNation.setLeader(nation.getLeader());
-        newNation.setCapital(nation.getCapital());
-        newNation.setUrlFlag(nation.getUrlFlag());
-        newNation.setLanguage(nation.getLanguage());
-        newNation.setProvinces(nation.getProvinces());
+//        newNation.setLeader(nation.getLeader());
+//        newNation.setCapital(nation.getCapital());
+//        newNation.setUrlFlag(nation.getUrlFlag());
+//        newNation.setLanguage(nation.getLanguage());
+//        newNation.setProvinces(nation.getProvinces());
         return nationRepository.save(newNation);
+    }
+
+    @Override
+    public long countNations() {
+        return nationRepository.count();
     }
 }

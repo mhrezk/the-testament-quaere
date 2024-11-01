@@ -26,6 +26,7 @@ public class ChapterMapper {
 
     public Chapter convertToEntity(ChapterDTO chapterDTO) {
         Chapter chapter = new Chapter();
+        chapter.setId(chapterDTO.getId());
         chapter.setName(chapterDTO.getName());
         chapter.setText(chapterDTO.getText());
         chapter.setChapterNumber(chapterDTO.getChapterNumber());

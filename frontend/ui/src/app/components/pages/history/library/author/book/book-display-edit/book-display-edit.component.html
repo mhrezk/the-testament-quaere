@@ -1,0 +1,40 @@
+<div class="display-container">
+  <div class="image-container">
+    <img [src]="book.coverURL" alt="Book Cover" />
+    @if(book.coverURL.split("/")[book.coverURL.split("/").length - 1] === "quran.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <form #bookForm="ngForm" (ngSubmit)="onSubmit(book)" class="details-container">
+    <h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Book Name</mat-label>
+        <input matInput name="name" [(ngModel)]="book.name"/>
+      </mat-form-field>
+    </h2>
+
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Release Date:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="releaseDate" [(ngModel)]="book.releaseDate" type="number" placeholder="Release Year" />
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Release Year Abbreviation:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="releaseYearAbbreviation" [(ngModel)]="book.releaseYearAbbreviation" type="text" placeholder="Release Year Abbr." />
+      </mat-form-field>
+    </div>
+
+    <div class="modal-footer">
+      <button [disabled]="bookForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="onClose(false)">Close</button>
+    </div>
+  </form>
+</div>
+
+

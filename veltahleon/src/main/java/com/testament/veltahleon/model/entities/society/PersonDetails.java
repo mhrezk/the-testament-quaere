@@ -1,10 +1,7 @@
 package com.testament.veltahleon.model.entities.society;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.testament.veltahleon.enumerations.ClosedAnswer;
 import com.testament.veltahleon.enumerations.Lineage;
 import com.testament.veltahleon.enumerations.MaritalStatus;
-import com.testament.veltahleon.model.entities.calendar.Year;
 import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.places.Nation;
 import com.testament.veltahleon.model.entities.politics.Rank;

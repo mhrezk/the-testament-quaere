@@ -1,0 +1,15 @@
+<div class="chapter-container">
+  <form #chapterForm="ngForm" (ngSubmit)="onSubmit(chapter)" class="details-container">
+    <h1 class="chapter-number">
+      Chapter Number: <input name="chapterNumber" [(ngModel)]="chapter.chapterNumber" required/>
+    </h1>
+    <h2 class="chapter-title">
+      Chapter Name: <input name="name" [(ngModel)]="chapter.name"/>
+    </h2>
+
+    <div class="modal-footer">
+      <button [disabled]="chapterForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="returnToChapterDisplay()">Close</button>
+    </div>
+  </form>
+</div>

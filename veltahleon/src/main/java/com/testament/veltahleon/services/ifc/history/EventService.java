@@ -7,6 +7,7 @@ import java.util.Collection;
 public interface EventService {
 
     Collection<Event> getPaginatedEvents(int pageNumber, int numberOfRecords);
+    Collection<Event> getPaginatedEventsByTimelineName(String timelineName, int pageNumber, int numberOfRecords);
     Collection<Event> getEvents();
     Collection<Event> getEventsByEventYear(int year);
     Collection<Event> getEventsByTimeline(String timelineName);
