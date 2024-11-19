@@ -3,4 +3,7 @@ export interface Capital {
   name: string;
   nation: string;
   description: string;
+  flagURL: string;
+
+  isSelected: boolean;
 }

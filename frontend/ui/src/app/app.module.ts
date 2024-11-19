@@ -16,6 +16,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
@@ -80,6 +81,18 @@ import { ChapterDisplayComponent } from './components/pages/history/library/auth
 import { ChapterDisplayEditComponent } from './components/pages/history/library/author/book/chapter/chapter-display-edit/chapter-display-edit.component';
 import { ChapterTextComponent } from './components/pages/history/library/author/book/chapter/chapter-text/chapter-text.component';
 import { BookReadComponent } from './components/pages/history/library/author/book/chapter/book-read/book-read.component';
+import { CardComponent } from './components/pages/card/card.component';
+import { TradingCardComponent } from './components/pages/card/trading-card/trading-card.component';
+import { NationDetailsComponent } from './components/pages/places/nation-details/nation-details.component';
+import { NationDetailsEditComponent } from './components/pages/places/nation-details/nation-details-edit/nation-details-edit.component';
+import { NationDetailsHistoryComponent } from './components/pages/places/nation-details/nation-details-history/nation-details-history.component';
+import { TooltipComponent } from './components/shared/tooltip/tooltip.component';
+import { DiagramComponent } from './components/shared/diagram/diagram.component';
+import { FruitComponent } from './components/shared/fruit/fruit.component';
+import { ReligionComponent } from './components/pages/dogma/religion/religion.component';
+import { ReligionDisplayComponent } from './components/pages/dogma/religion/religion-display/religion-display.component';
+import { ReligionDescriptionComponent } from './components/pages/dogma/religion/religion-description/religion-description.component';
+import { ReligionDisplayEditComponent } from './components/pages/dogma/religion/religion-display-edit/religion-display-edit.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +143,18 @@ import { BookReadComponent } from './components/pages/history/library/author/boo
     ChapterDisplayEditComponent,
     ChapterTextComponent,
     BookReadComponent,
+    CardComponent,
+    TradingCardComponent,
+    NationDetailsComponent,
+    NationDetailsEditComponent,
+    NationDetailsHistoryComponent,
+    TooltipComponent,
+    DiagramComponent,
+    FruitComponent,
+    ReligionComponent,
+    ReligionDisplayComponent,
+    ReligionDescriptionComponent,
+    ReligionDisplayEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,6 +166,7 @@ import { BookReadComponent } from './components/pages/history/library/author/boo
     RouterOutlet,
     HttpClientModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,

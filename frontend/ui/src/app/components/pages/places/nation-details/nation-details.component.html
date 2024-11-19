@@ -1,0 +1,142 @@
+<div *ngIf="!isEditing" class="display-container">
+  <div class="image-container">
+    <!--    <img src="https://via.placeholder.com/300x400" alt="Person Image" />-->
+    <img [src]="selectedNationDetails.flagURL" alt="Flag Image"/>
+    @if (selectedNationDetails.flagURL.split("/")[selectedNationDetails.flagURL.split("/").length - 1] === "square.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <div class="details-container">
+    <h2>
+      <fa-icon [icon]="faCircleArrowLeft"
+               [style.color]="'red'"
+               [title]="'Return to Nations'"
+               (click)="routeToNations()"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+      <b>
+        {{ selectedNationDetails.nation.toUpperCase() }}
+      </b>
+      &nbsp;
+      <span style="float: right">
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit National Details'"
+                           (click)="isEditing = true;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  &nbsp;
+                  <fa-icon [icon]="faTrash"
+                           [title]="'Delete Nation'"
+                           (click)="deleteNationDetails(selectedNationDetails.id)"
+                           style="cursor: pointer; color: firebrick">
+                  </fa-icon>
+      </span>
+    </h2>
+
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Leader Name:</strong> @if(selectedNationDetails.leaderFirstName === "NONE" && selectedNationDetails.leaderSecondName === "NONE") {
+      N/A
+    } @else {
+      {{ selectedNationDetails.leaderFirstName }} {{ selectedNationDetails.leaderSecondName }}
+    }
+    </div>
+
+    <div class="detail-item">
+      <strong>Timeframe:</strong> {{ selectedNationDetails.foundingYear }}
+      - @if (!selectedNationDetails.endingYear || selectedNationDetails.endingYear === 0) {
+      Present
+    } @else {
+      {{ selectedNationDetails.endingYear }}
+    }
+    </div>
+
+    <div class="detail-item">
+      <strong>Capital:</strong> {{ selectedNationDetails.capital.toUpperCase() }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Provincial Number:</strong> {{ selectedNationDetails.provincialNumber }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Ruling Party:</strong> {{ selectedNationDetails.rulingPartyName }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Ruling Family:</strong> {{ selectedNationDetails.rulingFamily }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Nation Type:</strong> {{ selectedNationDetails.type }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Governance Type:</strong> {{ selectedNationDetails.governanceType }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Nation Status:</strong> {{ selectedNationDetails.nationStatus }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Preceding Nation:</strong>
+      {{ selectedNationDetails.precedingNation }}
+    </div>
+
+    <div class="detail-item">
+      <strong>Succeeding Nation:</strong>
+      {{ selectedNationDetails.succeedingNation }}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isEditing" class="nation-details">
+  <h2>Languages</h2>
+  <div class="language-bubbles">
+    <div *ngFor="let language of languages; let i = index" class="bubble">
+      {{ language }}
+      <span
+        class="close-icon"
+        style="cursor: crosshair"
+        matTooltip="Delete Language"
+        matTooltipPosition="below"
+        matTooltipClass="custom-tooltip"
+        (click)="removeLanguage(i)"
+      >
+        ×
+      </span>
+    </div>
+  </div>
+</div>
+
+@if (isEditing) {
+  <app-nation-details-edit (isEditing)="closeEditing($event)"
+                           [nationDetails]="selectedNationDetails"></app-nation-details-edit>
+}
+
+@if (isEditing) {
+  <hr>
+} @else if (isHistory) {
+  <app-nation-details-history (isHistory)="closeHistoryEditing($event)"
+                                [nationDetails]="selectedNationDetails"></app-nation-details-history>
+} @else {
+  <h2>
+    History
+    <fa-icon [icon]="faEdit"
+             [style.color]="'cornflowerblue'"
+             [title]="'Edit History'"
+             (click)="isHistory = !isHistory;"
+             [style.cursor]="'pointer'">
+    </fa-icon>
+  </h2>
+  <hr>
+  <div [innerHTML]="selectedNationDetails.history"></div>
+}
+
+<!--<app-tooltip *ngIf="tooltipVisible" [content]="tooltipContent"-->
+<!--             #tooltip></app-tooltip>-->
+

@@ -15,4 +15,5 @@ public interface ProvinceService {
     Boolean deleteProvinceByID(Long id);
     Province saveProvince(Province province);
     Province updateProvince(Long id, Province province);
+    Province modifyProvince(Long id, Province province);
 }

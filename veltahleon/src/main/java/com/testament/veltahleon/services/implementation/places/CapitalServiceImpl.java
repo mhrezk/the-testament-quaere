@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
 
@@ -43,7 +44,14 @@ public class CapitalServiceImpl implements CapitalService {
 
     @Override
     public Capital getCapitalByName(String name) {
-        return capitalRepository.findByName(name);
+        if(capitalRepository.countByName(name) <= 0) {
+            Capital capital = new Capital();
+            capital.setName(name.toUpperCase());
+            capital.setFlagURL(defaultImageURL("square.png"));
+            return capitalRepository.save(capital);
+        } else {
+            return capitalRepository.findByName(name);
+        }
     }
 
 //    @Override
@@ -62,13 +70,13 @@ public class CapitalServiceImpl implements CapitalService {
         if(capitalRepository.countByName(capital.getName().toLowerCase()) >= 1) {
             throw new DataInsertionException("Capital name");
         }
-
-//        if(nationRepository.countByName(capital.getNation().getName()) >= 1) {
-//            Nation nation = nationRepository.findByName(capital.getNation().getName());
-//            capital.getNation().setId(nation.getId());
-//            capital.setNation(nation);
-//        }
+        capital.setName(capital.getName().toUpperCase());
+        capital.setFlagURL(defaultImageURL("square.png"));
         return capitalRepository.save(capital);
+    }
+
+    private String defaultImageURL(String imageName) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/places/capitals/images/" + imageName).toUriString();
     }
 
     @Override
@@ -79,8 +87,12 @@ public class CapitalServiceImpl implements CapitalService {
             newCapital.setName(capital.getName());
         }
 
-        if(capital.getDescription() != null && newCapital.getDescription() != capital.getDescription()) {
-            newCapital.setDescription(capital.getDescription());
+        if(capital.getHistory() != null && newCapital.getHistory() != capital.getHistory()) {
+            newCapital.setHistory(capital.getHistory());
+        }
+
+        if(capital.getFlagURL() != null && newCapital.getFlagURL() != capital.getFlagURL()) {
+            newCapital.setFlagURL(capital.getFlagURL());
         }
 
 //        if(capital.getNation() != null && newCapital.getNation() != capital.getNation()) {
@@ -89,6 +101,8 @@ public class CapitalServiceImpl implements CapitalService {
 
         return capitalRepository.save(newCapital);
     }
+
+
 
     //Helper Methods
     private Nation checkNationForUpdate(Nation nation, Nation newNation) {

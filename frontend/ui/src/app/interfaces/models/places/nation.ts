@@ -6,23 +6,14 @@
 
 import {NationType} from "../../../enums/nation-type";
 import {GovernanceType} from "../../../enums/governance-type";
+import {NationStatus} from "../../../enums/nation-status";
 
 export interface Nation {
   id: number;
   name: string;
-  // capital: Capital;
-  // leader: NationLeader;
-  // language: Language;
-  // provinces: Province[];
-  //type: NationType;
-  // capital: string;
-  // leader: string;
-  // language: string;
-  // provinces: string[];
+  capital: string;
   type: NationType;
+  nationStatus: NationStatus;
   governanceType: GovernanceType;
-  // description: string;
-  // urlFlag: string;
-
   isSelected: boolean;
 }

@@ -1,0 +1,37 @@
+<div class="display-container">
+  <div class="image-container">
+    <img [src]="selectedReligion.symbolURL" alt="Flag Image" />
+    @if(selectedReligion.symbolURL.split("/")[selectedReligion.symbolURL.split("/").length - 1] === "default.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <form #religionForm="ngForm" (ngSubmit)="onSubmit(selectedReligion)" class="details-container">
+    <h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Religion Name</mat-label>
+        <input matInput name="name" [(ngModel)]="selectedReligion.name" required />
+      </mat-form-field>
+    </h2>
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Nations:</strong>
+      <div *ngFor="let nation of selectedReligion.nations; let i = index">
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            name="nation-{{ i }}"
+            [(ngModel)]="religion.nations[i]"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="religionForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="onClose(false)">Close</button>
+    </div>
+  </form>
+</div>
+
+

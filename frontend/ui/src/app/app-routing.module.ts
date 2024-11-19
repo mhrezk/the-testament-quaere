@@ -48,6 +48,12 @@ import {
   ChapterDisplayEditComponent
 } from "./components/pages/history/library/author/book/chapter/chapter-display-edit/chapter-display-edit.component";
 import {BookReadComponent} from "./components/pages/history/library/author/book/chapter/book-read/book-read.component";
+import {CardComponent} from "./components/pages/card/card.component";
+import {TradingCardComponent} from "./components/pages/card/trading-card/trading-card.component";
+import {NationDetailsComponent} from "./components/pages/places/nation-details/nation-details.component";
+import {DiagramComponent} from "./components/shared/diagram/diagram.component";
+import {ReligionComponent} from "./components/pages/dogma/religion/religion.component";
+import {ReligionDisplayComponent} from "./components/pages/dogma/religion/religion-display/religion-display.component";
 //import {LineageTreeComponent} from "./components/pages/society/lineage-tree/lineage-tree.component";
 
 const routes: Routes = [
@@ -65,12 +71,24 @@ const routes: Routes = [
     component: CalendarComponent
   },
   {
+    path: "religions",
+    component: ReligionComponent
+  },
+  {
+    path: "religions/:id/:name",
+    component: ReligionDisplayComponent
+  },
+  {
     path: "people",
     component: PersonComponent
   },
   {
-    path: "person-details/:id/:firstName/:secondName",
+    path: "person-details/:firstName/:secondName",
     component: PersonDetailsComponent
+  },
+  {
+    path: "nation-details/:id/:nationName",
+    component: NationDetailsComponent
   },
   {
     path: "nations",
@@ -115,6 +133,14 @@ const routes: Routes = [
   {
     path: "organizations",
     component: OrganizationComponent
+  },
+  {
+    path: "cards",
+    component: CardComponent
+  },
+  {
+    path: "trading-cards",
+    component: TradingCardComponent
   },
   {
     path: "library",

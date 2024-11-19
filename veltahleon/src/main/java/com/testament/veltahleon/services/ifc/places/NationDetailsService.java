@@ -7,5 +7,5 @@ public interface NationDetailsService {
     NationDetails getNationDetailsByNationName(String name);
     NationDetails updateNationDetails(Long id, NationDetails nationDetails);
     NationDetails modifyNationDetails(Long id, NationDetails nationDetails);
-    Boolean deleteNationByID(Long id);
+    Boolean deleteNationDetailsByID(Long id);
 }

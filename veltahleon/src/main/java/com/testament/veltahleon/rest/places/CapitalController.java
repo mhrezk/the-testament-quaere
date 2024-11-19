@@ -7,9 +7,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +26,8 @@ public class CapitalController {
 
     @Autowired
     private CapitalService capitalService;
+
+    public final String IMAGE_PATH = "src/main/resources/assets/images/flags/";
 
     @GetMapping("/capitals")
     public ResponseEntity<CustomResponse> getPaginatedCapitals(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -71,6 +77,11 @@ public class CapitalController {
                 .message("Capital retrieved!")
                 .build()
         );
+    }
+
+    @GetMapping(path = "/capitals/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getFlagImage(@PathVariable("imageName") String imageName) throws IOException {
+        return Files.readAllBytes(Path.of(IMAGE_PATH + imageName));
     }
 
     @PostMapping("/save/capital")

@@ -49,7 +49,7 @@ public class PersonDetailsFacade {
         Religion religion = new Religion();
         religion.setName("None");
         if(religionRepository.countByName(religion.getName()) <= 0) {
-            religion.setDescription(null);
+            //religion.setDescription(null);
             return religionRepository.save(religion);
         } else {
             return religionRepository.findByName(religion.getName());

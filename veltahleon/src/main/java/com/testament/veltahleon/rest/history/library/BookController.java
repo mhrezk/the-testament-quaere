@@ -32,7 +32,7 @@ public class BookController {
     @Autowired
     private BookMapper bookMapper;
 
-    public final String imagePath = "src/main/resources/assets/images/books/";
+    public final String IMAGE_PATH = "src/main/resources/assets/images/books/";
 
     @GetMapping("/books")
     public ResponseEntity<CustomResponse> getPaginatedBooks(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -114,7 +114,7 @@ public class BookController {
 
     @GetMapping(path = "/books/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getBookImage(@PathVariable("imageName") String imageName) throws IOException {
-        return Files.readAllBytes(Path.of(imagePath + imageName));
+        return Files.readAllBytes(Path.of(IMAGE_PATH + imageName));
     }
 
     @DeleteMapping("/delete/book/{id}")

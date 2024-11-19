@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.places;
 
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.model.entities.history.Language;
 import jakarta.persistence.*;
@@ -36,11 +37,23 @@ public class NationDetails {
     @Column(name = "leader_second_name")
     private String leaderSecondName;
 
-    @NotNull(message = "Ruling party cannot be null!")
-    @NotBlank(message = "Ruling party cannot be blank!")
-    @NotEmpty(message = "Ruling party cannot be empty!")
     @Column(name = "ruling_party_name")
     private String rulingPartyName;
+
+    @Column(name = "ruling_family")
+    private String rulingFamily;
+
+    @Column(name = "founding_year")
+    private Integer foundingYear;
+
+    @Column(name = "endingYear")
+    private Integer endingYear;
+
+    @Column(name = "preceding_nation")
+    private String precedingNation;
+
+    @Column(name = "succeeding_nation")
+    private String succeedingNation;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
@@ -48,15 +61,16 @@ public class NationDetails {
             CascadeType.PERSIST,
             CascadeType.REMOVE
     })
-    @JoinColumn(name = "nation")
+    @JoinColumn(name = "nation_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Nation nation;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "capital_id")
-    private Capital capital;
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "capital_id")
+//    private Capital capital;
 
     @Column(name = "province_number", columnDefinition="Integer default '0'")
     //@ColumnDefault("0")
@@ -87,9 +101,9 @@ public class NationDetails {
 //            CascadeType.PERSIST})
 //    private List<Province> provinces;
 
-    @Column(name = "description", columnDefinition = "longtext")
-    private String description;
+    @Column(name = "history", columnDefinition = "longtext")
+    private String history;
 
-    @Column(name = "flag_url", nullable = true)
+    @Column(name = "flag_URL", nullable = true)
     private String flagURL;
 }

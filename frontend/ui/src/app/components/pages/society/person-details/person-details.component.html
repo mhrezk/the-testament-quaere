@@ -1,15 +1,11 @@
 <div *ngIf="!isEditing" class="display-container">
   <div class="image-container">
 <!--    <img src="https://via.placeholder.com/300x400" alt="Person Image" />-->
-    <img [src]="personDetails.value.data?.datumRetrieved?.imageURL" alt="Person Image" />
-    @if(personDetails.value.data?.datumRetrieved?.imageURL.split("/")[personDetails.value.data?.datumRetrieved?.imageURL.split("/").length - 1] === "default.png") {
+    <img [src]="selectedPersonDetails.imageURL" alt="Person Image" />
+    @if(selectedPersonDetails.imageURL.split("/")[selectedPersonDetails.imageURL.split("/").length - 1] === "default.png") {
       <h3 style="text-align: center">Default Image</h3>
     }
-<!--    <button style="display: block; margin: 0 auto;"-->
-<!--            (click)="isFamilyTree = true;-->
-<!--            this.family = this.familyNodeSubject.value;-->
-<!--            routeToFamilyTree(personDetails.value.data?.datumRetrieved?.firstName, personDetails.value.data?.datumRetrieved?.secondName);">Family Tree</button>-->
-  </div>
+</div>
 
   <div class="details-container">
     <h2>
@@ -20,7 +16,7 @@
                [style.cursor]="'pointer'">
       </fa-icon>
       <b>
-        {{ personDetails.value.data?.datumRetrieved?.firstName }} {{ personDetails.value.data?.datumRetrieved?.secondName }} @if(personDetails.value.data?.datumRetrieved?.epithet !== "None") { {{ personDetails.value.data?.datumRetrieved?.epithet }} }
+        {{ selectedPersonDetails.firstName.toUpperCase() }} {{ selectedPersonDetails.secondName.toUpperCase() }} @if(selectedPersonDetails.epithet !== "None") { {{ selectedPersonDetails.epithet }} }
       </b>
       &nbsp;
       <span style="float: right">
@@ -33,7 +29,7 @@
                   &nbsp;
                   <fa-icon [icon]="faTrash"
                            [title]="'Delete Person'"
-                           (click)="deletePersonDetails(personDetails.value.data.datumRetrieved?.id)"
+                           (click)="deletePersonDetails(selectedPersonDetails.id)"
                            style="cursor: pointer; color: firebrick">
                   </fa-icon>
       </span>
@@ -42,40 +38,40 @@
     <mat-divider></mat-divider>
 
     <div class="detail-item">
-      <strong>Gender:</strong> {{ personDetails.value.data?.datumRetrieved?.gender }}
+      <strong>Gender:</strong> {{ selectedPersonDetails.gender }}
     </div>
 
     <div class="detail-item">
-      <strong>Race:</strong> {{ personDetails.value.data?.datumRetrieved?.raceName || 'N/A' }}
+      <strong>Race:</strong> {{ selectedPersonDetails.raceName || 'N/A' }}
     </div>
 
     <div class="detail-item">
-      <strong>Religion:</strong> {{ personDetails.value.data?.datumRetrieved?.religion || 'N/A' }}
+      <strong>Religion:</strong> {{ selectedPersonDetails.religion || 'N/A' }}
     </div>
 
-    @if(personDetails.value.data?.datumRetrieved?.rank !== 'None') {
+    @if(selectedPersonDetails.rank !== 'None') {
       <div class="detail-item">
-        <strong>Militaristic Rank:</strong> {{ personDetails.value.data?.datumRetrieved?.rank || 'N/A' }}
+        <strong>Militaristic Rank:</strong> {{ selectedPersonDetails.rank || 'N/A' }}
       </div>
     }
 
     <div class="detail-item">
-      <strong>Nation:</strong> {{ personDetails.value.data?.datumRetrieved?.nation || 'N/A' }}
+      <strong>Nation:</strong> {{ selectedPersonDetails.nation || 'N/A' }}
     </div>
 
     <div class="detail-item">
       <strong>Age:</strong>
-      {{ personDetails.value.data?.datumRetrieved?.age }}
+      {{ selectedPersonDetails.age }}
     </div>
 
     <div class="detail-item">
       <strong>Birth Date:</strong>
-      {{ personDetails.value.data?.datumRetrieved?.birthDay }}/{{ personDetails.value.data?.datumRetrieved?.birthMonth }}/{{ personDetails.value.data?.datumRetrieved?.birthYear }} {{ personDetails.value.data?.datumRetrieved?.birthYearAbbreviation }}
+      {{ selectedPersonDetails.birthDay }}/{{ selectedPersonDetails.birthMonth }}/{{ selectedPersonDetails.birthYear }} {{ selectedPersonDetails.birthYearAbbreviation }}
     </div>
 
-    @if(personDetails.value.data?.datumRetrieved?.deathDay === 0 ||
-    personDetails.value.data?.datumRetrieved?.deathMonth === 0 ||
-    personDetails.value.data?.datumRetrieved?.deathYear === 0) {
+    @if(selectedPersonDetails.deathDay === 0 ||
+    selectedPersonDetails.deathMonth === 0 ||
+    selectedPersonDetails.deathYear === 0) {
       <div class="detail-item">
         <strong>Death Date:</strong>
         Alive
@@ -83,7 +79,7 @@
     } @else {
       <div class="detail-item">
         <strong>Death Date:</strong>
-        {{ personDetails.value.data?.datumRetrieved?.deathDay }}/{{ personDetails.value.data?.datumRetrieved?.deathMonth }}/{{ personDetails.value.data?.datumRetrieved?.deathYear }} {{ personDetails.value.data?.datumRetrieved?.deathYearAbbreviation }}
+        {{ selectedPersonDetails.deathDay }}/{{ selectedPersonDetails.deathMonth }}/{{ selectedPersonDetails.deathYear }} {{ selectedPersonDetails.deathYearAbbreviation }}
       </div>
     }
 
@@ -92,7 +88,7 @@
 <!--    </div>-->
 
     <div class="detail-item">
-      <strong>Job:</strong> {{ personDetails.value.data?.datumRetrieved?.job || 'N/A' }}
+      <strong>Job:</strong> {{ selectedPersonDetails.job || 'N/A' }}
     </div>
 
 <!--    <div class="detail-item">-->
@@ -100,24 +96,24 @@
 <!--    </div>-->
 
     <div class="detail-item">
-      <strong>Lineage:</strong> {{ personDetails.value.data?.datumRetrieved?.lineage }}
+      <strong>Lineage:</strong> {{ selectedPersonDetails.lineage }}
     </div>
 
     <div class="detail-item">
-      <strong>Marital Status:</strong> {{ personDetails.value.data?.datumRetrieved?.maritalStatus }}
+      <strong>Marital Status:</strong> {{ selectedPersonDetails.maritalStatus }}
     </div>
   </div>
 </div>
 
 @if (isEditing) {
-  <app-person-details-edit (isEditing)="closeEditing($event)" [personDetails]="personDetails.value.data?.datumRetrieved"></app-person-details-edit>
+  <app-person-details-edit (isEditing)="closeEditing($event)" [personDetails]="selectedPersonDetails"></app-person-details-edit>
 }
 
 @if(isEditing) {
   <hr>
 }
 @else if (isBiography) {
-  <app-person-details-biography (isBiography)="closeBiographyEditing($event)" [personDetails]="personDetails.value.data?.datumRetrieved"></app-person-details-biography>
+  <app-person-details-biography (isBiography)="closeBiographyEditing($event)" [personDetails]="selectedPersonDetails"></app-person-details-biography>
 } @else {
   <h2>
     Biography
@@ -129,7 +125,7 @@
     </fa-icon>
   </h2>
   <hr>
-  <div [innerHTML]="personDetails.value.data?.datumRetrieved?.biography"></div>
+  <div [innerHTML]="selectedPersonDetails.biography"></div>
 }
 
 <!--@if(isFamilyTree) {-->

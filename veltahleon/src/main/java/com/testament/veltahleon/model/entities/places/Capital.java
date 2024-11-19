@@ -27,20 +27,23 @@ public class Capital {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "capital", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "capital_id")
-    private NationDetails nationDetails;
+//    @OneToOne(mappedBy = "capital", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "capital_id")
+//    private NationDetails nationDetails;
 
-    @OneToOne(mappedBy = "capital", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "capital_id")
-    private Province province;
+//    @OneToOne(mappedBy = "capital", fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "capital_id")
+//    private Province province;
 
-    @Column(name = "description", columnDefinition = "text")
-    private String description;
+    @Column(name = "history", columnDefinition = "longtext")
+    private String history;
+
+    @Column(name = "flag_URL")
+    private String flagURL;
 }

@@ -1,0 +1,86 @@
+<div *ngIf="!isEditing" class="display-container">
+  <div class="image-container">
+    <!--    <img src="https://via.placeholder.com/300x400" alt="Person Image" />-->
+    <img [src]="selectedReligion.symbolURL" alt="Flag Image"/>
+    @if (selectedReligion.symbolURL.split("/")[selectedReligion.symbolURL.split("/").length - 1] === "mosque.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <div class="details-container">
+    <h2>
+      <fa-icon [icon]="faCircleArrowLeft"
+               [style.color]="'red'"
+               [title]="'Return to Religions'"
+               (click)="routeToReligions()"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+      <b>
+        {{ religionName }}
+      </b>
+      &nbsp;
+      <span style="float: right">
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit Religion'"
+                           (click)="isEditing = true;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  &nbsp;
+                  <fa-icon [icon]="faTrash"
+                           [title]="'Delete Religion'"
+                           (click)="deleteReligion(selectedReligion.id)"
+                           style="cursor: pointer; color: firebrick">
+                  </fa-icon>
+      </span>
+    </h2>
+
+    <mat-divider></mat-divider>
+  </div>
+</div>
+<div *ngIf="!isEditing" class="nation-details">
+  <h2>Nations</h2>
+  @if(selectedReligion.nations.length <= 0) {
+    None
+  } @else {
+    <div class="language-bubbles">
+      <div *ngFor="let nation of selectedReligion.nations; let i = index" class="bubble">
+        {{ nation }}
+        <span
+          class="close-icon"
+          style="cursor: crosshair"
+          matTooltip="Delete Nation"
+          matTooltipPosition="below"
+          matTooltipClass="custom-tooltip"
+          (click)="removeNation(nation, selectedReligion)"
+        >
+        ×
+      </span>
+      </div>
+    </div>
+  }
+</div>
+
+@if (isEditing) {
+  <app-religion-display-edit (isEditing)="closeEditing($event)"
+                             [religion]="selectedReligion"></app-religion-display-edit>
+}
+
+@if (isEditing) {
+  <hr>
+} @else if (isDescription) {
+  <app-religion-description (isDescription)="closeDescriptionEditing($event)"
+                            [religion]="selectedReligion"></app-religion-description>
+} @else {
+  <h2>
+    Description
+    <fa-icon [icon]="faEdit"
+             [style.color]="'cornflowerblue'"
+             [title]="'Edit Description'"
+             (click)="isDescription = !isDescription;"
+             [style.cursor]="'pointer'">
+    </fa-icon>
+  </h2>
+  <hr>
+  <div [innerHTML]="selectedReligion.description"></div>
+}

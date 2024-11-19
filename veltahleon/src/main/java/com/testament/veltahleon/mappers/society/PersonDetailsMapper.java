@@ -51,8 +51,8 @@ public class PersonDetailsMapper {
         Person person = new Person();
         personDetails.setId(personDetailsDTO.getId());
         person.setId(personDetails.getId());
-        person.setFirstName(personDetailsDTO.getFirstName());
-        person.setSecondName(personDetailsDTO.getSecondName());
+        person.setFirstName(personDetailsDTO.getFirstName().toUpperCase());
+        person.setSecondName(personDetailsDTO.getSecondName().toUpperCase());
         person.setGender(Gender.valueOf(personDetailsDTO.getGender()));
         person.setRaceName(personFacade.getRace(personDetailsDTO.getRaceName()));
         personDetails.setPerson(person);

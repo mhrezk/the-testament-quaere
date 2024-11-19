@@ -1,8 +1,14 @@
 package com.testament.veltahleon.services.implementation.places;
 
 import com.testament.veltahleon.enumerations.GovernanceType;
+import com.testament.veltahleon.enumerations.NationStatus;
 import com.testament.veltahleon.enumerations.NationType;
+import com.testament.veltahleon.model.entities.history.Language;
+import com.testament.veltahleon.model.entities.places.Capital;
 import com.testament.veltahleon.model.entities.places.Nation;
+import com.testament.veltahleon.model.entities.places.NationDetails;
+import com.testament.veltahleon.repositories.places.CapitalRepository;
+import com.testament.veltahleon.repositories.places.NationDetailsRepository;
 import com.testament.veltahleon.repositories.places.NationRepository;
 import com.testament.veltahleon.services.ifc.places.NationService;
 import jakarta.transaction.Transactional;
@@ -13,8 +19,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +30,9 @@ public class NationServiceImpl implements NationService {
 
     @Autowired
     private NationRepository nationRepository;
+
+    @Autowired
+    private NationDetailsRepository nationDetailsRepository;
 
     @Override
     public Collection<Nation> getNationsWithPagination(int pageNumber, int numberOfRecords) {
@@ -54,33 +63,83 @@ public class NationServiceImpl implements NationService {
     public Nation getNationByName(String name) {
         if(nationRepository.countByName(name) <= 0) {
           Nation newNation = new Nation();
-//          String firstLetter = name.substring(0, 1).toUpperCase();
-//          String word = name.substring(1).toLowerCase();
           newNation.setName(name.toUpperCase());
           newNation.setType(NationType.NONE);
+          newNation.setNationStatus(NationStatus.INDEPENDENT);
           newNation.setGovernanceType(GovernanceType.NONE);
+          newNation.setCapital(generateCapital());
+          NationDetails nationDetails = generateNationDetails();
+          nationDetails.setNation(newNation);
+          nationDetailsRepository.save(nationDetails);
           return nationRepository.save(newNation);
         } else {
             return nationRepository.findByName(name);
         }
     }
 
+    private Capital generateCapital() {
+        Capital capital = new Capital();
+        capital.setName("NONE");
+        capital.setFlagURL(capitalImageURL("square.png"));
+        return capital;
+    }
+
+    private String capitalImageURL(String imageName) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/places/capitals/images/" + imageName).toUriString();
+    }
+
     @Override
     public Boolean deleteNationByID(Long id) {
         nationRepository.deleteById(id);
+        nationDetailsRepository.deleteById(id);
+        return Boolean.TRUE;
+    }
+
+    @Override
+    public Boolean deleteNationByName(String name) {
+        nationRepository.deleteByName(name);
+        nationDetailsRepository.deleteByNation_Name(name);
+        return Boolean.TRUE;
+    }
+
+    @Override
+    public Boolean deleteNation(Nation nation) {
+        nationRepository.delete(nation);
+        nationDetailsRepository.deleteById(nation.getId());
         return Boolean.TRUE;
     }
 
     @Override
     public Nation saveNation(Nation nation) {
         nation.setName(nation.getName().toUpperCase());
-        //nation.setUrlFlag(defaultFlagURL("square.png"));
-        return nationRepository.save(nation);
+        nationRepository.save(nation);
+        NationDetails nationDetails = generateNationDetails();
+        nationDetails.setNation(nation);
+        nationDetailsRepository.save(nationDetails);
+        return nation;
     }
 
-//    private String defaultFlagURL(String imageName) {
-//        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/places/nations/images/" + imageName).toUriString();
-//    }
+    private NationDetails generateNationDetails() {
+        ArrayList<Language> languages = new ArrayList<>();
+        NationDetails nationDetails = new NationDetails();
+        nationDetails.setFoundingYear(0);
+        nationDetails.setEndingYear(0);
+        nationDetails.setRulingPartyName("N/A");
+        nationDetails.setRulingFamily("N/A");
+        nationDetails.setSucceedingNation("None".toUpperCase());
+        nationDetails.setPrecedingNation("None".toUpperCase());
+        nationDetails.setProvincialNumber(0);
+        nationDetails.setLeaderFirstName("None".toUpperCase());
+        nationDetails.setLeaderSecondName("None".toUpperCase());
+        nationDetails.setHistory(null);
+        nationDetails.setLanguages(languages);
+        nationDetails.setFlagURL(defaultImageURL("square.png"));
+        return nationDetails;
+    }
+
+    private String defaultImageURL(String imageName) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/places/nationDetails/images/" + imageName).toUriString();
+    }
 
     @Override
     public Nation updateNation(Long id, Nation nation) {
@@ -90,57 +149,35 @@ public class NationServiceImpl implements NationService {
             newNation.setName(nation.getName().toUpperCase());
         }
 
-//        if(nation.getDescription() != null && newNation.getDescription() != nation.getDescription()) {
-//            newNation.setDescription(nation.getDescription());
-//        }
-//
-//        if(nation.getCapital() != null && newNation.getCapital() != nation.getCapital()) {
-//            newNation.setCapital(nation.getCapital());
-//        }
-
-//        if(nation.getContinent() != null && newNation.getContinent() != nation.getContinent()) {
-//            newNation.setContinent(nation.getContinent());
-//        }
-
-//        if(nation.getLeader() != null && newNation.getLeader() != nation.getLeader()) {
-//            newNation.setLeader(nation.getLeader());
-//        }
-//
-//        if(nation.getLanguage() != null && newNation.getLanguage() != nation.getLanguage()) {
-//            newNation.setLanguage(nation.getLanguage());
-//        }
-//
-//        if(nation.getProvinces() != null && newNation.getProvinces() != nation.getProvinces()) {
-//            newNation.setProvinces(nation.getProvinces());
-//        }
-
         if(nation.getType() != null && newNation.getType() != nation.getType()) {
             newNation.setType(nation.getType());
+        }
+
+        if(nation.getNationStatus() != null && newNation.getNationStatus() != nation.getNationStatus()) {
+            newNation.setNationStatus(nation.getNationStatus());
         }
 
         if(nation.getGovernanceType() != null && newNation.getGovernanceType() != nation.getGovernanceType()) {
             newNation.setGovernanceType(nation.getGovernanceType());
         }
 
-//        if(nation.getUrlFlag() != null && newNation.getUrlFlag() != nation.getUrlFlag()) {
-//            newNation.setUrlFlag(nation.getUrlFlag());
-//        }
-
+        NationDetails nationDetails = nationDetailsRepository.findById(id).orElseThrow();
+        nationDetails.setNation(newNation);
+        nationDetailsRepository.save(nationDetails);
         return nationRepository.save(newNation);
     }
 
     @Override
     public Nation modifyNation(Long id, Nation nation) {
         Nation newNation = nationRepository.findById(id).orElseThrow();
+        newNation.setCapital(nation.getCapital());
         newNation.setName(nation.getName().toUpperCase());
-        //newNation.setDescription(nation.getDescription());
         newNation.setGovernanceType(nation.getGovernanceType());
         newNation.setType(nation.getType());
-//        newNation.setLeader(nation.getLeader());
-//        newNation.setCapital(nation.getCapital());
-//        newNation.setUrlFlag(nation.getUrlFlag());
-//        newNation.setLanguage(nation.getLanguage());
-//        newNation.setProvinces(nation.getProvinces());
+        newNation.setNationStatus(nation.getNationStatus());
+        NationDetails nationDetails = nationDetailsRepository.findById(id).orElseThrow();
+        nationDetails.setNation(newNation);
+        nationDetailsRepository.save(nationDetails);
         return nationRepository.save(newNation);
     }
 

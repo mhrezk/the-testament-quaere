@@ -2,6 +2,7 @@ package com.testament.veltahleon.model.entities.places;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.enumerations.GovernanceType;
+import com.testament.veltahleon.enumerations.NationStatus;
 import com.testament.veltahleon.enumerations.NationType;
 import com.testament.veltahleon.model.entities.history.Language;
 import com.testament.veltahleon.model.entities.society.Person;
@@ -33,6 +34,14 @@ public class Nation {
     @NotEmpty(message = "Name cannot be empty!")
     @Column(name = "name")
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "capital_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Capital capital;
 
 //    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,
@@ -93,6 +102,10 @@ public class Nation {
     @Enumerated(EnumType.STRING)
     @Column(name = "governance_type")
     private GovernanceType governanceType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "nation_status")
+    private NationStatus nationStatus;
 
 //    @OneToMany(mappedBy = "nation", cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,

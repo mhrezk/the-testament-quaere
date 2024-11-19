@@ -2,6 +2,7 @@ package com.testament.veltahleon.model.entities.dogma;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.model.entities.dogma.mythology.Deity;
+import com.testament.veltahleon.model.entities.places.Nation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -38,14 +39,28 @@ public class Religion {
 //    @JoinColumn(name = "pantheon_id")
 //    private Pantheon pantheon;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "religion_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private List<Deity> deities;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
-            CascadeType.PERSIST})
-    @JoinColumn(name = "deity_id")
+            CascadeType.PERSIST,
+            CascadeType.REMOVE})
+    @JoinTable(name="religions_nations",
+            joinColumns={@JoinColumn(name="religion_id")},
+            inverseJoinColumns={@JoinColumn(name="nation_id")})
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Deity> deities;
+    private List<Nation> nations;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;
+
+    @Column(name = "symbol_URL")
+    private String symbolURL;
 }

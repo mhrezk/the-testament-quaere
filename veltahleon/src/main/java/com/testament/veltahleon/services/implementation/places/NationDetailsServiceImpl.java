@@ -1,6 +1,5 @@
 package com.testament.veltahleon.services.implementation.places;
 
-import com.testament.veltahleon.model.entities.history.Language;
 import com.testament.veltahleon.model.entities.places.Nation;
 import com.testament.veltahleon.model.entities.places.NationDetails;
 import com.testament.veltahleon.repositories.places.NationDetailsRepository;
@@ -11,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +37,6 @@ public class NationDetailsServiceImpl implements NationDetailsService {
     public NationDetails updateNationDetails(Long id, NationDetails nationDetails) {
         NationDetails newNationDetails = nationDetailsRepository.findById(id).orElseThrow();
         Nation newNation = nationRepository.findById(id).orElseThrow();
-        List<Language> languages = nationDetails.getLanguages();
 
         if(nationDetails.getNation().getName() != null && newNation.getName() != nationDetails.getNation().getName()) {
             newNation.setName(nationDetails.getNation().getName().toUpperCase());
@@ -50,11 +46,15 @@ public class NationDetailsServiceImpl implements NationDetailsService {
             newNationDetails.setNation(nationDetails.getNation());
         }
 
-        newNationDetails.setNation(newNation);
-
-        if(nationDetails.getCapital().getName() != null && newNationDetails.getCapital().getName() != nationDetails.getCapital().getName()) {
-            newNationDetails.setCapital(nationDetails.getCapital());
+        if(nationDetails.getPrecedingNation() != null && newNationDetails.getPrecedingNation() != nationDetails.getPrecedingNation()) {
+            newNationDetails.setPrecedingNation(nationDetails.getPrecedingNation());
         }
+
+        if(nationDetails.getSucceedingNation() != null && newNationDetails.getSucceedingNation() != nationDetails.getSucceedingNation()) {
+            newNationDetails.setSucceedingNation(nationDetails.getSucceedingNation());
+        }
+
+        newNationDetails.setNation(newNation);
 
         if(nationDetails.getLeaderFirstName() != null && newNationDetails.getLeaderFirstName() != nationDetails.getLeaderFirstName()) {
             newNationDetails.setLeaderFirstName(nationDetails.getLeaderFirstName().toUpperCase());
@@ -72,8 +72,8 @@ public class NationDetailsServiceImpl implements NationDetailsService {
             newNationDetails.setRulingPartyName(nationDetails.getRulingPartyName().toUpperCase());
         }
 
-        if(nationDetails.getDescription() != null && newNationDetails.getDescription() != nationDetails.getDescription()) {
-            newNationDetails.setDescription(nationDetails.getDescription());
+        if(nationDetails.getHistory() != null && newNationDetails.getHistory() != nationDetails.getHistory()) {
+            newNationDetails.setHistory(nationDetails.getHistory());
         }
 
         if(nationDetails.getFlagURL() != null && newNationDetails.getFlagURL() != nationDetails.getFlagURL()) {
@@ -87,20 +87,27 @@ public class NationDetailsServiceImpl implements NationDetailsService {
         NationDetails newNationDetails = nationDetailsRepository.findById(id).orElseThrow();
         Nation newNation = nationRepository.findById(id).orElseThrow();
         newNation.setName(nationDetails.getNation().getName().toUpperCase());
+        newNation.setCapital(nationDetails.getNation().getCapital());
         newNation.setType(nationDetails.getNation().getType());
+        newNation.setNationStatus(nationDetails.getNation().getNationStatus());
         newNation.setGovernanceType(nationDetails.getNation().getGovernanceType());
         newNationDetails.setNation(newNation);
-        newNationDetails.setDescription(nationDetails.getDescription());
+        newNationDetails.setHistory(nationDetails.getHistory());
         newNationDetails.setFlagURL(nationDetails.getFlagURL());
-        newNationDetails.setLeaderFirstName(nationDetails.getLeaderFirstName());
-        newNationDetails.setLeaderSecondName(nationDetails.getLeaderSecondName());
+        newNationDetails.setPrecedingNation(nationDetails.getPrecedingNation());
+        newNationDetails.setSucceedingNation(nationDetails.getSucceedingNation());
+        newNationDetails.setLeaderFirstName(nationDetails.getLeaderFirstName().toUpperCase());
+        newNationDetails.setLeaderSecondName(nationDetails.getLeaderSecondName().toUpperCase());
         newNationDetails.setProvincialNumber(nationDetails.getProvincialNumber());
         newNationDetails.setRulingPartyName(nationDetails.getRulingPartyName());
-        return null;
+        newNationDetails.setFoundingYear(nationDetails.getFoundingYear());
+        newNationDetails.setEndingYear(nationDetails.getEndingYear());
+        return nationDetailsRepository.save(newNationDetails);
     }
 
     @Override
-    public Boolean deleteNationByID(Long id) {
+    public Boolean deleteNationDetailsByID(Long id) {
+        nationRepository.deleteById(id);
         nationDetailsRepository.deleteById(id);
         return Boolean.TRUE;
     }

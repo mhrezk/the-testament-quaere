@@ -11,6 +11,9 @@ public interface ReligionService {
     Religion getReligionByID(Long id);
     Religion getReligionByName(String name);
     Boolean deleteReligionByID(Long id);
+    Religion removeNationFromReligion(Long religionId, String nationName);
     Religion saveReligion(Religion religion);
     Religion updateReligion(Long id, Religion religion);
+    Religion modifyReligion(Long id, Religion religion);
+    long countReligions();
 }

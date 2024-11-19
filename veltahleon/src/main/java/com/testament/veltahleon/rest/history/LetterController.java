@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +32,7 @@ public class LetterController {
     @Autowired
     private LetterMapper letterMapper;
 
-    public final String imagePath = "src/main/resources/assets/images/letters/";
+    public final String IMAGE_PATH = "src/main/resources/assets/images/letters/";
 
     @GetMapping("/letters")
     public ResponseEntity<CustomResponse> getPaginatedLetters(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -104,7 +103,7 @@ public class LetterController {
 
     @GetMapping(path = "/letters/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getScriptImage(@PathVariable("imageName") String imageName) throws IOException {
-        return Files.readAllBytes(Path.of(imagePath + imageName));
+        return Files.readAllBytes(Path.of(IMAGE_PATH + imageName));
     }
 
     @PostMapping("/save/letter/{languageName}")

@@ -18,12 +18,10 @@ export class PersonDetailsBiographyComponent {
     buttons: ST_BUTTONS,
   };
 
+  constructor(private personDetailsService: PersonDetailsService) {}
+
   isBiographyEdited(editable: boolean) {
     this.isBiography.emit(editable);
-  }
-
-  constructor(private personDetailsService: PersonDetailsService) {
-
   }
 
   updateBiography() {

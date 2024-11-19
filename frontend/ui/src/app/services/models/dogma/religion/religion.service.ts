@@ -26,6 +26,10 @@ export class ReligionService {
       catchError(this.handleError)
     );
 
+  public getAllReligionsCount(): Observable<CustomResponse> {
+    return this.http.get<CustomResponse>(`${this.baseURL}/religions/all/count`)
+  }
+
   getReligionByID$ = (religionID: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/religion/${religionID}`)
     .pipe(
       tap(console.log),
@@ -48,17 +52,23 @@ export class ReligionService {
       catchError(this.handleError)
     );
 
-  modifyReligion$ = (religionID: number, religion: Religion) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${religionID}`, religion)
+  modifyReligion$ = (religionID: number, religion: Religion) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/religion/${religionID}`, religion)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
 
-  public modifyReligion(religion: Religion): Observable<CustomResponse> {
-    return this.http.put<CustomResponse>(`${this.baseURL}/update/religion`, religion);
+  public modifyReligion(religionID: number, religion: Religion): Observable<CustomResponse> {
+    return this.http.put<CustomResponse>(`${this.baseURL}/modify/religion/${religionID}`, religion);
   }
 
   deleteReligion$ = (religionID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/religion/${religionID}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  deleteNationFromReligion$ = (religionID: number, nationName: string) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/religion/${religionID}/${nationName}`)
     .pipe(
       tap(console.log),
       catchError(this.handleError)

@@ -1,0 +1,110 @@
+.display-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+}
+
+.image-container {
+  flex: 0 0 300px;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.details-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+mat-divider {
+  margin: 10px 0;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-item strong {
+  color: #333;
+  font-weight: bold;
+}
+
+.stylish-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.stylish-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.stylish-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.stylish-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nation-details {
+  padding: 20px;
+}
+
+.language-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bubble {
+  background-color: #5bc0de;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  max-width: 150px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.bubble:hover {
+  background-color: #31b0d5;
+}
+
+.custom-tooltip {
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.close-icon {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.86.0] 2024-11-19
+
+- Added CRUD operations for religion
+
 ## [0.85.0] 2024-10-23
 
 - Created CRUD for books

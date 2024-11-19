@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
 
@@ -21,6 +22,7 @@ public class DeityServiceImpl implements DeityService {
 
     @Autowired
     private final DeityRepository deityRepository;
+
     @Override
     public Collection<Deity> getDeitiesWithPagination(int pageNumber, int numberOfRecords) {
         return deityRepository.findAll(PageRequest.of(pageNumber, numberOfRecords)).toList();
@@ -38,6 +40,11 @@ public class DeityServiceImpl implements DeityService {
 
     @Override
     public Deity getDeityByName(String name) {
+        if(deityRepository.countByName(name) <= 0) {
+            Deity deity = new Deity();
+            deity.setName(name.toUpperCase());
+            deity.setImageURL(defaultImageURL("mosque.png"));
+        }
         return deityRepository.findByName(name);
     }
 
@@ -49,7 +56,13 @@ public class DeityServiceImpl implements DeityService {
 
     @Override
     public Deity saveDeity(Deity deity) {
+        deity.setName(deity.getName().toUpperCase());
+        deity.setImageURL(defaultImageURL("mosque.png"));
         return deityRepository.save(deity);
+    }
+
+    private String defaultImageURL(String imageName) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/dogma/mythology/deities/images/" + imageName).toUriString();
     }
 
     @Override

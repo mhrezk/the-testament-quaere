@@ -27,7 +27,7 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    public final String imagePath = "src/main/resources/assets/images/authors/";
+    public final String IMAGE_PATH = "src/main/resources/assets/images/authors/";
 
     @GetMapping("/authors")
     public ResponseEntity<CustomResponse> getPaginatedAuthors(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -81,7 +81,7 @@ public class AuthorController {
 
     @GetMapping(path = "/authors/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getAuthorImage(@PathVariable("imageName") String imageName) throws IOException {
-        return Files.readAllBytes(Path.of(imagePath + imageName));
+        return Files.readAllBytes(Path.of(IMAGE_PATH + imageName));
     }
 
     @DeleteMapping("/delete/author/{id}")

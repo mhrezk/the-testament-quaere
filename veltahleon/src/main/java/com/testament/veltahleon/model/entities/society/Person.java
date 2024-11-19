@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.society;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.testament.veltahleon.enumerations.ClosedAnswer;
 import com.testament.veltahleon.enumerations.Gender;
 import com.testament.veltahleon.model.entities.calendar.Year;
@@ -46,6 +47,7 @@ public class Person {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "race_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Race raceName;
 
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,

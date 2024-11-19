@@ -46,7 +46,15 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public Language getLanguageByName(String name) {
-        return languageRepository.findByName(name);
+        if(languageRepository.countByName(name) <= 0) {
+            Language language = new Language();
+            language.setName(name.toUpperCase());
+            language.setAlphabetSize(0);
+            language.setAlphabetURL(defaultAlphabetURL("arabic.png"));
+            return languageRepository.save(language);
+        } else {
+            return languageRepository.findByName(name);
+        }
     }
 
     @Override

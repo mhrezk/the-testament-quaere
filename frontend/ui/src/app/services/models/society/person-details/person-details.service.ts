@@ -14,11 +14,11 @@ export class PersonDetailsService {
 
   constructor(private http: HttpClient) { }
 
-  public getPersonDetailsByFirstNameAndSecondName(id: number, firstName: string, secondName: string): Observable<CustomResponse> {
-    return this.http.get<CustomResponse>(`${this.baseURL}/personDetails/${id}/${firstName}/${secondName}`);
+  public getPersonDetailsByFirstNameAndSecondName(firstName: string, secondName: string): Observable<CustomResponse> {
+    return this.http.get<CustomResponse>(`${this.baseURL}/personDetails/${firstName}/${secondName}`);
   }
 
-  deletePerson$ = (personDetailsID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/personDetails/${personDetailsID}`)
+  deletePersonDetails$ = (personDetailsID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/personDetails/${personDetailsID}`)
     .pipe(
       tap(console.log),
       catchError(this.handleError)

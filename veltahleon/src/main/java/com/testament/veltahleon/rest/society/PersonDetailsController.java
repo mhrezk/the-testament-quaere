@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -31,9 +30,9 @@ public class PersonDetailsController {
     @Autowired
     private PersonDetailsMapper personDetailsMapper;
 
-    public final String imagePath = "src/main/resources/assets/images/people/";
+    public final String IMAGE_PATH = "src/main/resources/assets/images/people/";
 
-    @GetMapping("/personDetails/{id}/{firstName}/{secondName}")
+    @GetMapping("/personDetails/{firstName}/{secondName}")
     public ResponseEntity<CustomResponse> getPersonDetailsByPersonName(@PathVariable String firstName, @PathVariable String secondName) {
         PersonDetailsDTO personDetailsDTO = personDetailsMapper.convertToDTO(personDetailsService.getPersonByFirstNameAndSecondName(firstName, secondName));
         return ResponseEntity.ok(CustomResponse.builder()
@@ -49,7 +48,7 @@ public class PersonDetailsController {
     @GetMapping(path = "/personDetails/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getPersonalImage(@PathVariable("imageName") String imageName) throws IOException {
         //Path image = Paths.get("src/main/resources/assets/images/people/" + imageName);
-        return Files.readAllBytes(Path.of(imagePath + imageName));
+        return Files.readAllBytes(Path.of(IMAGE_PATH + imageName));
     }
 
     @DeleteMapping("/delete/personDetails/{id}")
@@ -59,7 +58,7 @@ public class PersonDetailsController {
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataDeleted", personDetailsService.deletePersonDetailsByID(id)))
-                .message("Person detail deleted!")
+                .message("Person details deleted!")
                 .build()
         );
     }

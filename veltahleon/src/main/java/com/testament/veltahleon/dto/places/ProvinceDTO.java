@@ -12,5 +12,6 @@ public class ProvinceDTO {
     private String name;
     private String capital;
     private String nation;
-    private String description;
+    private String history;
+    private String flagURL;
 }

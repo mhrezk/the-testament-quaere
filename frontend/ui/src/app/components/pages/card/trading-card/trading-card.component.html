@@ -1,0 +1,49 @@
+<!--<div class="card">-->
+<!--  <div class="card-header">-->
+<!--    <h2>{{ cardTitle }}</h2>-->
+<!--  </div>-->
+<!--  <div class="card-image">-->
+<!--    <img style="text-align:center" [src]="cardImage" alt="Card Image" />-->
+<!--  </div>-->
+<!--  <div class="card-description">-->
+<!--    <p>{{ cardDescription }}</p>-->
+<!--  </div>-->
+<!--  <div class="card-attributes">-->
+<!--    <span>Movement: {{ cardPower }}</span>-->
+<!--    <span>Passing: {{ cardHealth }}</span>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="card-container" (click)="flipCard()">
+  <div class="card-inner" [class.flipped]="isFlipped">
+    <!-- Front of the Card -->
+    <div class="card card-front">
+      <div class="card-header">
+        <h2>{{ cardTitle }}</h2>
+      </div>
+      <div class="card-description">
+        <p>{{ cardDescription }}</p>
+      </div>
+      <div class="card-attributes">
+        <div class="attribute">
+          <span class="attribute-label">Power:</span>
+          <div class="gem" [ngClass]="cardPowerLevel">{{ cardPowerLevel }}</div>
+        </div>
+        &nbsp;
+        <div class="attribute">
+          <span class="attribute-label">Health:</span>
+          <div class="gem" [ngClass]="cardHealthLevel">{{ cardHealthLevel }}</div>
+        </div>
+      </div>
+<!--      <div class="card-attributes">-->
+<!--        <span>Power: {{ cardPower }}</span>-->
+<!--        <span>Health: {{ cardHealth }}</span>-->
+<!--      </div>-->
+    </div>
+
+    <!-- Back of the Card -->
+    <div class="card card-back">
+      <img [src]="cardBackImage" alt="Card Back Image" />
+    </div>
+  </div>
+</div>

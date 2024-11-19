@@ -1,0 +1,12 @@
+<div class="diagram">
+  <app-fruit *ngFor="let node of fruitNodes" [node]="node"></app-fruit>
+  <svg class="connections">
+    <line *ngFor="let connection of fruitConnections"
+          [attr.x1]="getNodeX(connection.from)"
+          [attr.y1]="getNodeY(connection.from)"
+          [attr.x2]="getNodeX(connection.to)"
+          [attr.y2]="getNodeY(connection.to)"
+          [attr.stroke]="connection.color"
+          stroke-width="2" />
+  </svg>
+</div>

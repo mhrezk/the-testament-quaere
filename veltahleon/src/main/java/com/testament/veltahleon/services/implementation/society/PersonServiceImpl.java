@@ -82,6 +82,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person savePerson(Person person) {
+        person.setFirstName(person.getFirstName().toUpperCase());
+        person.setSecondName(person.getSecondName().toUpperCase());
         personRepository.save(person);
         PersonDetails newPersonDetails = generatePersonDetails();
         newPersonDetails.setPerson(person);
@@ -120,11 +122,11 @@ public class PersonServiceImpl implements PersonService {
         Person newPerson = personRepository.findById(id).orElseThrow();
 
         if(person.getFirstName() != null && newPerson.getFirstName() != person.getFirstName()) {
-            newPerson.setFirstName(person.getFirstName());
+            newPerson.setFirstName(person.getFirstName().toUpperCase());
         }
 
         if(person.getSecondName() != null && newPerson.getSecondName() != person.getSecondName()) {
-            newPerson.setSecondName(person.getSecondName());
+            newPerson.setSecondName(person.getSecondName().toUpperCase());
         }
 
 //        if(person.getNation() != null && newPerson.getNation() != person.getNation()) {
@@ -147,34 +149,6 @@ public class PersonServiceImpl implements PersonService {
             newPerson.setGender(person.getGender());
         }
 
-//        if(person.getJob() != null && newPerson.getJob() != person.getJob()) {
-//            newPerson.setJob(person.getJob());
-//        }
-//
-//        if(person.getBirthYear() != null && newPerson.getBirthYear() != person.getBirthYear()) {
-//            newPerson.setBirthYear(person.getBirthYear());
-//        }
-//
-//        if(person.getDeathYear() != null && newPerson.getDeathYear() != person.getDeathYear()) {
-//            newPerson.setDeathYear(person.getDeathYear());
-//        }
-//
-//        if(person.getImageURL() != null && newPerson.getImageURL() != person.getImageURL()) {
-//            newPerson.setImageURL(person.getImageURL());
-//        }
-//
-//        if(person.getBiography() != null && newPerson.getBiography() != person.getBiography()) {
-//            newPerson.setBiography(person.getBiography());
-//        }
-//
-//        if(person.getTitle() != null && newPerson.getTitle() != person.getTitle()) {
-//            newPerson.setTitle(person.getTitle());
-//        }
-//
-//        if(person.getIsBastard() != null && newPerson.getIsBastard() != person.getIsBastard()) {
-//            newPerson.setIsBastard(person.getIsBastard());
-//        }
-
         PersonDetails newPersonDetails = personDetailsRepository.findById(id).orElseThrow();
         newPersonDetails.setPerson(newPerson);
         personDetailsRepository.save(newPersonDetails);
@@ -184,8 +158,8 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person modifyPerson(Long id, Person person) {
         Person newPerson = personRepository.findById(id).orElseThrow();
-        newPerson.setFirstName(person.getFirstName());
-        newPerson.setSecondName(person.getSecondName());
+        newPerson.setFirstName(person.getFirstName().toUpperCase());
+        newPerson.setSecondName(person.getSecondName().toUpperCase());
         newPerson.setGender(person.getGender());
         newPerson.setRaceName(person.getRaceName());
         PersonDetails newPersonDetails = personDetailsRepository.findById(id).orElseThrow();

@@ -1,0 +1,8 @@
+<h2>History</h2>
+<hr>
+<st-editor [(ngModel)]="nationDetails.history" [config]="config"></st-editor>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="isHistoryEdited(false)">Close History</button>
+  <button type="button" class="btn btn-success" (click)="updateHistory()">Save History</button>
+</div>
+

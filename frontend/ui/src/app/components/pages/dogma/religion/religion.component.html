@@ -1,0 +1,299 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Religions</h2>
+          </div>
+          <div class="col-sm-6">
+            <a class="btn btn-success" data-bs-toggle="modal" (click)="isClicked = true; isTableShown = false">
+              <i class="material-icons">&#xE147;</i>
+              <span>Add Religion</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+        <ng-container *ngSwitchCase="DATA_STATE.LOADING">
+          <div class="col-md-12 single-note-item text-center">
+            <div class="spinner-border text-info" role="status"></div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+          <div *ngIf="isTableShown">
+            <span>
+              Number of records:
+              <select (change)="onTableSizeChange($event)">
+                <option *ngFor="let size of tableSizes">
+                  {{ size }}
+                </option>
+              </select>
+            </span>
+            <br>
+            <br>
+            <input
+              [(ngModel)]="isMasterSelected"
+              type="checkbox"
+              (change)="checkUncheckAll()"
+              style="cursor: pointer"
+            >
+            &nbsp;&nbsp;&nbsp;
+            <span>Select/Deselect All</span>
+            &nbsp;
+            @if (hasSelected()) {
+              <button type="button" class="btn btn-danger" (click)="deleteReligions(this.checkedReligions)">Delete
+                Selection
+              </button>
+            }
+          </div>
+          <table *ngIf="isTableShown" class="table table-striped table-hover" id="days">
+            <thead>
+            <tr>
+              <th></th>
+              <th *ngFor="let header of headers">{{ header.value }}</th>
+              <th></th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let religion of appState.appData?.data.dataRetrieved
+            | paginate: {
+              itemsPerPage: tableSize,
+              currentPage: currentPage,
+              totalItems: count$ | async
+            }; let i = index;">
+            <tr>
+              <td>
+                @if (religion.name.toLowerCase() !== "none") {
+                  <input
+                    [(ngModel)]="religion.isSelected"
+                    type="checkbox"
+                    (change)="isAllSelected()"
+                    style="cursor: pointer"
+                  >
+                }
+              </td>
+              <td>
+                @if (religion.name.toLowerCase() === "none") {
+                  <b>{{ religion.name }}</b>
+                } @else {
+                  <u (click)="routeToReligionDetails(religion.id, religion.name)"
+                     style="cursor: pointer">{{ religion.name }}</u>
+                }
+              </td>
+              <td></td>
+              <td>
+                  <span>
+                    <fa-icon [icon]="faEdit"
+                             [style.color]="'blue'"
+                             [title]="'Edit'"
+                             (click)="isUpdated = true; getReligionByID(religion.id); isTableShown = false;"
+                             [style.cursor]="'pointer'"></fa-icon>
+                  </span>
+                @if (religion.name.toLowerCase() !== "none") {
+                  &nbsp;&nbsp;
+                  <span>
+                    <fa-icon [icon]="faTrash" [title]="'Delete'" (click)="deleteReligion(religion)"
+                             style="cursor: pointer; color: firebrick">
+                    </fa-icon>
+                  </span>
+                }
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.ERROR">
+          <div [hidden]="isUpdated || isClicked" style="background-color: indianred">{{ appState.error }}</div>
+        </ng-container>
+        <pagination-controls
+          *ngIf="isTableShown"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Add Religion-->
+<!--<div *ngIf="isClicked" class="modal-container">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <form #religionForm="ngForm" (ngSubmit)="saveReligion(religionForm)">-->
+<!--        <div class="modal-header">-->
+<!--          <h4 class="modal-title">Add Religion</h4>-->
+<!--          <button type="button" class="close-button" (click)="isClicked = false; isTableShown = true">×</button>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div class="modal-body">-->
+<!--          <div class="form-group">-->
+<!--            <label>Name</label>-->
+<!--            <input type="text" ngModel name="name" class="form-input" placeholder="Enter Religion Name" required>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="cancel-button" (click)="isClicked = false; isTableShown = true">Close</button>-->
+<!--          <button type="submit" [ngClass]="{'disabled': religionForm.invalid}"-->
+<!--                  [disabled]="(isLoading$ | async) || religionForm.invalid" class="submit-button">-->
+<!--            <i *ngIf="isLoading$ | async" class="loading-spinner"></i>-->
+<!--            <span *ngIf="isLoading$ | async">Saving...</span>-->
+<!--            <span *ngIf="!(isLoading$ | async)">Add</span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!-- Edit Religion -->
+<!--<div *ngIf="isUpdated" class="modal-container">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <form (ngSubmit)="modifyReligion(selectedReligion)">-->
+<!--        <div class="modal-header">-->
+<!--          <h4 class="modal-title">Edit Religion</h4>-->
+<!--          <button type="button" class="close-button" (click)="isUpdated = false; isTableShown = true">×</button>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div class="modal-body">-->
+<!--          <div class="form-group">-->
+<!--            <label>Name</label>-->
+<!--            <input type="text" [(ngModel)]="selectedReligion.name" name="name" class="form-input" required>-->
+<!--          </div>-->
+<!--          <div class="modal-footer">-->
+<!--            <button type="button" class="cancel-button" (click)="isUpdated = false; isTableShown = true">Close</button>-->
+<!--            <button type="submit" [ngClass]="{'disabled': isLoading$ | async}" [disabled]="isLoading$ | async"-->
+<!--                    class="submit-button">-->
+<!--              <i *ngIf="isLoading$ | async" class="loading-spinner"></i>-->
+<!--              <span *ngIf="isLoading$ | async">Updating...</span>-->
+<!--              <span *ngIf="!(isLoading$ | async)">Update</span>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!-- Dynamic Religion Addition -->
+<div *ngIf="isClicked" class="overlay"></div>
+<div *ngIf="isClicked" class="form-container">
+  <div class="form-header">Add Religion</div>
+  <form [formGroup]="religionForm" (ngSubmit)="saveReligionForm(religionForm)">
+
+    <!-- Religion Name Field -->
+    <div>
+      <label for="name">Name</label>
+      <input id="name" formControlName="name" type="text" placeholder="Enter Religion Name">
+      <div *ngIf="religionForm.get('name')?.invalid && religionForm.get('name')?.touched" class="form-error-message">
+        Religion name is required.
+      </div>
+    </div>
+
+    <!-- Nations Field (FormArray) -->
+    <div formArrayName="nations" class="nation-array">
+      <label>Nations</label>
+      <div style="display: flex" class="nation-input-container" *ngFor="let nation of nations.controls; let i = index"
+           class="nation-input">
+        <input [formControlName]="i" type="text" placeholder="Enter Nation Name">
+        <!--        <div *ngIf="nation.invalid && nation.touched" class="form-error-message">-->
+        <!--          Nation name is required.-->
+        <!--        </div>-->
+        &nbsp;
+        <fa-icon size="2x" [icon]="faTrash" [title]="'Delete Nation'" (click)="removeNation(i)"
+                 style="cursor: pointer; color: firebrick">
+        </fa-icon>
+      </div>
+      <fa-icon size="2x" [title]="'Add Nation'" [icon]="faPlusCircle" style="cursor: pointer; color: green"
+               (click)="addNation()">Add Nation
+      </fa-icon>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <button class="form-cancel-button" (click)="isClicked = false; isTableShown = true">Close</button>
+
+      <!-- Submit Button -->
+      <button [ngClass]="{'disabled': religionForm.invalid}"
+              [disabled]="(isLoading$ | async) || religionForm.invalid" class="form-submit-button">
+        <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+        <span *ngIf="isLoading$ | async">Saving...</span>
+        <span *ngIf="!(isLoading$ | async)">Add</span>
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Dynamic Religion Modification -->
+<div *ngIf="isUpdated" class="overlay"></div>
+<div *ngIf="isUpdated" class="form-container">
+  <div class="form-header">Edit Religion</div>
+  <form [formGroup]="religionForm" (ngSubmit)="updateReligionForm(selectedReligion.id, religionForm.value)">
+
+    <!-- Religion Name Field -->
+    <div>
+      <label>Religion Name</label>
+      <input formControlName="name" type="text">
+      <div *ngIf="religionForm.get('name')?.invalid && religionForm.get('name')?.touched" class="form-error-message">
+        Religion name is required.
+      </div>
+    </div>
+
+    <!-- Nations Field (FormArray) -->
+    <div formArrayName="nations">
+      <div *ngFor="let nationControl of nations.controls; let i = index">
+        <label for="nation{{ i }}">Nation {{ i + 1 }}</label>
+        <input style="width: 420px" [formControlName]="i" id="nation{{ i }}" type="text">
+        <!--        <div *ngIf="nationControl.invalid && nationControl.touched" class="form-error-message">-->
+        <!--          Nation name is required.-->
+        <!--        </div>-->
+        &nbsp;
+        <fa-icon size="2x" [icon]="faTrash" [title]="'Delete Nation'" (click)="removeNation(i)"
+                 style="cursor: pointer; color: firebrick">
+        </fa-icon>
+      </div>
+      <fa-icon size="2x" [title]="'Add Nation'" [icon]="faPlusCircle" style="cursor: pointer; color: green"
+               (click)="addNation()">Add Nation
+      </fa-icon>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <!-- Cancel Button -->
+      <button style="background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;"
+              (click)="isUpdated = false; isTableShown = true">Close</button>
+
+      <!-- Submit Button -->
+      <button [ngClass]="{'disabled': religionForm.invalid}"
+              [disabled]="(isLoading$ | async) || religionForm.invalid" class="form-submit-button">
+        <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+        <span *ngIf="isLoading$ | async">Updating...</span>
+        <span *ngIf="!(isLoading$ | async)">Update</span>
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Error Modal -->
+<!--<div *ngIf="showError" class="overlay">-->
+<!--  <div class="error-container">-->
+<!--    <div class="error-header">-->
+<!--      Error-->
+<!--      <button style="float:right" type="button" class="close-button" (click)="showError = false; isTableShown = true">×</button>-->
+<!--    </div>-->
+<!--    <div class="error-body">-->
+<!--      The religious name <strong><u>{{ enteredName }}</u></strong> {{ errorMessage }}-->
+<!--    </div>-->
+<!--    <div class="error-footer">-->
+<!--      <button class="close-btn" (click)="showError = false; isTableShown = true;">Close Window</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+

@@ -13,6 +13,8 @@ public interface NationService {
     Nation getNationByID(Long id);
     Nation getNationByName(String name);
     Boolean deleteNationByID(Long id);
+    Boolean deleteNationByName(String name);
+    Boolean deleteNation(Nation nation);
     Nation saveNation(Nation nation);
     Nation updateNation(Long id, Nation nation);
     Nation modifyNation(Long id, Nation nation);

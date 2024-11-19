@@ -309,11 +309,11 @@ export class PersonComponent implements OnInit {
     return this.people.some(person => person.isSelected);
   }
 
-  routeToPersonDetails(personID: number, firstName: string, secondName: string) {
+  routeToPersonDetails(firstName: string, secondName: string) {
     this.personService.setFullName(firstName, secondName);
-    this.personService.setPersonID(personID);
+    //this.personService.setPersonID(personID);
     //this.router.navigateByUrl(`/person-details/${firstName}/${secondName}`);
-    this.router.navigate([`/person-details`, personID, firstName, secondName]);
+    this.router.navigate([`/person-details`, firstName, secondName]);
   }
 
   // openModal(modalTemplate: TemplateRef<any>, size: string, title: string) {

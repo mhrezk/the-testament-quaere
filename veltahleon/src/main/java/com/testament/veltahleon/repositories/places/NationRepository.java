@@ -9,9 +9,11 @@ import java.util.Collection;
 @Repository
 public interface NationRepository extends JpaRepository<Nation, Long> {
 
-    Nation findByName(String name);
     Collection<Nation> findByType(String nationType);
     Collection<Nation> findByGovernanceType(String governanceType);
+    Nation findByName(String name);
+    Nation findByCapital_Name(String capitalName);
     //long countByProvinces_Name(String provincialName);
     long countByName(String name);
+    long deleteByName(String name);
 }

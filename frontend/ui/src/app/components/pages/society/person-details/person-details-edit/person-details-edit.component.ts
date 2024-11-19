@@ -15,9 +15,9 @@ import {MaritalStatus} from "../../../../../enums/marital-status";
   styleUrl: './person-details-edit.component.css'
 })
 export class PersonDetailsEditComponent implements OnInit {
-  protected readonly Object = Object;
-  protected readonly Lineage = Lineage;
-  protected readonly MaritalStatus = MaritalStatus;
+  Object = Object;
+  Lineage = Lineage;
+  MaritalStatus = MaritalStatus;
 
   races: Race[];
   selectedRace: string;
@@ -46,12 +46,14 @@ export class PersonDetailsEditComponent implements OnInit {
   }
 
   onSubmit(personDetails: PersonDetails) {
-    this.personDetailsService.modifyPersonDetails(this.personDetails.id, personDetails).subscribe();
+    this.personDetailsService.modifyPersonDetails(this.personDetails.id, personDetails).subscribe(
+      result => {
+        this.onClose(false);
+        this.router.navigateByUrl(`/person-details/${personDetails.firstName}/${personDetails.secondName}`);
+      }
+    );
     console.log(this.personDetails);
     console.log(this.personDetails.biography);
-    //this.updatedPersonDetails.emit(personDetailsForm.value);
-    this.onClose(false);
-    this.router.navigateByUrl(`/person-details/${this.personDetails.id}/${personDetails.firstName}/${personDetails.secondName}`);
   }
 
   onClose(editable: boolean) {

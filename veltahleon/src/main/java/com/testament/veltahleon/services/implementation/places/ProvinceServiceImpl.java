@@ -70,8 +70,8 @@ public class ProvinceServiceImpl implements ProvinceService {
             newProvince.setName(province.getName());
         }
 
-        if(province.getDescription() != null && newProvince.getDescription() != province.getDescription()) {
-            newProvince.setDescription(province.getDescription());
+        if(province.getHistory() != null && newProvince.getHistory() != province.getHistory()) {
+            newProvince.setHistory(province.getHistory());
         }
 
         if(province.getCapital() != null && newProvince.getCapital() != province.getCapital()) {
@@ -82,6 +82,15 @@ public class ProvinceServiceImpl implements ProvinceService {
 //            newProvince.setNation(province.getNation());
 //        }
 
+        return provinceRepository.save(newProvince);
+    }
+
+    @Override
+    public Province modifyProvince(Long id, Province province) {
+        Province newProvince = provinceRepository.findById(id).orElseThrow();
+        newProvince.setHistory(province.getHistory());
+        newProvince.setFlagURL(province.getFlagURL());
+        newProvince.setName(province.getName());
         return provinceRepository.save(newProvince);
     }
 }

@@ -1,0 +1,60 @@
+.blue-card-container {
+  width: 200px;
+  height: 300px;
+  background-color: #002b62;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s ease;
+}
+
+.red-card-container {
+  width: 200px;
+  height: 300px;
+  background-color: #a90202;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s ease;
+}
+
+.card-container:hover {
+  transform: scale(1.05);
+}
+
+.card-content {
+  text-align: center;
+}
+
+.stat {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blue-arrow-icon {
+  width: 100%;
+  height: 100%;
+  color: #4799fa;
+  margin-top: 5px;
+}
+
+.red-arrow-icon {
+  width: 100%;
+  height: 100%;
+  color: #fc6969;
+  margin-top: 5px;
+}

@@ -25,7 +25,6 @@ export class PersonDetailsComponent implements OnInit {
 
   firstName: string;
   secondName: string;
-  personID: number;
 
   selectedPersonDetails: PersonDetails;
   personDetails = new BehaviorSubject<CustomResponse>(null);
@@ -35,26 +34,23 @@ export class PersonDetailsComponent implements OnInit {
               private router: Router) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.personService.getFirstName$.subscribe(result => this.firstName = result);
     this.personService.getSecondName$.subscribe(result => this.secondName = result);
-    this.personService.getPersonID$.subscribe(result => this.personID = result);
-    this.getPersonDetailsByFirstNameAndLastName(this.personID, this.firstName, this.secondName);
+    await this.getPersonDetailsByFirstNameAndLastName(this.firstName, this.secondName);
   }
 
-  getPersonDetailsByFirstNameAndLastName(id: number, firstName: string, secondName: string) {
-    this.personDetailsService.getPersonDetailsByFirstNameAndSecondName(id, firstName, secondName).subscribe(result => {
-      this.selectedPersonDetails = result.data.datumRetrieved;
-      this.personDetails.next(result);
-      console.log(this.selectedPersonDetails);
-    });
+  async getPersonDetailsByFirstNameAndLastName(firstName: string, secondName: string) {
+    const result = await this.personDetailsService.getPersonDetailsByFirstNameAndSecondName(firstName, secondName).toPromise();
+    this.selectedPersonDetails = result.data.datumRetrieved;
+    console.log(this.selectedPersonDetails);
   }
 
   deletePersonDetails(personDetailsID: number) {
     this.personDetailsService.deletePersonDetailsByID(personDetailsID).subscribe((result) => {
       console.log(result);
+      this.router.navigateByUrl("/people");
     });
-    this.router.navigateByUrl("/people");
   }
 
   closeEditing(editable: boolean) {

@@ -21,6 +21,10 @@ export class NationService {
       catchError(this.handleError)
     );
 
+  getAllNationsCount() {
+    return this.http.get<CustomResponse>(`${this.baseURL}/nations/all/count`);
+  }
+
   getNationByID$ = (nationID: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/nation/${nationID}`)
     .pipe(
       tap(console.log),
@@ -43,17 +47,23 @@ export class NationService {
       catchError(this.handleError)
     );
 
-  modifyNation$ = (nationID: number, nation: Nation) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${nationID}`, nation)
+  modifyNation$ = (nationID: number, nation: Nation) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/nation/${nationID}`, nation)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
 
-  public modifyNation(nation: Nation): Observable<CustomResponse> {
-    return this.http.put<CustomResponse>(`${this.baseURL}/update/nation`, nation);
+  public modifyNation(nationID: number, nation: Nation): Observable<CustomResponse> {
+    return this.http.put<CustomResponse>(`${this.baseURL}/modify/nation?${nationID}`, nation);
   }
 
   deleteNation$ = (nationID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/nation/${nationID}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  deleteNationByName$ = (nationName: string) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/nation?nationName=${nationName}`)
     .pipe(
       tap(console.log),
       catchError(this.handleError)

@@ -1,0 +1,98 @@
+<div class="display-container">
+  <div class="image-container">
+    <img [src]="nationDetails.flagURL" alt="Flag Image" />
+    @if(nationDetails.flagURL.split("/")[nationDetails.flagURL.split("/").length - 1] === "default.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <form #nationDetailsForm="ngForm" (ngSubmit)="onSubmit(nationDetails)" class="details-container">
+    <h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Nation Name</mat-label>
+        <input matInput name="nation" [(ngModel)]="nationDetails.nation" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Leader First Name</mat-label>
+        <input matInput name="leaderFirstName" [(ngModel)]="nationDetails.leaderFirstName"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Leader Second Name</mat-label>
+        <input matInput name="leaderSecondName" [(ngModel)]="nationDetails.leaderSecondName"/>
+      </mat-form-field>
+    </h2>
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Capital:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="capital" [(ngModel)]="nationDetails.capital" />
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Nation type</strong>
+      <mat-form-field appearance="outline">
+        <mat-label>Nation Type</mat-label>
+        <mat-select name="type" [(ngModel)]="nationDetails.type">
+          <mat-option *ngFor="let type of nationTypeKeys" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Governance Type</strong>
+      <mat-form-field appearance="outline">
+        <mat-label>Governance Type</mat-label>
+        <mat-select name="governanceType" [(ngModel)]="nationDetails.governanceType">
+          <mat-option *ngFor="let type of governanceTypeKeys" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Nation Status</strong>
+      <mat-form-field appearance="outline">
+        <mat-label>Nation Status</mat-label>
+        <mat-select name="nationStatus" [(ngModel)]="nationDetails.nationStatus">
+          <mat-option *ngFor="let status of nationStatusKeys" [value]="status">{{ status }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Ruling Party:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="rulingPartyName" [(ngModel)]="nationDetails.rulingPartyName"/>
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Ruling Family:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="rulingFamily" [(ngModel)]="nationDetails.rulingFamily"/>
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Preceding Nation:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="precedingNation" [(ngModel)]="nationDetails.precedingNation" />
+      </mat-form-field>
+    </div>
+
+    <div class="detail-item">
+      <strong>Succeeding Nation:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="succeedingNation" [(ngModel)]="nationDetails.succeedingNation" />
+      </mat-form-field>
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="nationDetailsForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="onClose(false)">Close</button>
+    </div>
+  </form>
+</div>
+

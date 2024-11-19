@@ -27,7 +27,7 @@ public class RaceController {
     @Autowired
     private RaceService raceService;
 
-    public final String imagePath = "src/main/resources/assets/images/races/";
+    public final String IMAGE_PATH = "src/main/resources/assets/images/races/";
 
     @GetMapping("/races")
     public ResponseEntity<CustomResponse> getPaginatedRaces(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -105,7 +105,7 @@ public class RaceController {
 
     @GetMapping(path = "/races/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getRacialImage(@PathVariable("imageName") String imageName) throws IOException {
-        return Files.readAllBytes(Path.of(imagePath + imageName));
+        return Files.readAllBytes(Path.of(IMAGE_PATH + imageName));
     }
 
     @DeleteMapping("/delete/race/{id}")

@@ -11,5 +11,6 @@ public class CapitalDTO {
     private Long id;
     private String name;
     private String nation;
-    private String description;
+    private String history;
+    private String flagURL;
 }

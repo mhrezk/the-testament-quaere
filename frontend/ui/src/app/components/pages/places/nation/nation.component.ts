@@ -16,7 +16,7 @@ import {NationService} from "../../../../services/models/places/nation/nation.se
 import {Router} from "@angular/router";
 import {NationType} from "../../../../enums/nation-type";
 import {GovernanceType} from "../../../../enums/governance-type";
-import {Lineage} from "../../../../enums/lineage";
+import {NationStatus} from "../../../../enums/nation-status";
 
 @Component({
   selector: 'app-nation',
@@ -26,11 +26,11 @@ import {Lineage} from "../../../../enums/lineage";
 export class NationComponent implements OnInit {
   currentPage:number  = 1;
   tableSize: number = 5;
-  count: number = 0;
   tableSizes: number[] = [5, 10, 20];
 
   nationTypes: NationType;
   governanceTypes: GovernanceType;
+  NationStatus = NationStatus;
   GovernanceType = GovernanceType;
   NationType = NationType;
 
@@ -40,12 +40,12 @@ export class NationComponent implements OnInit {
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
 
-  countSubject = new BehaviorSubject<number>(0)
+  countSubject = new BehaviorSubject<number>(0);
   count$ = this.countSubject.asObservable();
 
   selectedNation: Nation;
-  nations: Nation[];
-  checkedNations: Nation[];
+  nations: Nation[] = [];
+  checkedNations: Nation[] = [];
 
   isUpdated: boolean = false;
   isClicked: boolean = false;
@@ -63,7 +63,23 @@ export class NationComponent implements OnInit {
   headers = [
     {
       key: 'name',
-      value: 'Nation',
+      value: 'Name',
+    },
+    {
+      key: 'capital',
+      value: 'Capital',
+    },
+    {
+      key: 'type',
+      value: 'Nation Type',
+    },
+    {
+      key: 'governance',
+      value: 'Governance Type',
+    },
+    {
+      key: 'status',
+      value: 'Nation Status',
     }
   ];
 
@@ -73,6 +89,15 @@ export class NationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPaginatedNations(this.currentPage, this.tableSize);
+    this.getAllNationsTotal();
+  }
+
+  getAllNationsTotal() {
+    this.nationService.getAllNationsCount().subscribe(
+      result => {
+        this.countSubject.next(result.data.datumRetrieved);
+      }
+    )
   }
 
   getPaginatedNations(pageNumber: number, pageSize: number) {
@@ -81,17 +106,14 @@ export class NationComponent implements OnInit {
       .pipe(
         map((result) => {
           this.nations = result.data.dataRetrieved;
-          this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
-          this.countSubject.next(result.data.dataRetrieved.length);
-          this.isTableShown = true;
+          this.dataSubject.next(result);
           return {
             dataState: DataState.LOADED,
             appData: result,
           };
         }),
         startWith({
-          dataState: DataState.LOADING,
-          // appData: null
+          dataState: DataState.LOADING
         }),
         catchError((caughtError: string) => {
           return of({
@@ -113,21 +135,19 @@ export class NationComponent implements OnInit {
       .saveNation$(nationForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
-          this.nations = result.data.dataRetrieved;
-          this.dataSubject.next(
-            {
-              ...result,
-              data: {
-                dataRetrieved: [
-                  result.data.dataSaved,
-                  ...this.dataSubject.value.data.dataRetrieved,
-                ],
-              },
-            });
+          this.dataSubject.next({ //this lists everything in ascending insertion order
+            ...result,
+            data: {
+              dataRetrieved: [
+                ...this.dataSubject.value.data.dataRetrieved, // Keep the existing entries
+                result.data.dataSaved, // Add the new entry at the end
+              ],
+            },
+          });
           this.isClicked = false;
           this.isTableShown = true;
           this.isLoading.next(false);
-          this.countSubject.next(this.dataSubject.value.data.dataRetrieved.length);
+          nationForm.resetForm();
           return {
             dataState: DataState.LOADED,
             appData: this.dataSubject.value,
@@ -145,6 +165,7 @@ export class NationComponent implements OnInit {
           });
         })
       );
+    this.getAllNationsTotal();
   }
 
   deleteNation(nation: Nation) {
@@ -157,12 +178,11 @@ export class NationComponent implements OnInit {
               ...result,
               data: {
                 dataRetrieved: this.dataSubject.value.data.dataRetrieved.filter((n) =>
-                  n.id !== nation.id //delete the record that matches d.id === day.id
+                  n.id !== nation.id //delete the record that matches r.id === race.id
                 )
               }
             }
           );
-          this.countSubject.next(result.data.dataRetrieved.length);
           return {
             dataState: DataState.LOADED,
             appData: this.dataSubject.value,
@@ -179,6 +199,7 @@ export class NationComponent implements OnInit {
           });
         })
       );
+    this.getAllNationsTotal();
   }
 
   deleteNations(nations: Nation[]) {
@@ -187,12 +208,12 @@ export class NationComponent implements OnInit {
     }
   }
 
-  modifyNation(Nation: Nation) {
+  modifyNation(nation: Nation) {
     this.isLoading.next(true);
-    this.appState$ = this.nationService.modifyNation$(Nation.id, Nation).pipe(
+    this.appState$ = this.nationService.modifyNation$(nation.id, nation).pipe(
       map((result) => {
-        const index = this.dataSubject.value.data.dataRetrieved.findIndex(person => person.id === result.data.dataUpdated.id);
-        this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated;
+        const index = this.dataSubject.value.data.dataRetrieved.findIndex(nation => nation.id === result.data.dataUpdated.id); //loops through the array and finds the record whose id matches the updated day from the backend
+        this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated; //replaces old day with updated day
         this.isUpdated = false;
         this.isTableShown = true;
         this.isLoading.next(false);
@@ -269,6 +290,16 @@ export class NationComponent implements OnInit {
 
   get governanceTypeValues() {
     return Object.values(this.governanceTypes);
+  }
+
+  get nationStatusKeys() {
+    return Object.keys(NationStatus).filter(
+      (key) => key !== 'ALL' && isNaN(Number(key))
+    );;
+  }
+
+  routeToNationDetails(nationID: number, nationName: string) {
+    this.router.navigate([`/nation-details`, nationID, nationName]);
   }
 
   protected readonly Object = Object;

@@ -8,5 +8,8 @@ export interface Province {
   capital: string;
   //nation: Nation;
   nation: string;
-  description: string;
+  history: string;
+  flagURL: string;
+
+  isSelected: boolean;
 }

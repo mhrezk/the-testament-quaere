@@ -77,9 +77,13 @@
                 @if(nation.name.toLowerCase() === "none") {
                   <b>{{ nation.name }}</b>
                 } @else {
-                  <u style="cursor: pointer">{{ nation.name }}</u>
+                  <u (click)="routeToNationDetails(nation.id, nation.name)" style="cursor: pointer">{{ nation.name }}</u>
                 }
               </td>
+              <td>{{ nation.capital }}</td>
+              <td>{{ nation.type }}</td>
+              <td>{{ nation.governanceType }}</td>
+              <td>{{ nation.nationStatus }}</td>
               <td></td>
               <td>
                   <span>
@@ -129,13 +133,12 @@
         <br>
         <div class="modal-body">
           <div class="form-group">
-            <label>Name</label>
-            <input type="text" id="name" ngModel name="name" class="form-input" placeholder="Enter Name" required>
+            <label>Nation Name</label>
+            <input type="text" ngModel name="name" class="form-input" placeholder="Enter Nation Name" required>
           </div>
           <div class="form-group">
-            <label>Description</label>
-            <textarea type="text" ngModel name="description" class="form-input"
-                      placeholder="Enter Description"></textarea>
+            <label>Capital Name</label>
+            <input type="text" ngModel name="capital" class="form-input" placeholder="Enter Capital Name" required>
           </div>
           <div class="form-group">
             <label for="type">Nation Type</label>
@@ -148,7 +151,14 @@
             <label for="governanceType">Governance Type</label>
             <select id="governanceType" name="governanceType" ngModel required class="form-select">
               <option value="" disabled selected>Select Governance Type</option>
-              <option *ngFor="let type of Object.keys(GovernanceType)" [value]="type">{{ type }}</option>
+              <option *ngFor="let type of governanceTypeKeys" [value]="type">{{ type }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label >Nation Status</label>
+            <select name="nationStatus" ngModel required class="form-select">
+              <option value="" disabled selected>Select Nation Status</option>
+              <option *ngFor="let type of nationStatusKeys" [value]="type">{{ type }}</option>
             </select>
           </div>
         </div>
@@ -178,22 +188,40 @@
         <br>
         <div class="modal-body">
           <div class="form-group">
-            <label>Name</label>
+            <label>Nation Name</label>
             <input type="text" [(ngModel)]="selectedNation.name" name="name" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>Capital Name</label>
+            <input type="text" [(ngModel)]="selectedNation.capital" name="capital" class="form-input" required>
           </div>
           <div class="form-group">
             <label >Nation Type</label>
             <select name="type" [(ngModel)]="selectedNation.type" class="form-select">
               <option value="" disabled selected>Select Nation type</option>
-              <option *ngFor="let type of nationTypeKeys" [value]="selectedNation.type">{{ selectedNation.type }}</option>
+              <option *ngFor="let type of nationTypeKeys" [value]="type">{{ type }}</option>
             </select>
           </div>
           <div class="form-group">
             <label>Governance Type</label>
             <select name="governanceType" [(ngModel)]="selectedNation.governanceType" class="form-select">
-              <option *ngFor="let type of governanceTypeKeys" [value]="selectedNation.governanceType">{{ selectedNation.governanceType }}</option>
+              <option *ngFor="let type of governanceTypeKeys" [value]="type">{{ type }}</option>
             </select>
           </div>
+          <div class="form-group">
+            <label >Nation Status</label>
+            <select name="nationStatus" [(ngModel)]="selectedNation.nationStatus" class="form-select">
+              <option value="" disabled selected>Select Nation type</option>
+              <option *ngFor="let status of nationStatusKeys" [value]="status">{{ status }}</option>
+            </select>
+          </div>
+<!--          <div class="form-group">-->
+<!--            <label >Nation Status</label>-->
+<!--            <select name="nationStatus" [(ngModel)]="selectedNation.nationStatus" class="form-select">-->
+<!--              <option value="" disabled selected>Select Nation type</option>-->
+<!--              <option *ngFor="let status of Object.keys(NationStatus)" [value]="status">{{ status }}</option>-->
+<!--            </select>-->
+<!--          </div>-->
           <div class="modal-footer">
             <button type="button" class="cancel-button" (click)="isUpdated = false; isTableShown = true">Close</button>
             <button type="submit" [ngClass]="{'disabled': isLoading$ | async}" [disabled]="isLoading$ | async"

@@ -14,12 +14,7 @@ public class NationDTO {
     private Long id;
     private String name;
     private String capital;
-    private String leaderFirstName;
-    private String leaderSecondName;
-    private String language;
-    private List<String> provinces;
     private String type;
+    private String nationStatus;
     private String governanceType;
-    private String description;
-    private String urlFlag;
 }
