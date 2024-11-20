@@ -36,6 +36,9 @@
     </h2>
 
     <mat-divider></mat-divider>
+    <button style="float: right" class="stylized-button" (click)="routeToProphets(selectedReligion.id, selectedReligion.name)">
+      <i class="fas fa-people-group"></i> Prophets
+    </button>
   </div>
 </div>
 <div *ngIf="!isEditing" class="nation-details">

@@ -8,13 +8,16 @@ public interface ProphetService {
 
     Collection<Prophet> getProphetsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Prophet> getProphetsSortedWithPagination(int pageNumber, int numberOfRecords);
+    Collection<Prophet> getProphetsWithPaginationByReligionName(String name, int pageNumber, int numberOfRecords);
     Collection<Prophet> getProphets();
     Prophet getProphetByID(Long id);
     Prophet getProphetByName(String name);
     Boolean deleteProphetByID(Long id);
     Boolean deleteProphetByName(String name);
     Boolean deleteProphets();
-    Prophet saveProphet(Prophet prophet);
+    Prophet saveProphet(Prophet prophet, String name);
     Collection<Prophet> saveProphets(Collection<Prophet> prophets);
     Prophet updateProphet(Long id, Prophet prophet);
+    Prophet modifyProphet(Long id, Prophet prophet);
+    long countProphetsByReligionName(String religionName);
 }

@@ -93,6 +93,9 @@ import { ReligionComponent } from './components/pages/dogma/religion/religion.co
 import { ReligionDisplayComponent } from './components/pages/dogma/religion/religion-display/religion-display.component';
 import { ReligionDescriptionComponent } from './components/pages/dogma/religion/religion-description/religion-description.component';
 import { ReligionDisplayEditComponent } from './components/pages/dogma/religion/religion-display-edit/religion-display-edit.component';
+import { ProphetComponent } from './components/pages/dogma/religion/prophet/prophet.component';
+import { DeityComponent } from './components/pages/dogma/religion/deity/deity.component';
+import { ProphetDisplayComponent } from './components/pages/dogma/religion/prophet/prophet-display/prophet-display.component';
 
 @NgModule({
   declarations: [
@@ -155,6 +158,9 @@ import { ReligionDisplayEditComponent } from './components/pages/dogma/religion/
     ReligionDisplayComponent,
     ReligionDescriptionComponent,
     ReligionDisplayEditComponent,
+    ProphetComponent,
+    DeityComponent,
+    ProphetDisplayComponent,
   ],
   imports: [
     BrowserModule,

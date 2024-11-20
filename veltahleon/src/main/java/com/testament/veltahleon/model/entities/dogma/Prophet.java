@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.dogma;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,6 +27,17 @@ public class Prophet {
     @NotBlank(message = "Name cannot be blank!")
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "religion_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Religion religion;
+
     @Column(name = "description", columnDefinition = "longtext")
     private String description;
+
+    @Column(name = "image_URL")
+    private String imageURL;
 }

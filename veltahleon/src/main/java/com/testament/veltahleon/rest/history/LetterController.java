@@ -56,19 +56,31 @@ public class LetterController {
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", letters))
-                .message(lettersDTO.size() + " letters retrieved from page: " + (pageNumber + 1))
+                .message(lettersDTO.size() + " letters retrieved from page: " + pageNumber)
                 .build()
         );
     }
 
-    @GetMapping("/letters/all")
-    public ResponseEntity<CustomResponse> getAllLetters() {
+    @GetMapping("/letters/all/count")
+    public ResponseEntity<CustomResponse> getAllLettersCount() {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", letterService.countLetters()))
                 .message("All letters retrieved!")
+                .build()
+        );
+    }
+
+    @GetMapping("/letters/{languageName}/count")
+    public ResponseEntity<CustomResponse> getAllLettersByLanguageNameCount(@PathVariable String languageName) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataRetrieved", letterService.countLettersByLanguageName(languageName)))
+                .message("All letters of " + languageName + " retrieved!")
                 .build()
         );
     }

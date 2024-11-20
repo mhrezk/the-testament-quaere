@@ -1,11 +1,13 @@
 package com.testament.veltahleon.facades.places;
 
+import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.dogma.mythology.Deity;
 import com.testament.veltahleon.model.entities.history.Language;
 import com.testament.veltahleon.model.entities.places.Capital;
 import com.testament.veltahleon.model.entities.places.Nation;
 import com.testament.veltahleon.model.entities.places.NationDetails;
 import com.testament.veltahleon.model.entities.society.Person;
+import com.testament.veltahleon.services.ifc.dogma.ReligionService;
 import com.testament.veltahleon.services.ifc.dogma.mythology.DeityService;
 import com.testament.veltahleon.services.ifc.history.LanguageService;
 import com.testament.veltahleon.services.ifc.places.CapitalService;
@@ -40,6 +42,9 @@ public class NationFacade {
     private LanguageService languageService;
 
     @Autowired
+    private ReligionService religionService;
+
+    @Autowired
     private PersonService personService;
 
 //    @Autowired
@@ -58,11 +63,17 @@ public class NationFacade {
     }
 
     public List<Language> getLanguages(List<String> languageNames) {
-        return languageNames.stream().map(l -> languageService.getLanguageByName(l)).toList();
+        return languageNames.stream()
+                .map(l -> languageService.getLanguageByName(l))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public Person getNationLeader(String firstName, String lastName) {
         return personService.getPersonByFirstNameAndLastName(firstName, lastName);
+    }
+
+    public Religion getReligion(String religionName) {
+        return religionService.getReligionByName(religionName);
     }
 
     public List<Nation> getNations(List<String> nationNames) {

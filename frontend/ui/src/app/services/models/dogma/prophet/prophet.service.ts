@@ -20,6 +20,12 @@ export class ProphetService {
       catchError(this.handleError)
     );
 
+  getPaginatedProphetsByReligionName$ = (religionName: string, number: number, size: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/prophets/religion/${religionName}?pageNumber=${number}&&pageSize=${size}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
   getProphets$ = <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/prophets/all`)
     .pipe(
       tap(console.log),
@@ -36,6 +42,12 @@ export class ProphetService {
     return this.http.get<CustomResponse>(`${this.baseURL}/prophet/${prophetID}`);
   }
 
+  getAllProphetsByReligionName$ = (religionName: string) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/prophets/${religionName}/count`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
   saveProphet$ = (prophet: Prophet) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/save/prophet`, prophet)
     .pipe(
       tap(console.log),
@@ -48,14 +60,14 @@ export class ProphetService {
       catchError(this.handleError)
     );
 
-  modifyProphet$ = (prophetID: number, prophet: Prophet) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${prophetID}`, prophet)
+  modifyProphet$ = (prophetID: number, prophet: Prophet) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/prophet/${prophetID}`, prophet)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
     );
 
-  public modifyProphet(prophet: Prophet): Observable<CustomResponse> {
-    return this.http.put<CustomResponse>(`${this.baseURL}/update/prophet`, prophet);
+  public modifyProphet(prophetID: number, prophet: Prophet): Observable<CustomResponse> {
+    return this.http.put<CustomResponse>(`${this.baseURL}/modify/prophet/${prophetID}`, prophet);
   }
 
   deleteProphet$ = (prophetID: number) => <Observable<CustomResponse>>this.http.delete<CustomResponse>(`${this.baseURL}/delete/prophet/${prophetID}`)

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.87.0] 2024-11-20
+
+- Added CRUD operations for prophet
+
 ## [0.86.0] 2024-11-19
 
 - Added CRUD operations for religion

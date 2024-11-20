@@ -96,7 +96,7 @@ export class ReligionDisplayComponent implements OnInit {
             dataState: DataState.LOADED,
             appData: {
               ...response, // Or any other data you need
-              updatedReligion: religion,
+              dataUpdated: religion,
             },
           };
         }),
@@ -144,5 +144,9 @@ export class ReligionDisplayComponent implements OnInit {
 
   routeToReligions() {
     this.router.navigate(['/religions']);
+  }
+
+  routeToProphets(religionID: number, religionName: string) {
+    this.router.navigate(['/religions', religionID, religionName, '/prophets']);
   }
 }

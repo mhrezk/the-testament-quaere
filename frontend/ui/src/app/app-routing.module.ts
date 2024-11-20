@@ -54,6 +54,10 @@ import {NationDetailsComponent} from "./components/pages/places/nation-details/n
 import {DiagramComponent} from "./components/shared/diagram/diagram.component";
 import {ReligionComponent} from "./components/pages/dogma/religion/religion.component";
 import {ReligionDisplayComponent} from "./components/pages/dogma/religion/religion-display/religion-display.component";
+import {ProphetComponent} from "./components/pages/dogma/religion/prophet/prophet.component";
+import {
+  ProphetDisplayComponent
+} from "./components/pages/dogma/religion/prophet/prophet-display/prophet-display.component";
 //import {LineageTreeComponent} from "./components/pages/society/lineage-tree/lineage-tree.component";
 
 const routes: Routes = [
@@ -77,6 +81,14 @@ const routes: Routes = [
   {
     path: "religions/:id/:name",
     component: ReligionDisplayComponent
+  },
+  {
+    path: "religions/:id/:name/prophets",
+    component: ProphetComponent
+  },
+  {
+    path: "religions/:id/:name/prophets/:prophetID/:prophetName",
+    component: ProphetDisplayComponent
   },
   {
     path: "people",

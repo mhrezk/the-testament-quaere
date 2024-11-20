@@ -35,7 +35,7 @@ export class FamilyTreeComponent implements OnInit {
   node: object;
   root: Root;
 
-  clickCount: number = 0;
+  isSaved: boolean = false;
   countSubject = new BehaviorSubject<number>(0);
   count$ = this.countSubject.asObservable();
   arrayLengthSubject = new BehaviorSubject<number>(0);
@@ -61,7 +61,7 @@ export class FamilyTreeComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.clickCount = 0;
+    this.isSaved = false;
     //XML to JSON Conversion
     // var xml =
     //   '<?xml version="1.0" encoding="utf-8"?>' +
@@ -209,7 +209,7 @@ export class FamilyTreeComponent implements OnInit {
       this.families.push(this.family);
       this.balkanFamily.push(node);
       this.countSubject.next(this.balkanFamily.length);
-      this.clickCount = 0;
+      this.isSaved = false;
       familyTree.load(this.balkanFamily);
       console.log(this.family);
       console.log(this.families);
@@ -231,21 +231,21 @@ export class FamilyTreeComponent implements OnInit {
         console.log(this.balkanFamily);
         console.log(this.families);
         console.log(JSON.stringify(this.families));
-        this.clickCount = 0;
+        this.isSaved = false;
       })
 
       familyTree.on("init", (sender) => {
         console.log(familyTree.get(node.id));
         console.log(node.name);
         this.family = this.convertToFamilyObject(node);
-        this.clickCount = 0;
+        this.isSaved = false;
         console.log(this.family);
         console.log(familyTree.get(this.convertToNodeObject(this.family).id));
       })
 
       familyTree.on("dbclick", (sender, node) => {
         if(this.families.length === 1) {
-          this.clickCount = 0;
+          this.isSaved = false;
           familyTree.destroy();
           this.balkanFamily = [];
           this.families = [];
@@ -289,7 +289,7 @@ export class FamilyTreeComponent implements OnInit {
       this.balkanFamily = this.families.map(
         family => this.convertToNodeObject(family)
       );
-      this.clickCount = 0;
+      this.isSaved = false;
       familyTree.load(this.balkanFamily);
 
       familyTree.on("updated", (sender, node) => {
@@ -315,13 +315,13 @@ export class FamilyTreeComponent implements OnInit {
         //   window.location.reload();
         // }
         this.countSubject.next(this.families.length)
-        this.clickCount = 0;
+        this.isSaved = false;
         console.log(this.families);
       })
 
       familyTree.on("dbclick", (sender, node) => {
         if(this.balkanFamily.length === 1) {
-          this.clickCount = 0;
+          this.isSaved = false;
           familyTree.destroy();
           this.balkanFamily = [];
           this.families = [];
@@ -391,7 +391,7 @@ export class FamilyTreeComponent implements OnInit {
   }
 
   saveFamilialTree() {
-    ++this.clickCount;
+    this.isSaved = true;
     this.showSuccessfulSave = true;
     if(this.families.length <= 0) {
       this.families.push(this.family);
