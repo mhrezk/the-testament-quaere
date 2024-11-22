@@ -1,0 +1,8 @@
+<h2>Description</h2>
+<hr>
+<st-editor [(ngModel)]="organization.description" [config]="config"></st-editor>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="isDescriptionEdited(false)">Close Description</button>
+  <button type="button" class="btn btn-success" (click)="updateDescription()">Save Description</button>
+</div>
+

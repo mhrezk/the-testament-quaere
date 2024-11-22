@@ -48,7 +48,7 @@ export class ProphetService {
       catchError(this.handleError)
     );
 
-  saveProphet$ = (prophet: Prophet) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/save/prophet`, prophet)
+  saveProphet$ = (religionName: string, prophet: Prophet) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/save/prophet/${religionName}`, prophet)
     .pipe(
       tap(console.log),
       catchError(this.handleError)

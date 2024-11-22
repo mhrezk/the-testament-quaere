@@ -12,7 +12,7 @@ import {Prophet} from "../../../../../interfaces/models/dogma/prophet";
 import {ProphetService} from "../../../../../services/models/dogma/prophet/prophet.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError} from "rxjs/operators";
-import {NgForm, Validators} from "@angular/forms";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-prophet',
@@ -114,7 +114,7 @@ export class ProphetComponent implements OnInit {
   saveProphet(prophetForm: NgForm) {
     this.isLoading.next(true);
     this.appState$ = this.prophetService
-      .saveProphet$(prophetForm.value) //or dayForm.value as Day or <Day> dayForm.value
+      .saveProphet$(this.religionName, prophetForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
           this.dataSubject.next({ //this lists everything in ascending insertion order

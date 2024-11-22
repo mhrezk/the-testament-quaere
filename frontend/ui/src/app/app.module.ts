@@ -96,6 +96,14 @@ import { ReligionDisplayEditComponent } from './components/pages/dogma/religion/
 import { ProphetComponent } from './components/pages/dogma/religion/prophet/prophet.component';
 import { DeityComponent } from './components/pages/dogma/religion/deity/deity.component';
 import { ProphetDisplayComponent } from './components/pages/dogma/religion/prophet/prophet-display/prophet-display.component';
+import { DeityDisplayComponent } from './components/pages/dogma/religion/deity/deity-display/deity-display.component';
+import { DeityDescriptionComponent } from './components/pages/dogma/religion/deity/deity-description/deity-description.component';
+import { ProphetDescriptionComponent } from './components/pages/dogma/religion/prophet/prophet-description/prophet-description.component';
+import { ProphetDisplayEditComponent } from './components/pages/dogma/religion/prophet/prophet-display-edit/prophet-display-edit.component';
+import { DeityDisplayEditComponent } from './components/pages/dogma/religion/deity/deity-display-edit/deity-display-edit.component';
+import { OrganizationDisplayComponent } from './components/pages/politics/organization/organization-display/organization-display.component';
+import { OrganizationDescriptionComponent } from './components/pages/politics/organization/organization-description/organization-description.component';
+import { OrganizationDisplayEditComponent } from './components/pages/politics/organization/organization-display-edit/organization-display-edit.component';
 
 @NgModule({
   declarations: [
@@ -161,6 +169,14 @@ import { ProphetDisplayComponent } from './components/pages/dogma/religion/proph
     ProphetComponent,
     DeityComponent,
     ProphetDisplayComponent,
+    DeityDisplayComponent,
+    DeityDescriptionComponent,
+    ProphetDescriptionComponent,
+    ProphetDisplayEditComponent,
+    DeityDisplayEditComponent,
+    OrganizationDisplayComponent,
+    OrganizationDescriptionComponent,
+    OrganizationDisplayEditComponent,
   ],
   imports: [
     BrowserModule,

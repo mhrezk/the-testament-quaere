@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +44,11 @@ public class ProphetServiceImpl implements ProphetService {
     @Override
     public Collection<Prophet> getProphetsWithPaginationByReligionName(String name, int pageNumber, int numberOfRecords) {
         return prophetRepository.findByReligion_Name(name, PageRequest.of(pageNumber, numberOfRecords)).toList();
+    }
+
+    @Override
+    public Collection<Prophet> getProphetsByReligionName(String name) {
+        return prophetRepository.findByReligion_Name(name);
     }
 
     @Override
@@ -103,7 +109,7 @@ public class ProphetServiceImpl implements ProphetService {
         Prophet newProphet = prophetRepository.findById(id).orElseThrow();
 
         if(prophet.getName() != null && newProphet.getName() != prophet.getName()) {
-            newProphet.setName(prophet.getName());
+            newProphet.setName(prophet.getName().toUpperCase());
         }
 
         if(prophet.getImageURL() != null && newProphet.getImageURL() != prophet.getImageURL()) {

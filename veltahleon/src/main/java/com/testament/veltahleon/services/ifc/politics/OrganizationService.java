@@ -10,9 +10,9 @@ public interface OrganizationService {
     Collection<Organization> getOrganizations();
     Organization getOrganizationByID(Long id);
     Organization getOrganizationByName(String name);
-    Organization getOrganizationByFounderName(String name);
     Boolean deleteOrganizationByID(Long id);
     Organization saveOrganization(Organization organization);
     Organization updateOrganization(Long id, Organization organization);
     Organization modifyOrganization(Long id, Organization organization);
+    long countOrganizations();
 }

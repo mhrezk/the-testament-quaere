@@ -98,7 +98,7 @@ public class ProphetController {
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataRetrieved", prophetService.countProphetsByReligionName(religionName)))
+                .data(Map.of("datumRetrieved", prophetService.countProphetsByReligionName(religionName)))
                 .message("All prophets of " + religionName + " retrieved!")
                 .build()
         );
@@ -173,7 +173,7 @@ public class ProphetController {
 
     @PostMapping("/save/prophet/{religionName}")
     public ResponseEntity<CustomResponse> saveProphet(@PathVariable String religionName, @RequestBody @Valid ProphetDTO prophetDTO) {
-        Prophet prophet = prophetMapper.convertToEntity(prophetDTO);
+        Prophet prophet = prophetMapper.convertToEntity(religionName, prophetDTO);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -198,7 +198,7 @@ public class ProphetController {
 
     @PatchMapping("/update/prophet/{id}")
     public ResponseEntity<CustomResponse> updateProphet(@PathVariable("id") Long id, @RequestBody @Valid ProphetDTO prophetDTO) {
-        Prophet prophet = prophetMapper.convertToEntity(prophetDTO);
+        Prophet prophet = prophetMapper.convertToEntity(prophetDTO.getReligion(), prophetDTO);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
@@ -211,7 +211,7 @@ public class ProphetController {
 
     @PutMapping("/modify/prophet/{id}")
     public ResponseEntity<CustomResponse> modifyProphet(@PathVariable("id") Long id, @RequestBody @Valid ProphetDTO prophetDTO) {
-        Prophet prophet = prophetMapper.convertToEntity(prophetDTO);
+        Prophet prophet = prophetMapper.convertToEntity(prophetDTO.getReligion(), prophetDTO);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)

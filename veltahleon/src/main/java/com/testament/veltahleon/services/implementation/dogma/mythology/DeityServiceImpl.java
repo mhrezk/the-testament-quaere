@@ -1,7 +1,9 @@
 package com.testament.veltahleon.services.implementation.dogma.mythology;
 
 import com.testament.veltahleon.exceptions.DataNotFoundException;
+import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.dogma.mythology.Deity;
+import com.testament.veltahleon.repositories.dogma.ReligionRepository;
 import com.testament.veltahleon.repositories.dogma.mythology.DeityRepository;
 import com.testament.veltahleon.services.ifc.dogma.mythology.DeityService;
 import jakarta.transaction.Transactional;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,9 +26,22 @@ public class DeityServiceImpl implements DeityService {
     @Autowired
     private final DeityRepository deityRepository;
 
+    @Autowired
+    private final ReligionRepository religionRepository;
+
     @Override
     public Collection<Deity> getDeitiesWithPagination(int pageNumber, int numberOfRecords) {
         return deityRepository.findAll(PageRequest.of(pageNumber, numberOfRecords)).toList();
+    }
+
+    @Override
+    public Collection<Deity> getDeitiesWithPaginationByReligionName(String name, int pageNumber, int numberOfRecords) {
+        return deityRepository.findByReligion_Name(name, PageRequest.of(pageNumber, numberOfRecords)).toList();
+    }
+
+    @Override
+    public Collection<Deity> getDeitiesByReligionName(String name) {
+        return deityRepository.findByReligion_Name(name);
     }
 
     @Override
@@ -55,9 +71,11 @@ public class DeityServiceImpl implements DeityService {
     }
 
     @Override
-    public Deity saveDeity(Deity deity) {
+    public Deity saveDeity(Deity deity, String religionName) {
+        Religion religion = religionRepository.findByName(religionName);
         deity.setName(deity.getName().toUpperCase());
         deity.setImageURL(defaultImageURL("mosque.png"));
+        deity.setReligion(religion);
         return deityRepository.save(deity);
     }
 
@@ -70,7 +88,11 @@ public class DeityServiceImpl implements DeityService {
         Deity newDeity = deityRepository.findById(id).orElseThrow();
 
         if(deity.getName() != null && newDeity.getName() != deity.getName()) {
-            newDeity.setName(deity.getName());
+            newDeity.setName(deity.getName().toUpperCase());
+        }
+
+        if(deity.getPowerDomain() != null && newDeity.getPowerDomain() != deity.getPowerDomain()) {
+            newDeity.setPowerDomain(deity.getPowerDomain());
         }
 
         if(deity.getDescription() != null && newDeity.getDescription() != deity.getDescription()) {
@@ -82,5 +104,20 @@ public class DeityServiceImpl implements DeityService {
         }
 
         return deityRepository.save(newDeity);
+    }
+
+    @Override
+    public Deity modifyDeity(Long id, Deity deity) {
+        Deity newDeity = deityRepository.findById(id).orElseThrow();
+        newDeity.setName(deity.getName().toUpperCase());
+        newDeity.setDescription(deity.getDescription());
+        newDeity.setImageURL(deity.getImageURL());
+        newDeity.setPowerDomain(deity.getPowerDomain());
+        return deityRepository.save(newDeity);
+    }
+
+    @Override
+    public long countDeitiesByReligionName(String name) {
+        return deityRepository.countByReligion_Name(name);
     }
 }

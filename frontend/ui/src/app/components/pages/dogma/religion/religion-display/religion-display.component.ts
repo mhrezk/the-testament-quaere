@@ -6,7 +6,6 @@ import {
 import {Religion} from "../../../../../interfaces/models/dogma/religion";
 import {ReligionService} from "../../../../../services/models/dogma/religion/religion.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {NationService} from "../../../../../services/models/places/nation/nation.service";
 import {map, Observable, of, startWith} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {AppState} from "../../../../../interfaces/app-state";
@@ -147,6 +146,10 @@ export class ReligionDisplayComponent implements OnInit {
   }
 
   routeToProphets(religionID: number, religionName: string) {
-    this.router.navigate(['/religions', religionID, religionName, '/prophets']);
+    this.router.navigate(['/religions', religionID, religionName, 'prophets']);
+  }
+
+  routeToDeities(religionID: number, religionName: string) {
+    this.router.navigate(['/religions', religionID, religionName, 'deities']);
   }
 }

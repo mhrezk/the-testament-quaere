@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, throwError} from "rxjs";
+import {BehaviorSubject, Observable, throwError} from "rxjs";
 import {CustomResponse} from "../../../../interfaces/custom-response";
 import {catchError, tap} from "rxjs/operators";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
@@ -10,6 +10,8 @@ import {Organization} from "../../../../interfaces/models/politics/organization"
   providedIn: 'root'
 })
 export class OrganizationService {
+  private organizationUpdate = new BehaviorSubject<Organization>(null);
+  organizationUpdated$ = this.organizationUpdate.asObservable();
 
   private baseURL: string = `${environment.API_URL}/politics`;
 
@@ -22,6 +24,12 @@ export class OrganizationService {
     );
 
   getOrganizationByID$ = (organizationID: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/organization/${organizationID}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  getAllOrganizationsCount$ = () => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/organizations/all/count`)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
@@ -43,7 +51,7 @@ export class OrganizationService {
       catchError(this.handleError)
     );
 
-  modifyOrganization$ = (organizationID: number, organization: Organization) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${organizationID}`, organization)
+  modifyOrganization$ = (organizationID: number, organization: Organization) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/organization/${organizationID}`, organization)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
@@ -58,6 +66,10 @@ export class OrganizationService {
       tap(console.log),
       catchError(this.handleError)
     );
+
+  notifyUpdate(organization: Organization) {
+    this.organizationUpdate.next(organization);
+  }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);

@@ -20,7 +20,19 @@ export class DeityService {
       catchError(this.handleError)
     );
 
+  getPaginatedDeitiesByReligionName$ = (religionName: string, number: number, size: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/deities/religion/${religionName}?pageNumber=${number}&&pageSize=${size}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
   getDeities$ = <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/deities/all`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  getAllDeitiesByReligionName$ = (religionName: string) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/deities/${religionName}/count`)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
@@ -36,7 +48,7 @@ export class DeityService {
     return this.http.get<CustomResponse>(`${this.baseURL}/deity/${deityID}`);
   }
 
-  saveDeity$ = (deity: Deity) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/save/deity`, deity)
+  saveDeity$ = (religionName: string, deity: Deity) => <Observable<CustomResponse>>this.http.post<CustomResponse>(`${this.baseURL}/save/deity/${religionName}`, deity)
     .pipe(
       tap(console.log),
       catchError(this.handleError)
@@ -48,7 +60,7 @@ export class DeityService {
       catchError(this.handleError)
     );
 
-  modifyDeity$ = (deityID: number, deity: Deity) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/update/${deityID}`, deity)
+  modifyDeity$ = (deityID: number, deity: Deity) => <Observable<CustomResponse>>this.http.put<CustomResponse>(`${this.baseURL}/modify/deity/${deityID}`, deity)
     .pipe(
       tap(console.log),
       catchError(this.handleError)

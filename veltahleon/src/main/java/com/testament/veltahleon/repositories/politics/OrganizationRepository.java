@@ -10,5 +10,4 @@ import java.util.Collection;
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
 
     Organization findByName(String name);
-    Organization findByFounder_FirstName(String name);
 }

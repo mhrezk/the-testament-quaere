@@ -1,22 +1,18 @@
-// import {Pundit} from "./pundit";
-// import {Nation} from "../places/nation";
-// import {Year} from "../calendar/year";
-
 export interface Organization {
   id: number;
   name: string;
-  // founder: Pundit;
-  founder: string;
-  // nation: Nation;
-  nation: string;
-  // yearFoundationAndDisbandment: Year[];
+  founderFirstName: string;
+  founderSecondName: string;
   foundationDay: number;
   foundationMonth: number;
   foundationYear: number;
+  foundationYearAbbreviation: string;
   disbandmentDay: number;
   disbandmentMonth: number;
   disbandmentYear: number;
-  urlSymbol: string;
+  disbandmentYearAbbreviation: string;
+  symbolURL: string;
+  description: string;
 
   isSelected: boolean;
 }

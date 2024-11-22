@@ -26,9 +26,11 @@ export class ReligionService {
       catchError(this.handleError)
     );
 
-  public getAllReligionsCount(): Observable<CustomResponse> {
-    return this.http.get<CustomResponse>(`${this.baseURL}/religions/all/count`)
-  }
+  getAllReligionsCount$ = <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/religions/all/count`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
 
   getReligionByID$ = (religionID: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/religion/${religionID}`)
     .pipe(

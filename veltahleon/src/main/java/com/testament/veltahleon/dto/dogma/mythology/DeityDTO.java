@@ -13,4 +13,5 @@ public class DeityDTO {
     private String description;
     private String religion;
     private String imageURL;
+    private String powerDomain;
 }

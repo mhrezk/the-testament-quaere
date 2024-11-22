@@ -1,1 +1,201 @@
-<p>deity works!</p>
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>
+              <fa-icon [icon]="faCircleArrowLeft"
+                       [style.color]="'yellowGreen'"
+                       [title]="'Return to ' + religionName"
+                       (click)="routeToReligionDisplay(+religionID, religionName)"
+                       [style.cursor]="'pointer'">
+              </fa-icon>
+              Deities of: {{ religionName }}
+            </h2>
+          </div>
+          <div class="col-sm-6">
+            <a class="btn btn-success" data-bs-toggle="modal" (click)="isClicked = true; isTableShown = false">
+              <i class="material-icons">&#xE147;</i>
+              <span>Add Deity</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+        <ng-container *ngSwitchCase="DATA_STATE.LOADING">
+          <div class="col-md-12 single-note-item text-center">
+            <div class="spinner-border text-info" role="status"></div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.LOADED">
+          <div *ngIf="isTableShown">
+            <span>
+              Number of records:
+              <select (change)="onTableSizeChange($event)">
+                <option *ngFor="let size of tableSizes">
+                  {{ size }}
+                </option>
+              </select>
+            </span>
+            <br>
+            <br>
+            <input
+              [(ngModel)]="isMasterSelected"
+              type="checkbox"
+              (change)="checkUncheckAll()"
+              style="cursor: pointer"
+            >
+            &nbsp;&nbsp;&nbsp;
+            <span>Select/Deselect All</span>
+            &nbsp;
+            @if (hasSelected()) {
+              <button type="button" class="btn btn-danger" (click)="deleteDeities(this.checkedDeities)">Delete
+                Selection
+              </button>
+            }
+          </div>
+          <table *ngIf="isTableShown" class="table table-striped table-hover" id="days">
+            <thead>
+            <tr>
+              <th></th>
+              <th *ngFor="let header of headers">{{ header.value }}</th>
+              <th></th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let deity of appState.appData?.data.dataRetrieved
+            | paginate: {
+              itemsPerPage: tableSize,
+              currentPage: currentPage,
+              totalItems: count$ | async
+            }; let i = index;">
+            <tr>
+              <td>
+                @if (deity.name.toLowerCase() !== "none") {
+                  <input
+                    [(ngModel)]="deity.isSelected"
+                    type="checkbox"
+                    (change)="isAllSelected()"
+                    style="cursor: pointer"
+                  >
+                }
+              </td>
+              <td>
+                <u (click)="routeToDeityDetails(deity.id, deity.name)"
+                   style="cursor: pointer">{{ deity.name }}</u>
+              </td>
+              <td></td>
+              <td>
+                <span>
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit'"
+                           (click)="isUpdated = true; getDeityByID(deity.id); isTableShown = false;"
+                           [style.cursor]="'pointer'"></fa-icon>
+                </span>
+                &nbsp;&nbsp;
+                <span>
+                  <fa-icon [icon]="faTrash" [title]="'Delete'" (click)="deleteDeity(deity)"
+                           style="cursor: pointer; color: firebrick">
+                  </fa-icon>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngSwitchCase="DATA_STATE.ERROR">
+          <div [hidden]="isUpdated || isClicked" style="background-color: indianred">{{ appState.error }}</div>
+        </ng-container>
+        <pagination-controls
+          *ngIf="isTableShown"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        >
+        </pagination-controls>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Add Deity -->
+<div *ngIf="isClicked" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #deityForm="ngForm" (ngSubmit)="saveDeity(deityForm)">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Deity</h4>
+          <button type="button" class="close-button" (click)="isClicked = false; isTableShown = true">×</button>
+        </div>
+        <br>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" ngModel name="name" class="form-input" placeholder="Enter Deity Name" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="cancel-button" (click)="isClicked = false; isTableShown = true">Close</button>
+          <button type="submit" [ngClass]="{'disabled': deityForm.invalid}"
+                  [disabled]="(isLoading$ | async) || deityForm.invalid" class="submit-button">
+            <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+            <span *ngIf="isLoading$ | async">Saving...</span>
+            <span *ngIf="!(isLoading$ | async)">Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Deity -->
+<div *ngIf="isUpdated" class="modal-container">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="modifyDeity(selectedDeity)">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Deity</h4>
+          <button type="button" class="close-button" (click)="isUpdated = false; isTableShown = true">×</button>
+        </div>
+        <br>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="selectedDeity.name" name="name" class="form-input" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="cancel-button" (click)="isUpdated = false; isTableShown = true">Close</button>
+            <button type="submit" [ngClass]="{'disabled': isLoading$ | async}" [disabled]="isLoading$ | async"
+                    class="submit-button">
+              <i *ngIf="isLoading$ | async" class="loading-spinner"></i>
+              <span *ngIf="isLoading$ | async">Updating...</span>
+              <span *ngIf="!(isLoading$ | async)">Update</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<!--<div *ngIf="showError" class="overlay">-->
+<!--  <div class="error-container">-->
+<!--    <div class="error-header">-->
+<!--      Error-->
+<!--      <button style="float:right" type="button" class="close-button" (click)="showError = false; isTableShown = true">×</button>-->
+<!--    </div>-->
+<!--    <div class="error-body">-->
+<!--      The religious name <strong><u>{{ enteredName }}</u></strong> {{ errorMessage }}-->
+<!--    </div>-->
+<!--    <div class="error-footer">-->
+<!--      <button class="close-btn" (click)="showError = false; isTableShown = true;">Close Window</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+

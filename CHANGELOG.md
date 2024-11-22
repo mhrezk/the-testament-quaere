@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.88.0] 2024-11-22
+
+- Added CRUD operations for organization
+
 ## [0.87.0] 2024-11-20
 
 - Added CRUD operations for prophet

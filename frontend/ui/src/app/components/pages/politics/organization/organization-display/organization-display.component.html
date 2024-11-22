@@ -1,0 +1,75 @@
+<div *ngIf="!isEditing" class="display-container">
+  <div class="image-container">
+    <!--    <img src="https://via.placeholder.com/300x400" alt="Person Image" />-->
+    <img [src]="selectedOrganization.symbolURL" alt="Flag Image"/>
+    @if (selectedOrganization.symbolURL.split("/")[selectedOrganization.symbolURL.split("/").length - 1] === "kaaba.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <div class="details-container">
+    <h2>
+      <fa-icon [icon]="faCircleArrowLeft"
+               [style.color]="'red'"
+               [title]="'Return to Organizations'"
+               (click)="routeToOrganizations()"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+      <b>
+        {{ organizationName }}
+      </b>
+      &nbsp;
+      <span style="float: right">
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit Organization'"
+                           (click)="isEditing = true;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  &nbsp;
+                  <fa-icon [icon]="faTrash"
+                           [title]="'Delete Organization'"
+                           (click)="deleteOrganization(selectedOrganization.id)"
+                           style="cursor: pointer; color: firebrick">
+                  </fa-icon>
+      </span>
+    </h2>
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Founder Name:</strong> {{ selectedOrganization.founderFirstName }} {{ selectedOrganization.founderSecondName }}
+    </div>
+    <div class="detail-item">
+      <strong>Foundation Date:</strong> {{ selectedOrganization.foundationDay }}/{{ selectedOrganization.foundationMonth }}/{{ selectedOrganization.foundationYear }} {{ selectedOrganization.foundationYearAbbreviation }}
+    </div>
+    <div class="detail-item">
+      <strong>Disbandment Date:</strong> {{ selectedOrganization.disbandmentDay }}/{{ selectedOrganization.disbandmentMonth }}/{{ selectedOrganization.disbandmentYear }} {{ selectedOrganization.disbandmentYearAbbreviation }}
+    </div>
+  </div>
+</div>
+
+@if (isEditing) {
+  <app-organization-display-edit (isEditing)="closeEditing($event)"
+                            [organization]="selectedOrganization"></app-organization-display-edit>
+}
+
+@if (isEditing) {
+  <hr>
+} @else if (isDescription) {
+  <app-organization-description (isDescription)="closeDescriptionEditing($event)"
+                           [organization]="selectedOrganization"></app-organization-description>
+} @else {
+  <h2>
+    Description
+    <fa-icon [icon]="faEdit"
+             [style.color]="'cornflowerblue'"
+             [title]="'Edit Description'"
+             (click)="isDescription = !isDescription;"
+             [style.cursor]="'pointer'">
+    </fa-icon>
+  </h2>
+  <hr>
+  <div [innerHTML]="selectedOrganization.description"></div>
+}
+
+

@@ -1,0 +1,25 @@
+<div class="display-container">
+  <div class="image-container">
+    <img [src]="selectedProphet.imageURL" alt="Flag Image" />
+    @if(selectedProphet.imageURL.split("/")[selectedProphet.imageURL.split("/").length - 1] === "default.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <form #prophetForm="ngForm" (ngSubmit)="onSubmit(selectedProphet)" class="details-container">
+    <h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Prophet Name</mat-label>
+        <input matInput name="name" [(ngModel)]="selectedProphet.name" required />
+      </mat-form-field>
+    </h2>
+    <mat-divider></mat-divider>
+
+    <div class="modal-footer">
+      <button [disabled]="prophetForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="onClose(false)">Close</button>
+    </div>
+  </form>
+</div>
+
+

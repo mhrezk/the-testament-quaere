@@ -1,0 +1,64 @@
+<div *ngIf="!isEditing" class="display-container">
+  <div class="image-container">
+    <!--    <img src="https://via.placeholder.com/300x400" alt="Person Image" />-->
+    <img [src]="selectedDeity.imageURL" alt="Flag Image"/>
+    @if (selectedDeity.imageURL.split("/")[selectedDeity.imageURL.split("/").length - 1] === "mosque.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <div class="details-container">
+    <h2>
+      <fa-icon [icon]="faCircleArrowLeft"
+               [style.color]="'red'"
+               [title]="'Return to Deities'"
+               (click)="routeToDeities()"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+      <b>
+        {{ deityName }}
+      </b>
+      &nbsp;
+      <span style="float: right">
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit Deity'"
+                           (click)="isEditing = true;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  &nbsp;
+                  <fa-icon [icon]="faTrash"
+                           [title]="'Delete Deity'"
+                           (click)="deleteDeity(selectedDeity.id)"
+                           style="cursor: pointer; color: firebrick">
+                  </fa-icon>
+      </span>
+    </h2>
+    <mat-divider></mat-divider>
+  </div>
+</div>
+
+@if (isEditing) {
+  <app-deity-display-edit (isEditing)="closeEditing($event)"
+                            [deity]="selectedDeity"></app-deity-display-edit>
+}
+
+@if (isEditing) {
+  <hr>
+} @else if (isDescription) {
+  <app-deity-description (isDescription)="closeDescriptionEditing($event)"
+                           [deity]="selectedDeity"></app-deity-description>
+} @else {
+  <h2>
+    Description
+    <fa-icon [icon]="faEdit"
+             [style.color]="'cornflowerblue'"
+             [title]="'Edit Description'"
+             (click)="isDescription = !isDescription;"
+             [style.cursor]="'pointer'">
+    </fa-icon>
+  </h2>
+  <hr>
+  <div [innerHTML]="selectedDeity.description"></div>
+}
+

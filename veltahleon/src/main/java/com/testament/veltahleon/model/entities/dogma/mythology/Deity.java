@@ -36,4 +36,7 @@ public class Deity {
 
     @Column(name = "image_URL")
     private String imageURL;
+
+    @Column
+    private String powerDomain;
 }

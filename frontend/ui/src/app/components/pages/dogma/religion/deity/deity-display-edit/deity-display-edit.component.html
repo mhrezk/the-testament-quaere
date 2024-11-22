@@ -1,0 +1,26 @@
+<div class="display-container">
+  <div class="image-container">
+    <img [src]="selectedDeity.imageURL" alt="Flag Image" />
+    @if(selectedDeity.imageURL.split("/")[selectedDeity.imageURL.split("/").length - 1] === "mosque.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <form #deityForm="ngForm" (ngSubmit)="onSubmit(selectedDeity)" class="details-container">
+    <h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Deity Name</mat-label>
+        <input matInput name="name" [(ngModel)]="selectedDeity.name" required />
+      </mat-form-field>
+    </h2>
+    <mat-divider></mat-divider>
+
+    <div class="modal-footer">
+      <button [disabled]="deityForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="onClose(false)">Close</button>
+    </div>
+  </form>
+</div>
+
+
+

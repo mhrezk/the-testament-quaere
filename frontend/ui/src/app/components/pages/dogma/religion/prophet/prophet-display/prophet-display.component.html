@@ -1,1 +1,64 @@
-<p>prophet-display works!</p>
+<div *ngIf="!isEditing" class="display-container">
+  <div class="image-container">
+    <!--    <img src="https://via.placeholder.com/300x400" alt="Person Image" />-->
+    <img [src]="selectedProphet.imageURL" alt="Flag Image"/>
+    @if (selectedProphet.imageURL.split("/")[selectedProphet.imageURL.split("/").length - 1] === "default.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <div class="details-container">
+    <h2>
+      <fa-icon [icon]="faCircleArrowLeft"
+               [style.color]="'red'"
+               [title]="'Return to Prophets'"
+               (click)="routeToProphets()"
+               [style.cursor]="'pointer'">
+      </fa-icon>
+      <b>
+        {{ prophetName }}
+      </b>
+      &nbsp;
+      <span style="float: right">
+                  <fa-icon [icon]="faEdit"
+                           [style.color]="'blue'"
+                           [title]="'Edit Prophet'"
+                           (click)="isEditing = true;"
+                           [style.cursor]="'pointer'">
+                  </fa-icon>
+                  &nbsp;
+                  <fa-icon [icon]="faTrash"
+                           [title]="'Delete Prophet'"
+                           (click)="deleteProphet(selectedProphet.id)"
+                           style="cursor: pointer; color: firebrick">
+                  </fa-icon>
+      </span>
+    </h2>
+    <mat-divider></mat-divider>
+  </div>
+</div>
+
+@if (isEditing) {
+  <app-prophet-display-edit (isEditing)="closeEditing($event)"
+                             [prophet]="selectedProphet"></app-prophet-display-edit>
+}
+
+@if (isEditing) {
+  <hr>
+} @else if (isDescription) {
+  <app-prophet-description (isDescription)="closeDescriptionEditing($event)"
+                            [prophet]="selectedProphet"></app-prophet-description>
+} @else {
+  <h2>
+    Description
+    <fa-icon [icon]="faEdit"
+             [style.color]="'cornflowerblue'"
+             [title]="'Edit Description'"
+             (click)="isDescription = !isDescription;"
+             [style.cursor]="'pointer'">
+    </fa-icon>
+  </h2>
+  <hr>
+  <div [innerHTML]="selectedProphet.description"></div>
+}
+

@@ -74,7 +74,6 @@
                   (change)="isAllSelected()"
                   style="cursor: pointer"
                 ></td>
-<!--              <td><u (click)="routeToEvents(person.id, person.firstName, person.secondName)" style="cursor:pointer;">{{ person.firstName }} {{ person.secondName }}</u></td>-->
               <td><u style="cursor:pointer;" (click)="routeToEvents(timeline.name)">{{ timeline.name }}</u></td>
               <td class="date-container">{{ timeline.beginningYear }} {{ timeline.beginningYearAbbreviation }} <div class="hyphen"></div> @if(timeline.endingYear === null || timeline.endingYear === 0) {
                 Present

@@ -9,6 +9,7 @@ public interface ProphetService {
     Collection<Prophet> getProphetsWithPagination(int pageNumber, int numberOfRecords);
     Collection<Prophet> getProphetsSortedWithPagination(int pageNumber, int numberOfRecords);
     Collection<Prophet> getProphetsWithPaginationByReligionName(String name, int pageNumber, int numberOfRecords);
+    Collection<Prophet> getProphetsByReligionName(String name);
     Collection<Prophet> getProphets();
     Prophet getProphetByID(Long id);
     Prophet getProphetByName(String name);

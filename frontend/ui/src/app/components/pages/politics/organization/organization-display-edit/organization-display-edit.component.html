@@ -1,0 +1,66 @@
+<div class="display-container">
+  <div class="image-container">
+    <img [src]="selectedOrganization.symbolURL" alt="Flag Image" />
+    @if(selectedOrganization.symbolURL.split("/")[selectedOrganization.symbolURL.split("/").length - 1] === "default.png") {
+      <h3 style="text-align: center">Default Image</h3>
+    }
+  </div>
+
+  <form #organizationForm="ngForm" (ngSubmit)="onSubmit(selectedOrganization)" class="details-container">
+    <h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Organization Name</mat-label>
+        <input matInput name="name" [(ngModel)]="selectedOrganization.name" required />
+      </mat-form-field>
+    </h2>
+    <mat-divider></mat-divider>
+
+    <div class="detail-item">
+      <strong>Founder:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="founderFirstName" [(ngModel)]="selectedOrganization.founderFirstName" type="text"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="founderSecondName" [(ngModel)]="selectedOrganization.founderSecondName" type="text"/>
+      </mat-form-field>
+    </div>
+    <div class="detail-item">
+      <strong>Foundation Date:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="foundationDay" [(ngModel)]="selectedOrganization.foundationDay" type="number" placeholder="Day" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="foundationMonth" [(ngModel)]="selectedOrganization.foundationMonth" type="number" placeholder="Month" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="foundationYear" [(ngModel)]="selectedOrganization.foundationYear" type="number" placeholder="Year" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="foundationYearAbbreviation" [(ngModel)]="selectedOrganization.foundationYearAbbreviation" type="text" placeholder="Foundation Year Abbr." />
+      </mat-form-field>
+    </div>
+    <div class="detail-item">
+      <strong>Disbandment Date:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="disbandmentDay" [(ngModel)]="selectedOrganization.disbandmentDay" type="number" placeholder="Day" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="disbandmentMonth" [(ngModel)]="selectedOrganization.disbandmentMonth" type="number" placeholder="Month" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="disbandmentYear" [(ngModel)]="selectedOrganization.disbandmentYear" type="number" placeholder="Year" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="disbandmentYearAbbreviation" [(ngModel)]="selectedOrganization.disbandmentYearAbbreviation" type="text" placeholder="Year Abbr." />
+      </mat-form-field>
+    </div>
+
+    <div class="modal-footer">
+      <button [disabled]="organizationForm.invalid" class="btn btn-success" type="submit">Save</button>
+      <button type="button" class="btn btn-danger" (click)="onClose(false)">Close</button>
+    </div>
+  </form>
+</div>
+
+
+

@@ -2,10 +2,13 @@ package com.testament.veltahleon.services.implementation.dogma;
 
 import com.testament.veltahleon.exceptions.DataNotFoundException;
 import com.testament.veltahleon.facades.places.NationFacade;
+import com.testament.veltahleon.model.entities.dogma.Prophet;
 import com.testament.veltahleon.model.entities.dogma.Religion;
+import com.testament.veltahleon.model.entities.dogma.mythology.Deity;
 import com.testament.veltahleon.model.entities.places.Nation;
+import com.testament.veltahleon.repositories.dogma.ProphetRepository;
 import com.testament.veltahleon.repositories.dogma.ReligionRepository;
-import com.testament.veltahleon.repositories.places.NationRepository;
+import com.testament.veltahleon.repositories.dogma.mythology.DeityRepository;
 import com.testament.veltahleon.services.ifc.dogma.ReligionService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +31,12 @@ public class ReligionServiceImpl implements ReligionService {
 
     @Autowired
     private ReligionRepository religionRepository;
+
+    @Autowired
+    private ProphetRepository prophetRepository;
+
+    @Autowired
+    private DeityRepository deityRepository;
 
     @Autowired
     private NationFacade nationFacade;
@@ -63,6 +72,11 @@ public class ReligionServiceImpl implements ReligionService {
 
     @Override
     public Boolean deleteReligionByID(Long id) {
+        Religion religion = religionRepository.findById(id).orElseThrow();
+        List<Prophet> prophets = (List<Prophet>) prophetRepository.findByReligion_Name(religion.getName());
+        List<Deity> deities = (List<Deity>) deityRepository.findByReligion_Name(religion.getName());
+        prophetRepository.deleteAll(prophets);
+        deityRepository.deleteAll(deities);
         religionRepository.deleteById(id);
         return Boolean.TRUE;
     }

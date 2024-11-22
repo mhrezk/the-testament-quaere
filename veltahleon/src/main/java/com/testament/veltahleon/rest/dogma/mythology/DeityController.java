@@ -1,5 +1,7 @@
 package com.testament.veltahleon.rest.dogma.mythology;
 
+import com.testament.veltahleon.dto.dogma.mythology.DeityDTO;
+import com.testament.veltahleon.mappers.dogma.mythology.DeityMapper;
 import com.testament.veltahleon.responses.CustomResponse;
 import com.testament.veltahleon.model.entities.dogma.mythology.Deity;
 import com.testament.veltahleon.services.ifc.dogma.mythology.DeityService;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,11 @@ public class DeityController {
     @Autowired
     private DeityService deityService;
 
+    @Autowired
+    private DeityMapper deityMapper;
+
+    public final String IMAGE_PATH = "src/main/resources/assets/images/deities/";
+
     @GetMapping("/deities")
     public ResponseEntity<CustomResponse> getPaginatedDeities(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         List<Deity> deities = (List<Deity>) deityService.getDeitiesWithPagination(pageNumber, pageSize);
@@ -36,6 +43,20 @@ public class DeityController {
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", deities))
                 .message(deities.size() + " deities retrieved from page: " + (pageNumber + 1))
+                .build()
+        );
+    }
+
+    @GetMapping("/deities/religion/{religionName}")
+    public ResponseEntity<CustomResponse> getPaginatedDeitiesByReligionName(@PathVariable(value = "religionName") String religionName, @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+        List<Deity> deities = (List<Deity>) deityService.getDeitiesWithPaginationByReligionName(religionName, (pageNumber -1), pageSize);
+        List<DeityDTO> deitiesDTO = deities.stream().map(d -> deityMapper.convertToDTO(d)).toList();
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataRetrieved", deitiesDTO))
+                .message(deitiesDTO.size() + " deities retrieved from page: " + pageNumber)
                 .build()
         );
     }
@@ -55,11 +76,12 @@ public class DeityController {
 
     @GetMapping("/deity/name")
     public ResponseEntity<CustomResponse> getDeityByName(@RequestParam(value = "name") String name) {
+        DeityDTO deityDTO = deityMapper.convertToDTO(deityService.getDeityByName(name));
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("datumRetrieved", deityService.getDeityByName(name)))
+                .data(Map.of("datumRetrieved", deityDTO))
                 .message("Deity retrieved!")
                 .build()
         );
@@ -67,19 +89,32 @@ public class DeityController {
 
     @GetMapping("/deity/{id}")
     public ResponseEntity<CustomResponse> getDeityByID(@PathVariable Long id) {
+        DeityDTO deityDTO = deityMapper.convertToDTO(deityService.getDeityByID(id));
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("datumRetrieved", deityService.getDeityByID(id)))
+                .data(Map.of("datumRetrieved", deityDTO))
                 .message("Deity retrieved!")
                 .build()
         );
     }
 
-    @GetMapping(value = "/deity/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE})
-    public byte[] getDeityImage(@PathVariable("fileName") String fileName) throws IOException {
-        return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/deities/" + fileName));
+    @GetMapping("/deities/{religionName}/count")
+    public ResponseEntity<CustomResponse> getAllDeitiesByReligionNameCount(@PathVariable String religionName) {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", deityService.countDeitiesByReligionName(religionName)))
+                .message("All deities of " + religionName + " retrieved!")
+                .build()
+        );
+    }
+
+    @GetMapping(path = "/mythology/deities/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getDeityImage(@PathVariable("imageName") String imageName) throws IOException {
+        return Files.readAllBytes(Path.of(IMAGE_PATH + imageName));
     }
 
     @DeleteMapping("/delete/deity/{id}")
@@ -94,25 +129,40 @@ public class DeityController {
         );
     }
 
-    @PostMapping("/save/deity")
-    public ResponseEntity<CustomResponse> saveDeity(@RequestBody @Valid Deity deity) {
+    @PostMapping("/save/deity/{religionName}")
+    public ResponseEntity<CustomResponse> saveDeity(@PathVariable String religionName, @RequestBody @Valid DeityDTO deityDTO) {
+        Deity deity = deityMapper.convertToEntity(religionName, deityDTO);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataSaved", deityService.saveDeity(deity)))
+                .data(Map.of("dataSaved", deityMapper.convertToDTO(deityService.saveDeity(deity, religionName))))
                 .message("Deity saved!")
                 .build()
         );
     }
 
     @PatchMapping("/update/deity/{id}")
-    public ResponseEntity<CustomResponse> updateDeity(@PathVariable("id") Long id, @RequestBody @Valid Deity deity) {
+    public ResponseEntity<CustomResponse> updateDeity(@PathVariable("id") Long id, @RequestBody @Valid DeityDTO deityDTO) {
+        Deity deity = deityMapper.convertToEntity(deityDTO.getReligion(), deityDTO);
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
-                .data(Map.of("dataUpdated", deityService.updateDeity(id, deity)))
+                .data(Map.of("dataUpdated", deityMapper.convertToDTO(deityService.updateDeity(id, deity))))
+                .message("Deity updated!")
+                .build()
+        );
+    }
+
+    @PutMapping("/modify/deity/{id}")
+    public ResponseEntity<CustomResponse> modifyDeity(@PathVariable("id") Long id, @RequestBody @Valid DeityDTO deityDTO) {
+        Deity deity = deityMapper.convertToEntity(deityDTO.getReligion(), deityDTO);
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("dataUpdated", deityMapper.convertToDTO(deityService.modifyDeity(id, deity))))
                 .message("Deity updated!")
                 .build()
         );

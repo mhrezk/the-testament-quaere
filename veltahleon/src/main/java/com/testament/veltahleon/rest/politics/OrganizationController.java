@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,6 +27,8 @@ public class OrganizationController {
 
     @Autowired
     private OrganizationService organizationService;
+
+    public final String IMAGE_PATH = "src/main/resources/assets/images/emblems/";
 
     @GetMapping("/organizations")
     public ResponseEntity<CustomResponse> getPaginatedOrganizations(@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -49,6 +52,18 @@ public class OrganizationController {
                 .statusCode(HttpStatus.OK.value())
                 .data(Map.of("dataRetrieved", organizations))
                 .message("All organizations retrieved!")
+                .build()
+        );
+    }
+
+    @GetMapping("/organizations/all/count")
+    public ResponseEntity<CustomResponse> getAllOrganizationsCount() {
+        return ResponseEntity.ok(CustomResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .data(Map.of("datumRetrieved", organizationService.countOrganizations()))
+                .message("Count retrieved!")
                 .build()
         );
     }
@@ -77,9 +92,9 @@ public class OrganizationController {
         );
     }
 
-    @GetMapping(value = "/organization/image/{fileName}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_GIF_VALUE})
-    public byte[] getOrganizationSymbol(@PathVariable("fileName") String fileName) throws IOException {
-        return Files.readAllBytes(Paths.get("src/main/java/com/testament/veltahleon/assets/images/symbols/" + fileName));
+    @GetMapping(path = "/organizations/images/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getOrganizationalImage(@PathVariable("imageName") String imageName) throws IOException {
+        return Files.readAllBytes(Path.of(IMAGE_PATH + imageName));
     }
 
     @PostMapping("/save/organization")
@@ -118,7 +133,7 @@ public class OrganizationController {
         );
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/modify/organization/{id}")
     public ResponseEntity<CustomResponse> modifyOrganization(@PathVariable Long id, @RequestBody Organization organization) {
         return ResponseEntity.ok(CustomResponse.builder()
                 .timestamp(LocalDateTime.now())

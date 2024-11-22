@@ -1,6 +1,7 @@
 package com.testament.veltahleon.services.implementation.politics;
 
 import com.testament.veltahleon.exceptions.DataNotFoundException;
+import com.testament.veltahleon.facades.places.NationFacade;
 import com.testament.veltahleon.model.entities.politics.Organization;
 import com.testament.veltahleon.repositories.politics.OrganizationRepository;
 import com.testament.veltahleon.services.ifc.politics.OrganizationService;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
 
@@ -21,6 +23,9 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     private OrganizationRepository organizationRepository;
+
+    @Autowired
+    private NationFacade nationFacade;
 
 
     @Override
@@ -44,11 +49,6 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Organization getOrganizationByFounderName(String name) {
-        return organizationRepository.findByFounder_FirstName(name);
-    }
-
-    @Override
     public Boolean deleteOrganizationByID(Long id) {
         organizationRepository.deleteById(id);
         return Boolean.TRUE;
@@ -56,7 +56,29 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Organization saveOrganization(Organization organization) {
-        return organizationRepository.save(organization);
+        Organization newOrganization = generateOrganization(organization);
+        return organizationRepository.save(newOrganization);
+    }
+
+    private String defaultImageURL(String imageName) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/politics/organizations/images/" + imageName).toUriString();
+    }
+
+    private Organization generateOrganization(Organization organization) {
+        return Organization.builder()
+                .name(organization.getName().toUpperCase())
+                .symbolURL(defaultImageURL("kaaba.png"))
+                .foundationDay(0)
+                .foundationMonth(0)
+                .foundationYear(0)
+                .foundationYearAbbreviation("N/A")
+                .disbandmentDay(0)
+                .disbandmentMonth(0)
+                .disbandmentYear(0)
+                .founderFirstName("None".toUpperCase())
+                .founderSecondName("None".toUpperCase())
+                .disbandmentYearAbbreviation("N/A")
+                .build();
     }
 
     @Override
@@ -64,27 +86,55 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization newOrganization = organizationRepository.findById(id).orElseThrow();
 
         if(organization.getName() != null && newOrganization.getName() != organization.getName()) {
-            newOrganization.setName(organization.getName());
+            newOrganization.setName(organization.getName().toUpperCase());
         }
 
-        if(organization.getNation() != null && newOrganization.getNation() != organization.getNation()) {
-            newOrganization.setNation(organization.getNation());
+        if(organization.getFounderFirstName() != null && newOrganization.getFounderFirstName() != organization.getFounderFirstName()) {
+            newOrganization.setFounderFirstName(organization.getFounderFirstName().toUpperCase());
         }
 
-        if(organization.getFounder() != null && newOrganization.getFounder() != organization.getFounder()) {
-            newOrganization.setFounder(organization.getFounder());
+        if(organization.getFounderSecondName() != null && newOrganization.getFounderSecondName() != organization.getFounderSecondName()) {
+            newOrganization.setFounderSecondName(organization.getFounderSecondName().toUpperCase());
+        }
+
+        if(organization.getFoundationDay() != null && newOrganization.getFoundationDay() != organization.getFoundationDay()) {
+            newOrganization.setFoundationDay(organization.getFoundationDay());
+        }
+
+        if(organization.getFoundationMonth() != null && newOrganization.getFoundationMonth() != organization.getFoundationMonth()) {
+            newOrganization.setFoundationMonth(organization.getFoundationMonth());
         }
 
         if(organization.getFoundationYear() != null && newOrganization.getFoundationYear() != organization.getFoundationYear()) {
             newOrganization.setFoundationYear(organization.getFoundationYear());
         }
 
+        if(organization.getFoundationYearAbbreviation() != null && newOrganization.getFoundationYearAbbreviation() != organization.getFoundationYearAbbreviation()) {
+            newOrganization.setFoundationYearAbbreviation(organization.getFoundationYearAbbreviation().toUpperCase());
+        }
+
+        if(organization.getDisbandmentDay() != null && newOrganization.getDisbandmentDay() != organization.getDisbandmentDay()) {
+            newOrganization.setDisbandmentDay(organization.getDisbandmentDay());
+        }
+
+        if(organization.getDisbandmentMonth() != null && newOrganization.getDisbandmentMonth() != organization.getDisbandmentMonth()) {
+            newOrganization.setDisbandmentMonth(organization.getDisbandmentMonth());
+        }
+
         if(organization.getDisbandmentYear() != null && newOrganization.getDisbandmentYear() != organization.getDisbandmentYear()) {
             newOrganization.setDisbandmentYear(organization.getDisbandmentYear());
         }
 
-        if(organization.getUrlSymbol() != null && newOrganization.getUrlSymbol() != organization.getUrlSymbol()) {
-            newOrganization.setUrlSymbol(organization.getUrlSymbol());
+        if(organization.getDisbandmentYearAbbreviation() != null && newOrganization.getDisbandmentYearAbbreviation() != organization.getDisbandmentYearAbbreviation()) {
+            newOrganization.setDisbandmentYearAbbreviation(organization.getDisbandmentYearAbbreviation().toUpperCase());
+        }
+
+        if(organization.getSymbolURL() != null && newOrganization.getSymbolURL() != organization.getSymbolURL()) {
+            newOrganization.setSymbolURL(organization.getSymbolURL());
+        }
+
+        if(organization.getDescription() != null && newOrganization.getDescription() != organization.getDescription()) {
+            newOrganization.setDescription(organization.getDescription());
         }
 
         return organizationRepository.save(newOrganization);
@@ -93,14 +143,23 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public Organization modifyOrganization(Long id, Organization organization) {
         Organization newOrganization = organizationRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database!"));
-
-        newOrganization.setName(organization.getName());
-        newOrganization.setUrlSymbol(organization.getUrlSymbol());
+        newOrganization.setName(organization.getName().toUpperCase());
+        newOrganization.setSymbolURL(organization.getSymbolURL());
+        newOrganization.setFoundationDay(organization.getFoundationDay());
+        newOrganization.setFoundationMonth(organization.getFoundationMonth());
         newOrganization.setFoundationYear(organization.getFoundationYear());
+        newOrganization.setFoundationYearAbbreviation(organization.getFoundationYearAbbreviation());
+        newOrganization.setDisbandmentDay(organization.getDisbandmentDay());
+        newOrganization.setDisbandmentMonth(organization.getDisbandmentMonth());
         newOrganization.setDisbandmentYear(organization.getDisbandmentYear());
-        newOrganization.setNation(organization.getNation());
-        newOrganization.setFounder(organization.getFounder());
-
+        newOrganization.setDisbandmentYearAbbreviation(organization.getDisbandmentYearAbbreviation());
+        newOrganization.setFounderFirstName(organization.getFounderFirstName().toUpperCase());
+        newOrganization.setFounderSecondName(organization.getFounderSecondName().toUpperCase());
         return newOrganization;
+    }
+
+    @Override
+    public long countOrganizations() {
+        return organizationRepository.count();
     }
 }

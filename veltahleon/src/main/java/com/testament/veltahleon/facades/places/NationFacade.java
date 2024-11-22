@@ -42,9 +42,6 @@ public class NationFacade {
     private LanguageService languageService;
 
     @Autowired
-    private ReligionService religionService;
-
-    @Autowired
     private PersonService personService;
 
 //    @Autowired
@@ -70,10 +67,6 @@ public class NationFacade {
 
     public Person getNationLeader(String firstName, String lastName) {
         return personService.getPersonByFirstNameAndLastName(firstName, lastName);
-    }
-
-    public Religion getReligion(String religionName) {
-        return religionService.getReligionByName(religionName);
     }
 
     public List<Nation> getNations(List<String> nationNames) {

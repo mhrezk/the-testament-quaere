@@ -96,7 +96,7 @@ export class ReligionComponent implements OnInit {
   }
 
   getAllReligionsTotal() {
-    this.religionService.getAllReligionsCount().subscribe(
+    this.religionService.getAllReligionsCount$.subscribe(
       result => {
         this.countSubject.next(result.data.datumRetrieved);
       }

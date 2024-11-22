@@ -13,6 +13,8 @@ import {CustomResponse} from "../../../../interfaces/custom-response";
 import {DataState} from "../../../../enums/data-state";
 import {OrganizationService} from "../../../../services/models/politics/organization/organization.service";
 import {Organization} from "../../../../interfaces/models/politics/organization";
+import {Prophet} from "../../../../interfaces/models/dogma/prophet";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-organization',
@@ -31,8 +33,11 @@ export class OrganizationComponent implements OnInit {
   private isLoading = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoading.asObservable();
 
+  countSubject = new BehaviorSubject<number>(0);
+  count$ = this.countSubject.asObservable();
+
   organizations: Organization[];
-  checkedOrganizations: Organization[];
+  checkedOrganizations: Organization[] = [];
   selectedOrganization: Organization;
 
   isUpdated: boolean = false;
@@ -45,15 +50,29 @@ export class OrganizationComponent implements OnInit {
   headers = [
     {
       key: 'name',
-      value: 'Organization Name',
+      value: 'Name'
+    },
+    {
+      key: 'timeFrame',
+      value: 'Time Frame'
     }
   ];
 
-  constructor(private organizationService: OrganizationService) {
+  constructor(private organizationService: OrganizationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.getPaginatedOrganizations(this.currentPage, this.tableSize);
+    this.getAllOrganizationsTotal();
+  }
+
+  getAllOrganizationsTotal() {
+    this.organizationService.getAllOrganizationsCount$().subscribe(
+      result => {
+        this.countSubject.next(result.data.datumRetrieved);
+      }
+    )
   }
 
   getPaginatedOrganizations(pageNumber: number, pageSize: number) {
@@ -61,6 +80,7 @@ export class OrganizationComponent implements OnInit {
     this.appState$ = this.organizationService.getPaginatedOrganizations$(pageNumber, pageSize)
       .pipe(
         map((result) => {
+          this.organizations = result.data.dataRetrieved;
           this.dataSubject.next(result); //stores result in dataSubject to be used in another method or later
           this.isTableShown = true;
           return {
@@ -81,10 +101,10 @@ export class OrganizationComponent implements OnInit {
       );
   }
 
-  getOrganizationByID(organizationID: number) {
-    this.organizationService.getOrganizationByID(organizationID).subscribe(result => {
-      this.selectedOrganization = result.data.datumRetrieved;
-    })
+  async getOrganizationByID(organizationID: number) {
+    const result = await this.organizationService.getOrganizationByID(organizationID).toPromise();
+    this.selectedOrganization = result.data.datumRetrieved;
+    console.log(this.selectedOrganization);
   }
 
   saveOrganization(organizationForm: NgForm) {
@@ -93,17 +113,16 @@ export class OrganizationComponent implements OnInit {
       .saveOrganization$(organizationForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
-          this.organizations = result.data.dataRetrieved;
-          this.dataSubject.next(
-            {
-              ...result,
-              data: {
-                dataRetrieved: [
-                  result.data.dataSaved,
-                  ...this.dataSubject.value.data.dataRetrieved,
-                ],
-              },
-            });
+          this.dataSubject.next({ //this lists everything in ascending insertion order
+            ...result,
+            data: {
+              dataRetrieved: [
+                ...this.dataSubject.value.data.dataRetrieved, // Keep the existing entries
+                result.data.dataSaved, // Add the new entry at the end
+              ],
+            },
+          });
+          organizationForm.resetForm();
           this.isClicked = false;
           this.isTableShown = true;
           this.isLoading.next(false);
@@ -124,6 +143,7 @@ export class OrganizationComponent implements OnInit {
           });
         })
       );
+    this.getAllOrganizationsTotal();
   }
 
   deleteOrganization(organization: Organization) {
@@ -157,13 +177,20 @@ export class OrganizationComponent implements OnInit {
           });
         })
       );
+    this.getAllOrganizationsTotal();
+  }
+
+  deleteOrganizations(organizations: Organization[]) {
+    for(let organization of organizations) {
+      this.organizationService.deleteOrganization$(organization.id).subscribe();
+    }
   }
 
   modifyOrganization(organization: Organization) {
     this.isLoading.next(true);
     this.appState$ = this.organizationService.modifyOrganization$(organization.id, organization).pipe(
       map((result) => {
-        const index = this.dataSubject.value.data.dataRetrieved.findIndex(person => person.id === result.data.dataUpdated.id);
+        const index = this.dataSubject.value.data.dataRetrieved.findIndex(o => o.id === result.data.dataUpdated.id);
         this.dataSubject.value.data.dataRetrieved[index] = result.data.dataUpdated;
         this.isUpdated = false;
         this.isTableShown = true;
@@ -216,5 +243,13 @@ export class OrganizationComponent implements OnInit {
         this.checkedOrganizations.push(checkedOrganization);
       }
     }
+  }
+
+  hasSelected() {
+    return this.organizations.some(organization => organization.isSelected);
+  }
+
+  routeToOrganizationDetails(organizationID: number, organizationName: string) {
+    this.router.navigateByUrl(`/organizations/${organizationID}/${organizationName}`);
   }
 }
