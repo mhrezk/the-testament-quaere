@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
   faTrash,
   faEdit, faCircleArrowLeft,
@@ -16,7 +16,7 @@ import {Organization} from "../../../../../interfaces/models/politics/organizati
   templateUrl: './organization-display.component.html',
   styleUrl: './organization-display.component.css'
 })
-export class OrganizationDisplayComponent implements OnInit {
+export class OrganizationDisplayComponent implements OnInit, OnDestroy {
   isEditing: boolean = false;
   isDescription: boolean = false;
 
@@ -55,6 +55,10 @@ export class OrganizationDisplayComponent implements OnInit {
     if(!this.selectedOrganization) {
       await this.getOrganizationByID(+this.organizationID);
     }
+  }
+
+  ngOnDestroy() {
+    this.updateSubscription.unsubscribe();
   }
 
   async getOrganizationByID(organizationID: number) {

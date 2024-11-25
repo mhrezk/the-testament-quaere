@@ -30,7 +30,7 @@ export class CustomSidenavComponent {
     },
     {
       icon: "calendar_month",
-      label: "Calendar",
+      label: "Calendars",
       route: "calendar"
     },
     {
@@ -39,7 +39,7 @@ export class CustomSidenavComponent {
       route: "nations"
     },
     {
-      icon: "diversity_2",
+      icon: "mosque",
       label: "Religions",
       route: "religions"
     },
@@ -67,6 +67,11 @@ export class CustomSidenavComponent {
       icon: "books",
       label: "Library",
       route: "library"
+    },
+    {
+      icon: "create_new_folder",
+      label: "Encyclopedia",
+      route: "encyclopedia"
     },
     {
       icon: "account_tree",

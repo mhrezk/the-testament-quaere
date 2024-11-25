@@ -13,6 +13,7 @@ export interface Organization {
   disbandmentYearAbbreviation: string;
   symbolURL: string;
   description: string;
+  organizationSize: number;
 
   isSelected: boolean;
 }

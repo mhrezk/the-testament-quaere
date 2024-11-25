@@ -75,6 +75,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                 .disbandmentDay(0)
                 .disbandmentMonth(0)
                 .disbandmentYear(0)
+                .organizationSize(0)
                 .founderFirstName("None".toUpperCase())
                 .founderSecondName("None".toUpperCase())
                 .disbandmentYearAbbreviation("N/A")
@@ -87,6 +88,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 
         if(organization.getName() != null && newOrganization.getName() != organization.getName()) {
             newOrganization.setName(organization.getName().toUpperCase());
+        }
+
+        if(organization.getOrganizationSize() != null && newOrganization.getOrganizationSize() != organization.getOrganizationSize()) {
+            newOrganization.setOrganizationSize(organization.getOrganizationSize());
         }
 
         if(organization.getFounderFirstName() != null && newOrganization.getFounderFirstName() != organization.getFounderFirstName()) {
@@ -144,6 +149,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization modifyOrganization(Long id, Organization organization) {
         Organization newOrganization = organizationRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Datum does not exist in database!"));
         newOrganization.setName(organization.getName().toUpperCase());
+        newOrganization.setOrganizationSize(organization.getOrganizationSize());
         newOrganization.setSymbolURL(organization.getSymbolURL());
         newOrganization.setFoundationDay(organization.getFoundationDay());
         newOrganization.setFoundationMonth(organization.getFoundationMonth());

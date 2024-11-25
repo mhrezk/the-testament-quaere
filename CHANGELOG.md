@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.88.1] 2024-11-25
+
+- Added `organizationSize` property for `Organization` entity
+
 ## [0.88.0] 2024-11-22
 
 - Added CRUD operations for organization

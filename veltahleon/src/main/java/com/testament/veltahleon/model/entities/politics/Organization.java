@@ -1,13 +1,7 @@
 package com.testament.veltahleon.model.entities.politics;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.testament.veltahleon.model.entities.calendar.Year;
-import com.testament.veltahleon.model.entities.places.Nation;
-import com.testament.veltahleon.model.entities.society.Person;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -101,6 +95,9 @@ public class Organization {
 //            CascadeType.PERSIST})
 //    @JoinColumn(name = "disbandment_year_id")
 //    private Year disbandmentYear;
+
+    @Column(name = "organization_size")
+    private Integer organizationSize;
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;
