@@ -63,6 +63,7 @@ import {DeityDisplayComponent} from "./components/pages/dogma/religion/deity/dei
 import {
   OrganizationDisplayComponent
 } from "./components/pages/politics/organization/organization-display/organization-display.component";
+import {EncyclopediaComponent} from "./components/pages/encyclopedia/encyclopedia.component";
 //import {LineageTreeComponent} from "./components/pages/society/lineage-tree/lineage-tree.component";
 
 const routes: Routes = [
@@ -162,6 +163,10 @@ const routes: Routes = [
   {
     path: "organizations/:id/:name",
     component: OrganizationDisplayComponent
+  },
+  {
+    path: "encyclopedia",
+    component: EncyclopediaComponent
   },
   {
     path: "cards",

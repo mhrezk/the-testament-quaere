@@ -35,6 +35,12 @@ public class Organization {
     @Column(name = "founder_second_name")
     private String founderSecondName;
 
+    @Column(name = "leader_first_name")
+    private String leaderFirstName;
+
+    @Column(name = "leader_second_name")
+    private String leaderSecondName;
+
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
 //            CascadeType.DETACH,
 //            CascadeType.MERGE,

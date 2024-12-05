@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface DemonRepository extends JpaRepository<Demon, Long> {
 
     Demon findByName(String name);
+    long countByName(String name);
 }

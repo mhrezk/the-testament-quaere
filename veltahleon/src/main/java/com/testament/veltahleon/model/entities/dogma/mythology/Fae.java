@@ -30,4 +30,7 @@ public class Fae {
 
     @Column(name = "image_URL")
     private String imageURL;
+
+    @Column(name = "power_domain")
+    private String powerDomain;
 }

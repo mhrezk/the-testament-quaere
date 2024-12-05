@@ -1,9 +1,10 @@
-import {Race} from "../../history/race";
-
 export interface Fae {
   id: number;
   name: string;
-  race: Race;
+  race: string;
   description: string;
   imageURL: string;
+  powerDomain: string;
+
+  isSelected: boolean;
 }

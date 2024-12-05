@@ -25,6 +25,15 @@
       </mat-form-field>
     </div>
     <div class="detail-item">
+      <strong>Leader:</strong>
+      <mat-form-field appearance="outline">
+        <input matInput name="leaderFirstName" [(ngModel)]="selectedOrganization.leaderFirstName" type="text"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput name="leaderSecondName" [(ngModel)]="selectedOrganization.leaderSecondName" type="text"/>
+      </mat-form-field>
+    </div>
+    <div class="detail-item">
       <strong>Foundation Date:</strong>
       <mat-form-field appearance="outline">
         <input matInput name="foundationDay" [(ngModel)]="selectedOrganization.foundationDay" type="number" placeholder="Day" />

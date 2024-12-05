@@ -78,6 +78,8 @@ public class OrganizationServiceImpl implements OrganizationService {
                 .organizationSize(0)
                 .founderFirstName("None".toUpperCase())
                 .founderSecondName("None".toUpperCase())
+                .leaderFirstName("None".toUpperCase())
+                .leaderSecondName("None".toUpperCase())
                 .disbandmentYearAbbreviation("N/A")
                 .build();
     }
@@ -100,6 +102,14 @@ public class OrganizationServiceImpl implements OrganizationService {
 
         if(organization.getFounderSecondName() != null && newOrganization.getFounderSecondName() != organization.getFounderSecondName()) {
             newOrganization.setFounderSecondName(organization.getFounderSecondName().toUpperCase());
+        }
+
+        if(organization.getLeaderFirstName() != null && newOrganization.getLeaderFirstName() != organization.getLeaderFirstName()) {
+            newOrganization.setLeaderFirstName(organization.getLeaderFirstName().toUpperCase());
+        }
+
+        if(organization.getLeaderSecondName() != null && newOrganization.getLeaderSecondName() != organization.getLeaderSecondName()) {
+            newOrganization.setLeaderSecondName(organization.getLeaderSecondName().toUpperCase());
         }
 
         if(organization.getFoundationDay() != null && newOrganization.getFoundationDay() != organization.getFoundationDay()) {
@@ -161,6 +171,8 @@ public class OrganizationServiceImpl implements OrganizationService {
         newOrganization.setDisbandmentYearAbbreviation(organization.getDisbandmentYearAbbreviation());
         newOrganization.setFounderFirstName(organization.getFounderFirstName().toUpperCase());
         newOrganization.setFounderSecondName(organization.getFounderSecondName().toUpperCase());
+        newOrganization.setLeaderFirstName(organization.getLeaderFirstName().toUpperCase());
+        newOrganization.setLeaderSecondName(organization.getLeaderSecondName().toUpperCase());
         return newOrganization;
     }
 

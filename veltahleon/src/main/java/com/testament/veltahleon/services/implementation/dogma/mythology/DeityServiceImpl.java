@@ -60,8 +60,10 @@ public class DeityServiceImpl implements DeityService {
             Deity deity = new Deity();
             deity.setName(name.toUpperCase());
             deity.setImageURL(defaultImageURL("mosque.png"));
+            return deityRepository.save(deity);
+        } else {
+            return deityRepository.findByName(name);
         }
-        return deityRepository.findByName(name);
     }
 
     @Override

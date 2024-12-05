@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.89.0] 2024-12-5
+
+- Added encyclopedia for microorganisms, animal and plant kingdoms
+
 ## [0.88.1] 2024-11-25
 
 - Added `organizationSize` property for `Organization` entity

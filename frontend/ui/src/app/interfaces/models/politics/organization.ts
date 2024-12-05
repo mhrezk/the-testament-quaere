@@ -14,6 +14,8 @@ export interface Organization {
   symbolURL: string;
   description: string;
   organizationSize: number;
+  leaderFirstName: string;
+  leaderSecondName: string;
 
   isSelected: boolean;
 }

@@ -13,7 +13,6 @@ import {DeityService} from "../../../../../services/models/dogma/mythology/deity
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError} from "rxjs/operators";
 import {NgForm} from "@angular/forms";
-import {Prophet} from "../../../../../interfaces/models/dogma/prophet";
 
 @Component({
   selector: 'app-deity',

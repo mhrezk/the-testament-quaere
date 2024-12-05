@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Collection;
 
@@ -39,7 +40,14 @@ public class DemonServiceImpl implements DemonService {
 
     @Override
     public Demon getDemonByName(String name) {
-        return demonRepository.findByName(name);
+        if(demonRepository.countByName(name) <= 0) {
+            Demon demon = new Demon();
+            demon.setName(name.toUpperCase());
+            demon.setImageURL(defaultImageURL("default.png"));
+            return demonRepository.save(demon);
+        } else {
+            return demonRepository.findByName(name);
+        }
     }
 
     @Override
@@ -51,6 +59,10 @@ public class DemonServiceImpl implements DemonService {
     @Override
     public Demon saveDemon(Demon demon) {
         return demonRepository.save(demon);
+    }
+
+    private String defaultImageURL(String imageName) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/dogma/mythology/demons/images/" + imageName).toUriString();
     }
 
     @Override

@@ -4,6 +4,7 @@ export interface Deity {
   description: string;
   religion: string;
   imageURL: string;
+  powerDomain: string;
 
   isSelected: boolean;
 }

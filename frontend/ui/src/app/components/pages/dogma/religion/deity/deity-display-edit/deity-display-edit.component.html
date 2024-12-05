@@ -14,6 +14,10 @@
       </mat-form-field>
     </h2>
     <mat-divider></mat-divider>
+    <strong>Power Domain:</strong>
+    <mat-form-field appearance="outline">
+      <input matInput name="powerDomain" [(ngModel)]="selectedDeity.powerDomain" type="number" placeholder="Day" />
+    </mat-form-field>
 
     <div class="modal-footer">
       <button [disabled]="deityForm.invalid" class="btn btn-success" type="submit">Save</button>

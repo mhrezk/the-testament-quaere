@@ -104,6 +104,7 @@ import { DeityDisplayEditComponent } from './components/pages/dogma/religion/dei
 import { OrganizationDisplayComponent } from './components/pages/politics/organization/organization-display/organization-display.component';
 import { OrganizationDescriptionComponent } from './components/pages/politics/organization/organization-description/organization-description.component';
 import { OrganizationDisplayEditComponent } from './components/pages/politics/organization/organization-display-edit/organization-display-edit.component';
+import { EncyclopediaComponent } from './components/pages/encyclopedia/encyclopedia.component';
 
 @NgModule({
   declarations: [
@@ -177,6 +178,7 @@ import { OrganizationDisplayEditComponent } from './components/pages/politics/or
     OrganizationDisplayComponent,
     OrganizationDescriptionComponent,
     OrganizationDisplayEditComponent,
+    EncyclopediaComponent,
   ],
   imports: [
     BrowserModule,
