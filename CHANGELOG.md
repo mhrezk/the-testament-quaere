@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.90.0] 2024-12-5
+
+- Added `Vocabulary` entity
+
 ## [0.89.0] 2024-12-5
 
 - Added encyclopedia for microorganisms, animal and plant kingdoms

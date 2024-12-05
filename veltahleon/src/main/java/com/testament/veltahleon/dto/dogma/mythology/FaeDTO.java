@@ -13,4 +13,5 @@ public class FaeDTO {
     private String race;
     private String description;
     private String imageURL;
+    private String powerDomain;
 }
