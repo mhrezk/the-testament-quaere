@@ -18,5 +18,7 @@ export class EncyclopediaComponent {
     { path: 'fungi', label: 'Fungi' },
     { path: 'protozoa', label: 'Protozoa' },
     { path: 'viruses', label: 'Viruses' },
+    { path: 'diseases', label: 'Diseases' },
+    { path: 'medicines', label: 'Medicines' },
   ].sort((a, b) => a.label.localeCompare(b.label)); // Sort alphabetically by label;
 }

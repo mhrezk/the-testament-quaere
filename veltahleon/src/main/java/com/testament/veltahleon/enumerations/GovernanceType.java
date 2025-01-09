@@ -1,5 +1,8 @@
 package com.testament.veltahleon.enumerations;
 
+import lombok.Getter;
+
+@Getter
 public enum GovernanceType {
     AUTHORITARIAN("AUTHORITARIAN"),
     DEMOCRATIC("DEMOCRATIC"),

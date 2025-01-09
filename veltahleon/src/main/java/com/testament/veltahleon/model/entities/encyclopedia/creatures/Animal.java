@@ -1,5 +1,7 @@
 package com.testament.veltahleon.model.entities.encyclopedia.creatures;
 
+import com.testament.veltahleon.enumerations.Category;
+import com.testament.veltahleon.enumerations.Classification;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -28,6 +30,13 @@ public class Animal {
 
     @Column(name = "description", columnDefinition = "longtext")
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "classification")
+    private Classification classification;
+
+    @Column(name = "sub_classification")
+    private String subClassification;
 
     @Column(name = "image_URL")
     private String imageURL;

@@ -105,6 +105,22 @@ import { OrganizationDisplayComponent } from './components/pages/politics/organi
 import { OrganizationDescriptionComponent } from './components/pages/politics/organization/organization-description/organization-description.component';
 import { OrganizationDisplayEditComponent } from './components/pages/politics/organization/organization-display-edit/organization-display-edit.component';
 import { EncyclopediaComponent } from './components/pages/encyclopedia/encyclopedia.component';
+import { AngelComponent } from './components/pages/encyclopedia/angel/angel.component';
+import { DemonComponent } from './components/pages/encyclopedia/demon/demon.component';
+import { FaeComponent } from './components/pages/encyclopedia/fae/fae.component';
+import { MineralComponent } from './components/pages/encyclopedia/mineral/mineral.component';
+import { MaterialComponent } from './components/pages/encyclopedia/material/material.component';
+import { AnimalComponent } from './components/pages/encyclopedia/animal/animal.component';
+import { PlantComponent } from './components/pages/encyclopedia/plant/plant.component';
+import { BacteriaComponent } from './components/pages/encyclopedia/bacteria/bacteria.component';
+import { FungiComponent } from './components/pages/encyclopedia/fungi/fungi.component';
+import { ProtozoanComponent } from './components/pages/encyclopedia/protozoan/protozoan.component';
+import { VirusComponent } from './components/pages/encyclopedia/virus/virus.component';
+import { FungusComponent } from './components/pages/encyclopedia/fungus/fungus.component';
+import { DiseaseComponent } from './components/pages/encyclopedia/disease/disease.component';
+import { MedicationComponent } from './components/pages/encyclopedia/medication/medication.component';
+import { MedicineComponent } from './components/pages/encyclopedia/medicine/medicine.component';
+import { ParasiteComponent } from './components/pages/encyclopedia/parasite/parasite.component';
 
 @NgModule({
   declarations: [
@@ -179,6 +195,22 @@ import { EncyclopediaComponent } from './components/pages/encyclopedia/encyclope
     OrganizationDescriptionComponent,
     OrganizationDisplayEditComponent,
     EncyclopediaComponent,
+    AngelComponent,
+    DemonComponent,
+    FaeComponent,
+    MineralComponent,
+    MaterialComponent,
+    AnimalComponent,
+    PlantComponent,
+    BacteriaComponent,
+    FungiComponent,
+    ProtozoanComponent,
+    VirusComponent,
+    FungusComponent,
+    DiseaseComponent,
+    MedicationComponent,
+    MedicineComponent,
+    ParasiteComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.91.0] 2025-01-09
+
+- Added frontend template code for encyclopedia child components
+
 ## [0.90.0] 2024-12-5
 
 - Added `Vocabulary` entity
