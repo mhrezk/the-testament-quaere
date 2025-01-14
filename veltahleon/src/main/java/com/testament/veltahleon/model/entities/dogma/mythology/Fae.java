@@ -1,5 +1,6 @@
 package com.testament.veltahleon.model.entities.dogma.mythology;
 
+import com.testament.veltahleon.model.entities.dogma.Religion;
 import com.testament.veltahleon.model.entities.history.Race;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,6 +25,13 @@ public class Fae {
             CascadeType.PERSIST})
     @JoinColumn(name = "race_id")
     private Race race;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST})
+    @JoinColumn(name = "religion_id")
+    private Religion religion;
 
     @Column(columnDefinition = "text")
     private String description;

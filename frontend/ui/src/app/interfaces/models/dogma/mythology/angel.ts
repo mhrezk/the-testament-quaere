@@ -3,6 +3,7 @@ export interface Angel {
   name: string;
   description: string;
   race: string;
+  religion: string;
   imageURL: string;
   powerDomain: string;
 

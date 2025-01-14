@@ -57,14 +57,48 @@ export class AngelComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getPaginatedAngels(this.currentPage, this.tableSize);
+    this.getAllAngelsTotal();
   }
 
   getAllAngelsTotal() {
-    this.angelService.getAllAngelsByReligionName$(this.religionName).subscribe(
+    this.angelService.getAllAngels$().subscribe(
       result => {
         this.countSubject.next(result.data.datumRetrieved);
       }
     )
+  }
+
+  getAllAngelsTotalByReligion(religionName: string) {
+    this.angelService.getAllAngelsByReligionName$(religionName).subscribe(
+      result => {
+        this.countSubject.next(result.data.datumRetrieved);
+      }
+    )
+  }
+
+  getPaginatedAngels(pageNumber: number, pageSize: number) {
+    this.isTableShown = true;
+    this.appState$ = this.angelService.getPaginatedAngels$(pageNumber, pageSize)
+      .pipe(
+        map((result) => {
+          this.angels = result.data.dataRetrieved;
+          this.dataSubject.next(result);
+          return {
+            dataState: DataState.LOADED,
+            appData: result,
+          };
+        }),
+        startWith({
+          dataState: DataState.LOADING
+        }),
+        catchError((caughtError: string) => {
+          return of({
+            dataState: DataState.ERROR,
+            error: caughtError,
+          });
+        })
+      );
   }
 
   getPaginatedAngelsByReligionName(name: string, pageNumber: number, pageSize: number) {
@@ -100,7 +134,7 @@ export class AngelComponent implements OnInit {
   saveAngel(angelForm: NgForm) {
     this.isLoading.next(true);
     this.appState$ = this.angelService
-      .saveAngel$(this.religionName, angelForm.value) //or dayForm.value as Day or <Day> dayForm.value
+      .saveAngel$(angelForm.value) //or dayForm.value as Day or <Day> dayForm.value
       .pipe(
         map((result) => {
           this.dataSubject.next({ //this lists everything in ascending insertion order
@@ -205,13 +239,13 @@ export class AngelComponent implements OnInit {
 
   onTableDataChange(event: any) {
     this.currentPage = event;
-    this.getPaginatedAngelsByReligionName(this.religionName, this.currentPage, this.tableSize);
+    this.getPaginatedAngels(this.currentPage, this.tableSize);
   }
 
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.currentPage = 1;
-    this.getPaginatedAngelsByReligionName(this.religionName, this.currentPage, this.tableSize);
+    this.getPaginatedAngels(this.currentPage, this.tableSize);
   }
 
   checkUncheckAll() {
@@ -239,7 +273,7 @@ export class AngelComponent implements OnInit {
     return this.angels.some(angel => angel.isSelected);
   }
 
-  routeToAngelDetails(AngelID: number, AngelName: string) {
-    this.router.navigateByUrl(`/religions/${+this.religionID}/${this.religionName}/Angels/${AngelID}/${AngelName}`);
+  routeToAngelDetails(angelID: number, angelName: string) {
+    this.router.navigateByUrl(`/encyclopedia/angels/${angelID}/${angelName}`);
   }
 }

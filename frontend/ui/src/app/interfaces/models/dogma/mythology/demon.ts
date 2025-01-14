@@ -3,6 +3,7 @@ export interface Demon {
   name: string;
   description: string;
   race: string;
+  religion: string;
   imageURL: string;
   powerDomain: string;
 

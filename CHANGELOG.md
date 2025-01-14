@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.92.0] 2025-01-14
+
+- Finalized angel entity component
+
 ## [0.91.0] 2025-01-09
 
 - Added frontend template code for encyclopedia child components

@@ -20,6 +20,12 @@ export class AngelService {
       catchError(this.handleError)
     );
 
+  getPaginatedAngelsByReligionName$ = (religionName: string, number: number, size: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/angels/religion/${religionName}?pageNumber=${number}&&pageSize=${size}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
   getAngels$ = <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/angels/all`)
     .pipe(
       tap(console.log),
@@ -27,6 +33,18 @@ export class AngelService {
     );
 
   getAngelByID$ = (angelID: number) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/angel/${angelID}`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  getAllAngelsByReligionName$ = (religionName: string) => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/angels/${religionName}/count`)
+    .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  getAllAngels$ = () => <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.baseURL}/angels/all/count`)
     .pipe(
       tap(console.log),
       catchError(this.handleError)

@@ -2,6 +2,7 @@ package com.testament.veltahleon.mappers.dogma.mythology;
 
 import com.testament.veltahleon.dto.dogma.mythology.FaeDTO;
 import com.testament.veltahleon.model.entities.dogma.mythology.Fae;
+import com.testament.veltahleon.services.ifc.dogma.ReligionService;
 import com.testament.veltahleon.services.ifc.history.RaceService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class FaeMapper {
     @Autowired
     private RaceService raceService;
 
+    @Autowired
+    private ReligionService religionService;
+
     public FaeDTO convertToDTO(Fae fae) {
         return FaeDTO.builder()
                 .id(fae.getId())
@@ -21,6 +25,7 @@ public class FaeMapper {
                 .description(fae.getDescription())
                 .imageURL(fae.getImageURL())
                 .race(fae.getRace().getName())
+                .religion(fae.getReligion().getName())
                 .build();
     }
 
@@ -30,6 +35,7 @@ public class FaeMapper {
         fae.setDescription(faeDTO.getDescription());
         fae.setImageURL(faeDTO.getImageURL());
         fae.setRace(raceService.getRaceByName(faeDTO.getRace()));
+        fae.setReligion(religionService.getReligionByName(faeDTO.getReligion()));
         return fae;
     }
 }
